@@ -2,30 +2,32 @@
 # define OBJECTS_H
 
 # include "geometry.h"
-
-// TODO: 자료형 타입 맞출 것
-typedef int	t_material;
+# include "hittable.h"
 
 typedef struct s_sphere
 {
+	t_hit		hit;
 	double		radius;
-	t_point3	center;	
+	t_point		center;	
 	t_material	*material;
 	t_color		color;
 }	t_sphere;
 
 typedef struct s_plane
 {
-	t_point3	point;
+	t_hit		hit;
+	t_point		point;
 	t_vec3		norm;
 	t_material	*material;
 	t_color		color;
 }	t_plane;
 
+// TODO: 오브젝트를 옆면과, 뚜껑 2개로 나누기
 typedef struct s_cylinder
 {
-	t_point3	cen_of_base;
-	t_vec3		norm;
+	t_hit		hit;
+	t_point		cen_of_base;
+	t_vec3		axis;
 	t_material	*material;
 	t_color		color;
 }	t_cylinder;
