@@ -17,6 +17,18 @@ DRIVER_SRC		= $(addprefix srcs/, $(addsuffix .c, $(DRIVER_FILENAME)))
 DRIVER_OBJ		= $(addprefix srcs/, $(addsuffix .o, $(DRIVER_FILENAME)))
 DRIVER_DEP		= $(addprefix srcs/, $(addsuffix .d, $(DRIVER_FILENAME)))
 
+TEST_FILENAME	= \
+				vectors_arithmetic
+TEST_SRC		= $(addprefix tests/, $(addsuffix .c, $(TEST_FILENAME)))
+TEST_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TEST_FILENAME)))
+TEST_DEP		= $(addprefix tests/, $(addsuffix .d, $(TEST_FILENAME)))
+
+TESTER_FILENAME	= \
+				vectors
+TESTER_SRC		= $(addprefix tests/, $(addsuffix .c, $(TESTER_FILENAME)))
+TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
+TESTER_DEP		= $(addprefix tests/, $(addsuffix .d, $(TESTER_FILENAME)))
+
 FILENAME		= \
 				geometry/matrix_init \
 				geometry/multiply \
@@ -47,14 +59,19 @@ $(NAME): $(LDLIBS) $(OBJ) $(DRIVER_OBJ)
 $(LIBFT):
 	@make -j4 -C $(LIBFT_DIR)/
 
+test_vectors: tests/vectors.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/vectors.o -o $@ $(LDFLAGS)
+
 -include $(DEP)
 
 clean:
 	$(RM) $(OBJ) $(DEP) $(DRIVER_OBJ) $(DRIVER_DEP)
+	$(RM) $(TEST_OBJ) $(TEST_DEP) $(TESTER_OBJ) $(TESTER_DEP)
 	@make clean -C $(LIBFT_DIR)
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
+	$(RM) test_vectors
 	@make fclean -C $(LIBFT_DIR)
 
 re:
