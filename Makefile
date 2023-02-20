@@ -21,7 +21,19 @@ FILENAME		= \
 				geometry/matrix_init \
 				geometry/multiply \
 				geometry/rotate \
-				geometry/translate
+				geometry/translate \
+				geometry/vec3_add \
+				geometry/vec3_cross \
+				geometry/vec3_dot \
+				geometry/vec3_mult \
+				geometry/vec3_sub \
+				geometry/vec3_utils1 \
+				geometry/vec3_utils2 \
+				number/random \
+				material/material_diffuse_light \
+				material/material_lambertian \
+				material/material \
+				texture/texture_solid
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix srcs/, $(addsuffix .o, $(FILENAME)))
