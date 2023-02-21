@@ -44,6 +44,8 @@ FILENAME		= \
 				number/random \
 				number/degree \
 				ptrarr/ptrarr \
+				camera/camera_init \
+				camera/camera_get_ray_at \
 				material/material_diffuse_light \
 				material/material_lambertian \
 				material/material \
