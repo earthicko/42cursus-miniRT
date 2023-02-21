@@ -12,49 +12,44 @@ typedef struct s_scatter_record
 	t_ray	scattered;
 }	t_scatter_record;
 
+typedef void	(*t_material_emit)(
+	t_material *, t_color *, t_uv, t_point *);
+typedef t_bool	(*t_material_scatter)(
+	t_material *, t_scatter_record *, t_ray *, t_hit_record *);
+
 typedef struct s_material
 {
-	void	(*emit)(
-			t_material *, t_color *, t_uv, t_point *);
-	t_bool	((*scatter)(
-			t_material *, t_scatter_record *, t_ray *, t_hit_record *));
+	t_material_emit		emit;
+	t_material_scatter	scatter;
 }	t_material;
 
 typedef struct s_material_lambertian
 {
-	void		(*emit)(
-			t_material *, t_color *, t_uv, t_point *);
-	t_bool		((*scatter)(
-			t_material *, t_scatter_record *, t_ray *, t_hit_record *));
-	t_texture	*albedo;
+	t_material_emit		emit;
+	t_material_scatter	scatter;
+	t_texture			*albedo;
 }	t_material_lambertian;
 
 typedef struct s_material_metal
 {
-	void		(*emit)(
-			t_material *, t_color *, t_uv, t_point *);
-	t_bool		((*scatter)(
-			t_material *, t_scatter_record *, t_ray *, t_hit_record *));
-	t_texture	*albedo;
-	double		fuzz;
+	t_material_emit		emit;
+	t_material_scatter	scatter;
+	t_texture			*albedo;
+	double				fuzz;
 }	t_material_metal;
 
 typedef struct s_material_dielectric
 {
-	void		(*emit)(
-			t_material *, t_color *, t_uv, t_point *);
-	t_bool		((*scatter)(
-			t_material *, t_scatter_record *, t_ray *, t_hit_record *));
-	double		ior;
+	t_material_emit		emit;
+	t_material_scatter	scatter;
+	double				ior;
 }	t_material_dielectric;
 
 typedef struct s_material_diffuse_light
 {
-	void		(*emit)(
-			t_material *, t_color *, t_uv, t_point *);
-	t_bool		((*scatter)(
-			t_material *, t_scatter_record *, t_ray *, t_hit_record *));
-	t_texture	*emitter;
+	t_material_emit		emit;
+	t_material_scatter	scatter;
+	t_texture			*emitter;
 }	t_material_diffuse_light;
 
 t_material	*material_lambertian_create(t_texture *albedo);
