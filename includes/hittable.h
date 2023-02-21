@@ -2,6 +2,7 @@
 # define HITTABLE_H
 
 # include "geometry.h"
+#include "ptrarr.h"
 # include "ray.h"
 # include "material.h"
 
@@ -22,15 +23,21 @@ void	hit_record_set_normal_and_face(
 
 typedef struct s_pair
 {
-	double	t_min;
-	double	t_max;
+	double	min;
+	double	max;
 }	t_pair;
 
 typedef struct s_hittable	t_hittable;
 
 typedef t_bool				(*t_hit)(
-		t_hittable *hittable, t_ray r, t_pair t, t_hit_record *rec);	
+		t_hittable *hittable, t_ray *r, t_pair t, t_hit_record *rec);	
 typedef t_bool				(*t_bounding_box)(void);
+
+typedef struct s_hittables
+{
+	t_hit		hit;
+	t_ptrarr	arr;
+}	t_hittables;
 
 typedef struct s_hittable
 {
