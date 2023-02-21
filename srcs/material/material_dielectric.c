@@ -3,7 +3,7 @@
 #include "libft.h"
 #include "geometry.h"
 #include "number.h"
-#include "material.h"
+#include "material_internal.h"
 
 t_material	*material_dielectric_create(double ior)
 {

@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "geometry.h"
-#include "material.h"
+#include "material_internal.h"
 
 t_material	*material_metal_create(t_texture *albedo, double fuzz)
 {

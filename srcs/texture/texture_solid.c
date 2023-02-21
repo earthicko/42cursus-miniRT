@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "texture.h"
+#include "texture_internal.h"
 
 t_texture	*texture_solid_create(t_color color)
 {

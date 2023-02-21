@@ -60,30 +60,4 @@ t_material	*material_metal_create(t_texture *albedo, double fuzz);
 t_material	*material_dielectric_create(double ior);
 t_material	*material_diffuse_light_create(t_texture *emitter);
 
-void		material_emit(
-				t_material *self, t_color *out, t_uv uv, t_point *p);
-void		material_diffuse_light_emit(
-				t_material *self, t_color *out, t_uv uv, t_point *p);
-
-t_bool		material_lambertian_scatter(
-				t_material *self,
-				t_scatter_record *out,
-				t_ray *ray_in,
-				t_hit_record *hit);
-t_bool		material_metal_scatter(
-				t_material *self,
-				t_scatter_record *out,
-				t_ray *ray_in,
-				t_hit_record *hit);
-t_bool		material_dielectric_scatter(
-				t_material *self,
-				t_scatter_record *out,
-				t_ray *ray_in,
-				t_hit_record *hit);
-t_bool		material_diffuse_light_scatter(
-				t_material *self,
-				t_scatter_record *out,
-				t_ray *ray_in,
-				t_hit_record *hit);
-
 #endif

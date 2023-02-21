@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "material.h"
+#include "material_internal.h"
 
 t_material	*material_diffuse_light_create(t_texture *emitter)
 {
