@@ -6,15 +6,18 @@
 # include "hittable.h"
 # include "texture.h"
 
+typedef struct s_hit_record	t_hit_record;
+typedef struct s_material	t_material;
+
 typedef struct s_scatter_record
 {
 	t_color	albedo;
 	t_ray	scattered;
 }	t_scatter_record;
 
-typedef void	(*t_material_emit)(
+typedef void				(*t_material_emit)(
 	t_material *, t_color *, t_uv, t_point *);
-typedef t_bool	(*t_material_scatter)(
+typedef t_bool				(*t_material_scatter)(
 	t_material *, t_scatter_record *, t_ray *, t_hit_record *);
 
 typedef struct s_material

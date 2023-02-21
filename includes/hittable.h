@@ -17,7 +17,8 @@ typedef struct s_hit_record
 	t_bool		is_front;
 }	t_hit_record;
 
-void	hit_record_set_normal_and_face(t_ray *ray, t_vec3 *normal);
+void	hit_record_set_normal_and_face(
+			t_hit_record *hit, t_ray *ray, t_vec3 *normal);
 
 typedef struct s_pair
 {
