@@ -49,6 +49,8 @@ FILENAME		= \
 				camera/camera_init \
 				camera/camera_get_ray_at \
 				material/material_diffuse_light \
+				material/material_metal \
+				material/material_dielectric \
 				material/material_lambertian \
 				material/material \
 				texture/texture_solid
