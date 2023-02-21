@@ -31,6 +31,9 @@ typedef struct s_matrix44
 	double	i[4][4];
 }	t_matrix44;
 
+void	vec3_setval(t_vec3 *out, double a, double b, double c);
+void	vec2_setval(t_vec3 *out, double a, double b);
+
 void	vec3_add_vec3(t_vec3 *out, t_vec3 *a, t_vec3 *b);
 void	vec3_sub_vec3(t_vec3 *out, t_vec3 *a, t_vec3 *b);
 void	vec3_add_vec3_inplace(t_vec3 *a, t_vec3 *b);
@@ -41,6 +44,9 @@ void	vec3_cross_vec3(t_vec3 *out, t_vec3 *a, t_vec3 *b);
 
 void	vec3_mult_num(t_vec3 *out, t_vec3 *a, double b);
 void	vec3_mult_num_inplace(t_vec3 *a, double b);
+
+void	vec3_reflect(t_vec3 *out, t_vec3 *in, t_vec3 *normal);
+void	vec3_refract(t_vec3 *out, t_vec3 *in, t_vec3 *normal, double ratio);
 
 void	m44_init_zero(t_matrix44 *m);
 void	m44_init_identity(t_matrix44 *m);

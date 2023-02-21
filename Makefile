@@ -34,11 +34,13 @@ FILENAME		= \
 				geometry/multiply \
 				geometry/rotate \
 				geometry/translate \
+				geometry/vec_setval \
 				geometry/vec3_add \
 				geometry/vec3_cross \
 				geometry/vec3_dot \
 				geometry/vec3_mult \
 				geometry/vec3_sub \
+				geometry/vec3_reflect_refract \
 				geometry/vec3_utils1 \
 				geometry/vec3_utils2 \
 				number/random \
