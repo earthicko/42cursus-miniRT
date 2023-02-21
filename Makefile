@@ -18,13 +18,15 @@ DRIVER_OBJ		= $(addprefix srcs/, $(addsuffix .o, $(DRIVER_FILENAME)))
 DRIVER_DEP		= $(addprefix srcs/, $(addsuffix .d, $(DRIVER_FILENAME)))
 
 TEST_FILENAME	= \
-				vectors_arithmetic
+				vectors_arithmetic \
+				print0
 TEST_SRC		= $(addprefix tests/, $(addsuffix .c, $(TEST_FILENAME)))
 TEST_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TEST_FILENAME)))
 TEST_DEP		= $(addprefix tests/, $(addsuffix .d, $(TEST_FILENAME)))
 
 TESTER_FILENAME	= \
-				vectors
+				vectors \
+				camera
 TESTER_SRC		= $(addprefix tests/, $(addsuffix .c, $(TESTER_FILENAME)))
 TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
 TESTER_DEP		= $(addprefix tests/, $(addsuffix .d, $(TESTER_FILENAME)))
@@ -70,6 +72,9 @@ $(LIBFT):
 test_vectors: tests/vectors.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/vectors.o -o $@ $(LDFLAGS)
 
+test_camera: tests/camera.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/camera.o -o $@ $(LDFLAGS)
+
 -include $(DEP)
 
 clean:
@@ -79,7 +84,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
-	$(RM) test_vectors
+	$(RM) test_vectors test_camera
 	@make fclean -C $(LIBFT_DIR)
 
 re:
