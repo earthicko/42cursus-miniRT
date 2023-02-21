@@ -42,6 +42,7 @@ FILENAME		= \
 				geometry/vec3_utils1 \
 				geometry/vec3_utils2 \
 				number/random \
+				number/degree \
 				ptrarr/ptrarr \
 				material/material_diffuse_light \
 				material/material_lambertian \
