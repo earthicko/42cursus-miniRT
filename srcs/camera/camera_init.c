@@ -4,8 +4,11 @@
 
 void	camera_init_get_h_and_w(t_camerainfo *caminfo, double *h, double *w)
 {
+	double	w_to_h;
+
+	w_to_h = caminfo->pixel_w / caminfo->pixel_h;
 	*h = 2.0 * tan(deg_to_rad(caminfo->fov));
-	*w = caminfo->w_to_h * *h;
+	*w = w_to_h * *h;
 }
 
 /*
@@ -57,6 +60,8 @@ void	camera_init(t_camera *cam, t_camerainfo *caminfo)
 	double	height;
 	double	width;
 
+	cam->pixel_w = caminfo->pixel_w;
+	cam->pixel_h = caminfo->pixel_h;
 	camera_init_get_h_and_w(caminfo, &height, &width);
 	camera_init_get_uvw(cam, caminfo);
 	camera_init_get_origin_and_axis(cam, caminfo, height, width);

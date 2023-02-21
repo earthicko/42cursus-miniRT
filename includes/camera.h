@@ -10,8 +10,9 @@ typedef struct s_camerainfo
 	t_point	cam_end;
 	t_vec3	cam_up;
 	double	fov;
-	double	w_to_h;
 	double	focallen;
+	int		pixel_w;
+	int		pixel_h;
 }	t_camerainfo;
 
 typedef struct s_camera
@@ -24,6 +25,8 @@ typedef struct s_camera
 	t_vec3	v;
 	t_vec3	w;
 	t_vec3	uv;
+	int		pixel_w;
+	int		pixel_h;
 }	t_camera;
 
 void	camera_init(t_camera *cam, t_camerainfo *caminfo);
