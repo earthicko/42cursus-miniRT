@@ -27,7 +27,8 @@ TEST_DEP		= $(addprefix tests/, $(addsuffix .d, $(TEST_FILENAME)))
 TESTER_FILENAME	= \
 				vectors \
 				camera \
-				texture
+				texture \
+				material
 TESTER_SRC		= $(addprefix tests/, $(addsuffix .c, $(TESTER_FILENAME)))
 TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
 TESTER_DEP		= $(addprefix tests/, $(addsuffix .d, $(TESTER_FILENAME)))
