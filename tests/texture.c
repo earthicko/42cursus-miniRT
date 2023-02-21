@@ -12,7 +12,7 @@ int	main(void)
 	vec3_setval(&color, 0.8, 0.5, 0);
 	vec2_setval(&uv, 0.2, 0.3);
 	texture_solid = texture_solid_create(color);
-	texture_solid->get_color_at(texture_solid, &color_out, uv, NULL);
+	texture_solid->get_color_at(texture_solid, &color_out, &uv, NULL);
 	printf("output color: ");
 	print_vec3(&color_out);
 	printf("\n");

@@ -1,6 +1,6 @@
 #include "material_internal.h"
 
-void	material_emit(t_material *self, t_color *out, t_uv uv, t_point *p)
+void	material_emit(t_material *self, t_color *out, t_uv *uv, t_point *p)
 {
 	(void)self;
 	(void)uv;

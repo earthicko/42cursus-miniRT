@@ -15,7 +15,7 @@ t_material	*material_diffuse_light_create(t_texture *emitter)
 }
 
 void	material_diffuse_light_emit(
-		t_material *self, t_color *out, t_uv uv, t_point *p)
+		t_material *self, t_color *out, t_uv *uv, t_point *p)
 {
 	t_material_diffuse_light	*this;
 

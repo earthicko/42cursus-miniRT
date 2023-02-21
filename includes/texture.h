@@ -5,8 +5,9 @@
 
 typedef struct s_texture	t_texture;
 
+// t_texture *self, t_color *out, t_uv *uv, t_vec3 *p
 typedef void				(*t_texture_get_color_at)(
-	t_texture *, t_color *, t_uv, t_vec3 *);
+	t_texture *, t_color *, t_uv *, t_vec3 *);
 
 typedef struct s_texture
 {
