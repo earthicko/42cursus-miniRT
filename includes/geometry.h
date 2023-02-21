@@ -32,7 +32,7 @@ typedef struct s_matrix44
 }	t_matrix44;
 
 void	vec3_setval(t_vec3 *out, double a, double b, double c);
-void	vec2_setval(t_vec3 *out, double a, double b);
+void	vec2_setval(t_vec2 *out, double a, double b);
 
 void	vec3_add_vec3(t_vec3 *out, t_vec3 *a, t_vec3 *b);
 void	vec3_sub_vec3(t_vec3 *out, t_vec3 *a, t_vec3 *b);
