@@ -3,7 +3,7 @@
 
 # include "geometry.h"
 # include "ray.h"
-# include "hit_record_dummy.h"
+# include "hittable.h"
 # include "texture.h"
 
 typedef struct s_scatter_record
