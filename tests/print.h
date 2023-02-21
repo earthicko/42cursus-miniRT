@@ -2,6 +2,7 @@
 # define PRINT_H
 
 # include "geometry.h"
+# include "camera.h"
 # include "ray.h"
 
 void	print_vec3(t_vec3 *vec3);
