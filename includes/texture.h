@@ -20,6 +20,15 @@ typedef struct s_texture_solid
 	t_color					color;
 }	t_texture_solid;
 
+typedef struct s_texture_checker
+{
+	t_texture_get_color_at	get_color_at;
+	t_texture				*a;
+	t_texture				*b;
+	double					freq;
+}	t_texture_checker;
+
 t_texture	*texture_solid_create(t_color color);
+t_texture	*texture_checker_create(t_texture *a, t_texture *b, double freq);
 
 #endif

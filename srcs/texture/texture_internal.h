@@ -5,5 +5,7 @@
 
 void		texture_solid_get_color_at(
 				t_texture *self, t_color *out, t_uv *uv, t_vec3 *p);
+void		texture_checker_get_color_at(
+				t_texture *self, t_color *out, t_uv *uv, t_vec3 *p);
 
 #endif

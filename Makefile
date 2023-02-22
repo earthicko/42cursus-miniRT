@@ -57,7 +57,8 @@ FILENAME		= \
 				material/material_dielectric \
 				material/material_lambertian \
 				material/material \
-				texture/texture_solid
+				texture/texture_solid \
+				texture/texture_checker
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix srcs/, $(addsuffix .o, $(FILENAME)))
