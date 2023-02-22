@@ -3,6 +3,11 @@
 #include "camera.h"
 #include "print.h"
 
+void	print_vec2(t_vec2 *vec2)
+{
+	printf("(%.2f, %.2f)", vec2->i[0], vec2->i[1]);
+}
+
 void	print_vec3(t_vec3 *vec3)
 {
 	printf("(%.2f, %.2f, %.2f)", vec3->i[0], vec3->i[1], vec3->i[2]);
