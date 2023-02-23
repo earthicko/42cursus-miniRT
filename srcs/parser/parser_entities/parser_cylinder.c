@@ -6,8 +6,8 @@
 
 t_bool	is_cylinder(t_ptrarr *tokens)
 {
-	const static int	patternlen = 18;
-	const static int	pattern[18] = {
+	static const int	patternlen = 18;
+	static const int	pattern[18] = {
 		TOKENTYPE_IDENTIFIER,
 		TOKENTYPE_NUMBER, TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 		TOKENTYPE_COMMA, TOKENTYPE_NUMBER,

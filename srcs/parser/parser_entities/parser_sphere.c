@@ -6,8 +6,8 @@
 
 t_bool	is_sphere(t_ptrarr *tokens)
 {
-	const static int	patternlen = 12;
-	const static int	pattern[12] = {
+	static const int	patternlen = 12;
+	static const int	pattern[12] = {
 		TOKENTYPE_IDENTIFIER,
 		TOKENTYPE_NUMBER,
 		TOKENTYPE_COMMA,

@@ -6,8 +6,8 @@
 
 t_bool	is_plane(t_ptrarr *tokens)
 {
-	const static int	patternlen = 16;
-	const static int	pattern[16] = {
+	static const int	patternlen = 16;
+	static const int	pattern[16] = {
 		TOKENTYPE_IDENTIFIER,
 		TOKENTYPE_NUMBER, TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 		TOKENTYPE_COMMA, TOKENTYPE_NUMBER,

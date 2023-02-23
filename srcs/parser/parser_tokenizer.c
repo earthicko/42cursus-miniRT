@@ -92,7 +92,7 @@ void	print_tokens(t_ptrarr *tokens)
 	i = 0;
 	while (i < tokens->len)
 	{
-		printf("\"%s\" ", tokens->data[i]);
+		printf("\"%s\" ", (char *)tokens->data[i]);
 		i++;
 	}
 }

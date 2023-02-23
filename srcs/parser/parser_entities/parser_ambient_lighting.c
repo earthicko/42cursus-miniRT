@@ -6,8 +6,8 @@
 
 t_bool	is_ambient_lighting(t_ptrarr *tokens)
 {
-	const static int	patternlen = 7;
-	const static int	pattern[7] = {
+	static const int	patternlen = 7;
+	static const int	pattern[7] = {
 		TOKENTYPE_IDENTIFIER,
 		TOKENTYPE_NUMBER,
 		TOKENTYPE_NUMBER,

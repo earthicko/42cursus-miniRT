@@ -3,7 +3,7 @@
 
 char	*tokenname_manager(int i)
 {
-	const static char	*names[N_IDENTIFIER] = {
+	static const char	*names[N_IDENTIFIER] = {
 		IDENTIFIER_AMBIENTLIGHTING,
 		IDENTIFIER_CAMERA,
 		IDENTIFIER_LIGHT,
@@ -19,7 +19,7 @@ char	*tokenname_manager(int i)
 
 t_wordtester	wordtester_manager(int i)
 {
-	const static t_wordtester	testers[3] = {
+	static const t_wordtester	testers[3] = {
 		is_identifier,
 		is_number,
 		is_comma
