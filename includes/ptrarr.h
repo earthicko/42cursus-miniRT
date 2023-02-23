@@ -1,6 +1,8 @@
 #ifndef PTRARR_H
 # define PTRARR_H
 
+# include "libft_def.h"
+
 # define PTRARR_INITIAL_CAP 1
 
 typedef struct s_ptrarr
