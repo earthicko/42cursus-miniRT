@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "libft.h"
 #include "ptrarr.h"
 #include "msgdef.h"
@@ -73,13 +72,13 @@ t_ptrarr	*tokenize(char *line)
 	arr = ptrarr_create();
 	if (!arr)
 	{
-		printf("%s: %s\n", EXEC_NAME, MSG_MALLOC);
+		ft_dprintf(2, "%s: %s\n", EXEC_NAME, MSG_MALLOC);
 		return (NULL);
 	}
 	if (fill_tokens(line, arr))
 	{
 		ptrarr_destroy(arr, TRUE);
-		printf("%s: %s\n", EXEC_NAME, MSG_MALLOC);
+		ft_dprintf(2, "%s: %s\n", EXEC_NAME, MSG_MALLOC);
 		return (NULL);
 	}
 	return (arr);
@@ -92,7 +91,7 @@ void	print_tokens(t_ptrarr *tokens)
 	i = 0;
 	while (i < tokens->len)
 	{
-		printf("\"%s\" ", (char *)tokens->data[i]);
+		ft_dprintf(2, "\"%s\" ", (char *)tokens->data[i]);
 		i++;
 	}
 }

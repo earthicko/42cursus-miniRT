@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "libft.h"
 #include "ptrarr.h"
 #include "msgdef.h"
@@ -26,7 +25,7 @@ static int	parse_unique_entity_loop(t_bool *already_found, char *line)
 			found_once = TRUE;
 			if (already_found[i])
 			{
-				printf("%s: duplicate unique elements detected.\n", EXEC_NAME);
+				ft_dprintf(2, "%s: duplicate unique elements detected.\n", EXEC_NAME);
 				return (CODE_ERROR_DATA);
 			}
 			already_found[i] = TRUE;
@@ -69,7 +68,7 @@ static int	parse_common_entity(char *line)
 		return (stat);
 	if (stat == FALSE)
 	{
-		printf("%s: failed to parse line \"%s\"\n", EXEC_NAME, line);
+		ft_dprintf(2, "%s: failed to parse line \"%s\"\n", EXEC_NAME, line);
 		return (CODE_ERROR_DATA);
 	}
 	return (CODE_OK);

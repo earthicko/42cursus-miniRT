@@ -12,7 +12,7 @@ static t_bool	read_file_to_strarr_init(char *path, t_ptrarr **arr, int *fd)
 	*arr = ptrarr_create();
 	if (!(*arr))
 	{
-		printf("%s: %s\n", EXEC_NAME, MSG_MALLOC);
+		ft_dprintf(2, "%s: %s\n", EXEC_NAME, MSG_MALLOC);
 		return (FALSE);
 	}
 	*fd = open(path, O_RDONLY);
