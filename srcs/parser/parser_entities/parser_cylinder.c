@@ -1,7 +1,4 @@
 #include <stdio.h>
-#include "libft.h"
-#include "ptrarr.h"
-#include "msgdef.h"
 #include "../parser_internal.h"
 
 t_bool	is_cylinder(t_ptrarr *tokens)
