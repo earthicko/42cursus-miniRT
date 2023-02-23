@@ -4,6 +4,7 @@
 # include "geometry.h"
 # include "hittable.h"
 
+// TODO: material에 color정보 담기면 color 불필요
 typedef struct s_sphere
 {
 	t_hit			hit;

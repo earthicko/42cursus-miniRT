@@ -2,7 +2,7 @@
 # define HITTABLE_H
 
 # include "geometry.h"
-#include "ptrarr.h"
+# include "ptrarr.h"
 # include "ray.h"
 # include "material.h"
 
