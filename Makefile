@@ -58,7 +58,19 @@ FILENAME		= \
 				material/material_lambertian \
 				material/material \
 				texture/texture_solid \
-				texture/texture_checker
+				texture/texture_checker \
+				parser/parser \
+				parser/parser_managers1 \
+				parser/parser_managers2 \
+				parser/parser_tokenizer \
+				parser/parser_get_tokentype \
+				parser/parser_entities/parser_entities \
+				parser/parser_entities/parser_ambient_lighting \
+				parser/parser_entities/parser_camera \
+				parser/parser_entities/parser_light \
+				parser/parser_entities/parser_sphere \
+				parser/parser_entities/parser_plane \
+				parser/parser_entities/parser_cylinder \
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix srcs/, $(addsuffix .o, $(FILENAME)))
