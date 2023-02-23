@@ -5,8 +5,10 @@ LIBFT			= $(LIBFT_DIR)/libft.a
 LINK_LIBFT		= -L$(LIBFT_DIR)
 INC_DIR_LIBFT	= -I$(LIBFT_DIR)/includes
 
+LINK_LIBM		= -lm
+
 LDLIBS			= $(LIBFT)
-LDFLAGS			= $(LINK_LIBFT)
+LDFLAGS			= $(LINK_LIBFT) $(LINK_LIBM)
 
 INC_DIR			= -I. -Iincludes $(INC_DIR_LIBFT)
 ################################# COMMANDS #####################################
@@ -81,26 +83,26 @@ DEP				= $(addprefix srcs/, $(addsuffix .d, $(FILENAME)))
 ################################# TARGETS ######################################
 all: $(NAME)
 
-$(NAME): $(LDLIBS) $(OBJ) $(DRIVER_OBJ)
-	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(DRIVER_OBJ) -o $@ $(LDFLAGS)
+$(NAME): $(OBJ) $(LDLIBS) $(DRIVER_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(DRIVER_OBJ) -o $@ $(LDFLAGS)
 
 $(LIBFT):
 	@make -j4 -C $(LIBFT_DIR)/
 
-test_vectors: tests/vectors.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/vectors.o -o $@ $(LDFLAGS)
+test_vectors: tests/vectors.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/vectors.o -o $@ $(LDFLAGS)
 
-test_camera: tests/camera.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/camera.o -o $@ $(LDFLAGS)
+test_camera: tests/camera.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/camera.o -o $@ $(LDFLAGS)
 
-test_texture: tests/texture.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/texture.o -o $@ $(LDFLAGS)
+test_texture: tests/texture.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/texture.o -o $@ $(LDFLAGS)
 
-test_material: tests/material.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/material.o -o $@ $(LDFLAGS)
+test_material: tests/material.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/material.o -o $@ $(LDFLAGS)
 
-test_parser: tests/parser.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/parser.o -o $@ $(LDFLAGS)
+test_parser: tests/parser.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/parser.o -o $@ $(LDFLAGS)
 
 -include $(DEP)
 
