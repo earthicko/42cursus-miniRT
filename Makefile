@@ -98,6 +98,9 @@ test_texture: tests/texture.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
 test_material: tests/material.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/material.o -o $@ $(LDFLAGS)
 
+test_parser: tests/parser.o $(LDLIBS) $(OBJ) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(LDLIBS) $(OBJ) $(TEST_OBJ) tests/parser.o -o $@ $(LDFLAGS)
+
 -include $(DEP)
 
 clean:
@@ -107,7 +110,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
-	$(RM) test_vectors test_camera test_texture test_material
+	$(RM) test_vectors test_camera test_texture test_material test_parser
 	@make fclean -C $(LIBFT_DIR)
 
 re:
