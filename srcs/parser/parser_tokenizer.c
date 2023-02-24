@@ -72,13 +72,13 @@ t_ptrarr	*tokenize(const char *line)
 	arr = ptrarr_create();
 	if (!arr)
 	{
-		ft_dprintf(2, "%s: %s\n", EXEC_NAME, MSG_MALLOC);
+		ft_dprintf(2, "%s: "MSG_MALLOC"\n", EXEC_NAME);
 		return (NULL);
 	}
 	if (fill_tokens(line, arr))
 	{
 		ptrarr_destroy(arr, TRUE);
-		ft_dprintf(2, "%s: %s\n", EXEC_NAME, MSG_MALLOC);
+		ft_dprintf(2, "%s: "MSG_MALLOC"\n", EXEC_NAME);
 		return (NULL);
 	}
 	return (arr);

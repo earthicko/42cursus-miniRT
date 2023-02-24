@@ -25,7 +25,7 @@ static int	parse_unique_entity_loop(t_bool *already_found, const char *line)
 			found_once = TRUE;
 			if (already_found[i])
 			{
-				ft_dprintf(2, "%s: duplicate unique elements detected.\n", EXEC_NAME);
+				ft_dprintf(2, "%s: "MSG_DUPLICATE"\n", EXEC_NAME);
 				return (CODE_ERROR_DATA);
 			}
 			already_found[i] = TRUE;
