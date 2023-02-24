@@ -21,9 +21,9 @@ t_bool	is_cylinder(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
-int	build_cylinder(const char *line)
+int	build_cylinder(const t_ptrarr *tokens)
 {
-	(void)line;
+	(void)tokens;
 	printf("Unimplemented stub of %s\n", __func__);
 	return (CODE_OK);
 }

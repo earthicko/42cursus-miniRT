@@ -67,7 +67,7 @@ int	parse_line(const char *line, t_patternmatcher tester, t_builder builder)
 	stat = FALSE;
 	if (tester(tokens))
 	{
-		stat = builder(line);
+		stat = builder(tokens);
 		if (!stat)
 			stat = TRUE;
 	}

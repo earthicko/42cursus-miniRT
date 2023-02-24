@@ -19,9 +19,9 @@ t_bool	is_ambient_lighting(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
-int	build_ambient_lighting(const char *line)
+int	build_ambient_lighting(const t_ptrarr *tokens)
 {
-	(void)line;
+	(void)tokens;
 	printf("Unimplemented stub of %s\n", __func__);
 	return (CODE_OK);
 }

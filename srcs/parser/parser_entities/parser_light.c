@@ -24,9 +24,9 @@ t_bool	is_light(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
-int	build_light(const char *line)
+int	build_light(const t_ptrarr *tokens)
 {
-	(void)line;
+	(void)tokens;
 	printf("Unimplemented stub of %s\n", __func__);
 	return (CODE_OK);
 }

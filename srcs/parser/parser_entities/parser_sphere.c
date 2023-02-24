@@ -24,9 +24,9 @@ t_bool	is_sphere(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
-int	build_sphere(const char *line)
+int	build_sphere(const t_ptrarr *tokens)
 {
-	(void)line;
+	(void)tokens;
 	printf("Unimplemented stub of %s\n", __func__);
 	return (CODE_OK);
 }
