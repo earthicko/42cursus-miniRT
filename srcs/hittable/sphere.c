@@ -1,15 +1,14 @@
 #include <stdlib.h>
-#include <math.h>
 #include "libft.h"
-#include "hittable_internal.h"
 #include "material.h"
 #include "geometry.h"
+#include "hittable_internal.h"
 
 // TODO: radius 0, 혹은 거의 0인 경우에 대한 예외처리, 파싱단에서 처리하는게 나을듯
 // TODO: 필요시 uv 좌표 계산식 추가, the next weekend
 // TODO: 직선의 방향벡터가 정규화(길이 1로 설정)되지 않았을 때도 성립하는지 체크
-
 // TODO: outward_norm 길이 1로 정규화를 해주긴 했는데 왜 해야되지? 일단 해두긴 함
+
 // This function needs to solve equation system of sphere and straight line 
 // Sphere: (x_vec - O_point) * (x_vec - O_point) = radius^2
 //    The trace of the vector x represents a sphere.
@@ -23,19 +22,22 @@
 // a = dir * dir,
 // 2b = 2 * (dir * (A - O)),
 // c = OA^2 - radius^2.
+t_bool	hit_sphere(t_hittable *hittable,
+					t_ray *ray,
+					t_minmax t,
 					t_hit_record *rec)
 {
 	t_hittable_sphere	*this;
-	t_vec3				oc;
+	t_vec3				oa;
 	t_vec3				outward_norm;
 	double				coef[3];
 	double				root;
 
 	this = (t_hittable_sphere *)hittable;
-	vec3_sub_vec3(&oc, &ray->orig, &this->center);
+	vec3_sub_vec3(&oa, &ray->orig, &this->center);
 	coef[A] = vec3_dot_vec3(&ray->dir, &ray->dir);
-	coef[B] = 2 * vec3_dot_vec3(&oc, &ray->dir);
-	coef[C] = vec3_dot_vec3(&oc, &oc) - pow(this->radius, 2);
+	coef[B] = 2 * vec3_dot_vec3(&oa, &ray->dir);
+	coef[C] = vec3_dot_vec3(&oa, &oa) - pow(this->radius, 2);
 	if (solve_quadratic_equation(t, coef, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
