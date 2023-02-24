@@ -19,7 +19,6 @@ enum	e_axis
 	Z
 };
 
-
-t_bool	solve_quadratic_equation(double coef[3], t_pair t, double *root);
+t_bool	solve_quadratic_equation(t_pair t, double coef[3], double *root);
 
 #endif

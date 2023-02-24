@@ -2,7 +2,6 @@
 #include "objects.h"
 #include "hittable_internal.h"
 
-
 t_bool	solve_quadratic_equation(t_pair t, double coef[3], double *root)
 {
 	double	dscrm;
@@ -21,7 +20,6 @@ t_bool	solve_quadratic_equation(t_pair t, double coef[3], double *root)
 	}
 	return (TRUE);
 }
-
 
 // TODO: ray가 평면이랑 평행하거나, 거의 평행할 때 예외처리 (0으로 나누게 됨)
 // TODO: 교점이 무수히 많을 때 (?)
