@@ -101,6 +101,9 @@ test_vectors: tests/vectors.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 test_camera: tests/camera.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/camera.o -o $@ $(LDFLAGS)
 
+test_hittable: tests/hittable.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/hittable.o -o $@ $(LDFLAGS)
+
 test_texture: tests/texture.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/texture.o -o $@ $(LDFLAGS)
 
@@ -119,7 +122,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
-	$(RM) test_vectors test_camera test_texture test_material test_parser
+	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable
 	@make fclean -C $(LIBFT_DIR)
 
 re:
