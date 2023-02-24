@@ -63,6 +63,9 @@ FILENAME		= \
 				number/number_utils \
 				ptrarr/ptrarr \
 				print/print0 \
+				mlx_interface/mlx_interface \
+				mlx_interface/mlx_interface_buffer \
+				mlx_interface/mlx_interface_putpixel \
 				camera/camera_init \
 				camera/camera_get_ray_at \
 				hittable/math_utils \
