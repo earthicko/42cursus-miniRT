@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "libft.h"
+#include "print.h"
 #include "../parser_internal.h"
 
 /*
@@ -34,7 +35,8 @@ int	build_ambient_lighting(const t_ptrarr *tokens, t_scene *scene)
 	ratio = ft_atof(tokens->data[1]);
 	parse_vector(&color, &tokens->data[2]);
 	vec3_mult_num(&scene->bg, &color, ratio);
-	printf("%s: background color (%.2f, %.2f, %.2f)\n", __func__,
-		scene->bg.i[0], scene->bg.i[1], scene->bg.i[2]);
+	printf("%s: background color ", __func__);
+	print_vec3(&scene->bg);
+	printf("\n");
 	return (CODE_OK);
 }
