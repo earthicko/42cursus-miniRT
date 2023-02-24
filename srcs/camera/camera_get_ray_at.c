@@ -9,7 +9,7 @@ void	camera_get_ray_at(t_ray *out, const t_camera *cam, double x, double y)
 {
 	int	i;
 
-	vec3_add_vec3(&out->orig, &cam->view_origin, &cam->uv);
+	out->orig = cam->view_origin;
 	i = 0;
 	while (i < 3)
 	{
