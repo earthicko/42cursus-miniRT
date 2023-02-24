@@ -1,8 +1,7 @@
 #ifndef GEOMETRY_H
 # define GEOMETRY_H
-# include "libft_def.h"
 
-# define DOUBLE_E 1e-8
+# include "libft_def.h"
 
 enum	e_axis
 {

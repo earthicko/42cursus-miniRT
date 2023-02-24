@@ -60,6 +60,7 @@ FILENAME		= \
 				ray \
 				number/random \
 				number/degree \
+				number/number_utils \
 				ptrarr/ptrarr \
 				print/print0 \
 				camera/camera_init \
