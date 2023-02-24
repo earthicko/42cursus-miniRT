@@ -31,9 +31,9 @@ typedef enum e_tokentype
 	TOKENTYPE_COMMA
 }	t_tokentype;
 
-typedef t_bool		(*t_wordtester)(char *);
-typedef t_bool		(*t_patternmatcher)(t_ptrarr *);
-typedef int			(*t_builder)(char *);
+typedef t_bool		(*t_wordtester)(char *word);
+typedef t_bool		(*t_patternmatcher)(t_ptrarr *tokens);
+typedef int			(*t_builder)(char *line);
 
 char				*tokenname_manager(int i);
 t_wordtester		wordtester_manager(int i);
