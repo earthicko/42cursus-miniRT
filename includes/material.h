@@ -15,12 +15,11 @@ typedef struct s_scatter_record
 	t_ray	scattered;
 }	t_scatter_record;
 
-// t_material *self, t_color *out, t_uv *uv, t_point *p
-typedef void				(*t_material_emit)(
-	t_material *self, t_color *out, t_uv *uv, t_point *p);
-// t_material *self, t_scatter_record *out, t_ray *ray_in, t_hit_record *hit
-typedef t_bool				(*t_material_scatter)(
-	t_material *self, t_scatter_record *out, t_ray *ray_in, t_hit_record *hit);
+typedef void				(*t_material_emit)(t_material *self,
+	t_color *out, const t_uv *uv, const t_point *p);
+
+typedef t_bool				(*t_material_scatter)(t_material *self,
+	t_scatter_record *out, const t_ray *ray_in, const t_hit_record *hit);
 
 typedef struct s_material
 {

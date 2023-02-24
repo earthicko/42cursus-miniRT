@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../parser_internal.h"
 
-t_bool	is_plane(t_ptrarr *tokens)
+t_bool	is_plane(const t_ptrarr *tokens)
 {
 	static const int	patternlen = 16;
 	static const int	pattern[16] = {
@@ -19,7 +19,7 @@ t_bool	is_plane(t_ptrarr *tokens)
 	return (FALSE);
 }
 
-int	build_plane(char *line)
+int	build_plane(const char *line)
 {
 	(void)line;
 	printf("Unimplemented stub of %s\n", __func__);

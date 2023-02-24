@@ -56,7 +56,7 @@ t_ptrarr	*read_file_to_strarr(char *path)
 	returns TRUE if line matches pattern, FALSE if doesn't,
 	negative if error occurs.
 */
-int	parse_line(char *line, t_patternmatcher tester, t_builder builder)
+int	parse_line(const char *line, t_patternmatcher tester, t_builder builder)
 {
 	t_ptrarr	*tokens;
 	int			stat;

@@ -19,7 +19,8 @@ t_material	*material_dielectric_create(double ior)
 }
 
 void	material_dielectric_scatter_set_sincostheta(
-		t_vec3 *unitdir, t_hit_record *hit, double *costheta, double *sintheta)
+		const t_vec3 *unitdir, const t_hit_record *hit,
+		double *costheta, double *sintheta)
 {
 	t_vec3	unitdir_inv;
 
@@ -55,8 +56,8 @@ t_bool	material_dielectric_can_refract(
 t_bool	material_dielectric_scatter(
 				t_material *self,
 				t_scatter_record *out,
-				t_ray *ray_in,
-				t_hit_record *hit)
+				const t_ray *ray_in,
+				const t_hit_record *hit)
 {
 	t_material_dielectric	*this;
 	double					refract_ratio;

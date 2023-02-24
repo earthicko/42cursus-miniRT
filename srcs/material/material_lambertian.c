@@ -19,8 +19,8 @@ t_material	*material_lambertian_create(t_texture *albedo)
 t_bool	material_lambertian_scatter(
 				t_material *self,
 				t_scatter_record *out,
-				t_ray *ray_in,
-				t_hit_record *hit)
+				const t_ray *ray_in,
+				const t_hit_record *hit)
 {
 	t_vec3					random_unit;
 	t_vec3					scatter_dir;

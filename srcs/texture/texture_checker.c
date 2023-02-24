@@ -16,7 +16,7 @@ t_texture	*texture_checker_create(t_texture *a, t_texture *b, double freq)
 }
 
 void	texture_checker_get_color_at(
-			t_texture *self, t_color *out, t_uv *uv, t_vec3 *p)
+			t_texture *self, t_color *out, const t_uv *uv, const t_vec3 *p)
 {
 	t_texture_checker	*this;
 	int					checker[2];

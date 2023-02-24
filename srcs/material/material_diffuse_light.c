@@ -15,7 +15,7 @@ t_material	*material_diffuse_light_create(t_texture *emitter)
 }
 
 void	material_diffuse_light_emit(
-		t_material *self, t_color *out, t_uv *uv, t_point *p)
+		t_material *self, t_color *out, const t_uv *uv, const t_point *p)
 {
 	t_material_diffuse_light	*this;
 
@@ -26,8 +26,8 @@ void	material_diffuse_light_emit(
 t_bool	material_diffuse_light_scatter(
 			t_material *self,
 			t_scatter_record *out,
-			t_ray *ray_in,
-			t_hit_record *hit)
+			const t_ray *ray_in,
+			const t_hit_record *hit)
 {
 	(void)self;
 	(void)out;

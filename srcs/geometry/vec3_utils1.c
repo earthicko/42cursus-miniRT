@@ -3,7 +3,7 @@
 #include "geometry.h"
 #include "number.h"
 
-double	vec3_get_len(t_vec3 *in)
+double	vec3_get_len(const t_vec3 *in)
 {
 	return (sqrt(
 			in->i[0] * in->i[0]
@@ -11,14 +11,14 @@ double	vec3_get_len(t_vec3 *in)
 			+ in->i[2] * in->i[2]));
 }
 
-double	vec3_get_len_sq(t_vec3 *in)
+double	vec3_get_len_sq(const t_vec3 *in)
 {
 	return (in->i[0] * in->i[0]
 		+ in->i[1] * in->i[1]
 		+ in->i[2] * in->i[2]);
 }
 
-t_bool	vec3_is_near_zero(t_vec3 *in)
+t_bool	vec3_is_near_zero(const t_vec3 *in)
 {
 	return (
 		(fabs(in->i[0]) < DOUBLE_E)
@@ -26,7 +26,7 @@ t_bool	vec3_is_near_zero(t_vec3 *in)
 		&& (fabs(in->i[2]) < DOUBLE_E));
 }
 
-void	vec3_get_unit(t_vec3 *out, t_vec3 *in)
+void	vec3_get_unit(t_vec3 *out, const t_vec3 *in)
 {
 	int		i;
 	double	len;

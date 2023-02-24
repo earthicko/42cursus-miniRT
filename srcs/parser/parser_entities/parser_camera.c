@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../parser_internal.h"
 
-t_bool	is_camera(t_ptrarr *tokens)
+t_bool	is_camera(const t_ptrarr *tokens)
 {
 	static const int	patternlen = 12;
 	static const int	pattern[12] = {
@@ -24,7 +24,7 @@ t_bool	is_camera(t_ptrarr *tokens)
 	return (FALSE);
 }
 
-int	build_camera(char *line)
+int	build_camera(const char *line)
 {
 	(void)line;
 	printf("Unimplemented stub of %s\n", __func__);

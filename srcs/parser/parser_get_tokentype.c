@@ -4,7 +4,7 @@
 #include "ptrarr.h"
 #include "parser_internal.h"
 
-t_bool	is_identifier(char *word)
+t_bool	is_identifier(const char *word)
 {
 	int	i;
 
@@ -19,7 +19,7 @@ t_bool	is_identifier(char *word)
 	return (FALSE);
 }
 
-t_bool	is_number(char *word)
+t_bool	is_number(const char *word)
 {
 	double	num;
 
@@ -28,7 +28,7 @@ t_bool	is_number(char *word)
 	return (TRUE);
 }
 
-t_bool	is_comma(char *word)
+t_bool	is_comma(const char *word)
 {
 	if (ft_strncmp(PARSER_COMMA_STR, word,
 			ft_strlen(PARSER_COMMA_STR) + 1) == 0)
@@ -37,7 +37,7 @@ t_bool	is_comma(char *word)
 }
 
 t_bool	is_in_pattern(const char *identifier,
-	const int *pattern, const int patternlen, t_ptrarr *tokens)
+	const int *pattern, const int patternlen, const t_ptrarr *tokens)
 {
 	int	i;
 

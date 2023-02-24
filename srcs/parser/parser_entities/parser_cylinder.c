@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../parser_internal.h"
 
-t_bool	is_cylinder(t_ptrarr *tokens)
+t_bool	is_cylinder(const t_ptrarr *tokens)
 {
 	static const int	patternlen = 18;
 	static const int	pattern[18] = {
@@ -21,7 +21,7 @@ t_bool	is_cylinder(t_ptrarr *tokens)
 	return (FALSE);
 }
 
-int	build_cylinder(char *line)
+int	build_cylinder(const char *line)
 {
 	(void)line;
 	printf("Unimplemented stub of %s\n", __func__);

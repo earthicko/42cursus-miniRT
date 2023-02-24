@@ -26,8 +26,8 @@ t_material	*material_metal_create(t_texture *albedo, double fuzz)
 t_bool	material_metal_scatter(
 				t_material *self,
 				t_scatter_record *out,
-				t_ray *ray_in,
-				t_hit_record *hit)
+				const t_ray *ray_in,
+				const t_hit_record *hit)
 {
 	t_material_metal	*this;
 	t_vec3				in_unit;

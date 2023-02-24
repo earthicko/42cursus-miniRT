@@ -1,7 +1,7 @@
 #include "libft.h"
 #include "geometry.h"
 
-void	vec3_cross_vec3(t_vec3 *out, t_vec3 *a, t_vec3 *b)
+void	vec3_cross_vec3(t_vec3 *out, const t_vec3 *a, const t_vec3 *b)
 {
 	int	i;
 

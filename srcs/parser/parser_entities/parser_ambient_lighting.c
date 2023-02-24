@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../parser_internal.h"
 
-t_bool	is_ambient_lighting(t_ptrarr *tokens)
+t_bool	is_ambient_lighting(const t_ptrarr *tokens)
 {
 	static const int	patternlen = 7;
 	static const int	pattern[7] = {
@@ -19,7 +19,7 @@ t_bool	is_ambient_lighting(t_ptrarr *tokens)
 	return (FALSE);
 }
 
-int	build_ambient_lighting(char *line)
+int	build_ambient_lighting(const char *line)
 {
 	(void)line;
 	printf("Unimplemented stub of %s\n", __func__);

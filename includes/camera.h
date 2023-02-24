@@ -29,7 +29,7 @@ typedef struct s_camera
 	int		pixel_h;
 }	t_camera;
 
-void	camera_init(t_camera *cam, t_camerainfo *caminfo);
-void	camera_get_ray_at(t_ray *out, t_camera *cam, double x, double y);
+void	camera_init(t_camera *cam, const t_camerainfo *caminfo);
+void	camera_get_ray_at(t_ray *out, const t_camera *cam, double x, double y);
 
 #endif

@@ -31,9 +31,9 @@ typedef enum e_tokentype
 	TOKENTYPE_COMMA
 }	t_tokentype;
 
-typedef t_bool		(*t_wordtester)(char *word);
-typedef t_bool		(*t_patternmatcher)(t_ptrarr *tokens);
-typedef int			(*t_builder)(char *line);
+typedef t_bool		(*t_wordtester)(const char *word);
+typedef t_bool		(*t_patternmatcher)(const t_ptrarr *tokens);
+typedef int			(*t_builder)(const char *line);
 
 char				*tokenname_manager(int i);
 t_wordtester		wordtester_manager(int i);
@@ -42,35 +42,35 @@ t_builder			unique_builder_manager(int i);
 t_patternmatcher	common_patternmatcher_manager(int i);
 t_builder			common_builder_manager(int i);
 
-t_ptrarr			*tokenize(char *line);
-void				print_tokens(t_ptrarr *tokens);
-t_bool				is_identifier(char *word);
-t_bool				is_number(char *word);
-t_bool				is_comma(char *word);
+t_ptrarr			*tokenize(const char *line);
+void				print_tokens(const t_ptrarr *tokens);
+t_bool				is_identifier(const char *word);
+t_bool				is_number(const char *word);
+t_bool				is_comma(const char *word);
 t_bool				is_in_pattern(
 						const char *identifier,
 						const int *pattern,
 						const int patternlen,
-						t_ptrarr *tokens);
+						const t_ptrarr *tokens);
 
 int					parse_line(
-						char *line,
+						const char *line,
 						t_patternmatcher tester,
 						t_builder builder);
-int					parse_entities(t_ptrarr *lines);
+int					parse_entities(const t_ptrarr *lines);
 
-t_bool				is_ambient_lighting(t_ptrarr *tokens);
-t_bool				is_camera(t_ptrarr *tokens);
-t_bool				is_light(t_ptrarr *tokens);
-t_bool				is_sphere(t_ptrarr *tokens);
-t_bool				is_plane(t_ptrarr *tokens);
-t_bool				is_cylinder(t_ptrarr *tokens);
+t_bool				is_ambient_lighting(const t_ptrarr *tokens);
+t_bool				is_camera(const t_ptrarr *tokens);
+t_bool				is_light(const t_ptrarr *tokens);
+t_bool				is_sphere(const t_ptrarr *tokens);
+t_bool				is_plane(const t_ptrarr *tokens);
+t_bool				is_cylinder(const t_ptrarr *tokens);
 
-int					build_ambient_lighting(char *line);
-int					build_camera(char *line);
-int					build_light(char *line);
-int					build_sphere(char *line);
-int					build_plane(char *line);
-int					build_cylinder(char *line);
+int					build_ambient_lighting(const char *line);
+int					build_camera(const char *line);
+int					build_light(const char *line);
+int					build_sphere(const char *line);
+int					build_plane(const char *line);
+int					build_cylinder(const char *line);
 
 #endif

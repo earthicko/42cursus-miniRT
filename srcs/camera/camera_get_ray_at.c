@@ -5,7 +5,7 @@
 	ray origin = view origin + uv
 	ray dir = pixel origin + (x * x axis + y * y axis) - ray origin
 */
-void	camera_get_ray_at(t_ray *out, t_camera *cam, double x, double y)
+void	camera_get_ray_at(t_ray *out, const t_camera *cam, double x, double y)
 {
 	int	i;
 

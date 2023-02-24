@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../parser_internal.h"
 
-t_bool	is_sphere(t_ptrarr *tokens)
+t_bool	is_sphere(const t_ptrarr *tokens)
 {
 	static const int	patternlen = 12;
 	static const int	pattern[12] = {
@@ -24,7 +24,7 @@ t_bool	is_sphere(t_ptrarr *tokens)
 	return (FALSE);
 }
 
-int	build_sphere(char *line)
+int	build_sphere(const char *line)
 {
 	(void)line;
 	printf("Unimplemented stub of %s\n", __func__);

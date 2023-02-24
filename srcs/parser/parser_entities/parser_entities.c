@@ -8,7 +8,7 @@
 	FALSE if line matches none,
 	negative if error occurs.
 */
-static int	parse_unique_entity_loop(t_bool *already_found, char *line)
+static int	parse_unique_entity_loop(t_bool *already_found, const char *line)
 {
 	int		i;
 	int		stat;
@@ -42,7 +42,7 @@ static int	parse_unique_entity_loop(t_bool *already_found, char *line)
 	FALSE if line matches none,
 	negative if error occurs.
 */
-static int	parse_common_entity_loop(char *line)
+static int	parse_common_entity_loop(const char *line)
 {
 	int		i;
 	int		stat;
@@ -59,7 +59,7 @@ static int	parse_common_entity_loop(char *line)
 	return (FALSE);
 }
 
-static int	parse_common_entity(char *line)
+static int	parse_common_entity(const char *line)
 {
 	int	stat;
 
@@ -74,7 +74,7 @@ static int	parse_common_entity(char *line)
 	return (CODE_OK);
 }
 
-int	parse_entities(t_ptrarr *lines)
+int	parse_entities(const t_ptrarr *lines)
 {
 	int			i;
 	int			stat;

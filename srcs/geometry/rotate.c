@@ -2,9 +2,9 @@
 #include "geometry.h"
 #include <math.h>
 
-static void	matrix44_rotate_x(t_matrix44 *out, t_matrix44 *m, double theta)
+static void	matrix44_rotate_x(t_mtx44 *out, const t_mtx44 *m, double theta)
 {
-	t_matrix44	rotate;
+	t_mtx44	rotate;
 
 	m44_init_zero(&rotate);
 	rotate.i[0][0] = 1;
@@ -16,9 +16,9 @@ static void	matrix44_rotate_x(t_matrix44 *out, t_matrix44 *m, double theta)
 	m44_multiply_m44(out, m, &rotate);
 }
 
-static void	matrix44_rotate_y(t_matrix44 *out, t_matrix44 *m, double theta)
+static void	matrix44_rotate_y(t_mtx44 *out, const t_mtx44 *m, double theta)
 {
-	t_matrix44	rotate;
+	t_mtx44	rotate;
 
 	m44_init_zero(&rotate);
 	rotate.i[0][0] = cos(theta);
@@ -30,9 +30,9 @@ static void	matrix44_rotate_y(t_matrix44 *out, t_matrix44 *m, double theta)
 	m44_multiply_m44(out, m, &rotate);
 }
 
-static void	matrix44_rotate_z(t_matrix44 *out, t_matrix44 *m, double theta)
+static void	matrix44_rotate_z(t_mtx44 *out, const t_mtx44 *m, double theta)
 {
-	t_matrix44	rotate;
+	t_mtx44	rotate;
 
 	m44_init_zero(&rotate);
 	rotate.i[0][0] = cos(theta);
@@ -44,7 +44,7 @@ static void	matrix44_rotate_z(t_matrix44 *out, t_matrix44 *m, double theta)
 	m44_multiply_m44(out, m, &rotate);
 }
 
-void	m44_rotate(t_matrix44 *out, t_matrix44 *m, int axis_i, double theta)
+void	m44_rotate(t_mtx44 *out, const t_mtx44 *m, int axis_i, double theta)
 {
 	if (axis_i == AXIS_X)
 		matrix44_rotate_x(out, m, theta);
@@ -54,10 +54,10 @@ void	m44_rotate(t_matrix44 *out, t_matrix44 *m, int axis_i, double theta)
 		matrix44_rotate_z(out, m, theta);
 }
 
-void	m44_rotate_inplace(t_matrix44 *m, int axis_i, double theta)
+void	m44_rotate_inplace(t_mtx44 *target, int axis_i, double theta)
 {
-	t_matrix44	temp;
+	t_mtx44	temp;
 
-	m44_rotate(&temp, m, axis_i, theta);
-	ft_memcpy(m, &temp, sizeof(t_matrix44));
+	m44_rotate(&temp, target, axis_i, theta);
+	ft_memcpy(target, &temp, sizeof(t_mtx44));
 }

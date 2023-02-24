@@ -21,7 +21,7 @@ static int	tokenize_comma(t_ptrarr *arr)
 	return (CODE_OK);
 }
 
-static int	tokenize_word(char *line, t_ptrarr *arr)
+static int	tokenize_word(const char *line, t_ptrarr *arr)
 {
 	int		wordlen;
 	char	*word;
@@ -42,7 +42,7 @@ static int	tokenize_word(char *line, t_ptrarr *arr)
 	return (CODE_OK);
 }
 
-static int	fill_tokens(char *line, t_ptrarr *arr)
+static int	fill_tokens(const char *line, t_ptrarr *arr)
 {
 	while (*line)
 	{
@@ -65,7 +65,7 @@ static int	fill_tokens(char *line, t_ptrarr *arr)
 	return (CODE_OK);
 }
 
-t_ptrarr	*tokenize(char *line)
+t_ptrarr	*tokenize(const char *line)
 {
 	t_ptrarr	*arr;
 
@@ -84,7 +84,7 @@ t_ptrarr	*tokenize(char *line)
 	return (arr);
 }
 
-void	print_tokens(t_ptrarr *tokens)
+void	print_tokens(const t_ptrarr *tokens)
 {
 	int	i;
 
