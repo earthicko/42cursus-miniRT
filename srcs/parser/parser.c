@@ -7,7 +7,8 @@
 #include "msgdef.h"
 #include "parser_internal.h"
 
-static t_bool	read_file_to_strarr_init(char *path, t_ptrarr **arr, int *fd)
+static t_bool	read_file_to_strarr_init(
+		const char *path, t_ptrarr **arr, int *fd)
 {
 	*arr = ptrarr_create();
 	if (!(*arr))
@@ -25,7 +26,7 @@ static t_bool	read_file_to_strarr_init(char *path, t_ptrarr **arr, int *fd)
 	return (TRUE);
 }
 
-t_ptrarr	*read_file_to_strarr(char *path)
+t_ptrarr	*read_file_to_strarr(const char *path)
 {
 	t_ptrarr	*arr;
 	int			fd;
