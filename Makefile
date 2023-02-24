@@ -29,6 +29,7 @@ TEST_DEP		= $(addprefix tests/, $(addsuffix .d, $(TEST_FILENAME)))
 TESTER_FILENAME	= \
 				vectors \
 				camera \
+				hittable \
 				texture \
 				material \
 				parser \
@@ -58,6 +59,9 @@ FILENAME		= \
 				print/print0 \
 				camera/camera_init \
 				camera/camera_get_ray_at \
+				hittable/math_utils \
+				hittable/hit_record_set_normal_and_face \
+				hittable/sphere \
 				material/material_diffuse_light \
 				material/material_metal \
 				material/material_dielectric \

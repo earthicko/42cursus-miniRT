@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include "libft.h"
 #include "ptrarr.h"
-#include "objects.h"
 #include "msgdef.h"
 #include "parser_internal.h"
 

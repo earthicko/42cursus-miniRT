@@ -3,12 +3,11 @@
 #include "hittable_internal.h"
 #include "material.h"
 #include "geometry.h"
-#include "objects.h"
 
 // TODO: outward_norm 필요성, 필요하긴 할듯. ray color 함수 잘 보고 판단
 t_bool	hit_plane(t_hittable *hittable, \
 					t_ray *ray, \
-					t_pair t, \
+					t_minmax t, \
 					t_hit_record *rec)
 {
 	t_plane	*this;

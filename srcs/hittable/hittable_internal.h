@@ -12,13 +12,6 @@ enum	e_coefficient
 	D
 };
 
-enum	e_axis
-{
-	X = 0,
-	Y,
-	Z
-};
-
-t_bool	solve_quadratic_equation(t_pair t, double coef[3], double *root);
+t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root);
 
 #endif

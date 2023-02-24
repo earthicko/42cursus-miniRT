@@ -1,8 +1,7 @@
 #include <math.h>
-#include "objects.h"
 #include "hittable_internal.h"
 
-t_bool	solve_quadratic_equation(t_pair t, double coef[3], double *root)
+t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root)
 {
 	double	dscrm;
 	double	sqrt_dscrm;
@@ -26,22 +25,22 @@ t_bool	solve_quadratic_equation(t_pair t, double coef[3], double *root)
 
 // 상식적으로 생각했을 때, 표면을 스치듯 지나가는 광선은 표면 밝기에 영향력이 거의 0
 // 따라서 위 두가지 경우 그냥 hit하지 않는다고 판단해도 무방할듯
-t_bool	solve_equation_system_plane_and_line(t_pair t, \
-											t_plane *pl, \
-											t_ray *ray, \
-											double *root)
-{
-	const double	norm_dot_dir = vec3_dot_vec3(&pl->norm, &ray->dir);
-	double			coef[4];
+// t_bool	solve_equation_system_plane_and_line(t_minmax t, \
+// 											t_plane *pl, \
+// 											t_ray *ray, \
+// 											double *root)
+// {
+// 	const double	norm_dot_dir = vec3_dot_vec3(&pl->norm, &ray->dir);
+// 	double			coef[4];
 
-	if (norm_dot_dir == near_zero)
-	{
-		if (ray->orig is on pl)
-			//직선이 평면에 포함, 무수히 많은 교점
-		else
-			//평행, 교점 0개
-	}
-	coef[D] = -vec3_dot_vec3(&pl->norm, &pl->point)
-	*root = (-vec3_dot_vec3(&pl->norm, &ray->orig) - coef[D]) / norm_dot_dir;
-	return (TRUE);
-}
+// 	// if (norm_dot_dir == near_zero)
+// 	// {
+// 	// 	if (ray->orig is on pl)
+// 	// 		//직선이 평면에 포함, 무수히 많은 교점
+// 	// 	else
+// 	// 		//평행, 교점 0개
+// 	// }
+// 	coef[D] = -vec3_dot_vec3(&pl->norm, &pl->point)
+// 	*root = (-vec3_dot_vec3(&pl->norm, &ray->orig) - coef[D]) / norm_dot_dir;
+// 	return (TRUE);
+// }
