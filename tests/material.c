@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <time.h>
+#include "libft.h"
 #include "material.h"
 #include "print.h"
 
@@ -38,6 +40,7 @@ void	test_scatter(t_material *material)
 		print_vec3(&scattered.albedo);
 		printf(", ");
 		print_ray(&scattered.scattered);
+		printf(" vec len %.5f", vec3_get_len(&scattered.scattered.dir));
 		printf("\n");
 	}
 	else
@@ -56,6 +59,7 @@ int	main(void)
 	t_material	*materials[4];
 	t_color		color;
 
+	ft_srand(time(NULL));
 	vec3_setval(&color, 0.2, 0.3, 0.4);
 	solid = texture_solid_create(color);
 	materials[0] = material_lambertian_create(solid);
