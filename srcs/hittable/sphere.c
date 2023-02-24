@@ -60,9 +60,9 @@ t_hittable_sphere	*sphere_create(
 	if (!sphere)
 		return (NULL);
 	ft_memset(sphere, 0, sizeof(t_hittable_sphere));
-	sphere->center = center;
-	sphere->radius = radius;
-	sphere->material = material;
 	sphere->hit = hit_sphere;
+	sphere->material = material;
+	sphere->radius = radius;
+	sphere->center = center;
 	return (sphere);
 }	
