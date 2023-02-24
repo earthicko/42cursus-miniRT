@@ -5,12 +5,17 @@ LIBFT			= $(LIBFT_DIR)/libft.a
 LINK_LIBFT		= -L$(LIBFT_DIR)
 INC_DIR_LIBFT	= -I$(LIBFT_DIR)/includes
 
+LIBMLX_DIR		= minilibx_macos
+LIBMLX			= $(LIBMLX_DIR)/libmlx.a
+LINK_LIBMLX		= -L$(LIBMLX_DIR) -framework OpenGL -framework AppKit
+INC_DIR_LIBMLX	= -I$(LIBMLX_DIR)
+
 LINK_LIBM		= -lm
 
-LDLIBS			= $(LIBFT)
-LDFLAGS			= $(LINK_LIBFT) $(LINK_LIBM)
+LDLIBS			= $(LIBFT) $(LIBMLX)
+LDFLAGS			= $(LINK_LIBFT) $(LINK_LIBMLX) $(LINK_LIBM)
 
-INC_DIR			= -I. -Iincludes $(INC_DIR_LIBFT)
+INC_DIR			= -I. -Iincludes $(INC_DIR_LIBFT) $(INC_DIR_LIBMLX)
 ################################# COMMANDS #####################################
 CFLAGS			= -Wall -Werror -Wextra -MMD -MP $(ACFLAGS) $(INC_DIR)
 ################################ FILENAMES #####################################
@@ -94,6 +99,9 @@ $(NAME): $(OBJ) $(LDLIBS) $(DRIVER_OBJ)
 
 $(LIBFT):
 	@make -j4 -C $(LIBFT_DIR)/
+
+$(LIBMLX):
+	@make -j4 -C $(LIBMLX_DIR)/
 
 test_vectors: tests/vectors.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/vectors.o -o $@ $(LDFLAGS)
