@@ -1,6 +1,13 @@
 #include <math.h>
 #include "hittable_internal.h"
 
+t_bool	is_nere_zero(double val)
+{
+	if (fabs(val) < 1e-8)
+		return (TRUE);
+	return (FALSE);
+}
+
 // This function solves ax^2 + bx + c = 0 equation.
 // Each coef element refers to a, b, and c respectively.
 // If this function finds a solution that fits the range of t_minmax, 
@@ -39,15 +46,17 @@ t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root)
 //    The given point A is origin of the line,
 //    The vector u is direction vector of the line 
 // Solution: t = (P - A) * n_vec / n_vec * dir_vec
+t_bool	solve_equation_system_plane_and_line(t_minmax t, \
+											t_hittable_plane *plane, \
+											t_ray *ray, \
+											double *root)
+{
+	const double	norm_dot_dir = vec3_dot_vec3(&plane->norm, &ray->dir);
+	t_vec3			ap;
 
-// 	// if (norm_dot_dir == near_zero)
-// 	// {
-// 	// 	if (ray->orig is on pl)
-// 	// 		//직선이 평면에 포함, 무수히 많은 교점
-// 	// 	else
-// 	// 		//평행, 교점 0개
-// 	// }
-// 	coef[D] = -vec3_dot_vec3(&pl->norm, &pl->point)
-// 	*root = (-vec3_dot_vec3(&pl->norm, &ray->orig) - coef[D]) / norm_dot_dir;
-// 	return (TRUE);
-// }
+	if (is_near_zero(norm_dot_dir))
+		return (FALSE);
+	vec3_sub_vec3(&ap, &plane->point, &ray->orig);
+	*root = vec3_dot_vec3(&ap, &plane->norm) / norm_dot_dir;
+	return (TRUE);
+}
