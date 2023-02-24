@@ -75,6 +75,23 @@ static int	parse_common_entity(const char *line, t_scene *scene)
 	return (CODE_OK);
 }
 
+static t_bool	all_unique_entities_found(t_bool *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < N_IDENTIFIER_UNIQUE)
+	{
+		if (map[i] == FALSE)
+		{
+			ft_dprintf(2, "%s: "MSG_ENTITY_NOTFOUND"\n", EXEC_NAME);
+			return (FALSE);
+		}
+		i++;
+	}
+	return (TRUE);
+}
+
 int	parse_entities(const t_ptrarr *lines, t_scene *scene)
 {
 	int			i;
@@ -96,5 +113,7 @@ int	parse_entities(const t_ptrarr *lines, t_scene *scene)
 		}
 		i++;
 	}
+	if (all_unique_entities_found(already_found))
+		return (CODE_ERROR_DATA);
 	return (CODE_OK);
 }
