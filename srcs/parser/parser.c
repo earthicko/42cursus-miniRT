@@ -57,7 +57,8 @@ t_ptrarr	*read_file_to_strarr(const char *path)
 	returns TRUE if line matches pattern, FALSE if doesn't,
 	negative if error occurs.
 */
-int	parse_line(const char *line, t_patternmatcher tester, t_builder builder)
+int	parse_line(const char *line, t_scene *scene,
+	t_patternmatcher tester, t_builder builder)
 {
 	t_ptrarr	*tokens;
 	int			stat;
@@ -68,7 +69,7 @@ int	parse_line(const char *line, t_patternmatcher tester, t_builder builder)
 	stat = FALSE;
 	if (tester(tokens))
 	{
-		stat = builder(tokens);
+		stat = builder(tokens, scene);
 		if (!stat)
 			stat = TRUE;
 	}
@@ -76,7 +77,7 @@ int	parse_line(const char *line, t_patternmatcher tester, t_builder builder)
 	return (stat);
 }
 
-int	parse_scene(char *path)
+int	parse_scene(const char *path, t_scene *scene)
 {
 	int			stat;
 	t_ptrarr	*lines;
@@ -84,7 +85,7 @@ int	parse_scene(char *path)
 	lines = read_file_to_strarr(path);
 	if (!lines)
 		return (CODE_ERROR_IO);
-	stat = parse_entities(lines);
+	stat = parse_entities(lines, scene);
 	ptrarr_destroy(lines, TRUE);
 	return (stat);
 }

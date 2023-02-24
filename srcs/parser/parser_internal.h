@@ -3,6 +3,7 @@
 
 # include "libft_def.h"
 # include "ptrarr.h"
+# include "scene.h"
 
 # define PARSER_DELIMETER ' '
 # define PARSER_COMMA ','
@@ -33,7 +34,7 @@ typedef enum e_tokentype
 
 typedef t_bool		(*t_wordtester)(const char *word);
 typedef t_bool		(*t_patternmatcher)(const t_ptrarr *tokens);
-typedef int			(*t_builder)(const t_ptrarr *tokens);
+typedef int			(*t_builder)(const t_ptrarr *tokens, t_scene *scene);
 
 char				*tokenname_manager(int i);
 t_wordtester		wordtester_manager(int i);
@@ -55,9 +56,10 @@ t_bool				is_in_pattern(
 
 int					parse_line(
 						const char *line,
+						t_scene *scene,
 						t_patternmatcher tester,
 						t_builder builder);
-int					parse_entities(const t_ptrarr *lines);
+int					parse_entities(const t_ptrarr *lines, t_scene *scene);
 
 t_bool				is_ambient_lighting(const t_ptrarr *tokens);
 t_bool				is_camera(const t_ptrarr *tokens);
@@ -67,11 +69,18 @@ t_bool				is_plane(const t_ptrarr *tokens);
 t_bool				is_cylinder(const t_ptrarr *tokens);
 
 void				parse_vector(t_vec3 *out, const void **token_start);
-int					build_ambient_lighting(const t_ptrarr *tokens);
-int					build_camera(const t_ptrarr *tokens);
-int					build_light(const t_ptrarr *tokens);
-int					build_sphere(const t_ptrarr *tokens);
-int					build_plane(const t_ptrarr *tokens);
-int					build_cylinder(const t_ptrarr *tokens);
+
+int					build_ambient_lighting(
+						const t_ptrarr *tokens, t_scene *scene);
+int					build_camera(
+						const t_ptrarr *tokens, t_scene *scene);
+int					build_light(
+						const t_ptrarr *tokens, t_scene *scene);
+int					build_sphere(
+						const t_ptrarr *tokens, t_scene *scene);
+int					build_plane(
+						const t_ptrarr *tokens, t_scene *scene);
+int					build_cylinder(
+						const t_ptrarr *tokens, t_scene *scene);
 
 #endif

@@ -8,7 +8,8 @@
 	FALSE if line matches none,
 	negative if error occurs.
 */
-static int	parse_unique_entity_loop(t_bool *already_found, const char *line)
+static int	parse_unique_entity_loop(
+			t_bool *already_found, const char *line, t_scene *scene)
 {
 	int		i;
 	int		stat;
@@ -18,7 +19,7 @@ static int	parse_unique_entity_loop(t_bool *already_found, const char *line)
 	i = 0;
 	while (i < N_IDENTIFIER_UNIQUE)
 	{
-		stat = parse_line(line,
+		stat = parse_line(line, scene,
 				unique_patternmatcher_manager(i), unique_builder_manager(i));
 		if (stat == TRUE)
 		{
@@ -42,7 +43,7 @@ static int	parse_unique_entity_loop(t_bool *already_found, const char *line)
 	FALSE if line matches none,
 	negative if error occurs.
 */
-static int	parse_common_entity_loop(const char *line)
+static int	parse_common_entity_loop(const char *line, t_scene *scene)
 {
 	int		i;
 	int		stat;
@@ -50,7 +51,7 @@ static int	parse_common_entity_loop(const char *line)
 	i = 0;
 	while (i < N_IDENTIFIER_COMMON)
 	{
-		stat = parse_line(line,
+		stat = parse_line(line, scene,
 				common_patternmatcher_manager(i), common_builder_manager(i));
 		if (stat)
 			return (stat);
@@ -59,11 +60,11 @@ static int	parse_common_entity_loop(const char *line)
 	return (FALSE);
 }
 
-static int	parse_common_entity(const char *line)
+static int	parse_common_entity(const char *line, t_scene *scene)
 {
 	int	stat;
 
-	stat = parse_common_entity_loop(line);
+	stat = parse_common_entity_loop(line, scene);
 	if (stat < 0)
 		return (stat);
 	if (stat == FALSE)
@@ -74,7 +75,7 @@ static int	parse_common_entity(const char *line)
 	return (CODE_OK);
 }
 
-int	parse_entities(const t_ptrarr *lines)
+int	parse_entities(const t_ptrarr *lines, t_scene *scene)
 {
 	int			i;
 	int			stat;
@@ -84,12 +85,12 @@ int	parse_entities(const t_ptrarr *lines)
 	i = 0;
 	while (i < lines->len)
 	{
-		stat = parse_unique_entity_loop(already_found, lines->data[i]);
+		stat = parse_unique_entity_loop(already_found, lines->data[i], scene);
 		if (stat < 0)
 			return (stat);
 		if (stat == FALSE)
 		{
-			stat = parse_common_entity(lines->data[i]);
+			stat = parse_common_entity(lines->data[i], scene);
 			if (stat < 0)
 				return (stat);
 		}
