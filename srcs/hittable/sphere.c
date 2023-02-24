@@ -57,7 +57,7 @@ t_hittable_sphere	*sphere_create(
 	sphere = malloc(sizeof(t_hittable_sphere));
 	if (!sphere)
 		return (NULL);
-	ft_memset(sphere, 0, sizeof(sphere));
+	ft_memset(sphere, 0, sizeof(t_hittable_sphere));
 	sphere->center = center;
 	sphere->radius = radius;
 	sphere->material = material;
