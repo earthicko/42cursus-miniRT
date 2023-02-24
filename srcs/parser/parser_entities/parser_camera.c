@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include "libft.h"
+#include "print.h"
 #include "../parser_internal.h"
 
 /*
@@ -32,10 +34,36 @@ t_bool	is_camera(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
+static void	camerainfo_init(t_camerainfo *info,
+				t_point *viewpoint, t_vec3 *viewdir, double fov)
+{
+	info->cam_start = *viewpoint;
+	vec3_add_vec3(&info->cam_end, viewpoint, viewdir);
+	vec3_setval(&info->cam_up, 0, 1, 0);
+	info->fov = fov;
+	info->focallen = CAM_DEFAULT_FOCALLEN;
+	info->pixel_w = CAM_DEFAULT_PIXEL_W;
+	info->pixel_h = CAM_DEFAULT_PIXEL_H;
+}
+
 int	build_camera(const t_ptrarr *tokens, t_scene *scene)
 {
-	(void)tokens;
-	(void)scene;
-	printf("Unimplemented stub of %s\n", __func__);
+	t_point			viewpoint;
+	t_vec3			viewdir;
+	double			fov;
+	t_camerainfo	info;
+
+	parse_vector(&viewpoint, &tokens->data[1]);
+	parse_vector(&viewdir, &tokens->data[6]);
+	fov = ft_atof(tokens->data[11]);
+	camerainfo_init(&info, &viewpoint, &viewdir, fov);
+	camera_init(&scene->cam, &info);
+	printf("%s: camera viewpoint ", __func__);
+	print_vec3(&viewpoint);
+	printf(", view direction ");
+	print_vec3(&viewdir);
+	printf(", fov %.2f\n%s: built ", fov, __func__);
+	print_camera(&scene->cam);
+	printf("\n");
 	return (CODE_OK);
 }
