@@ -31,9 +31,9 @@ t_ptrarr	*ptrarr_destroy(t_ptrarr *ptrarr, t_bool free_all)
 
 int	ptrarr_expand(t_ptrarr *ptrarr)
 {
-	void	**new_data;
+	const void	**new_data;
 
-	new_data = malloc(sizeof(void *) * ptrarr->cap * 2);
+	new_data = malloc(sizeof(const void *) * ptrarr->cap * 2);
 	if (!new_data)
 		return (CODE_ERROR_MALLOC);
 	ft_memcpy(new_data, ptrarr->data, sizeof(void *) * ptrarr->len);
@@ -43,7 +43,7 @@ int	ptrarr_expand(t_ptrarr *ptrarr)
 	return (CODE_OK);
 }
 
-int	ptrarr_append(t_ptrarr *ptrarr, void *data)
+int	ptrarr_append(t_ptrarr *ptrarr, const void *data)
 {
 	if (ptrarr->len == ptrarr->cap)
 	{
@@ -62,7 +62,7 @@ void	ptrarr_free_all_ptr(t_ptrarr *ptrarr)
 	i = 0;
 	while (i < ptrarr->len)
 	{
-		free(ptrarr->data[i]);
+		free((void *)(ptrarr->data[i]));
 		i++;
 	}
 }
