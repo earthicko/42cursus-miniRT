@@ -4,7 +4,7 @@
 #include "material.h"
 #include "geometry.h"
 
-// TODO: outward_norm 필요성, 필요하긴 할듯. ray color 함수 잘 보고 판단
+// TODO: outward_norm 필요성, 필요하긴 할듯. one weekend ray_color 함수읽고 판단할 것
 t_bool	hit_plane(t_hittable *hittable, \
 					t_ray *ray, \
 					t_minmax t, \
