@@ -21,7 +21,6 @@ DRIVER_DEP		= $(addprefix srcs/, $(addsuffix .d, $(DRIVER_FILENAME)))
 
 TEST_FILENAME	= \
 				vectors_arithmetic \
-				print0 \
 
 TEST_SRC		= $(addprefix tests/, $(addsuffix .c, $(TEST_FILENAME)))
 TEST_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TEST_FILENAME)))
@@ -56,6 +55,7 @@ FILENAME		= \
 				number/random \
 				number/degree \
 				ptrarr/ptrarr \
+				print/print0 \
 				camera/camera_init \
 				camera/camera_get_ray_at \
 				material/material_diffuse_light \
