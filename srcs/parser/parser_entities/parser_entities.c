@@ -69,7 +69,7 @@ static int	parse_common_entity(const char *line, t_scene *scene)
 		return (stat);
 	if (stat == FALSE)
 	{
-		ft_dprintf(2, "%s: failed to parse line \"%s\"\n", EXEC_NAME, line);
+		ft_dprintf(2, "%s: "MSG_PARSEFAIL"\n", EXEC_NAME, line);
 		return (CODE_ERROR_DATA);
 	}
 	return (CODE_OK);
