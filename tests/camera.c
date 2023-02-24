@@ -12,6 +12,17 @@ void	set_caminfo(t_camerainfo *caminfo)
 	caminfo->pixel_w = 400;
 	caminfo->pixel_h = 300;
 	caminfo->focallen = 10.0;
+	printf("Cam start ");
+	print_vec3(&caminfo->cam_start);
+	printf(", Cam end ");
+	print_vec3(&caminfo->cam_end);
+	printf(", Cam up ");
+	print_vec3(&caminfo->cam_up);
+	printf(", fov %.2f, pixel (%d x %d), focallen %.2f\n",
+		caminfo->fov,
+		caminfo->pixel_w,
+		caminfo->pixel_h,
+		caminfo->focallen);
 }
 
 void	test_get_ray(t_camera *cam, int x, int y)
@@ -20,11 +31,12 @@ void	test_get_ray(t_camera *cam, int x, int y)
 	double	v;
 	t_ray	ray;
 
-	printf("for pixel (%d, %d) ", x, y);
 	u = (x + rand_double()) / (cam->pixel_w - 1);
 	v = (y + rand_double()) / (cam->pixel_h - 1);
+	printf("for pixel (%d, %d) uv=(%.2f, %.2f) ", x, y, u, v);
 	camera_get_ray_at(&ray, cam, u, v);
 	print_ray(&ray);
+	printf("\n");
 }
 
 void	loop_cam(t_camera *cam, int nsamples)
@@ -57,8 +69,13 @@ void	test_cam(t_camera *cam)
 	int	nsamples;
 
 	nsamples = 2;
-	printf("Pixels: (%d x %d)\n", cam->pixel_w, cam->pixel_h);
-	test_get_ray(cam, 100, 100);
+	test_get_ray(cam, 50, 100);
+	test_get_ray(cam, 150, 100);
+	test_get_ray(cam, 250, 100);
+	test_get_ray(cam, 0, 150);
+	test_get_ray(cam, 200, 150);
+	test_get_ray(cam, 400, 150);
+	test_get_ray(cam, 400, 300);
 }
 
 /*
