@@ -66,6 +66,7 @@ t_bool				is_sphere(const t_ptrarr *tokens);
 t_bool				is_plane(const t_ptrarr *tokens);
 t_bool				is_cylinder(const t_ptrarr *tokens);
 
+void				parse_vector(t_vec3 *out, const void **token_start);
 int					build_ambient_lighting(const t_ptrarr *tokens);
 int					build_camera(const t_ptrarr *tokens);
 int					build_light(const t_ptrarr *tokens);
