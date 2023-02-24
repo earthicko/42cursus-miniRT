@@ -52,6 +52,7 @@ FILENAME		= \
 				geometry/vec3_reflect_refract \
 				geometry/vec3_utils1 \
 				geometry/vec3_utils2 \
+				ray \
 				number/random \
 				number/degree \
 				ptrarr/ptrarr \
