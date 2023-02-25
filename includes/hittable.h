@@ -109,5 +109,8 @@ t_hittable_sphere	*sphere_create(
 						t_point center,
 						double radius,
 						t_material *material);
+t_hittable			*hittable_list_create(void);
+
+void				hittable_list_destroy(t_hittable_list *list);
 
 #endif
