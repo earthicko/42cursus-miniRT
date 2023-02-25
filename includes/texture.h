@@ -1,12 +1,14 @@
 #ifndef TEXTURE_H
 # define TEXTURE_H
 
+# include "hittable.h"
 # include "geometry.h"
 
+typedef struct s_hit_record	t_hit_record;
 typedef struct s_texture	t_texture;
 
 typedef void				(*t_texture_get_color_at)(t_texture *self,
-		t_color *out, const t_uv *uv, const t_vec3 *p);
+		t_color *out, const t_hit_record *hitrec);
 
 typedef struct s_texture
 {

@@ -79,6 +79,7 @@ t_bool				is_cylinder(const t_ptrarr *tokens);
 void				parse_vector(t_vec3 *out, const void **token_start);
 
 t_bool				is_invalid_ratio(double ratio);
+t_bool				is_invalid_length(double len);
 t_bool				is_invalid_color(const t_color *color);
 t_bool				is_invalid_normalized_vec3(const t_vec3 *vec);
 t_bool				is_invalid_fov(double fov);

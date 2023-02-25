@@ -35,7 +35,6 @@ t_bool	material_lambertian_scatter(
 		out->scattered.dir = hit->normal;
 	else
 		out->scattered.dir = scatter_dir;
-	this->albedo->get_color_at(
-		this->albedo, &(out->albedo), &hit->uv, &(hit->p));
+	this->albedo->get_color_at(this->albedo, &(out->albedo), hit);
 	return (TRUE);
 }

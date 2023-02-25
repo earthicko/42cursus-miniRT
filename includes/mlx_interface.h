@@ -2,9 +2,8 @@
 # define MLX_INTERFACE_H
 
 # include "libft_def.h"
-
-# define DISPLAY_DEFAULT_W	400
-# define DISPLAY_DEFAULT_H	300
+# include "geometry.h"
+# include "settings.h"
 
 enum	e_appkitkeycode
 {
@@ -54,15 +53,14 @@ typedef struct s_display
 	int		w;
 	int		h;
 	double	ratio;
-	int		n_v;
-	t_pixel	*v;
+	int		n_pixels;
+	t_color	*colors;
+	t_pixel	*pixels;
 }	t_display;
 
 t_display	*display_create(int width, int height, char *title);
 t_display	*display_destroy(t_display *disp);
 
-int			display_start_buffer(t_display *disp);
-int			display_end_buffer(t_display *disp);
 void		display_putpixel(t_display *disp, t_pixel p);
 
 #endif

@@ -1,6 +1,18 @@
 #include "libft.h"
+#include "number.h"
 #include "msgdef.h"
-#include "../parser_internal.h"
+#include "parser_entities_internal.h"
+
+t_bool	is_invalid_length(double len)
+{
+	if (len <= DOUBLE_E)
+	{
+		ft_dprintf(2, "%s: ratio "MSG_OUTOFRANGE"\n", EXEC_NAME,
+			len, DOUBLE_E, DOUBLE_INF);
+		return (TRUE);
+	}
+	return (FALSE);
+}
 
 t_bool	is_invalid_ratio(double ratio)
 {

@@ -1,5 +1,9 @@
+#include <stdlib.h>
 #include <stdio.h>
-#include "../parser_internal.h"
+#include "libft.h"
+#include "number.h"
+#include "print.h"
+#include "parser_entities_internal.h"
 
 /*
 		sp 0.0,0.0,20.6 12.6 10,0,255
@@ -31,10 +35,47 @@ t_bool	is_sphere(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
+// TODO: remove casting to hittable* after return types get sorted out
+static int	add_sphere(t_scene *scene, t_point cen, double d, t_material *m)
+{
+	t_hittable		*sphere;
+	t_hittable_list	*world;
+
+	sphere = (t_hittable *)sphere_create(cen, d / 2, m);
+	if (!sphere)
+		return (CODE_ERROR_MALLOC);
+	if (ptrarr_append(scene->res.primitives, sphere))
+	{
+		free(sphere);
+		return (CODE_ERROR_MALLOC);
+	}
+	world = (t_hittable_list *)scene->world;
+	if (ptrarr_append(world->elements, sphere))
+		return (CODE_ERROR_MALLOC);
+	return (CODE_OK);
+}
+
 int	build_sphere(const t_ptrarr *tokens, t_scene *scene)
 {
-	(void)tokens;
-	(void)scene;
-	printf("Unimplemented stub of %s\n", __func__);
+	t_point		cen;
+	double		d;
+	t_color		color;
+
+	parse_vector(&cen, &tokens->data[1]);
+	d = ft_atof(tokens->data[6]);
+	parse_vector(&color, &tokens->data[7]);
+	if (is_invalid_length(d / 2) || is_invalid_color(&color))
+		return (CODE_ERROR_DATA);
+	if (add_texture_solid(scene, color))
+		return (CODE_ERROR_MALLOC);
+	if (add_material_lambertian(scene, ptrarr_getlast(scene->res.textures)))
+		return (CODE_ERROR_MALLOC);
+	if (add_sphere(scene, cen, d, ptrarr_getlast(scene->res.materials)))
+		return (CODE_ERROR_MALLOC);
+	printf("%s: sphere (center ", __func__);
+	print_vec3(&cen);
+	printf(", radius %.2f, color ", d / 2);
+	print_vec3(&color);
+	printf(")\n");
 	return (CODE_OK);
 }

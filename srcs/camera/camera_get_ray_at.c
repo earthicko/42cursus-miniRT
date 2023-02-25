@@ -5,7 +5,7 @@
 	ray origin = view origin + uv
 	ray dir = pixel origin + (x * x axis + y * y axis) - ray origin
 */
-void	camera_get_ray_at(t_ray *out, const t_camera *cam, double x, double y)
+void	camera_get_ray_at(t_ray *out, const t_camera *cam, t_uv *uv)
 {
 	int	i;
 
@@ -15,8 +15,8 @@ void	camera_get_ray_at(t_ray *out, const t_camera *cam, double x, double y)
 	{
 		out->dir.i[i]
 			= cam->pixel_origin.i[i]
-			+ x * cam->xaxis.i[i]
-			+ y * cam->yaxis.i[i]
+			+ uv->i[0] * cam->xaxis.i[i]
+			+ uv->i[1] * cam->yaxis.i[i]
 			- out->orig.i[i];
 		i++;
 	}

@@ -4,7 +4,6 @@
 #include "hittable.h"
 #include "scene.h"
 
-// TODO: check allocation of world, lights when their constructors are ready
 static t_bool	is_all_allocated(t_scene *scene)
 {
 	if (!(scene->res.primitives))
@@ -13,25 +12,27 @@ static t_bool	is_all_allocated(t_scene *scene)
 		return (FALSE);
 	if (!(scene->res.textures))
 		return (FALSE);
+	if (!(scene->world))
+		return (FALSE);
+	if (!(scene->lights))
+		return (FALSE);
 	return (TRUE);
 }
 
-// TODO: implement deep-destroy sequence
 void	scene_destroy(t_scene *scene)
 {
 	if (scene->res.primitives)
-		ptrarr_destroy(scene->res.primitives, FALSE);
+		ptrarr_destroy(scene->res.primitives, TRUE);
 	if (scene->res.materials)
-		ptrarr_destroy(scene->res.materials, FALSE);
+		ptrarr_destroy(scene->res.materials, TRUE);
 	if (scene->res.textures)
-		ptrarr_destroy(scene->res.textures, FALSE);
+		ptrarr_destroy(scene->res.textures, TRUE);
 	if (scene->world)
-		free(scene->world);
+		hittable_list_destroy((t_hittable_list *)scene->world);
 	if (scene->lights)
-		free(scene->lights);
+		hittable_list_destroy((t_hittable_list *)scene->lights);
 }
 
-// TODO: create world, lights when their constructors are ready
 t_scene	*scene_create(void)
 {
 	t_scene	*scene;
@@ -43,6 +44,8 @@ t_scene	*scene_create(void)
 	scene->res.primitives = ptrarr_create();
 	scene->res.materials = ptrarr_create();
 	scene->res.textures = ptrarr_create();
+	scene->world = hittable_list_create();
+	scene->lights = hittable_list_create();
 	if (!is_all_allocated(scene))
 	{
 		scene_destroy(scene);

@@ -62,15 +62,17 @@ FILENAME		= \
 				number/degree \
 				number/number_utils \
 				ptrarr/ptrarr \
+				ptrarr/ptrarr_get \
 				print/print0 \
 				mlx_interface/mlx_interface \
-				mlx_interface/mlx_interface_buffer \
 				mlx_interface/mlx_interface_putpixel \
 				camera/camera_init \
 				camera/camera_get_ray_at \
 				hittable/math_utils \
 				hittable/hit_record_set_normal_and_face \
 				hittable/sphere \
+				hittable/hittable_list \
+				hittable/hittable_transform \
 				material/material_diffuse_light \
 				material/material_metal \
 				material/material_dielectric \
@@ -84,6 +86,7 @@ FILENAME		= \
 				parser/parser_tokenizer \
 				parser/parser_get_tokentype \
 				parser/parser_entities/parser_entities \
+				parser/parser_entities/parser_add_resource \
 				parser/parser_entities/parser_utils \
 				parser/parser_entities/parser_checkrange \
 				parser/parser_entities/parser_ambient_lighting \
@@ -93,6 +96,7 @@ FILENAME		= \
 				parser/parser_entities/parser_plane \
 				parser/parser_entities/parser_cylinder \
 				scene/scene \
+				renderer/renderer \
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix srcs/, $(addsuffix .o, $(FILENAME)))

@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../parser_internal.h"
+#include "parser_entities_internal.h"
 
 /*
 		cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255

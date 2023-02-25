@@ -43,6 +43,8 @@ void	vec3_cross_vec3(t_vec3 *out, const t_vec3 *a, const t_vec3 *b);
 
 void	vec3_mult_num(t_vec3 *out, const t_vec3 *a, double b);
 void	vec3_mult_num_inplace(t_vec3 *target, double b);
+void	vec3_mult_component_vec3(t_vec3 *out, const t_vec3 *a, const t_vec3 *b);
+void	vec3_mult_component_vec3_inplace(t_vec3 *target, const t_vec3 *a);
 
 void	vec3_reflect(t_vec3 *out, const t_vec3 *in, const t_vec3 *n);
 void	vec3_refract(t_vec3 *out, const t_vec3 *in, const t_vec3 *n, double r);
@@ -51,6 +53,7 @@ void	m44_init_zero(t_mtx44 *target);
 void	m44_init_identity(t_mtx44 *target);
 
 void	vec3_multiply_m44(t_vec3 *out, const t_vec3 *a, const t_mtx44 *b);
+void	vec3_multiply_m44_inplace(t_vec3 *target, const t_mtx44 *a);
 void	m44_multiply_m44(t_mtx44 *out, const t_mtx44 *a, const t_mtx44 *b);
 void	m44_multiply_m44_inplace(t_mtx44 *target, const t_mtx44 *m);
 

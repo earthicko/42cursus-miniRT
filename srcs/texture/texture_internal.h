@@ -4,8 +4,8 @@
 # include "texture.h"
 
 void		texture_solid_get_color_at(
-				t_texture *self, t_color *out, const t_uv *uv, const t_vec3 *p);
+				t_texture *self, t_color *out, const t_hit_record *hitrec);
 void		texture_checker_get_color_at(
-				t_texture *self, t_color *out, const t_uv *uv, const t_vec3 *p);
+				t_texture *self, t_color *out, const t_hit_record *hitrec);
 
 #endif

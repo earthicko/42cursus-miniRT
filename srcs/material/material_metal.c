@@ -43,8 +43,7 @@ t_bool	material_metal_scatter(
 	vec3_add_vec3(&out->scattered.dir, &reflection, &fuzziness);
 	if (vec3_dot_vec3(&out->scattered.dir, &hit->normal) > 0)
 	{
-		this->albedo->get_color_at(
-			this->albedo, &out->albedo, &hit->uv, &hit->p);
+		this->albedo->get_color_at(this->albedo, &out->albedo, hit);
 		return (TRUE);
 	}
 	return (FALSE);

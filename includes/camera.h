@@ -3,11 +3,7 @@
 
 # include "geometry.h"
 # include "ray.h"
-
-# define CAM_DEFAULT_CAMUP_X	0
-# define CAM_DEFAULT_CAMUP_Y	1
-# define CAM_DEFAULT_CAMUP_Z	0
-# define CAM_DEFAULT_FOCALLEN	10
+# include "settings.h"
 
 typedef struct s_camerainfo
 {
@@ -35,6 +31,6 @@ typedef struct s_camera
 }	t_camera;
 
 void	camera_init(t_camera *cam, const t_camerainfo *caminfo);
-void	camera_get_ray_at(t_ray *out, const t_camera *cam, double x, double y);
+void	camera_get_ray_at(t_ray *out, const t_camera *cam, t_uv *uv);
 
 #endif
