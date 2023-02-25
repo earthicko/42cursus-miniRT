@@ -15,12 +15,12 @@ t_material	*material_diffuse_light_create(t_texture *emitter)
 }
 
 void	material_diffuse_light_emit(
-		t_material *self, t_color *out, const t_uv *uv, const t_point *p)
+		t_material *self, t_color *out, const t_hit_record *hitrec)
 {
 	t_material_diffuse_light	*this;
 
 	this = (t_material_diffuse_light *)self;
-	this->emitter->get_color_at(this->emitter, out, uv, p);
+	this->emitter->get_color_at(this->emitter, out, hitrec);
 }
 
 t_bool	material_diffuse_light_scatter(

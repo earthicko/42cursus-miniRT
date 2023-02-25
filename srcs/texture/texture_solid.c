@@ -14,9 +14,8 @@ t_texture	*texture_solid_create(t_color color)
 }
 
 void	texture_solid_get_color_at(
-			t_texture *self, t_color *out, const t_uv *uv, const t_vec3 *p)
+			t_texture *self, t_color *out, const t_hit_record *hitrec)
 {
-	(void)uv;
-	(void)p;
+	(void)hitrec;
 	*out = ((t_texture_solid *)self)->color;
 }

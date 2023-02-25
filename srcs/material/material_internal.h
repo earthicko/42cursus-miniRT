@@ -4,9 +4,9 @@
 # include "material.h"
 
 void		material_emit(t_material *self,
-				t_color *out, const t_uv *uv, const t_point *p);
+				t_color *out, const t_hit_record *hitrec);
 void		material_diffuse_light_emit(t_material *self,
-				t_color *out, const t_uv *uv, const t_point *p);
+				t_color *out, const t_hit_record *hitrec);
 
 t_bool		material_lambertian_scatter(
 				t_material *self,

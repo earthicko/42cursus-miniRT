@@ -8,6 +8,7 @@
 
 typedef struct s_hit_record	t_hit_record;
 typedef struct s_material	t_material;
+typedef struct s_texture	t_texture;
 
 typedef struct s_scatter_record
 {
@@ -16,7 +17,7 @@ typedef struct s_scatter_record
 }	t_scatter_record;
 
 typedef void				(*t_material_emit)(t_material *self,
-	t_color *out, const t_uv *uv, const t_point *p);
+	t_color *out, const t_hit_record *hitrec);
 
 typedef t_bool				(*t_material_scatter)(t_material *self,
 	t_scatter_record *out, const t_ray *ray_in, const t_hit_record *hit);
