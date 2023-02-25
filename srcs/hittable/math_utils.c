@@ -3,7 +3,7 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
-static t_bool	val_is_nere_zero(double val)
+t_bool	val_is_near_zero(double val)
 {
 	if (fabs(val) < DOUBLE_E)
 		return (TRUE);

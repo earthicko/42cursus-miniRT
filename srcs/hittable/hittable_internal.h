@@ -10,6 +10,7 @@ enum	e_coefficient
 	C,
 };
 
+t_bool	val_is_near_zero(double val);
 double	dist_sq(t_point *a, t_point *b);
 t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root);
 t_bool	solve_equation_system_plane_and_line(t_minmax t, \
