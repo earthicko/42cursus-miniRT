@@ -72,6 +72,7 @@ FILENAME		= \
 				hittable/hit_record_set_normal_and_face \
 				hittable/sphere \
 				hittable/hittable_list \
+				hittable/hittable_transform \
 				material/material_diffuse_light \
 				material/material_metal \
 				material/material_dielectric \
