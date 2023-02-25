@@ -9,6 +9,14 @@ t_bool	is_nere_zero(double val)
 	return (FALSE);
 }
 
+double	dist_sq(t_point *a, t_point *b)
+{
+	t_vec3	b_to_a;
+
+	vec3_sub_vec3(&b_to_a, a, b);
+	return (vec3_get_len_sq(&b_to_a));
+}
+
 // This function solves ax^2 + bx + c = 0 equation.
 // Each coef element refers to a, b, and c respectively.
 // If this function finds a solution that fits the range of t_minmax, 
