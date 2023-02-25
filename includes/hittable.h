@@ -46,7 +46,8 @@ typedef struct s_hittable_transform
 	t_bounding_box	bounding_box;
 	t_material		*material;
 	t_hittable		*base;
-	t_mtx44			transform;
+	t_mtx44			w_to_h;
+	t_mtx44			h_to_w;
 }	t_hittable_transform;
 
 typedef struct s_hittable_sphere
@@ -110,6 +111,9 @@ t_hittable_sphere	*sphere_create(
 						double radius,
 						t_material *material);
 t_hittable			*hittable_list_create(void);
+t_hittable			*hittable_transform_create(
+						t_hittable *base,
+						t_point orig, double ele, double azi);
 
 void				hittable_list_destroy(t_hittable_list *list);
 
