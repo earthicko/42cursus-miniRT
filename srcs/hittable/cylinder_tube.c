@@ -73,7 +73,6 @@ void	set_tube_of_cylinder(t_hittable_tube *tube,
 									t_cylinder_info *cylinder_info,
 									t_material *material)
 {
-	t_point	center_of_disk;
 	t_vec3	shift;
 
 	tube->center_of_disk = cylinder_info->center;

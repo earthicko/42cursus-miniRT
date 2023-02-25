@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <math.h>
+#include "libft.h"
 #include "geometry.h"
 #include "number.h"
 #include "material.h"
@@ -46,16 +47,15 @@ t_bool	hit_cylinder(t_hittable *hittable,
 					t_hit_record *rec)
 {
 	t_hittable_cylinder	*this;
-	t_vec3				outward_norm;
 
 	this = (t_hittable_cylinder *)hittable;
-	if (this->tube.hit(&this->tube, ray, t, rec))
+	if (this->tube.hit((t_hittable *)&this->tube, ray, t, rec))
 		t.max = rec->t;
-	if (this->disk[0].hit(&this->disk, ray, t, rec))
+	if (this->disk[0].hit((t_hittable *)&this->disk[0], ray, t, rec))
 		t.max = rec->t;
-	if (this->disk[1].hit(&this->disk, ray, t, rec))
+	if (this->disk[1].hit((t_hittable *)&this->disk[1], ray, t, rec))
 		t.max = rec->t;
-	if (val_is_near(t.max - DOUBLE_INF))
+	if (val_is_near_zero(t.max - DOUBLE_INF))
 		return (FALSE);
 	return (TRUE);
 }
@@ -67,7 +67,7 @@ t_hittable_cylinder	*cylinder_create(t_cylinder_info *cylinder_info,
 
 	cylinder = malloc(sizeof(t_hittable_cylinder));
 	if (!cylinder)
-		return (CODE_ERROR_MALLOC);
+		return (NULL);
 	ft_memset(cylinder, 0, sizeof(t_hittable_cylinder));
 	cylinder->hit = hit_cylinder;
 	cylinder->material = material;

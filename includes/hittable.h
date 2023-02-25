@@ -120,14 +120,20 @@ typedef struct s_hittable_list
 	t_ptrarr		*elements;
 }	t_hittable_list;
 
-t_hittable_sphere	*sphere_create(
-						t_point center,
-						double radius,
-						t_material *material);
+t_hittable_sphere	*sphere_create(t_point center, \
+									double radius, \
+									t_material *material);
+t_hittable_plane	*plane_create(t_point point, \
+									t_vec3 norm, \
+									t_material *material);
+
+t_hittable_cylinder	*cylinder_create(t_cylinder_info *cylinder_info, \
+										t_material *material);
 t_hittable			*hittable_list_create(void);
-t_hittable			*hittable_transform_create(
-						t_hittable *base,
-						t_point orig, double ele, double azi);
+t_hittable			*hittable_transform_create(t_hittable *base, \
+												t_point orig, \
+												double ele, \
+												double azi);
 
 void				hittable_list_destroy(t_hittable_list *list);
 

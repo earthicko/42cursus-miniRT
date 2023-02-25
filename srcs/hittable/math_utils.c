@@ -18,10 +18,11 @@ double	dist_sq(t_point *a, t_point *b)
 	return (vec3_get_len_sq(&b_to_a));
 }
 
-// This function solves ax^2 + bx + c = 0 equation.
-// Each coef element refers to a, b, and c respectively.
-// If this function finds a solution that fits the range of t_minmax, 
-// it stores the result in root parameter and returns true. 
+/*  This function solves ax^2 + bx + c = 0 equation.
+	Each coef element refers to a, b, and c respectively.
+ 	If this function finds a solution that fits the range of t_minmax, 
+ 	it stores the result in root parameter and returns true. 
+*/
 t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root)
 {
 	double	dscrm;
@@ -47,15 +48,17 @@ t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root)
 // 상식적으로 생각했을 때, 표면을 스치듯 지나가는 광선은 표면 밝기에 영향력이 거의 없다.
 // 따라서 위 두가지 경우 그냥 hit하지 않는다고 판단해도 무방할듯
 
-// This function solves equation system of plane and straight line.
-// Plane: n_vec * (x_vec - P_point), 
-//    Vector n is normal vector of plane, 
-//    The given point P is a point on the plane,
-//    The trace of the vector x represents a plane.
-// Line: A_point + t * dir_vec
-//    The given point A is origin of the line,
-//    The vector u is direction vector of the line 
-// Solution: t = (P - A) * n_vec / n_vec * dir_vec
+/*
+	This function solves equation system of plane and straight line.
+	 Plane: n_vec * (x_vec - P_point), 
+	    Vector n is normal vector of plane, 
+	    The given point P is a point on the plane,
+	    The trace of the vector x represents a plane.
+	 Line: A_point + t * dir_vec
+	    The given point A is origin of the line,
+	    The vector u is direction vector of the line 
+	Solution: t = (P - A) * n_vec / n_vec * dir_vec
+*/
 t_bool	solve_equation_system_plane_and_line(t_minmax t,
 											t_hittable_plane *plane,
 											t_ray *ray,

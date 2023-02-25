@@ -18,4 +18,14 @@ t_bool	solve_equation_system_plane_and_line(t_minmax t, \
 											t_ray *ray, \
 											double *root);
 
+
+void	set_tube_of_cylinder(t_hittable_tube *tube, \
+									t_cylinder_info *cylinder_info, \
+									t_material *material);
+
+void	set_disk_of_cylinder(t_hittable_disk *disk, \
+									t_cylinder_info *cylinder_info, \
+									t_material *material, \
+									int disk_type);
+
 #endif

@@ -10,19 +10,20 @@
 // TODO: 직선의 방향벡터가 정규화(길이 1로 설정)되지 않았을 때도 성립하는지 체크
 // TODO: outward_norm 길이 1로 정규화를 해주긴 했는데 왜 해야되지? 일단 해두긴 함
 
-// This function needs to solve equation system of sphere and straight line 
-// Sphere: (x_vec - O_point) * (x_vec - O_point) = radius^2
-//    The trace of the vector x represents a sphere.
-//    The given point O is the center of the sphere.
-// Line: A_point + t * dir_vec
-//    The given point A is origin of the line,
-//    The vector dir is direction vector of line 
-// By aligning the sphere and the straight line, 
-// the following quadratic equation can be obtained. 
-// at^2 + 2bt + c = 0, where
-// a = dir * dir,
-// 2b = 2 * (dir * (A - O)),
-// c = OA^2 - radius^2.
+/* This function needs to solve equation system of sphere and straight line 
+	Sphere: (x_vec - O_point) * (x_vec - O_point) = radius^2
+	   The trace of the vector x represents a sphere.
+	   The given point O is the center of the sphere.
+	Line: A_point + t * dir_vec
+	   The given point A is origin of the line,
+	   The vector dir is direction vector of line 
+	By aligning the sphere and the straight line, 
+	the following quadratic equation can be obtained. 
+	at^2 + 2bt + c = 0, where
+	a = dir * dir,
+	2b = 2 * (dir * (A - O)),
+	c = OA^2 - radius^2.
+*/
 t_bool	hit_sphere(t_hittable *hittable,
 					t_ray *ray,
 					t_minmax t,
