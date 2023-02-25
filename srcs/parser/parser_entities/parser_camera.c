@@ -55,7 +55,11 @@ int	build_camera(const t_ptrarr *tokens, t_scene *scene)
 
 	parse_vector(&viewpoint, &tokens->data[1]);
 	parse_vector(&viewdir, &tokens->data[6]);
+	if (is_invalid_normalized_vec3(&viewdir))
+		return (CODE_ERROR_DATA);
 	fov = ft_atof(tokens->data[11]);
+	if (is_invalid_fov(fov))
+		return (CODE_ERROR_DATA);
 	camerainfo_init(&info, &viewpoint, &viewdir, fov);
 	camera_init(&scene->cam, &info);
 	printf("%s: camera viewpoint ", __func__);
