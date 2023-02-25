@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define array of directory names
-directories=("includes" "libft" "srcs")
+directories=("includes" "srcs")
 
 # Define array to store filenames with the specified extensions
 file_list=()
