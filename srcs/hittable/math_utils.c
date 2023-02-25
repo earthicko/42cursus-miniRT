@@ -30,10 +30,10 @@ t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root)
 	if (dscrm < 0)
 		return (FALSE);
 	sqrt_dscrm = sqrt(dscrm);
-	*root = (-coef[B] - sqrt_dscrm) / 2 * coef[A];
+	*root = (-coef[B] - sqrt_dscrm) / (2 * coef[A]);
 	if (*root < t.min || *root > t.max)
 	{
-		*root = (-coef[B] + sqrt_dscrm) / 2 * coef[A];
+		*root = (-coef[B] + sqrt_dscrm) / (2 * coef[A]);
 		if (*root < t.min || *root > t.max)
 			return (FALSE);
 	}
