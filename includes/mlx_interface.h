@@ -59,8 +59,6 @@ typedef struct s_display
 t_display	*display_create(int width, int height, char *title);
 t_display	*display_destroy(t_display *disp);
 
-int			display_start_buffer(t_display *disp);
-int			display_end_buffer(t_display *disp);
 void		display_putpixel(t_display *disp, t_pixel p);
 
 #endif
