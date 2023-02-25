@@ -1,10 +1,11 @@
 #include <math.h>
 #include "number.h"
+#include "geometry.h"
 #include "hittable_internal.h"
 
-t_bool	is_nere_zero(double val)
+static t_bool	val_is_nere_zero(double val)
 {
-	if (fabs(val) < 1e-8)
+	if (fabs(val) < DOUBLE_E)
 		return (TRUE);
 	return (FALSE);
 }
@@ -55,16 +56,16 @@ t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root)
 //    The given point A is origin of the line,
 //    The vector u is direction vector of the line 
 // Solution: t = (P - A) * n_vec / n_vec * dir_vec
-t_bool	solve_equation_system_plane_and_line(t_minmax t, \
-											t_hittable_plane *plane, \
-											t_ray *ray, \
+t_bool	solve_equation_system_plane_and_line(t_minmax t,
+											t_hittable_plane *plane,
+											t_ray *ray,
 											double *root)
 {
 	const double	norm_dot_dir = vec3_dot_vec3(&plane->norm, &ray->dir);
 	t_vec3			ap;
 
 	(void)t;
-	if (is_near_zero(norm_dot_dir))
+	if (val_is_near_zero(norm_dot_dir))
 		return (FALSE);
 	vec3_sub_vec3(&ap, &plane->point, &ray->orig);
 	*root = vec3_dot_vec3(&ap, &plane->norm) / norm_dot_dir;
