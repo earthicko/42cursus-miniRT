@@ -8,12 +8,6 @@
 
 typedef struct s_material	t_material;
 
-enum	e_disk_of_cylinder
-{
-	TOP = 0,
-	BOTTOM
-};
-
 typedef struct s_hit_record
 {
 	t_point		p;
@@ -25,7 +19,7 @@ typedef struct s_hit_record
 }	t_hit_record;
 
 void				hit_record_set_normal_and_face(
-						t_hit_record *hit, t_ray *ray, t_vec3 *normal);
+						t_hit_record *rec, t_ray *ray, t_vec3 *normal);
 
 typedef struct s_minmax
 {
@@ -80,7 +74,7 @@ typedef struct s_hittable_tube
 	t_bounding_box	bounding_box;
 	t_material		*material;
 	t_point			center_of_cylinder;
-	t_point			center_of_base;
+	t_point			center_of_disk;
 	t_vec3			axis;
 	double			height;
 	double			radius;
@@ -104,6 +98,20 @@ typedef struct s_hittable_cylinder
 	t_hittable_disk	disk[2];
 }	t_hittable_cylinder;
 
+typedef struct s_cylinder_info
+{
+	t_point	center;
+	t_vec3	axis;
+	double	height;
+	double	radius;
+}	t_cylinder_info;
+
+enum	e_disk_of_cylinder
+{
+	TOP = 0,
+	BOTTOM
+};
+
 typedef struct s_hittable_list
 {
 	t_hittable_hit	hit;
@@ -112,7 +120,6 @@ typedef struct s_hittable_list
 	t_ptrarr		*elements;
 }	t_hittable_list;
 
-// TODO: 왜 함수가 여기있지..? 확인후 삭제할 것
 t_hittable_sphere	*sphere_create(
 						t_point center,
 						double radius,
