@@ -3,6 +3,9 @@
 
 # include "libft_def.h"
 
+# define DISPLAY_DEFAULT_W	400
+# define DISPLAY_DEFAULT_H	300
+
 typedef struct s_pixel
 {
 	int		x;

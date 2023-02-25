@@ -8,8 +8,6 @@
 # define CAM_DEFAULT_CAMUP_Y	1
 # define CAM_DEFAULT_CAMUP_Z	0
 # define CAM_DEFAULT_FOCALLEN	10
-# define CAM_DEFAULT_PIXEL_W	400
-# define CAM_DEFAULT_PIXEL_H	300
 
 typedef struct s_camerainfo
 {

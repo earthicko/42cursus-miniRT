@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "libft.h"
+#include "mlx_interface.h"
 #include "print.h"
 #include "../parser_internal.h"
 
@@ -42,8 +43,8 @@ static void	camerainfo_init(t_camerainfo *info,
 	vec3_setval(&info->cam_up, 0, 1, 0);
 	info->fov = fov;
 	info->focallen = CAM_DEFAULT_FOCALLEN;
-	info->pixel_w = CAM_DEFAULT_PIXEL_W;
-	info->pixel_h = CAM_DEFAULT_PIXEL_H;
+	info->pixel_w = DISPLAY_DEFAULT_W;
+	info->pixel_h = DISPLAY_DEFAULT_H;
 }
 
 int	build_camera(const t_ptrarr *tokens, t_scene *scene)
