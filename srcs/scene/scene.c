@@ -20,11 +20,11 @@ static t_bool	is_all_allocated(t_scene *scene)
 void	scene_destroy(t_scene *scene)
 {
 	if (scene->res.primitives)
-		ptrarr_destroy(scene->res.primitives, FALSE);
+		ptrarr_destroy(scene->res.primitives, TRUE);
 	if (scene->res.materials)
-		ptrarr_destroy(scene->res.materials, FALSE);
+		ptrarr_destroy(scene->res.materials, TRUE);
 	if (scene->res.textures)
-		ptrarr_destroy(scene->res.textures, FALSE);
+		ptrarr_destroy(scene->res.textures, TRUE);
 	if (scene->world)
 		free(scene->world);
 	if (scene->lights)

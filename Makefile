@@ -94,6 +94,7 @@ FILENAME		= \
 				parser/parser_entities/parser_plane \
 				parser/parser_entities/parser_cylinder \
 				scene/scene \
+				renderer/renderer \
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix srcs/, $(addsuffix .o, $(FILENAME)))

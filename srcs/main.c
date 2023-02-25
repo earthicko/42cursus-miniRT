@@ -6,10 +6,11 @@
 #include "parser.h"
 #include "msgdef.h"
 #include "scene.h"
+#include "renderer.h"
 
 int	exit_program(void *param)
 {
-	scene_destroy((t_scene *)param);
+	renderer_destroy((t_renderer *)param);
 	system("leaks miniRT");
 	exit(0);
 }
@@ -26,24 +27,17 @@ t_bool	match_extension(const char *path, const char *ext)
 
 int	main(int argc, char **argv)
 {
-	t_display	*disp;
-	t_scene		*scene;
+	t_renderer	renderer;
 
 	if (argc != 2 || !match_extension(argv[1], ".rt"))
 	{
 		printf(MSG_USAGE"\n");
 		return (2);
 	}
-	scene = scene_create();
-	if (!scene)
+	if (renderer_init(&renderer, argv[1]))
 		return (1);
-	if (parse_scene(argv[1], scene))
-	{
-		scene_destroy(scene);
-		return (1);
-	}
-	disp = display_create(DISPLAY_DEFAULT_W, DISPLAY_DEFAULT_H, "miniRT");
-	mlx_hook(disp->win, ON_DESTROY, 0, exit_program, scene);
-	mlx_loop(disp->mlx);
+	mlx_hook(renderer.disp->win, ON_DESTROY, 0, exit_program, renderer.scene);
+	mlx_loop_hook(renderer.disp->mlx, renderer_render, &renderer);
+	mlx_loop(renderer.disp->mlx);
 	return (0);
 }
