@@ -21,4 +21,7 @@ typedef struct s_scene
 	t_color		bg;
 }	t_scene;
 
+t_scene	*scene_create(void);
+void	scene_destroy(t_scene *scene);
+
 #endif
