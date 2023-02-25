@@ -86,5 +86,10 @@ int	parse_scene(const char *path, t_scene *scene)
 		return (CODE_ERROR_IO);
 	stat = parse_entities(lines, scene);
 	ptrarr_destroy(lines, TRUE);
+	printf("%s: parsing complete. results:\n", __func__);
+	printf("\t%d primitives, %d materials, %d textures\n",
+		scene->res.primitives->len,
+		scene->res.materials->len,
+		scene->res.textures->len);
 	return (stat);
 }

@@ -1,7 +1,7 @@
 #include "libft.h"
 #include "ptrarr.h"
 #include "msgdef.h"
-#include "../parser_internal.h"
+#include "parser_entities_internal.h"
 
 /*
 	returns TRUE if line matches one of unique entities,

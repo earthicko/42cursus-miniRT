@@ -2,7 +2,7 @@
 #include "libft.h"
 #include "mlx_interface.h"
 #include "print.h"
-#include "../parser_internal.h"
+#include "parser_entities_internal.h"
 
 /*
 		C -50.0,0,20 0,0,1 70

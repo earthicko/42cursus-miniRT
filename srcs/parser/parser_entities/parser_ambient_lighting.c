@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "libft.h"
 #include "print.h"
-#include "../parser_internal.h"
+#include "parser_entities_internal.h"
 
 /*
 		A 0.2 255,255,255

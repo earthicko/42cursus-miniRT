@@ -84,6 +84,7 @@ FILENAME		= \
 				parser/parser_tokenizer \
 				parser/parser_get_tokentype \
 				parser/parser_entities/parser_entities \
+				parser/parser_entities/parser_add_resource \
 				parser/parser_entities/parser_utils \
 				parser/parser_entities/parser_checkrange \
 				parser/parser_entities/parser_ambient_lighting \
