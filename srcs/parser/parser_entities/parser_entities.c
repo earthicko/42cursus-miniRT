@@ -113,7 +113,7 @@ int	parse_entities(const t_ptrarr *lines, t_scene *scene)
 		}
 		i++;
 	}
-	if (all_unique_entities_found(already_found))
+	if (!all_unique_entities_found(already_found))
 		return (CODE_ERROR_DATA);
 	return (CODE_OK);
 }
