@@ -85,6 +85,7 @@ FILENAME		= \
 				parser/parser_get_tokentype \
 				parser/parser_entities/parser_entities \
 				parser/parser_entities/parser_utils \
+				parser/parser_entities/parser_checkrange \
 				parser/parser_entities/parser_ambient_lighting \
 				parser/parser_entities/parser_camera \
 				parser/parser_entities/parser_light \

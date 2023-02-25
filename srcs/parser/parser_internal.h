@@ -8,6 +8,14 @@
 # define PARSER_DELIMETER ' '
 # define PARSER_COMMA ','
 # define PARSER_COMMA_STR ","
+# define RANGE_MIN_RATIO			0.0
+# define RANGE_MAX_RATIO			1.0
+# define RANGE_MIN_FOV				0.0
+# define RANGE_MAX_FOV				180.0
+# define RANGE_MIN_NORMALIZEDVEC3	-1.0
+# define RANGE_MAX_NORMALIZEDVEC3	1.0
+# define RANGE_MIN_COLOR			0.0
+# define RANGE_MAX_COLOR			256.0
 # define N_IDENTIFIER			6
 # define N_IDENTIFIER_UNIQUE	3
 # define N_IDENTIFIER_COMMON	3
@@ -69,6 +77,11 @@ t_bool				is_plane(const t_ptrarr *tokens);
 t_bool				is_cylinder(const t_ptrarr *tokens);
 
 void				parse_vector(t_vec3 *out, const void **token_start);
+
+t_bool				is_invalid_ratio(double ratio);
+t_bool				is_invalid_color(const t_color *color);
+t_bool				is_invalid_normalized_vec3(const t_vec3 *vec);
+t_bool				is_invalid_fov(double fov);
 
 int					build_ambient_lighting(
 						const t_ptrarr *tokens, t_scene *scene);
