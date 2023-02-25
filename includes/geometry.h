@@ -43,6 +43,8 @@ void	vec3_cross_vec3(t_vec3 *out, const t_vec3 *a, const t_vec3 *b);
 
 void	vec3_mult_num(t_vec3 *out, const t_vec3 *a, double b);
 void	vec3_mult_num_inplace(t_vec3 *target, double b);
+void	vec3_mult_component_vec3(t_vec3 *out, const t_vec3 *a, const t_vec3 *b);
+void	vec3_mult_component_vec3_inplace(t_vec3 *target, const t_vec3 *a);
 
 void	vec3_reflect(t_vec3 *out, const t_vec3 *in, const t_vec3 *n);
 void	vec3_refract(t_vec3 *out, const t_vec3 *in, const t_vec3 *n, double r);
