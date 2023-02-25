@@ -1,4 +1,5 @@
 #include <math.h>
+#include "number.h"
 #include "hittable_internal.h"
 
 t_bool	is_nere_zero(double val)
@@ -54,6 +55,7 @@ t_bool	solve_equation_system_plane_and_line(t_minmax t, \
 	const double	norm_dot_dir = vec3_dot_vec3(&plane->norm, &ray->dir);
 	t_vec3			ap;
 
+	(void)t;
 	if (is_near_zero(norm_dot_dir))
 		return (FALSE);
 	vec3_sub_vec3(&ap, &plane->point, &ray->orig);
