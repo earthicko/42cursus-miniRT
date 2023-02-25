@@ -2,9 +2,7 @@
 # define MLX_INTERFACE_H
 
 # include "libft_def.h"
-
-# define DISPLAY_DEFAULT_W	400
-# define DISPLAY_DEFAULT_H	300
+# include "settings.h"
 
 enum	e_appkitkeycode
 {

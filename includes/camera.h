@@ -3,11 +3,7 @@
 
 # include "geometry.h"
 # include "ray.h"
-
-# define CAM_DEFAULT_CAMUP_X	0
-# define CAM_DEFAULT_CAMUP_Y	1
-# define CAM_DEFAULT_CAMUP_Z	0
-# define CAM_DEFAULT_FOCALLEN	10
+# include "settings.h"
 
 typedef struct s_camerainfo
 {

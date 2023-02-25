@@ -1,0 +1,11 @@
+#ifndef SETTINGS_H
+# define SETTINGS_H
+
+# define DISPLAY_DEFAULT_W	400
+# define DISPLAY_DEFAULT_H	300
+# define CAM_DEFAULT_CAMUP_X	0
+# define CAM_DEFAULT_CAMUP_Y	1
+# define CAM_DEFAULT_CAMUP_Z	0
+# define CAM_DEFAULT_FOCALLEN	10
+
+#endif
