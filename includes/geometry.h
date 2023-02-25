@@ -53,6 +53,7 @@ void	m44_init_zero(t_mtx44 *target);
 void	m44_init_identity(t_mtx44 *target);
 
 void	vec3_multiply_m44(t_vec3 *out, const t_vec3 *a, const t_mtx44 *b);
+void	vec3_multiply_m44_inplace(t_vec3 *target, const t_mtx44 *a);
 void	m44_multiply_m44(t_mtx44 *out, const t_mtx44 *a, const t_mtx44 *b);
 void	m44_multiply_m44_inplace(t_mtx44 *target, const t_mtx44 *m);
 
