@@ -3,13 +3,12 @@
 #include "msgdef.h"
 #include "parser_entities_internal.h"
 
-// TODO: define infinity in header
 t_bool	is_invalid_length(double len)
 {
 	if (len <= DOUBLE_E)
 	{
 		ft_dprintf(2, "%s: ratio "MSG_OUTOFRANGE"\n", EXEC_NAME,
-			len, DOUBLE_E, 999999999);
+			len, DOUBLE_E, DOUBLE_INF);
 		return (TRUE);
 	}
 	return (FALSE);

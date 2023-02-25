@@ -1,7 +1,8 @@
 #ifndef NUMBER_H
 # define NUMBER_H
 
-# define DOUBLE_E 1e-8
+# define DOUBLE_E	1e-8
+# define DOUBLE_INF	999999999
 
 double	rand_double(void);
 double	rand_double_range(double min, double max);

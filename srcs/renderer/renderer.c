@@ -13,7 +13,6 @@ void	renderer_destroy(t_renderer *renderer)
 	ft_bzero(renderer, sizeof(t_renderer));
 }
 
-// TODO: move hard-coded constants into defines
 int	renderer_init(t_renderer *renderer, const char *scene_path)
 {
 	int	stat;
@@ -21,14 +20,14 @@ int	renderer_init(t_renderer *renderer, const char *scene_path)
 	ft_bzero(renderer, sizeof(t_renderer));
 	renderer->scene = scene_create();
 	renderer->disp = display_create(
-			DISPLAY_DEFAULT_W, DISPLAY_DEFAULT_H, "miniRT");
+			DISPLAY_DEFAULT_W, DISPLAY_DEFAULT_H, DISPLAY_TITLE);
 	if (!renderer->scene || !renderer->disp)
 	{
 		renderer_destroy(renderer);
 		return (CODE_ERROR_GENERIC);
 	}
-	renderer->max_depth = 50;
-	renderer->n_samples = 1;
+	renderer->max_depth = RENDERER_MAX_DEPTH;
+	renderer->n_samples = RENDERER_N_SAMPLES;
 	stat = parse_scene(scene_path, renderer->scene);
 	if (stat)
 	{
@@ -38,7 +37,6 @@ int	renderer_init(t_renderer *renderer, const char *scene_path)
 	return (CODE_OK);
 }
 
-// TODO: define infinity in header
 void	renderer_render_ray(t_color	*out,
 			t_renderer *renderer, const t_ray *ray, int depth)
 {
@@ -49,7 +47,7 @@ void	renderer_render_ray(t_color	*out,
 	t_color				next_color;
 
 	range.min = DOUBLE_E;
-	range.max = 999999999;
+	range.max = DOUBLE_INF;
 	if (depth <= 0)
 		return ;
 	if (!renderer->scene->world->hit(renderer->scene->world,
