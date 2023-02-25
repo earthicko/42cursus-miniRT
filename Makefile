@@ -71,6 +71,10 @@ FILENAME		= \
 				hittable/math_utils \
 				hittable/hit_record_set_normal_and_face \
 				hittable/sphere \
+				hittable/plane \
+				hittable/cylinder_disk \
+				hittable/cylinder_tube \
+				hittable/cylinder \
 				hittable/hittable_list \
 				hittable/hittable_transform \
 				material/material_diffuse_light \
