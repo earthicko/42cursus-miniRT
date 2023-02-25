@@ -8,6 +8,12 @@
 
 typedef struct s_material	t_material;
 
+enum	e_disk_of_cylinder
+{
+	TOP = 0,
+	BOTTOM
+};
+
 typedef struct s_hit_record
 {
 	t_point		p;
@@ -72,7 +78,8 @@ typedef struct s_hittable_tube
 	t_hittable_hit	hit;
 	t_bounding_box	bounding_box;
 	t_material		*material;
-	t_point			center;
+	t_point			center_of_cylinder;
+	t_point			center_of_base;
 	t_vec3			axis;
 	double			height;
 	double			radius;
@@ -92,8 +99,8 @@ typedef struct s_hittable_cylinder
 	t_hittable_hit	hit;
 	t_bounding_box	bounding_box;
 	t_material		*material;
-	t_hittable_tube	*tube;
-	t_hittable_disk	*disk[2];
+	t_hittable_tube	tube;
+	t_hittable_disk	disk[2];
 }	t_hittable_cylinder;
 
 typedef struct s_hittable_list
