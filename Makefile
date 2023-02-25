@@ -62,6 +62,7 @@ FILENAME		= \
 				number/degree \
 				number/number_utils \
 				ptrarr/ptrarr \
+				ptrarr/ptrarr_get \
 				print/print0 \
 				mlx_interface/mlx_interface \
 				mlx_interface/mlx_interface_putpixel \
