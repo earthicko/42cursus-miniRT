@@ -146,14 +146,15 @@ test_parser: tests/parser.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 clean:
 	$(RM) $(OBJ) $(DEP) $(DRIVER_OBJ) $(DRIVER_DEP)
 	$(RM) $(TEST_OBJ) $(TEST_DEP) $(TESTER_OBJ) $(TESTER_DEP)
+	$(RM) $(LIBMLX)
 	@make clean -C $(LIBFT_DIR)
 	@make clean -C $(LIBMLX_DIR)
-	$(RM) $(LIBMLX)
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
 	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable
 	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(LIBMLX_DIR)
 
 re:
 	@make fclean
