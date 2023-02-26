@@ -5,9 +5,10 @@ LIBFT			= $(LIBFT_DIR)/libft.a
 LINK_LIBFT		= -L$(LIBFT_DIR)
 INC_DIR_LIBFT	= -I$(LIBFT_DIR)/includes
 
-LIBMLX_DIR		= minilibx_macos
-LIBMLX			= $(LIBMLX_DIR)/libmlx.a
-LINK_LIBMLX		= -L$(LIBMLX_DIR) -framework OpenGL -framework AppKit
+LIBMLX_DIR		= minilibx_mms_20210621
+LIBMLX_ORIG		= $(LIBMLX_DIR)/libmlx.dylib
+LIBMLX			= ./libmlx.dylib
+LINK_LIBMLX		= -L$(LIBMLX_DIR) -lmlx -framework OpenGL -framework AppKit
 INC_DIR_LIBMLX	= -I$(LIBMLX_DIR)
 
 LINK_LIBM		= -lm
@@ -114,8 +115,11 @@ $(NAME): $(OBJ) $(LDLIBS) $(DRIVER_OBJ)
 $(LIBFT):
 	@make -j4 -C $(LIBFT_DIR)/
 
-$(LIBMLX):
-	@make -j4 -C $(LIBMLX_DIR)/
+$(LIBMLX_ORIG):
+	@make -C $(LIBMLX_DIR)/
+
+$(LIBMLX): $(LIBMLX_ORIG)
+	cp $(LIBMLX_ORIG) .
 
 test_vectors: tests/vectors.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/vectors.o -o $@ $(LDFLAGS)
@@ -141,6 +145,8 @@ clean:
 	$(RM) $(OBJ) $(DEP) $(DRIVER_OBJ) $(DRIVER_DEP)
 	$(RM) $(TEST_OBJ) $(TEST_DEP) $(TESTER_OBJ) $(TESTER_DEP)
 	@make clean -C $(LIBFT_DIR)
+	@make clean -C $(LIBMLX_DIR)
+	$(RM) $(LIBMLX)
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)

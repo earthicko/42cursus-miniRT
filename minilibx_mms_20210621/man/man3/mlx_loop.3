@@ -45,8 +45,7 @@ MiniLibX - Handle events
 
 .SH EVENTS
 
-Both X-Window and MacOSX graphical systems are bi-directionnal.
-On one hand, the program sends orders to
+The graphical system is bi-directionnal. On one hand, the program sends orders to
 the screen to display pixels, images, and so on. On the other hand,
 it can get information from the keyboard and mouse associated to
 the screen. To do so, the program receives "events" from the keyboard or the
@@ -70,7 +69,8 @@ You can assign different functions to the three following events:
 - The mouse button is pressed
 .br
 - A part of the window should be re-drawn
-(this is called an "expose" event, and it is your program's job to handle it).
+(this is called an "expose" event, and it is your program's job to handle it in the
+Unix/Linux X11 environment, but at the opposite it never happens on MacOS).
 .br
 
 Each window can define a different function for the same event.
@@ -101,8 +101,8 @@ with fixed parameters:
 .nf
 
   expose_hook(void *param);
-  key_hook(int keycode,void *param);
-  mouse_hook(int button,int x,int y,void *param);
+  key_hook(int keycode, void *param);
+  mouse_hook(int button, int x, int y, void *param);
   loop_hook(void *param);
 
 .fi
@@ -115,8 +115,8 @@ is the address specified in the mlx_*_hook calls. This address is never
 used nor modified by the MiniLibX. On key and mouse events, additional
 information is passed:
 .I keycode
-tells you which key is pressed (X11 : look for the include file "keysymdef.h",
-MacOS : create a small software and find out by yourself),
+tells you which key is pressed (with X11, look for the include file "keysymdef.h",
+with MacOS, just try :) ),
 (
 .I x
 ,
@@ -126,18 +126,19 @@ MacOS : create a small software and find out by yourself),
 tells you which mouse button was pressed.
 
 .SH GOING FURTHER WITH EVENTS
-The MiniLibX provides a much generic access to all type of events. The
+The MiniLibX provides a much generic access to other available events. The
 .I mlx.h
 include define
 .B mlx_hook()
 in the same manner mlx_*_hook functions work. The event and mask values
-will be taken from the X11 include file "X.h" (even for MacOSX, for compatibility purposes)
+will be taken from the X11 include file "X.h". Some MacOS events are mapped
+to these values, when it makes sense, and the mask is not used in MacOS.
 
-See source code of mlx_int_param_event.c to find out how the MiniLibX will
+See source code of the MiniLibX to find out how it will
 call your own function for a specific event.
 
 .SH SEE ALSO
 mlx(3), mlx_new_window(3), mlx_pixel_put(3), mlx_new_image(3)
 
 .SH AUTHOR
-Copyright ol@ - 2002-2015 - Olivier Crouzet
+Copyright ol@ - 2002-2019 - Olivier Crouzet

@@ -49,8 +49,9 @@ will be displayed at (
 .I y
 ).
 
-In both functions, it is impossible to display anything outside the
-specified window, nor display in another window in front of the selected one.
+Both functions will discard any display outside the window. This makes
+.B mlx_pixel_put
+slow. Consider using images instead.
 
 .SH COLOR MANAGEMENT
 The
@@ -72,10 +73,13 @@ this integer are filled as shown in the picture below:
 While filling the integer, make sure you avoid endian problems. Remember
 that the "blue" byte should always be the least significant one.
 
+Depending on hardware capabilities, the most significant bit can handle
+transparency. Beware, at the opposite of the OpenGL classics, it does
+not represent opacity.
 
 .SH SEE ALSO
 mlx(3), mlx_new_window(3), mlx_new_image(3), mlx_loop(3)
 
 
 .SH AUTHOR
-Copyright ol@ - 2002-2015 - Olivier Crouzet
+Copyright ol@ - 2002-2019 - Olivier Crouzet
