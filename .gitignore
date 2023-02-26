@@ -65,3 +65,12 @@ minilibx_mms_20210621/mlx_init.swiftsourceinfo
 minilibx_mms_20210621/mlx_window.swiftdoc
 minilibx_mms_20210621/mlx_window.swiftmodule
 minilibx_mms_20210621/mlx_window.swiftsourceinfo
+
+# swift temp files
+*.swiftdoc
+*.swiftmodule
+*.swiftsourceinfo
+
+# VSCode settings
+.vscode/launch.json
+.vscode/settings.json
