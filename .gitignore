@@ -53,3 +53,15 @@ dkms.conf
 
 # ctags
 tags
+
+# User config
+miniRT
+minilibx_mms_20210621/mlx_image.swiftdoc
+minilibx_mms_20210621/mlx_image.swiftmodule
+minilibx_mms_20210621/mlx_image.swiftsourceinfo
+minilibx_mms_20210621/mlx_init.swiftdoc
+minilibx_mms_20210621/mlx_init.swiftmodule
+minilibx_mms_20210621/mlx_init.swiftsourceinfo
+minilibx_mms_20210621/mlx_window.swiftdoc
+minilibx_mms_20210621/mlx_window.swiftmodule
+minilibx_mms_20210621/mlx_window.swiftsourceinfo
