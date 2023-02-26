@@ -64,6 +64,7 @@ int	build_sphere(const t_ptrarr *tokens, t_scene *scene)
 	parse_vector(&cen, &tokens->data[1]);
 	d = ft_atof(tokens->data[6]);
 	parse_vector(&color, &tokens->data[7]);
+	map_color(&color);
 	if (is_invalid_length(d / 2) || is_invalid_color(&color))
 		return (CODE_ERROR_DATA);
 	if (add_texture_solid(scene, color))

@@ -38,6 +38,7 @@ int	build_ambient_lighting(const t_ptrarr *tokens, t_scene *scene)
 	parse_vector(&color, &tokens->data[2]);
 	if (is_invalid_color(&color))
 		return (CODE_ERROR_DATA);
+	map_color(&color);
 	vec3_mult_num(&scene->bg, &color, ratio);
 	printf("%s: background color ", __func__);
 	print_vec3(&scene->bg);
