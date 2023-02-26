@@ -1,4 +1,7 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include "libft.h"
+#include "print.h"
 #include "parser_entities_internal.h"
 
 /*
@@ -31,10 +34,64 @@ t_bool	is_light(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
+static int	add_material_diffuse_light(t_scene *scene, t_color color)
+{
+	t_material	*light;
+
+	if (add_texture_solid(scene, color))
+		return (CODE_ERROR_MALLOC);
+	light = material_diffuse_light_create(ptrarr_getlast(scene->res.textures));
+	if (!light)
+		return (CODE_ERROR_MALLOC);
+	if (ptrarr_append(scene->res.materials, light))
+	{
+		free(light);
+		return (CODE_ERROR_MALLOC);
+	}
+	return (CODE_OK);
+}
+
+// TODO: remove casting to hittable* after return types get sorted out
+static int	add_light(t_scene *scene, t_point coord, t_material *m)
+{
+	t_hittable		*light;
+	t_hittable_list	*world;
+
+	light = (t_hittable *)hittable_sphere_create(coord, LIGHT_DEFAULT_R, m);
+	if (!light)
+		return (CODE_ERROR_MALLOC);
+	if (ptrarr_append(scene->res.primitives, light))
+	{
+		free(light);
+		return (CODE_ERROR_MALLOC);
+	}
+	world = (t_hittable_list *)scene->world;
+	if (ptrarr_append(world->elements, light))
+		return (CODE_ERROR_MALLOC);
+	return (CODE_OK);
+}
+
 int	build_light(const t_ptrarr *tokens, t_scene *scene)
 {
-	(void)tokens;
-	(void)scene;
-	printf("Unimplemented stub of %s\n", __func__);
+	t_point	coord;
+	double	ratio;
+	t_color	color;
+
+	parse_vector(&coord, &tokens->data[1]);
+	ratio = ft_atof(tokens->data[6]);
+	parse_vector(&color, &tokens->data[7]);
+	if (is_invalid_ratio(ratio) || is_invalid_color(&color))
+		return (CODE_ERROR_DATA);
+	map_color(&color);
+	vec3_mult_num_inplace(&color, ratio);
+	if (add_material_diffuse_light(scene, color))
+		return (CODE_ERROR_MALLOC);
+	if (add_light(scene, coord, ptrarr_getlast(scene->res.materials)))
+		return (CODE_ERROR_MALLOC);
+	printf("%s: light (coord ", __func__);
+	print_vec3(&coord);
+	printf(", ratio %.2f, color ", ratio);
+	print_vec3(&color);
+	printf(")\n");
 	return (CODE_OK);
 }
