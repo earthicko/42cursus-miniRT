@@ -31,6 +31,7 @@ void	scene_destroy(t_scene *scene)
 		hittable_list_destroy((t_hittable_list *)scene->world);
 	if (scene->objects)
 		hittable_list_destroy((t_hittable_list *)scene->objects);
+	free(scene);
 }
 
 t_scene	*scene_create(void)
