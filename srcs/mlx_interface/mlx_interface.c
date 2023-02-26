@@ -1,7 +1,15 @@
 #include "libft.h"
 #include "mlx_interface.h"
 #include "mlx.h"
+#include "renderer.h"
 #include <stdlib.h>
+
+int	exit_program(void *param)
+{
+	renderer_destroy((t_renderer *)param);
+	system("leaks miniRT");
+	exit(0);
+}
 
 t_display	*display_destroy(t_display *disp)
 {

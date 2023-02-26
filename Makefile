@@ -67,6 +67,7 @@ FILENAME		= \
 				print/print0 \
 				print/print1 \
 				mlx_interface/mlx_interface \
+				mlx_interface/mlx_interface_key \
 				mlx_interface/mlx_interface_putpixel \
 				camera/camera_init \
 				camera/camera_get_ray_at \
