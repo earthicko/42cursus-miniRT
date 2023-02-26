@@ -53,3 +53,14 @@ dkms.conf
 
 # ctags
 tags
+
+# swift temp files
+*.swiftdoc
+*.swiftmodule
+*.swiftsourceinfo
+
+# VSCode settings
+.vscode/launch.json
+.vscode/settings.json
+
+miniRT
