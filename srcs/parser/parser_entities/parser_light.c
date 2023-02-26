@@ -38,6 +38,7 @@ static int	add_material_diffuse_light(t_scene *scene, t_color color)
 {
 	t_material	*light;
 
+	vec3_mult_num_inplace(&color, LIGHT_DEFAULT_INTENSITY);
 	if (add_texture_solid(scene, color))
 		return (CODE_ERROR_MALLOC);
 	light = material_diffuse_light_create(ptrarr_getlast(scene->res.textures));
@@ -57,7 +58,8 @@ static int	add_light(t_scene *scene, t_point coord, t_material *m)
 	t_hittable		*light;
 	t_hittable_list	*world;
 
-	light = (t_hittable *)hittable_sphere_create(coord, LIGHT_DEFAULT_R, m);
+	light = (t_hittable *)hittable_sphere_create(
+			coord, LIGHT_DEFAULT_RADIUS, m);
 	if (!light)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, light))
