@@ -4,39 +4,6 @@
 #include "parser.h"
 #include "renderer.h"
 
-void	renderer_destroy(t_renderer *renderer)
-{
-	if (renderer->scene)
-		scene_destroy(renderer->scene);
-	if (renderer->disp)
-		display_destroy(renderer->disp);
-	ft_bzero(renderer, sizeof(t_renderer));
-}
-
-int	renderer_init(t_renderer *renderer, const char *scene_path)
-{
-	int	stat;
-
-	ft_bzero(renderer, sizeof(t_renderer));
-	renderer->scene = scene_create();
-	renderer->disp = display_create(
-			DISPLAY_DEFAULT_W, DISPLAY_DEFAULT_H, DISPLAY_TITLE);
-	if (!renderer->scene || !renderer->disp)
-	{
-		renderer_destroy(renderer);
-		return (CODE_ERROR_GENERIC);
-	}
-	renderer->max_depth = RENDERER_MAX_DEPTH;
-	renderer->n_samples = RENDERER_N_SAMPLES;
-	stat = parse_scene(scene_path, renderer->scene);
-	if (stat)
-	{
-		renderer_destroy(renderer);
-		return (stat);
-	}
-	return (CODE_OK);
-}
-
 void	renderer_render_ray(t_color	*out,
 			t_renderer *renderer, const t_ray *ray, int depth)
 {
@@ -49,7 +16,10 @@ void	renderer_render_ray(t_color	*out,
 	range.min = DOUBLE_E;
 	range.max = DOUBLE_INF;
 	if (depth <= 0)
+	{
+		vec3_setval(out, 0, 0, 0);
 		return ;
+	}
 	if (!renderer->scene->world->hit(renderer->scene->world,
 			(t_ray*)ray, range, &hitrec))
 	{
@@ -77,17 +47,55 @@ void	renderer_getpixel(t_renderer *renderer, int x, int y)
 		renderer, &ray, renderer->max_depth);
 }
 
+static void	map_pixel_color(int *rgb, t_renderer *renderer, t_pixel *p, int n)
+{
+	const t_minmax	in = {0, n + 1};
+	const t_minmax	out = {0, 255};
+	int				i;
+
+	i = 0;
+	while (i < 3)
+	{
+		rgb[i] = map_minmax(renderer->disp->colors[
+				(renderer->disp->w * (renderer->disp->h - p->y))
+				+ p->x].i[i], &in, &out);
+		rgb[i] = clamp_int(rgb[i], 0, 255);
+		i++;
+	}
+}
+
+// TODO: gamma correction, NaN filtering
+void	renderer_write_color(t_renderer *renderer, int n_samples)
+{
+	t_pixel			p;
+	int				rgb[3];
+
+	p.y = 0;
+	while (p.y < renderer->disp->h)
+	{
+		p.x = 0;
+		while (p.x < renderer->disp->w)
+		{
+			map_pixel_color(rgb, renderer, &p, n_samples);
+			p.color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+			display_putpixel(renderer->disp, p);
+			p.x++;
+		}
+		p.y++;
+	}
+}
+
 int	renderer_render(void *param)
 {
 	t_renderer	*renderer;
 	int			x;
 	int			y;
-	int			n;
+	static int	n_samples_so_far;
 
 	renderer = (t_renderer *)param;
-	n = 0;
-	while (n < renderer->n_samples)
-	{
+	if (n_samples_so_far >= renderer->n_samples)
+		return (0);
+	printf("Sample %d\n", n_samples_so_far);
 		y = 0;
 		while (y < renderer->disp->h)
 		{
@@ -99,9 +107,9 @@ int	renderer_render(void *param)
 			}
 			y++;
 		}
+	renderer_write_color(renderer, n_samples_so_far);
 		mlx_put_image_to_window(renderer->disp->mlx, renderer->disp->win,
 			renderer->disp->img, 0, 0);
-		n++;
-	}
+	n_samples_so_far++;
 	return (0);
 }

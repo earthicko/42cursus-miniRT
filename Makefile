@@ -65,6 +65,7 @@ FILENAME		= \
 				ptrarr/ptrarr \
 				ptrarr/ptrarr_get \
 				print/print0 \
+				print/print1 \
 				mlx_interface/mlx_interface \
 				mlx_interface/mlx_interface_putpixel \
 				camera/camera_init \
@@ -102,6 +103,7 @@ FILENAME		= \
 				parser/parser_entities/parser_cylinder \
 				scene/scene \
 				renderer/renderer \
+				renderer/renderer_init \
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix srcs/, $(addsuffix .o, $(FILENAME)))
