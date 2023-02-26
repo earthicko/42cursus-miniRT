@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 	}
 	if (renderer_init(&renderer, argv[1]))
 		return (1);
-	mlx_hook(renderer.disp->win, ON_DESTROY, 0, exit_program, renderer.scene);
+	mlx_hook(renderer.disp->win, ON_DESTROY, 0, exit_program, &renderer);
 	mlx_loop_hook(renderer.disp->mlx, renderer_render, &renderer);
 	mlx_loop(renderer.disp->mlx);
 	return (0);
