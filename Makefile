@@ -104,6 +104,7 @@ FILENAME		= \
 				scene/scene \
 				renderer/renderer \
 				renderer/renderer_init \
+				renderer/renderer_write_color \
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix srcs/, $(addsuffix .o, $(FILENAME)))

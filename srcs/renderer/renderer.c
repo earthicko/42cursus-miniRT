@@ -6,43 +6,52 @@
 #include "print.h"
 #include "renderer.h"
 
+void	renderer_write_color(t_renderer *renderer, int n_samples);
+
+static void	init_renderer_render_ray(
+		t_renderer *renderer, t_renderinfo *info, int depth)
+{
+	info->range.min = DOUBLE_E;
+	info->range.max = DOUBLE_INF;
+	if (depth == renderer->max_depth)
+		info->target = renderer->scene->objects;
+	else
+		info->target = renderer->scene->world;
+}
+
 void	renderer_render_ray(t_color	*out,
 			t_renderer *renderer, const t_ray *ray, int depth)
 {
 	t_hit_record		hitrec;
-	t_minmax			range;
-	t_color				emitted;
 	t_scatter_record	scatrec;
-	t_color				next_color;
+	t_renderinfo		info;
 
-	range.min = DOUBLE_E;
-	range.max = DOUBLE_INF;
+	init_renderer_render_ray(renderer, &info, depth);
 	if (depth <= 0)
 	{
 		vec3_setval(out, 0, 0, 0);
 		return ;
 	}
-	if (!renderer->scene->world->hit(renderer->scene->world,
-			(t_ray*)ray, range, &hitrec))
+	if (!info.target->hit(info.target, ray, info.range, &hitrec))
 	{
-		// printf(" return bg ");
 		vec3_add_vec3_inplace(out, &renderer->scene->bg);
 		return ;
 	}
 	// printf("depth %d ", depth);
 	// print_hit_record(&hitrec);
 	// printf(" ");
-	hitrec.material->emit(hitrec.material, &emitted, &hitrec);
-	vec3_add_vec3_inplace(out, &emitted);
+	hitrec.material->emit(hitrec.material, &info.emitted, &hitrec);
+	vec3_add_vec3_inplace(out, &info.emitted);
 	if (!hitrec.material->scatter(hitrec.material, &scatrec, ray, &hitrec))
 		return ;
 	// print_scatter_record(&scatrec);
 	// printf(" ");
-	renderer_render_ray(&next_color, renderer, &scatrec.scattered, depth - 1);
+	renderer_render_ray(&info.next_color,
+		renderer, &scatrec.scattered, depth - 1);
 	// printf(" got color ");
 	// print_vec3(&next_color);
-	vec3_mult_component_vec3_inplace(&next_color, &scatrec.albedo);
-	vec3_add_vec3_inplace(out, &next_color);
+	vec3_mult_component_vec3_inplace(&info.next_color, &scatrec.albedo);
+	vec3_add_vec3_inplace(out, &info.next_color);
 }
 
 void	renderer_getpixel(t_renderer *renderer, int x, int y)
@@ -58,44 +67,6 @@ void	renderer_getpixel(t_renderer *renderer, int x, int y)
 	// printf("Pixel color at (%d, %d) is ", x, y);
 	// print_vec3(renderer->disp->colors + (renderer->disp->w * y) + x);
 	// printf("\n");
-}
-
-static void	map_pixel_color(int *rgb, t_renderer *renderer, t_pixel *p, int n)
-{
-	const t_minmax	in = {0, n + 1};
-	const t_minmax	out = {0, 255};
-	int				i;
-
-	i = 0;
-	while (i < 3)
-	{
-		rgb[i] = map_minmax(renderer->disp->colors[
-				(renderer->disp->w * (renderer->disp->h - p->y - 1))
-				+ p->x].i[i], &in, &out);
-		rgb[i] = clamp_int(rgb[i], 0, 255);
-		i++;
-	}
-}
-
-// TODO: gamma correction, NaN filtering
-void	renderer_write_color(t_renderer *renderer, int n_samples)
-{
-	t_pixel			p;
-	int				rgb[3];
-
-	p.y = 0;
-	while (p.y < renderer->disp->h)
-	{
-		p.x = 0;
-		while (p.x < renderer->disp->w)
-		{
-			map_pixel_color(rgb, renderer, &p, n_samples);
-			p.color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
-			display_putpixel(renderer->disp, p);
-			p.x++;
-		}
-		p.y++;
-	}
 }
 
 int	renderer_render(void *param)
