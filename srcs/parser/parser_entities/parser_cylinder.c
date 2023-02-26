@@ -1,4 +1,7 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include "libft.h"
+#include "print.h"
 #include "parser_entities_internal.h"
 
 /*
@@ -31,10 +34,49 @@ t_bool	is_cylinder(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
+// TODO: remove casting to hittable* after return types get sorted out
+static int	add_cylinder(t_scene *scene, t_cylinder_info *info, t_material *m)
+{
+	t_hittable		*cylinder;
+	t_hittable_list	*world;
+
+	cylinder = (t_hittable *)hittable_cylinder_create(info, m);
+	if (!cylinder)
+		return (CODE_ERROR_MALLOC);
+	if (ptrarr_append(scene->res.primitives, cylinder))
+	{
+		free(cylinder);
+		return (CODE_ERROR_MALLOC);
+	}
+	world = (t_hittable_list *)scene->world;
+	if (ptrarr_append(world->elements, cylinder))
+		return (CODE_ERROR_MALLOC);
+	return (CODE_OK);
+}
+
 int	build_cylinder(const t_ptrarr *tokens, t_scene *scene)
 {
-	(void)tokens;
-	(void)scene;
-	printf("Unimplemented stub of %s\n", __func__);
+	t_cylinder_info	info;
+	t_color			color;
+
+	parse_vector(&info.center, &tokens->data[1]);
+	parse_vector(&info.axis, &tokens->data[6]);
+	info.radius = ft_atof(tokens->data[11]) / 2;
+	info.height = ft_atof(tokens->data[12]);
+	parse_vector(&color, &tokens->data[13]);
+	if (is_invalid_normalized_vec3(&info.axis) || is_invalid_color(&color))
+		return (CODE_ERROR_DATA);
+	map_color(&color);
+	if (add_texture_solid(scene, color))
+		return (CODE_ERROR_MALLOC);
+	if (add_material_lambertian(scene, ptrarr_getlast(scene->res.textures)))
+		return (CODE_ERROR_MALLOC);
+	if (add_cylinder(scene, &info, ptrarr_getlast(scene->res.materials)))
+		return (CODE_ERROR_MALLOC);
+	printf("%s: ", __func__);
+	print_cylinder_info(&info);
+	printf(", color ");
+	print_vec3(&color);
+	printf(")\n");
 	return (CODE_OK);
 }
