@@ -92,7 +92,8 @@ int	parse_scene(const char *path, t_scene *scene)
 		scene->res.materials->len,
 		scene->res.textures->len);
 	printf("\t%d objects, %d lights\n",
-		((t_hittable_list *)scene->world)->elements->len,
-		((t_hittable_list *)scene->lights)->elements->len);
+		((t_hittable_list *)scene->objects)->elements->len,
+		((t_hittable_list *)scene->world)->elements->len
+		- ((t_hittable_list *)scene->objects)->elements->len);
 	return (stat);
 }

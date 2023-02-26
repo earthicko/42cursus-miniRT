@@ -17,7 +17,7 @@ typedef struct s_scene
 	t_resources	res;
 	t_camera	cam;
 	t_hittable	*world;
-	t_hittable	*lights;
+	t_hittable	*objects;
 	t_color		bg;
 }	t_scene;
 
