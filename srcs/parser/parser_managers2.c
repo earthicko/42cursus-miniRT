@@ -5,8 +5,7 @@ t_patternmatcher	unique_patternmatcher_manager(int i)
 {
 	static const t_patternmatcher	unique_matcher[N_IDENTIFIER_UNIQUE] = {
 		is_ambient_lighting,
-		is_camera,
-		is_light
+		is_camera
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_UNIQUE)
@@ -18,8 +17,7 @@ t_builder	unique_builder_manager(int i)
 {
 	static const t_builder			unique_builder[N_IDENTIFIER_UNIQUE] = {
 		build_ambient_lighting,
-		build_camera,
-		build_light
+		build_camera
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_UNIQUE)
@@ -32,7 +30,8 @@ t_patternmatcher	common_patternmatcher_manager(int i)
 	static const t_patternmatcher	common_matcher[N_IDENTIFIER_COMMON] = {
 		is_sphere,
 		is_plane,
-		is_cylinder
+		is_cylinder,
+		is_light
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)
@@ -45,7 +44,8 @@ t_builder	common_builder_manager(int i)
 	static const t_builder			common_builder[N_IDENTIFIER_COMMON] = {
 		build_sphere,
 		build_plane,
-		build_cylinder
+		build_cylinder,
+		build_light
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)
