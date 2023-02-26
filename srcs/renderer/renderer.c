@@ -34,6 +34,7 @@ void	renderer_render_ray(t_color	*out,
 	}
 	if (!info.target->hit(info.target, ray, info.range, &hitrec))
 	{
+		// printf(" return bg ");
 		vec3_add_vec3_inplace(out, &renderer->scene->bg);
 		return ;
 	}
@@ -42,6 +43,9 @@ void	renderer_render_ray(t_color	*out,
 	// printf(" ");
 	hitrec.material->emit(hitrec.material, &info.emitted, &hitrec);
 	vec3_add_vec3_inplace(out, &info.emitted);
+	// printf("emit ");
+	// print_vec3(&info.emitted);
+	// printf(" ");
 	if (!hitrec.material->scatter(hitrec.material, &scatrec, ray, &hitrec))
 		return ;
 	// print_scatter_record(&scatrec);
@@ -49,7 +53,7 @@ void	renderer_render_ray(t_color	*out,
 	renderer_render_ray(&info.next_color,
 		renderer, &scatrec.scattered, depth - 1);
 	// printf(" got color ");
-	// print_vec3(&next_color);
+	// print_vec3(&info.next_color);
 	vec3_mult_component_vec3_inplace(&info.next_color, &scatrec.albedo);
 	vec3_add_vec3_inplace(out, &info.next_color);
 }
