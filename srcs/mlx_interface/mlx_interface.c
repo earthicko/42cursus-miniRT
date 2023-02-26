@@ -34,13 +34,15 @@ static int	display_create_mlx(t_display *disp,
 	disp->mlx = mlx_init();
 	if (!disp->mlx)
 		return (CODE_ERROR_GENERIC);
-	disp->win = mlx_new_window(disp->mlx, width, height, title);
+	disp->win = mlx_new_window(disp->mlx,
+			width * DISPLAY_MULTIPLIER, height * DISPLAY_MULTIPLIER, title);
 	if (!disp->win)
 		return (CODE_ERROR_GENERIC);
 	disp->w = width;
 	disp->h = height;
 	disp->ratio = (double)disp->w / (double)disp->h;
-	disp->img = mlx_new_image(disp->mlx, width, height);
+	disp->img = mlx_new_image(disp->mlx,
+			width * DISPLAY_MULTIPLIER, height * DISPLAY_MULTIPLIER);
 	if (!disp->img)
 		return (CODE_ERROR_GENERIC);
 	if (get_display_info(disp))
