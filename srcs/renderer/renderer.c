@@ -69,20 +69,15 @@ void	renderer_getpixel(t_renderer *renderer, int x, int y)
 	// printf("\n");
 }
 
-int	renderer_render(void *param)
+static void	renderer_render_loop(t_renderer *renderer, int n_samples_so_far)
 {
-	t_renderer	*renderer;
-	int			x;
-	int			y;
-	static int	n_samples_so_far;
+	int	x;
+	int	y;
 
-	renderer = (t_renderer *)param;
-	if (n_samples_so_far >= renderer->n_samples)
-		return (0);
-	printf("Sample %d\n", n_samples_so_far);
 	y = 0;
 	while (y < renderer->disp->h)
 	{
+		printf("\rSample %d, Scanline %d", n_samples_so_far, y);
 		x = 0;
 		while (x < renderer->disp->w)
 		{
@@ -91,6 +86,25 @@ int	renderer_render(void *param)
 		}
 		y++;
 	}
+}
+
+int	renderer_render(void *param)
+{
+	t_renderer	*renderer;
+	static int	n_samples_so_far;
+	static int	render_finished;
+
+	renderer = (t_renderer *)param;
+	if (n_samples_so_far >= renderer->n_samples)
+	{
+		if (!render_finished)
+		{
+			printf("\nRender finished.\n");
+			render_finished = 1;
+		}
+		return (0);
+	}
+	renderer_render_loop(renderer, n_samples_so_far);
 	renderer_write_color(renderer, n_samples_so_far);
 	mlx_put_image_to_window(renderer->disp->mlx, renderer->disp->win,
 		renderer->disp->img, 0, 0);
