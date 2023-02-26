@@ -39,6 +39,7 @@ static int	add_cylinder(t_scene *scene, t_cylinder_info *info, t_material *m)
 {
 	t_hittable		*cylinder;
 	t_hittable_list	*world;
+	t_hittable_list	*objects;
 
 	cylinder = (t_hittable *)hittable_cylinder_create(info, m);
 	if (!cylinder)
@@ -49,7 +50,9 @@ static int	add_cylinder(t_scene *scene, t_cylinder_info *info, t_material *m)
 		return (CODE_ERROR_MALLOC);
 	}
 	world = (t_hittable_list *)scene->world;
-	if (ptrarr_append(world->elements, cylinder))
+	objects = (t_hittable_list *)scene->objects;
+	if (ptrarr_append(world->elements, cylinder)
+		|| ptrarr_append(objects->elements, cylinder))
 		return (CODE_ERROR_MALLOC);
 	return (CODE_OK);
 }
