@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include "print.h"
+
+
 #include <math.h>
 #include "libft.h"
 #include "material.h"
@@ -9,8 +13,11 @@ static t_bool	root_is_out_of_range(t_hittable_tube *tube, t_hit_record *rec)
 	double	max_dist_sq;
 
 	max_dist_sq = pow(tube->height / 2, 2) + pow(tube->radius, 2);
+	// printf("max_dist_sq: %.2f\n", max_dist_sq);
+	// printf("dist p to center_of_cylinder: %.2f\n", dist_sq(&rec->p, &tube->center_of_cylinder));
 	if (dist_sq(&rec->p, &tube->center_of_cylinder) > max_dist_sq)
 		return (TRUE);
+	ft_printf("tube root is in range\n");
 	return (FALSE);
 }
 
@@ -29,6 +36,11 @@ static void	tube_hit_record_set_normal_and_face(const t_hittable_tube *tube,
 	vec3_mult_num(&q, &tube->axis, t);
 	vec3_add_vec3_inplace(&q, &tube->center_of_disk);
 	vec3_sub_vec3(&outward_norm, &rec->p, &q);
+	// printf("outward norm: ");
+	// print_vec3(&outward_norm);
+	// printf("  ");
+	//print_hit_record(rec);
+	//printf("\n\n");
 	vec3_unitize(&outward_norm);
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 }
@@ -55,10 +67,20 @@ t_bool	hit_tube(t_hittable *hittable,
 						* vec3_dot_vec3(&ca, &this->axis)));
 	coef[C] = vec3_dot_vec3(&ca, &ca) - pow(vec3_dot_vec3(&ca, &ray->dir), 2) \
 				- pow(this->radius, 2);
+	
+	// 아니 대체 왜 ray만 두번 프린트되는거지 밑에 hit_record는 왜 프린트 안되지? 
+	// equation이 false일 수가 있나? 말이 되냐고
+	print_ray(ray);
+	//printf("\n");
+	printf("\n");
+	//printf("(A, B, C) is (%.2f, %.2f, %.2f)\n", coef[A], coef[B], coef[C]);
 	if (solve_quadratic_equation(t, coef, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);
+	rec->is_front = TRUE;
+	print_hit_record(rec);
+	printf("\n\n");
 	if (root_is_out_of_range(this, rec))
 		return (FALSE);
 	rec->material = this->material;
