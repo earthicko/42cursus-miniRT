@@ -14,9 +14,9 @@ t_bool	val_is_near_zero(double val);
 double	dist_sq(t_point *a, t_point *b);
 t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root);
 t_bool	solve_equation_system_plane_and_line(
-			t_minmax t,
-			t_hittable_plane *plane,
-			t_ray *ray,
+			const t_minmax t,
+			const t_hittable_plane *plane,
+			const t_ray *ray,
 			double *root);
 
 void	set_tube_of_cylinder(

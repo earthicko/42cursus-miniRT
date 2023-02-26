@@ -19,27 +19,28 @@ typedef struct s_hit_record
 	t_bool		is_front;
 }	t_hit_record;
 
-void				hit_record_set_normal_and_face(
-						t_hit_record *rec, t_ray *ray, t_vec3 *normal);
+void				hit_record_set_normal_and_face(t_hit_record *rec, \
+													const t_ray *ray, \
+													const t_vec3 *normal);
 
 typedef struct s_hittable	t_hittable;
 
-typedef t_bool				(*t_hittable_hit)(
-		t_hittable *hittable, t_ray *r, t_minmax t, t_hit_record *rec);	
+typedef t_bool				(*t_hittable_hit)(t_hittable *hittable,
+											const t_ray *r,
+											t_minmax t,
+											t_hit_record *rec);
 typedef t_bool				(*t_bounding_box)(void);
 
 typedef struct s_hittable
 {
 	t_hittable_hit	hit;
 	t_bounding_box	bounding_box;
-	t_material		*material;
 }	t_hittable;
 
 typedef struct s_hittable_transform
 {
 	t_hittable_hit	hit;
 	t_bounding_box	bounding_box;
-	t_material		*material;
 	t_hittable		*base;
 	t_mtx44			w_to_h;
 	t_mtx44			h_to_w;
@@ -111,19 +112,17 @@ typedef struct s_hittable_list
 {
 	t_hittable_hit	hit;
 	t_bounding_box	bounding_box;
-	t_material		*material;
 	t_ptrarr		*elements;
 }	t_hittable_list;
 
-t_hittable_sphere	*sphere_create(t_point center, \
-									double radius, \
-									t_material *material);
-t_hittable_plane	*plane_create(t_point point, \
-									t_vec3 norm, \
-									t_material *material);
-
-t_hittable_cylinder	*cylinder_create(t_cylinder_info *cylinder_info, \
-										t_material *material);
+t_hittable_sphere	*hittable_sphere_create(t_point center, \
+											double radius, \
+											t_material *material);
+t_hittable_plane	*hittable_plane_create(t_point point, \
+											t_vec3 norm, \
+											t_material *material);
+t_hittable_cylinder	*hittable_cylinder_create(t_cylinder_info *cylinder_info, \
+												t_material *material);
 t_hittable			*hittable_list_create(void);
 t_hittable			*hittable_transform_create(t_hittable *base, \
 												t_point orig, \

@@ -6,7 +6,7 @@
 
 // TODO: outward_norm 필요성, 필요하긴 할듯. one weekend ray_color 함수읽고 판단할 것
 t_bool	hit_plane(t_hittable *hittable,
-					t_ray *ray,
+					const t_ray *ray,
 					t_minmax t,
 					t_hit_record *rec)
 {
@@ -25,7 +25,7 @@ t_bool	hit_plane(t_hittable *hittable,
 	return (TRUE);
 }
 
-t_hittable_plane	*plane_create(t_point point,
+t_hittable_plane	*hittable_plane_create(t_point point,
 									t_vec3 norm,
 									t_material *material)
 {

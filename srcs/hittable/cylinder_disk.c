@@ -12,7 +12,7 @@ static t_bool	root_is_out_of_range(t_hittable_disk *disk, t_hit_record *rec)
 }
 
 t_bool	hit_disk(t_hittable *hittable,
-					t_ray *ray,
+					const t_ray *ray,
 					t_minmax t,
 					t_hit_record *rec)
 {

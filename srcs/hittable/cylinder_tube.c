@@ -14,9 +14,9 @@ static t_bool	root_is_out_of_range(t_hittable_tube *tube, t_hit_record *rec)
 	return (FALSE);
 }
 
-static void	tube_hit_record_set_normal_and_face(t_hittable_tube *tube,
+static void	tube_hit_record_set_normal_and_face(const t_hittable_tube *tube,
 											t_hit_record *rec,
-											t_ray *ray)
+											const t_ray *ray)
 {
 	t_vec3	cp;
 	double	t;
@@ -37,7 +37,7 @@ static void	tube_hit_record_set_normal_and_face(t_hittable_tube *tube,
 // URL: http://www.illusioncatalyst.com/notes_files/mathematics
 //  	/line_cylinder_intersection.php
 t_bool	hit_tube(t_hittable *hittable,
-					t_ray *ray,
+					const t_ray *ray,
 					t_minmax t,
 					t_hit_record *rec)
 {

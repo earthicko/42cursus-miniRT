@@ -41,7 +41,7 @@ static int	add_sphere(t_scene *scene, t_point cen, double d, t_material *m)
 	t_hittable		*sphere;
 	t_hittable_list	*world;
 
-	sphere = (t_hittable *)sphere_create(cen, d / 2, m);
+	sphere = (t_hittable *)hittable_sphere_create(cen, d / 2, m);
 	if (!sphere)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, sphere))

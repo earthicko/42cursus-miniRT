@@ -4,7 +4,7 @@
 #include "hittable.h"
 
 t_bool	hittable_transform_hit(t_hittable *self,
-			t_ray *r, t_minmax t, t_hit_record *rec)
+			const t_ray *r, t_minmax t, t_hit_record *rec)
 {
 	t_hittable_transform	*this;
 	t_ray					r_trans;

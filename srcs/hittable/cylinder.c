@@ -42,7 +42,7 @@ static int	init_cylinder_and_elements(t_hittable_cylinder **cylinder,
 */
 
 t_bool	hit_cylinder(t_hittable *hittable,
-					t_ray *ray,
+					const t_ray *ray,
 					t_minmax t,
 					t_hit_record *rec)
 {
@@ -60,7 +60,7 @@ t_bool	hit_cylinder(t_hittable *hittable,
 	return (TRUE);
 }
 
-t_hittable_cylinder	*cylinder_create(t_cylinder_info *cylinder_info,
+t_hittable_cylinder	*hittable_cylinder_create(t_cylinder_info *cylinder_info,
 										t_material *material)
 {
 	t_hittable_cylinder	*cylinder;

@@ -2,7 +2,7 @@
 #include "ray.h"
 
 void	hit_record_set_normal_and_face(
-			t_hit_record *rec, t_ray *ray, t_vec3 *normal)
+			t_hit_record *rec, const t_ray *ray, const t_vec3 *normal)
 {
 	if (vec3_dot_vec3(&ray->dir, normal) < 0)
 	{

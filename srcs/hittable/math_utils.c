@@ -59,9 +59,9 @@ t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root)
 	    The vector u is direction vector of the line 
 	Solution: t = (P - A) * n_vec / n_vec * dir_vec
 */
-t_bool	solve_equation_system_plane_and_line(t_minmax t,
-											t_hittable_plane *plane,
-											t_ray *ray,
+t_bool	solve_equation_system_plane_and_line(const t_minmax t,
+											const t_hittable_plane *plane,
+											const t_ray *ray,
 											double *root)
 {
 	const double	norm_dot_dir = vec3_dot_vec3(&plane->norm, &ray->dir);

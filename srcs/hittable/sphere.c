@@ -25,7 +25,7 @@
 	c = OA^2 - radius^2.
 */
 t_bool	hit_sphere(t_hittable *hittable,
-					t_ray *ray,
+					const t_ray *ray,
 					t_minmax t,
 					t_hit_record *rec)
 {
@@ -51,7 +51,7 @@ t_bool	hit_sphere(t_hittable *hittable,
 	return (TRUE);
 }
 
-t_hittable_sphere	*sphere_create(
+t_hittable_sphere	*hittable_sphere_create(
 								t_point center,
 								double radius,
 								t_material *material)
