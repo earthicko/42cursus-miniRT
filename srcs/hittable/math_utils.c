@@ -72,5 +72,7 @@ t_bool	solve_equation_system_plane_and_line(t_minmax t,
 		return (FALSE);
 	vec3_sub_vec3(&ap, &plane->point, &ray->orig);
 	*root = vec3_dot_vec3(&ap, &plane->norm) / norm_dot_dir;
+	if (*root < t.min || *root > t.max)
+		return (FALSE);
 	return (TRUE);
 }
