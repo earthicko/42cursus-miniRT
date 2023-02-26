@@ -40,6 +40,7 @@ static int	add_sphere(t_scene *scene, t_point cen, double d, t_material *m)
 {
 	t_hittable		*sphere;
 	t_hittable_list	*world;
+	t_hittable_list	*objects;
 
 	sphere = (t_hittable *)hittable_sphere_create(cen, d / 2, m);
 	if (!sphere)
@@ -50,7 +51,9 @@ static int	add_sphere(t_scene *scene, t_point cen, double d, t_material *m)
 		return (CODE_ERROR_MALLOC);
 	}
 	world = (t_hittable_list *)scene->world;
-	if (ptrarr_append(world->elements, sphere))
+	objects = (t_hittable_list *)scene->objects;
+	if (ptrarr_append(world->elements, sphere)
+		|| ptrarr_append(objects->elements, sphere))
 		return (CODE_ERROR_MALLOC);
 	return (CODE_OK);
 }

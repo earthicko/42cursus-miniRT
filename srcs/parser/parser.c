@@ -38,12 +38,14 @@ t_ptrarr	*read_file_to_strarr(const char *path)
 		newline = get_next_line(fd);
 		if (!newline)
 			return (arr);
-		if (ft_strlen(newline) == 1 && newline[0] == '\n')
+		if ((ft_strlen(newline) == 1 && newline[0] == '\n')
+			|| newline[0] == PARSER_COMMENT)
 		{
 			free(newline);
 			continue ;
 		}
-		newline[ft_strlen(newline) - 1] = '\0';
+		if (newline[ft_strlen(newline) - 1] == '\n')
+			newline[ft_strlen(newline) - 1] = '\0';
 		if (ptrarr_append(arr, newline))
 		{
 			ptrarr_destroy(arr, TRUE);
@@ -92,7 +94,8 @@ int	parse_scene(const char *path, t_scene *scene)
 		scene->res.materials->len,
 		scene->res.textures->len);
 	printf("\t%d objects, %d lights\n",
-		((t_hittable_list *)scene->world)->elements->len,
-		((t_hittable_list *)scene->lights)->elements->len);
+		((t_hittable_list *)scene->objects)->elements->len,
+		((t_hittable_list *)scene->world)->elements->len
+		- ((t_hittable_list *)scene->objects)->elements->len);
 	return (stat);
 }

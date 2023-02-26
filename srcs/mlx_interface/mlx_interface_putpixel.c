@@ -1,15 +1,37 @@
 #include "mlx_interface.h"
 
-void	display_putpixel(t_display *disp, t_pixel p)
+static void	display_putpixel_forreal(t_display *disp, t_pixel p)
 {
 	int	o_height;
 	int	o_width;
+
+	o_height = disp->nbytes * p.y;
+	o_width = p.x * disp->bpp / 8;
+	*(t_uint *)(disp->img_addr + o_height + o_width) = p.color;
+}
+
+void	display_putpixel(t_display *disp, t_pixel p)
+{
+	int		x_offset;
+	int		y_offset;
+	t_pixel	p_real;
 
 	if (p.x < 0 || p.x >= disp->w)
 		return ;
 	if (p.y < 0 || p.y >= disp->h)
 		return ;
-	o_height = disp->nbytes * p.y;
-	o_width = p.x * disp->bpp / 8;
-	*(t_uint *)(disp->img_addr + o_height + o_width) = p.color;
+	x_offset = 0;
+	while (x_offset < DISPLAY_MULTIPLIER)
+	{
+		y_offset = 0;
+		while (y_offset < DISPLAY_MULTIPLIER)
+		{
+			p_real.x = p.x * DISPLAY_MULTIPLIER + x_offset;
+			p_real.y = p.y * DISPLAY_MULTIPLIER + y_offset;
+			p_real.color = p.color;
+			display_putpixel_forreal(disp, p_real);
+			y_offset++;
+		}
+		x_offset++;
+	}
 }

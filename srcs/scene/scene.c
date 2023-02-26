@@ -14,7 +14,7 @@ static t_bool	is_all_allocated(t_scene *scene)
 		return (FALSE);
 	if (!(scene->world))
 		return (FALSE);
-	if (!(scene->lights))
+	if (!(scene->objects))
 		return (FALSE);
 	return (TRUE);
 }
@@ -29,8 +29,9 @@ void	scene_destroy(t_scene *scene)
 		ptrarr_destroy(scene->res.textures, TRUE);
 	if (scene->world)
 		hittable_list_destroy((t_hittable_list *)scene->world);
-	if (scene->lights)
-		hittable_list_destroy((t_hittable_list *)scene->lights);
+	if (scene->objects)
+		hittable_list_destroy((t_hittable_list *)scene->objects);
+	free(scene);
 }
 
 t_scene	*scene_create(void)
@@ -45,7 +46,7 @@ t_scene	*scene_create(void)
 	scene->res.materials = ptrarr_create();
 	scene->res.textures = ptrarr_create();
 	scene->world = hittable_list_create();
-	scene->lights = hittable_list_create();
+	scene->objects = hittable_list_create();
 	if (!is_all_allocated(scene))
 	{
 		scene_destroy(scene);

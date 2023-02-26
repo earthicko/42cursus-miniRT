@@ -8,13 +8,6 @@
 #include "scene.h"
 #include "renderer.h"
 
-int	exit_program(void *param)
-{
-	renderer_destroy((t_renderer *)param);
-	system("leaks miniRT");
-	exit(0);
-}
-
 t_bool	match_extension(const char *path, const char *ext)
 {
 	size_t	start;
@@ -36,7 +29,8 @@ int	main(int argc, char **argv)
 	}
 	if (renderer_init(&renderer, argv[1]))
 		return (1);
-	mlx_hook(renderer.disp->win, ON_DESTROY, 0, exit_program, renderer.scene);
+	mlx_hook(renderer.disp->win, ON_KEYDOWN, 0, mlx_key_interface, &renderer);
+	mlx_hook(renderer.disp->win, ON_DESTROY, 0, exit_program, &renderer);
 	mlx_loop_hook(renderer.disp->mlx, renderer_render, &renderer);
 	mlx_loop(renderer.disp->mlx);
 	return (0);

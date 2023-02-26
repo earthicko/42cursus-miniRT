@@ -57,6 +57,9 @@ typedef struct s_display
 	t_color	*colors;
 }	t_display;
 
+int			exit_program(void *param);
+int			mlx_key_interface(int k, void *param);
+
 t_display	*display_create(int width, int height, char *title);
 t_display	*display_destroy(t_display *disp);
 

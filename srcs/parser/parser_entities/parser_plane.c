@@ -34,6 +34,7 @@ static int	add_plane(t_scene *scene, t_point p, t_vec3 norm, t_material *m)
 {
 	t_hittable		*plane;
 	t_hittable_list	*world;
+	t_hittable_list	*objects;
 
 	plane = (t_hittable *)hittable_plane_create(p, norm, m);
 	if (!plane)
@@ -44,7 +45,9 @@ static int	add_plane(t_scene *scene, t_point p, t_vec3 norm, t_material *m)
 		return (CODE_ERROR_MALLOC);
 	}
 	world = (t_hittable_list *)scene->world;
-	if (ptrarr_append(world->elements, plane))
+	objects = (t_hittable_list *)scene->objects;
+	if (ptrarr_append(world->elements, plane)
+		|| ptrarr_append(objects->elements, plane))
 		return (CODE_ERROR_MALLOC);
 	return (CODE_OK);
 }

@@ -5,9 +5,10 @@
 # include "ptrarr.h"
 # include "scene.h"
 
-# define PARSER_DELIMETER ' '
-# define PARSER_COMMA ','
-# define PARSER_COMMA_STR ","
+# define PARSER_DELIMETER	' '
+# define PARSER_COMMA		','
+# define PARSER_COMMA_STR	","
+# define PARSER_COMMENT		'#'
 # define RANGE_MIN_RATIO			0.0
 # define RANGE_MAX_RATIO			1.0
 # define RANGE_MIN_FOV				0.0
@@ -17,14 +18,14 @@
 # define RANGE_MIN_COLOR			0.0
 # define RANGE_MAX_COLOR			256.0
 # define N_IDENTIFIER			6
-# define N_IDENTIFIER_UNIQUE	3
-# define N_IDENTIFIER_COMMON	3
+# define N_IDENTIFIER_UNIQUE	2
+# define N_IDENTIFIER_COMMON	4
 # define IDENTIFIER_AMBIENTLIGHTING	"A"
 # define IDENTIFIER_CAMERA			"C"
-# define IDENTIFIER_LIGHT			"L"
 # define IDENTIFIER_SPHERE			"sp"
 # define IDENTIFIER_PLANE			"pl"
 # define IDENTIFIER_CYLINDER		"cy"
+# define IDENTIFIER_LIGHT			"l"
 # define IDENTIFIER_NAME_AMBIENTLIGHTING	"Ambient Lighting"
 # define IDENTIFIER_NAME_CAMERA				"Camera"
 # define IDENTIFIER_NAME_LIGHT				"Light"
