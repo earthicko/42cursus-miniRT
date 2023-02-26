@@ -1,7 +1,9 @@
+#include <stdio.h>
 #include "libft.h"
 #include "mlx.h"
 #include "number.h"
 #include "parser.h"
+#include "print.h"
 #include "renderer.h"
 
 void	renderer_render_ray(t_color	*out,
@@ -23,14 +25,22 @@ void	renderer_render_ray(t_color	*out,
 	if (!renderer->scene->world->hit(renderer->scene->world,
 			(t_ray*)ray, range, &hitrec))
 	{
+		// printf(" return bg ");
 		vec3_add_vec3_inplace(out, &renderer->scene->bg);
 		return ;
 	}
+	// printf("depth %d ", depth);
+	// print_hit_record(&hitrec);
+	// printf(" ");
 	hitrec.material->emit(hitrec.material, &emitted, &hitrec);
 	vec3_add_vec3_inplace(out, &emitted);
 	if (!hitrec.material->scatter(hitrec.material, &scatrec, ray, &hitrec))
 		return ;
+	// print_scatter_record(&scatrec);
+	// printf(" ");
 	renderer_render_ray(&next_color, renderer, &scatrec.scattered, depth - 1);
+	// printf(" got color ");
+	// print_vec3(&next_color);
 	vec3_mult_component_vec3_inplace(&next_color, &scatrec.albedo);
 	vec3_add_vec3_inplace(out, &next_color);
 }
@@ -45,6 +55,9 @@ void	renderer_getpixel(t_renderer *renderer, int x, int y)
 	camera_get_ray_at(&ray, &renderer->scene->cam, &uv);
 	renderer_render_ray(renderer->disp->colors + (renderer->disp->w * y) + x,
 		renderer, &ray, renderer->max_depth);
+	// printf("Pixel color at (%d, %d) is ", x, y);
+	// print_vec3(renderer->disp->colors + (renderer->disp->w * y) + x);
+	// printf("\n");
 }
 
 static void	map_pixel_color(int *rgb, t_renderer *renderer, t_pixel *p, int n)
