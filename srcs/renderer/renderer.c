@@ -70,7 +70,7 @@ static void	map_pixel_color(int *rgb, t_renderer *renderer, t_pixel *p, int n)
 	while (i < 3)
 	{
 		rgb[i] = map_minmax(renderer->disp->colors[
-				(renderer->disp->w * (renderer->disp->h - p->y))
+				(renderer->disp->w * (renderer->disp->h - p->y - 1))
 				+ p->x].i[i], &in, &out);
 		rgb[i] = clamp_int(rgb[i], 0, 255);
 		i++;
