@@ -109,20 +109,20 @@ int	renderer_render(void *param)
 	if (n_samples_so_far >= renderer->n_samples)
 		return (0);
 	printf("Sample %d\n", n_samples_so_far);
-		y = 0;
-		while (y < renderer->disp->h)
+	y = 0;
+	while (y < renderer->disp->h)
+	{
+		x = 0;
+		while (x < renderer->disp->w)
 		{
-			x = 0;
-			while (x < renderer->disp->w)
-			{
-				renderer_getpixel(renderer, x, y);
-				x++;
-			}
-			y++;
+			renderer_getpixel(renderer, x, y);
+			x++;
 		}
+		y++;
+	}
 	renderer_write_color(renderer, n_samples_so_far);
-		mlx_put_image_to_window(renderer->disp->mlx, renderer->disp->win,
-			renderer->disp->img, 0, 0);
+	mlx_put_image_to_window(renderer->disp->mlx, renderer->disp->win,
+		renderer->disp->img, 0, 0);
 	n_samples_so_far++;
 	return (0);
 }
