@@ -5,9 +5,10 @@
 # include "ptrarr.h"
 # include "scene.h"
 
-# define PARSER_DELIMETER ' '
-# define PARSER_COMMA ','
-# define PARSER_COMMA_STR ","
+# define PARSER_DELIMETER	' '
+# define PARSER_COMMA		','
+# define PARSER_COMMA_STR	","
+# define PARSER_COMMENT		'#'
 # define RANGE_MIN_RATIO			0.0
 # define RANGE_MAX_RATIO			1.0
 # define RANGE_MIN_FOV				0.0

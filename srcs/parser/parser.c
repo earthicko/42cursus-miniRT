@@ -38,12 +38,14 @@ t_ptrarr	*read_file_to_strarr(const char *path)
 		newline = get_next_line(fd);
 		if (!newline)
 			return (arr);
-		if (ft_strlen(newline) == 1 && newline[0] == '\n')
+		if ((ft_strlen(newline) == 1 && newline[0] == '\n')
+			|| newline[0] == PARSER_COMMENT)
 		{
 			free(newline);
 			continue ;
 		}
-		newline[ft_strlen(newline) - 1] = '\0';
+		if (newline[ft_strlen(newline) - 1] == '\n')
+			newline[ft_strlen(newline) - 1] = '\0';
 		if (ptrarr_append(arr, newline))
 		{
 			ptrarr_destroy(arr, TRUE);
