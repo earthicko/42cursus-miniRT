@@ -1,19 +1,20 @@
 #include <stdio.h>
+#include "hittable.h"
 #include "ray.h"
 #include "camera.h"
 #include "print.h"
 
-void	print_vec2(t_vec2 *vec2)
+void	print_vec2(const t_vec2 *vec2)
 {
 	printf("(%.2f, %.2f)", vec2->i[0], vec2->i[1]);
 }
 
-void	print_vec3(t_vec3 *vec3)
+void	print_vec3(const t_vec3 *vec3)
 {
 	printf("(%.2f, %.2f, %.2f)", vec3->i[0], vec3->i[1], vec3->i[2]);
 }
 
-void	print_ray(t_ray *ray)
+void	print_ray(const t_ray *ray)
 {
 	printf("Ray ");
 	print_vec3(&ray->orig);
@@ -34,7 +35,7 @@ typedef struct s_camera
 	t_vec3	uv;
 }	t_camera;
 */
-void	print_camera(t_camera *cam)
+void	print_camera(const t_camera *cam)
 {
 	printf("Camera orig: ");
 	print_vec3(&cam->view_origin);
@@ -52,4 +53,22 @@ void	print_camera(t_camera *cam)
 	print_vec3(&cam->w);
 	printf(" uv: ");
 	print_vec3(&cam->uv);
+}
+
+void	print_hit_record(const t_hit_record *rec)
+{
+	printf("hit record p");
+	print_vec3(&rec->p);
+	printf(" normal ");
+	print_vec3(&rec->normal);
+	printf(" %.2f ", rec->t);
+	printf(" is front: %d", rec->is_front);
+}
+
+void	print_scatter_record(const t_scatter_record *rec)
+{
+	printf("scatter record color ");
+	print_vec3(&rec->albedo);
+	printf(" ray ");
+	print_ray(&rec->scattered);
 }
