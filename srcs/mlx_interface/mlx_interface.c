@@ -9,10 +9,6 @@ t_display	*display_destroy(t_display *disp)
 		mlx_destroy_image(disp->mlx, disp->img);
 	if (disp->win)
 		mlx_destroy_window(disp->mlx, disp->win);
-	if (disp->pixels)
-		free(disp->pixels);
-	if (disp->pixels)
-		free(disp->pixels);
 	if (disp->colors)
 		free(disp->colors);
 	free(disp);
@@ -63,10 +59,8 @@ t_display	*display_create(int width, int height, char *title)
 	if (display_create_mlx(disp, width, height, title))
 		return (display_destroy(disp));
 	disp->colors = malloc(sizeof(t_color) * width * height);
-	disp->pixels = malloc(sizeof(t_pixel) * width * height);
-	if (!disp->colors || !disp->pixels)
+	if (!disp->colors)
 		return (display_destroy(disp));
 	ft_bzero(disp->colors, sizeof(t_color) * width * height);
-	ft_bzero(disp->pixels, sizeof(t_pixel) * width * height);
 	return (disp);
 }

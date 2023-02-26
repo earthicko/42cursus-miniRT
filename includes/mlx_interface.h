@@ -55,7 +55,6 @@ typedef struct s_display
 	double	ratio;
 	int		n_pixels;
 	t_color	*colors;
-	t_pixel	*pixels;
 }	t_display;
 
 t_display	*display_create(int width, int height, char *title);
