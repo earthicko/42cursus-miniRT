@@ -33,6 +33,21 @@ static void	tube_hit_record_set_normal_and_face(const t_hittable_tube *tube,
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 }
 
+static void	set_coefficient(double coef[3],
+								t_hittable_tube *tube,
+								const t_ray *ray,
+								t_vec3 *ca)
+{
+	coef[A] = vec3_dot_vec3(&ray->dir, &ray->dir) \
+				- pow(vec3_dot_vec3(&ray->dir, &tube->axis), 2);
+	coef[B] = 2 * (vec3_dot_vec3(&ray->dir, ca) \
+					- (vec3_dot_vec3(&ray->dir, &tube->axis) \
+						* vec3_dot_vec3(ca, &tube->axis)));
+	coef[C] = vec3_dot_vec3(ca, ca) \
+				- pow(vec3_dot_vec3(ca, &tube->axis), 2) \
+				- pow(tube->radius, 2);
+}
+
 // URL: http://www.illusioncatalyst.com/notes_files/mathematics
 //  	/line_cylinder_intersection.php
 t_bool	hit_tube(t_hittable *hittable,
@@ -41,20 +56,17 @@ t_bool	hit_tube(t_hittable *hittable,
 					t_hit_record *rec)
 {
 	t_hittable_tube	*this;
+	t_vec3			dir_cross_axis;
 	t_vec3			ca;
 	double			coef[3];
 	double			root;
 
 	this = (t_hittable_tube *)hittable;
+	vec3_cross_vec3(&dir_cross_axis, &ray->dir, &this->axis);
+	if (vec3_is_near_zero(&dir_cross_axis))
+		return (FALSE);
 	vec3_sub_vec3(&ca, &ray->orig, &this->center_of_disk);
-	coef[A] = vec3_dot_vec3(&ray->dir, &ray->dir) \
-				- pow(vec3_dot_vec3(&ray->dir, &this->axis), 2);
-	coef[B] = 2 * (vec3_dot_vec3(&ray->dir, &ca) \
-					- (vec3_dot_vec3(&ray->dir, &this->axis) \
-						* vec3_dot_vec3(&ca, &this->axis)));
-	coef[C] = vec3_dot_vec3(&ca, &ca) \
-				- pow(vec3_dot_vec3(&ca, &this->axis), 2) \
-				- pow(this->radius, 2);
+	set_coefficient(coef, this, ray, &ca);
 	if (solve_quadratic_equation(t, coef, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
