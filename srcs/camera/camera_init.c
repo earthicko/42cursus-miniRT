@@ -7,7 +7,7 @@ void	camera_init_get_h_and_w(const t_camerainfo *info, double *h, double *w)
 	double	w_to_h;
 
 	w_to_h = info->pixel_w / info->pixel_h;
-	*h = 2.0 * tan(deg_to_rad(info->fov));
+	*h = 2.0 * tan(deg_to_rad(info->fov / 2));
 	*w = w_to_h * *h;
 }
 
