@@ -81,7 +81,7 @@ static void	renderer_render_loop(t_renderer *renderer, int n_samples_so_far)
 	static int			i;
 	const static char	*blinker[3] = {".     ", "..    ", "...   "};
 
-	if (n_samples_so_far == renderer->n_samples
+	if (n_samples_so_far == renderer->n_samples - 1
 		|| n_samples_so_far % RENDERER_UPDATE_FREQ == 0)
 	{
 		ft_printf("\rSample count %d ", n_samples_so_far);
