@@ -1,6 +1,3 @@
-#include <stdio.h>
-
-
 #include "hittable.h"
 #include "ray.h"
 
