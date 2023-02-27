@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include "print.h"
-
-
 #include <math.h>
 #include "libft.h"
 #include "material.h"
@@ -13,11 +9,8 @@ static t_bool	root_is_out_of_range(t_hittable_tube *tube, t_hit_record *rec)
 	double	max_dist_sq;
 
 	max_dist_sq = pow(tube->height / 2, 2) + pow(tube->radius, 2);
-	// printf("max_dist_sq: %.2f\n", max_dist_sq);
-	// printf("dist p to center_of_cylinder: %.2f\n", dist_sq(&rec->p, &tube->center_of_cylinder));
 	if (dist_sq(&rec->p, &tube->center_of_cylinder) > max_dist_sq)
 		return (TRUE);
-	ft_printf("tube root is in range\n");
 	return (FALSE);
 }
 
@@ -36,16 +29,10 @@ static void	tube_hit_record_set_normal_and_face(const t_hittable_tube *tube,
 	vec3_mult_num(&q, &tube->axis, t);
 	vec3_add_vec3_inplace(&q, &tube->center_of_disk);
 	vec3_sub_vec3(&outward_norm, &rec->p, &q);
-	// printf("outward norm: ");
-	// print_vec3(&outward_norm);
-	// printf("  ");
-	//print_hit_record(rec);
-	//printf("\n\n");
 	vec3_unitize(&outward_norm);
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 }
 
-// TODO: 렌더링시, axis 방향에 영향이 있는지 꼭 체크, axis에 -1 실수배 해볼 것
 // URL: http://www.illusioncatalyst.com/notes_files/mathematics
 //  	/line_cylinder_intersection.php
 t_bool	hit_tube(t_hittable *hittable,
@@ -73,8 +60,6 @@ t_bool	hit_tube(t_hittable *hittable,
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);
 	rec->is_front = TRUE;
-	print_hit_record(rec);
-	printf("\n\n");
 	if (root_is_out_of_range(this, rec))
 		return (FALSE);
 	rec->material = this->material;
@@ -82,9 +67,6 @@ t_bool	hit_tube(t_hittable *hittable,
 	return (TRUE);
 }
 
-// TODO: 반드시 shift와 shift_inverse의 렌더링 결과를 비교할 것
-//    (두 밑면의 중심중 어느것을 택해도 렌더링 결과가 같은지 확인)
-//    실제로 center_of_disk는 두가지 경우가 존재
 void	set_tube_of_cylinder(t_hittable_tube *tube,
 									t_cylinder_info *cylinder_info,
 									t_material *material)

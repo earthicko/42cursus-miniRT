@@ -1,6 +1,3 @@
-#include <stdio.h>
-
-
 #include <stdlib.h>
 #include <math.h>
 #include "libft.h"
@@ -18,23 +15,11 @@ t_bool	hit_cylinder(t_hittable *hittable,
 
 	this = (t_hittable_cylinder *)hittable;
 	if (this->tube.hit((t_hittable *)&this->tube, ray, t, rec))
-	{
-		ft_printf("hit tube\n");
 		t.max = rec->t;
-	}
-	
-	/*
 	if (this->disk[0].hit((t_hittable *)&this->disk[0], ray, t, rec))
-	{
-		printf("hit disk[0]\n");
 		t.max = rec->t;
-	}
 	if (this->disk[1].hit((t_hittable *)&this->disk[1], ray, t, rec))
-	{
-		printf("hit disk[1]\n");
 		t.max = rec->t;
-	}
-	*/
 	if (val_is_near_zero(t.max - DOUBLE_INF))
 		return (FALSE);
 	return (TRUE);

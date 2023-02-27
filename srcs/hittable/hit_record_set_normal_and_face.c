@@ -9,13 +9,11 @@ void	hit_record_set_normal_and_face(
 {
 	if (vec3_dot_vec3(&ray->dir, normal) < 0)
 	{
-		printf("Should be here\n");
 		rec->is_front = TRUE;
 		rec->normal = *normal;
 	}
 	else
 	{
-		printf("Shouldn't be here\n");
 		rec->is_front = FALSE;
 		vec3_mult_num(&rec->normal, normal, -1);
 	}
