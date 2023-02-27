@@ -76,13 +76,20 @@ void	renderer_getpixel(t_renderer *renderer, int x, int y)
 
 static void	renderer_render_loop(t_renderer *renderer, int n_samples_so_far)
 {
-	int	x;
-	int	y;
+	int					x;
+	int					y;
+	static int			i;
+	const static char	*blinker[3] = {".     ", "..    ", "...   "};
 
+	if (n_samples_so_far == renderer->n_samples
+		|| n_samples_so_far % RENDERER_UPDATE_FREQ == 0)
+	{
+		ft_printf("\rSample count %d ", n_samples_so_far);
+		ft_printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);
+	}
 	y = 0;
 	while (y < renderer->disp->h)
 	{
-		printf("\rSample %d, Scanline %d", n_samples_so_far, y);
 		x = 0;
 		while (x < renderer->disp->w)
 		{
@@ -106,13 +113,18 @@ int	renderer_render(void *param)
 		{
 			printf("\nRender finished.\n");
 			render_finished = 1;
+			mlx_put_image_to_window(renderer->disp->mlx, renderer->disp->win,
+				renderer->disp->img, 0, 0);
 		}
 		return (0);
 	}
 	renderer_render_loop(renderer, n_samples_so_far);
-	renderer_write_color(renderer, n_samples_so_far);
-	mlx_put_image_to_window(renderer->disp->mlx, renderer->disp->win,
-		renderer->disp->img, 0, 0);
+	if (n_samples_so_far % RENDERER_UPDATE_FREQ == 0)
+	{
+		renderer_write_color(renderer, n_samples_so_far);
+		mlx_put_image_to_window(renderer->disp->mlx, renderer->disp->win,
+			renderer->disp->img, 0, 0);
+	}
 	n_samples_so_far++;
 	return (0);
 }
