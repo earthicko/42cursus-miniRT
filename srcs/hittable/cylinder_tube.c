@@ -65,15 +65,9 @@ t_bool	hit_tube(t_hittable *hittable,
 	coef[B] = 2 * (vec3_dot_vec3(&ray->dir, &ca) \
 					- (vec3_dot_vec3(&ray->dir, &this->axis) \
 						* vec3_dot_vec3(&ca, &this->axis)));
-	coef[C] = vec3_dot_vec3(&ca, &ca) - pow(vec3_dot_vec3(&ca, &ray->dir), 2) \
+	coef[C] = vec3_dot_vec3(&ca, &ca) \
+				- pow(vec3_dot_vec3(&ca, &this->axis), 2) \
 				- pow(this->radius, 2);
-	
-	// 아니 대체 왜 ray만 두번 프린트되는거지 밑에 hit_record는 왜 프린트 안되지? 
-	// equation이 false일 수가 있나? 말이 되냐고
-	print_ray(ray);
-	//printf("\n");
-	printf("\n");
-	//printf("(A, B, C) is (%.2f, %.2f, %.2f)\n", coef[A], coef[B], coef[C]);
 	if (solve_quadratic_equation(t, coef, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
