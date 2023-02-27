@@ -45,6 +45,7 @@ TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
 TESTER_DEP		= $(addprefix tests/, $(addsuffix .d, $(TESTER_FILENAME)))
 
 FILENAME		= \
+				timeman \
 				geometry/matrix_init \
 				geometry/multiply \
 				geometry/rotate \

@@ -76,6 +76,9 @@ static void	renderer_render_flush(t_renderer *renderer, int n_samples)
 	free(filename);
 }
 
+void	timeman(int mode);
+
+// TODO: remove timeman before submission
 int	renderer_render(void *param)
 {
 	t_renderer	*renderer;
@@ -83,12 +86,15 @@ int	renderer_render(void *param)
 	static int	render_finished;
 
 	renderer = (t_renderer *)param;
+	if (n_samples_so_far == 0)
+		timeman(0);
 	if (n_samples_so_far >= renderer->n_samples)
 	{
 		if (!render_finished)
 		{
 			printf("\nRender finished.\n");
 			render_finished = 1;
+			timeman(1);
 			renderer_render_flush(renderer, n_samples_so_far);
 		}
 		return (0);
