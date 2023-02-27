@@ -1,24 +1,30 @@
+#include <math.h>
 #include "renderer.h"
 #include "number.h"
 
 static void	map_pixel_color(int *rgb, t_renderer *renderer, t_pixel *p, int n)
 {
-	const t_minmax	in = {0, n + 1};
+	const t_minmax	in = {0, 1};
 	const t_minmax	out = {0, 255};
 	int				i;
+	int				pixel_i;
+	double			val;
 
 	i = 0;
 	while (i < 3)
 	{
-		rgb[i] = map_minmax(renderer->disp->colors[
-				(renderer->disp->w * (renderer->disp->h - p->y - 1))
-				+ p->x].i[i], &in, &out);
-		rgb[i] = clamp_int(rgb[i], 0, 255);
+		pixel_i = (renderer->disp->w * (renderer->disp->h - p->y - 1)) + p->x;
+		val = renderer->disp->colors[pixel_i].i[i];
+		if (val != val)
+			val = 0.0;
+		val /= (n + 1);
+		val = sqrt(val);
+		val = map_minmax(val, &in, &out);
+		rgb[i] = clamp_int(val, 0, 255);
 		i++;
 	}
 }
 
-// TODO: gamma correction, NaN filtering
 void	renderer_write_color(t_renderer *renderer, int n_samples)
 {
 	t_pixel			p;
