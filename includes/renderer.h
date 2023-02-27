@@ -14,10 +14,10 @@ typedef struct s_renderer
 
 typedef struct s_renderinfo
 {
-	t_minmax			range;
-	t_color				emitted;
-	t_color				next_color;
-	t_hittable			*target;
+	t_minmax	range;
+	t_color		emitted;
+	t_color		next_color;
+	t_hittable	*target;
 }	t_renderinfo;
 
 int		renderer_init(t_renderer *renderer, const char *scene_path);
