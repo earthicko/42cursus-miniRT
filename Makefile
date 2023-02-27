@@ -142,6 +142,9 @@ test_material: tests/material.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 
 test_parser: tests/parser.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/parser.o -o $@ $(LDFLAGS)
+	
+test_tube: tests/tube.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/tube.o -o $@ $(LDFLAGS)
 
 -include $(DEP)
 
