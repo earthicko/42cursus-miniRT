@@ -148,6 +148,9 @@ test_material: tests/material.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 test_parser: tests/parser.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/parser.o -o $@ $(LDFLAGS)
 
+test_pointer_speed: tests/pointer_speed_compare.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/pointer_speed_compare.o -o $@ $(LDFLAGS)
+
 -include $(DEP)
 
 clean:
@@ -159,7 +162,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
-	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable
+	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable test_pointer_speed
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBMLX_DIR)
 
