@@ -113,8 +113,9 @@ int	renderer_render(void *param)
 		{
 			printf("\nRender finished.\n");
 			render_finished = 1;
-			mlx_put_image_to_window(renderer->disp->mlx, renderer->disp->win,
-				renderer->disp->img, 0, 0);
+			renderer_write_color(renderer, n_samples_so_far);
+			display_putimage(renderer->disp);
+			display_save_bmp(renderer->disp, "out.bmp");
 		}
 		return (0);
 	}
@@ -122,8 +123,7 @@ int	renderer_render(void *param)
 	if (n_samples_so_far % RENDERER_UPDATE_FREQ == 0)
 	{
 		renderer_write_color(renderer, n_samples_so_far);
-		mlx_put_image_to_window(renderer->disp->mlx, renderer->disp->win,
-			renderer->disp->img, 0, 0);
+		display_putimage(renderer->disp);
 	}
 	n_samples_so_far++;
 	return (0);

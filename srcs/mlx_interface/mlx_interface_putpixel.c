@@ -1,3 +1,4 @@
+#include "mlx.h"
 #include "mlx_interface.h"
 
 static void	display_putpixel_forreal(t_display *disp, t_pixel p)
@@ -34,4 +35,9 @@ void	display_putpixel(t_display *disp, t_pixel p)
 		}
 		x_offset++;
 	}
+}
+
+void	display_putimage(t_display *disp)
+{
+	mlx_put_image_to_window(disp->mlx, disp->win, disp->img, 0, 0);
 }

@@ -69,6 +69,7 @@ FILENAME		= \
 				mlx_interface/mlx_interface \
 				mlx_interface/mlx_interface_key \
 				mlx_interface/mlx_interface_putpixel \
+				mlx_interface/mlx_interface_saveimg \
 				camera/camera_init \
 				camera/camera_get_ray_at \
 				hittable/math_utils \
