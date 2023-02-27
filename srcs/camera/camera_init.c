@@ -23,6 +23,8 @@ void	camera_init_get_uvw(t_camera *cam, const t_camerainfo *info)
 
 	vec3_sub_vec3(&view_dir, &info->cam_start, &info->cam_end);
 	vec3_get_unit(&cam->w, &view_dir);
+	vec3_mult_num_inplace(&cam->w,
+		(double)info->pixel_h / (double)info->pixel_w);
 	vec3_cross_vec3(&up_dir, &info->cam_up, &cam->w);
 	vec3_get_unit(&cam->u, &up_dir);
 	vec3_cross_vec3(&cam->v, &cam->w, &cam->u);
