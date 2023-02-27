@@ -106,6 +106,7 @@ FILENAME		= \
 				scene/scene \
 				renderer/renderer \
 				renderer/renderer_init \
+				renderer/renderer_pixel \
 				renderer/renderer_write_color \
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
