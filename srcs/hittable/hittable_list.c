@@ -12,6 +12,8 @@ t_bool	hittable_list_hit(t_hittable *self,
 	int				i;
 
 	this = (t_hittable_list *)self;
+	if (hittable_has_bbox(self) && !this->bbox.hit(&this->bbox, r, &t))
+		return (FALSE);
 	hit_anything = FALSE;
 	i = 0;
 	while (i < this->elements->len)
@@ -25,6 +27,39 @@ t_bool	hittable_list_hit(t_hittable *self,
 		i++;
 	}
 	return (hit_anything);
+}
+
+void	hittable_list_update_bbox(t_hittable *self)
+{
+	t_hittable_list	*this;
+	int				i;
+
+	this = (t_hittable_list *)self;
+	if (this->elements->len == 0)
+	{
+		ft_bzero(&self->bbox, sizeof(t_bbox));
+		return ;
+	}
+	this->bbox = ((t_hittable *)ptrarr_get(this->elements, 0))->bbox;
+	i = 1;
+	while (i < this->elements->len)
+	{
+		bbox_init_surrounding(&this->bbox, &this->bbox,
+			&((t_hittable *)ptrarr_get(this->elements, i))->bbox);
+		i++;
+	}
+}
+
+int	hittable_list_append(t_hittable *self, t_hittable *item)
+{
+	t_hittable_list	*this;
+	int				stat;
+
+	this = (t_hittable_list *)self;
+	stat = ptrarr_append(this->elements, item);
+	if (stat == CODE_OK)
+		hittable_list_update_bbox(self);
+	return (stat);
 }
 
 t_hittable	*hittable_list_create(void)

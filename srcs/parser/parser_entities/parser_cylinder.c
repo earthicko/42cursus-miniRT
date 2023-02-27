@@ -38,8 +38,6 @@ t_bool	is_cylinder(const t_ptrarr *tokens)
 static int	add_cylinder(t_scene *scene, t_cylinder_info *info, t_material *m)
 {
 	t_hittable		*cylinder;
-	t_hittable_list	*world;
-	t_hittable_list	*objects;
 
 	cylinder = (t_hittable *)hittable_cylinder_create(info, m);
 	if (!cylinder)
@@ -49,10 +47,8 @@ static int	add_cylinder(t_scene *scene, t_cylinder_info *info, t_material *m)
 		free(cylinder);
 		return (CODE_ERROR_MALLOC);
 	}
-	world = (t_hittable_list *)scene->world;
-	objects = (t_hittable_list *)scene->objects;
-	if (ptrarr_append(world->elements, cylinder)
-		|| ptrarr_append(objects->elements, cylinder))
+	if (hittable_list_append(scene->world, cylinder)
+		|| hittable_list_append(scene->objects, cylinder))
 		return (CODE_ERROR_MALLOC);
 	return (CODE_OK);
 }

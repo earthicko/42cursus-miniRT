@@ -73,6 +73,7 @@ FILENAME		= \
 				camera/camera_init \
 				camera/camera_get_ray_at \
 				bounding_box/bounding_box_init \
+				hittable/hittable_methods \
 				hittable/math_utils \
 				hittable/hit_record_set_normal_and_face \
 				hittable/sphere \

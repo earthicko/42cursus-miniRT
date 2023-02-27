@@ -4,6 +4,7 @@
 #include "libft.h"
 #include "ptrarr.h"
 #include "msgdef.h"
+#include "print.h"
 #include "parser_internal.h"
 
 static t_bool	read_file_to_strarr_init(
@@ -97,5 +98,10 @@ int	parse_scene(const char *path, t_scene *scene)
 		((t_hittable_list *)scene->objects)->elements->len,
 		((t_hittable_list *)scene->world)->elements->len
 		- ((t_hittable_list *)scene->objects)->elements->len);
+	printf("\tworld: ");
+	print_bbox(&scene->world->bbox);
+	printf(" objects: ");
+	print_bbox(&scene->objects->bbox);
+	printf("\n");
 	return (stat);
 }
