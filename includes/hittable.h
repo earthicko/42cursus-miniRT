@@ -6,6 +6,7 @@
 # include "ptrarr.h"
 # include "ray.h"
 # include "material.h"
+# include "bounding_box.h"
 
 typedef struct s_material	t_material;
 
@@ -29,18 +30,17 @@ typedef t_bool				(*t_hittable_hit)(t_hittable *hittable,
 											const t_ray *r,
 											t_minmax t,
 											t_hit_record *rec);
-typedef t_bool				(*t_bounding_box)(void);
 
 typedef struct s_hittable
 {
 	t_hittable_hit	hit;
-	t_bounding_box	bounding_box;
+	t_bbox			bbox;
 }	t_hittable;
 
 typedef struct s_hittable_transform
 {
 	t_hittable_hit	hit;
-	t_bounding_box	bounding_box;
+	t_bbox			bbox;
 	t_hittable		*base;
 	t_mtx44			w_to_h;
 	t_mtx44			h_to_w;
@@ -49,7 +49,7 @@ typedef struct s_hittable_transform
 typedef struct s_hittable_sphere
 {
 	t_hittable_hit	hit;
-	t_bounding_box	bounding_box;
+	t_bbox			bbox;
 	t_material		*material;
 	double			radius;
 	t_point			center;
@@ -58,7 +58,7 @@ typedef struct s_hittable_sphere
 typedef struct s_hittable_plane
 {
 	t_hittable_hit	hit;
-	t_bounding_box	bounding_box;
+	t_bbox			bbox;
 	t_material		*material;
 	t_point			point;
 	t_vec3			norm;
@@ -67,7 +67,7 @@ typedef struct s_hittable_plane
 typedef struct s_hittable_tube
 {
 	t_hittable_hit	hit;
-	t_bounding_box	bounding_box;
+	t_bbox			bbox;
 	t_material		*material;
 	t_point			center_of_cylinder;
 	t_point			center_of_disk;
@@ -79,7 +79,7 @@ typedef struct s_hittable_tube
 typedef struct s_hittable_disk
 {
 	t_hittable_hit			hit;
-	t_bounding_box			bounding_box;
+	t_bbox					bbox;
 	t_material				*material;
 	t_hittable_plane		plane;
 	double					radius;
@@ -88,7 +88,7 @@ typedef struct s_hittable_disk
 typedef struct s_hittable_cylinder
 {
 	t_hittable_hit	hit;
-	t_bounding_box	bounding_box;
+	t_bbox			bbox;
 	t_material		*material;
 	t_hittable_tube	tube;
 	t_hittable_disk	disk[2];
@@ -111,7 +111,7 @@ enum	e_disk_of_cylinder
 typedef struct s_hittable_list
 {
 	t_hittable_hit	hit;
-	t_bounding_box	bounding_box;
+	t_bbox			bbox;
 	t_ptrarr		*elements;
 }	t_hittable_list;
 
@@ -130,5 +130,8 @@ t_hittable			*hittable_transform_create(t_hittable *base, \
 												double azi);
 
 void				hittable_list_destroy(t_hittable_list *list);
+
+t_bool				hittable_has_bbox(t_hittable *self);
+int					hittable_list_append(t_hittable *self, t_hittable *item);
 
 #endif

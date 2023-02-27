@@ -31,3 +31,19 @@ void	print_cylinder_info(const t_cylinder_info *info)
 	printf(", r %.2f h %.2f", info->radius, info->height);
 	printf(")");
 }
+
+void	print_bbox(const t_bbox *bbox)
+{
+	printf("bbox (");
+	if (bbox->hit == 0)
+	{
+		printf("empty");
+	}
+	else
+	{
+		print_vec3(&bbox->min);
+		printf(" -> ");
+		print_vec3(&bbox->max);
+	}
+	printf(")");
+}

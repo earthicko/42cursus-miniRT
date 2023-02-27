@@ -52,6 +52,8 @@ typedef struct s_display
 	char	*img_addr;
 	int		w;
 	int		h;
+	int		w_real;
+	int		h_real;
 	double	ratio;
 	int		n_pixels;
 	t_color	*colors;
@@ -64,5 +66,8 @@ t_display	*display_create(int width, int height, char *title);
 t_display	*display_destroy(t_display *disp);
 
 void		display_putpixel(t_display *disp, t_pixel p);
+void		display_putimage(t_display *disp);
+
+int			display_save_bmp(const t_display *disp, const char *path);
 
 #endif

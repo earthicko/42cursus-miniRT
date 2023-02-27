@@ -45,6 +45,7 @@ TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
 TESTER_DEP		= $(addprefix tests/, $(addsuffix .d, $(TESTER_FILENAME)))
 
 FILENAME		= \
+				timeman \
 				geometry/matrix_init \
 				geometry/multiply \
 				geometry/rotate \
@@ -69,8 +70,11 @@ FILENAME		= \
 				mlx_interface/mlx_interface \
 				mlx_interface/mlx_interface_key \
 				mlx_interface/mlx_interface_putpixel \
+				mlx_interface/mlx_interface_saveimg \
 				camera/camera_init \
 				camera/camera_get_ray_at \
+				bounding_box/bounding_box_init \
+				hittable/hittable_methods \
 				hittable/math_utils \
 				hittable/hit_record_set_normal_and_face \
 				hittable/sphere \
@@ -105,6 +109,7 @@ FILENAME		= \
 				scene/scene \
 				renderer/renderer \
 				renderer/renderer_init \
+				renderer/renderer_pixel \
 				renderer/renderer_write_color \
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
@@ -146,6 +151,9 @@ test_parser: tests/parser.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 test_tube: tests/tube.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/tube.o -o $@ $(LDFLAGS)
 
+test_pointer_speed: tests/pointer_speed_compare.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/pointer_speed_compare.o -o $@ $(LDFLAGS)
+
 -include $(DEP)
 
 clean:
@@ -157,7 +165,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
-	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable
+	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable test_pointer_speed
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBMLX_DIR)
 

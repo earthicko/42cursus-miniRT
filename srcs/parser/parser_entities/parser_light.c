@@ -55,8 +55,7 @@ static int	add_material_diffuse_light(t_scene *scene, t_color color)
 // TODO: remove casting to hittable* after return types get sorted out
 static int	add_light(t_scene *scene, t_point coord, t_material *m)
 {
-	t_hittable		*light;
-	t_hittable_list	*world;
+	t_hittable	*light;
 
 	light = (t_hittable *)hittable_sphere_create(
 			coord, LIGHT_DEFAULT_RADIUS, m);
@@ -67,8 +66,7 @@ static int	add_light(t_scene *scene, t_point coord, t_material *m)
 		free(light);
 		return (CODE_ERROR_MALLOC);
 	}
-	world = (t_hittable_list *)scene->world;
-	if (ptrarr_append(world->elements, light))
+	if (hittable_list_append(scene->world, light))
 		return (CODE_ERROR_MALLOC);
 	return (CODE_OK);
 }

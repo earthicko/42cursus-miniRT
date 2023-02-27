@@ -6,13 +6,6 @@ void	test_vec3_sub_vec3(void);
 void	test_vec3_dot_cross(void);
 void	test_vec3_mult(void);
 
-void	vec3_setval(t_vec3 *vec, double a, double b, double c)
-{
-	vec->i[0] = a;
-	vec->i[1] = b;
-	vec->i[2] = c;
-}
-
 void	test_vec3_rand(void)
 {
 	t_vec3	out;

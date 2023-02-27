@@ -35,6 +35,8 @@ t_bool	hit_sphere(t_hittable *hittable,
 	double				coef[3];
 	double				root;
 
+	if (!hittable->bbox.hit(&hittable->bbox, ray, &t))
+		return (FALSE);
 	this = (t_hittable_sphere *)hittable;
 	vec3_sub_vec3(&oa, &ray->orig, &this->center);
 	coef[A] = vec3_dot_vec3(&ray->dir, &ray->dir);
@@ -57,6 +59,9 @@ t_hittable_sphere	*hittable_sphere_create(
 								t_material *material)
 {
 	t_hittable_sphere	*sphere;
+	t_point				min;
+	t_point				max;
+	t_vec3				rad;
 
 	sphere = malloc(sizeof(t_hittable_sphere));
 	if (!sphere)
@@ -66,5 +71,9 @@ t_hittable_sphere	*hittable_sphere_create(
 	sphere->material = material;
 	sphere->radius = radius;
 	sphere->center = center;
+	vec3_setval(&rad, radius, radius, radius);
+	vec3_sub_vec3(&min, &center, &rad);
+	vec3_add_vec3(&max, &center, &rad);
+	bbox_init(&sphere->bbox, min, max);
 	return (sphere);
 }	

@@ -13,5 +13,6 @@ void	print_camera(const t_camera *cam);
 void	print_hit_record(const t_hit_record *rec);
 void	print_scatter_record(const t_scatter_record *rec);
 void	print_cylinder_info(const t_cylinder_info *info);
+void	print_bbox(const t_bbox *bbox);
 
 #endif
