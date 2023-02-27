@@ -11,6 +11,7 @@ void	renderer_write_color(t_renderer *renderer, int n_samples);
 static void	init_renderer_render_ray(
 		t_renderer *renderer, t_renderinfo *info, int depth)
 {
+	vec3_setval(&info->next_color, 0, 0, 0);
 	info->range.min = DOUBLE_E;
 	info->range.max = DOUBLE_INF;
 	if (depth == renderer->max_depth)
