@@ -17,7 +17,7 @@ static t_bool	root_is_out_of_range(t_hittable_tube *tube, t_hit_record *rec)
 	// printf("dist p to center_of_cylinder: %.2f\n", dist_sq(&rec->p, &tube->center_of_cylinder));
 	if (dist_sq(&rec->p, &tube->center_of_cylinder) > max_dist_sq)
 		return (TRUE);
-	ft_printf("tube root is in range\n");
+	// ft_printf("tube root is in range\n");
 	return (FALSE);
 }
 
@@ -70,17 +70,17 @@ t_bool	hit_tube(t_hittable *hittable,
 	
 	// 아니 대체 왜 ray만 두번 프린트되는거지 밑에 hit_record는 왜 프린트 안되지? 
 	// equation이 false일 수가 있나? 말이 되냐고
-	print_ray(ray);
+	// print_ray(ray);
 	//printf("\n");
-	printf("\n");
+	// printf("\n");
 	//printf("(A, B, C) is (%.2f, %.2f, %.2f)\n", coef[A], coef[B], coef[C]);
 	if (solve_quadratic_equation(t, coef, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);
 	rec->is_front = TRUE;
-	print_hit_record(rec);
-	printf("\n\n");
+	// print_hit_record(rec);
+	// printf("\n\n");
 	if (root_is_out_of_range(this, rec))
 		return (FALSE);
 	rec->material = this->material;

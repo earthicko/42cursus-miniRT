@@ -19,7 +19,7 @@ t_bool	hit_cylinder(t_hittable *hittable,
 	this = (t_hittable_cylinder *)hittable;
 	if (this->tube.hit((t_hittable *)&this->tube, ray, t, rec))
 	{
-		ft_printf("hit tube\n");
+		// ft_printf("hit tube\n");
 		t.max = rec->t;
 	}
 	
