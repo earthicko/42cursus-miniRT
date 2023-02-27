@@ -52,6 +52,8 @@ typedef struct s_display
 	char	*img_addr;
 	int		w;
 	int		h;
+	int		w_real;
+	int		h_real;
 	double	ratio;
 	int		n_pixels;
 	t_color	*colors;
