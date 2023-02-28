@@ -1,13 +1,21 @@
 #include <stdlib.h>
+#include "libft.h"
 #include "texture_internal.h"
 
-t_texture	*texture_checker_create(t_texture *a, t_texture *b, double freq)
+t_texture	*texture_checker_create(const char *name,
+				t_texture *a, t_texture *b, double freq)
 {
 	t_texture_checker	*out;
 
 	out = malloc(sizeof(t_texture_checker));
 	if (!out)
 		return (NULL);
+	out->name = ft_strdup(name);
+	if (!out->name)
+	{
+		free(out);
+		return (NULL);
+	}
 	out->get_color_at = texture_checker_get_color_at;
 	out->a = a;
 	out->b = b;

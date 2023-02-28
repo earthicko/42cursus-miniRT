@@ -6,7 +6,7 @@ int	add_texture_solid(t_scene *scene, t_color color)
 {
 	t_texture	*solid;
 
-	solid = texture_solid_create(color);
+	solid = texture_solid_create("", color);
 	if (!solid)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.textures, solid))
