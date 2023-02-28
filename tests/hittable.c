@@ -18,7 +18,7 @@ int	main(void)
 	info.axis = norm;
 	info.height = 10;
 	info.radius = 5;
-	info.center = point;
+	info.center_of_cylinder = point;
 	cylinder = hittable_cylinder_create(&info, 0);
 	(void)cylinder;
 	return (0);

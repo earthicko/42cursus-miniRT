@@ -25,7 +25,7 @@ void	print_scatter_record(const t_scatter_record *rec)
 void	print_cylinder_info(const t_cylinder_info *info)
 {
 	printf("cylinder (center ");
-	print_vec3(&info->center);
+	print_vec3(&info->center_of_cylinder);
 	printf(", axis ");
 	print_vec3(&info->axis);
 	printf(", r %.2f h %.2f", info->radius, info->height);

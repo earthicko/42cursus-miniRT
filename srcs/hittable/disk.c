@@ -11,6 +11,7 @@ static t_bool	root_is_out_of_range(t_hittable_disk *disk, t_hit_record *rec)
 	return (FALSE);
 }
 
+// TODO: hit 함수들 static으로 수정해볼 것
 t_bool	hit_disk(t_hittable *hittable,
 					const t_ray *ray,
 					t_minmax t,
@@ -36,9 +37,9 @@ t_bool	hit_disk(t_hittable *hittable,
 
 // TODO: wgcc에서 shift 초기화 안해서 에러뱉을수도
 void	set_disk_of_cylinder(t_hittable_disk *disk,
-									t_cylinder_info *cylinder_info,
-									t_material *material,
-									int disk_type)
+								t_cylinder_info *cylinder_info,
+								t_material *material,
+								int disk_type)
 {
 	t_vec3	axis_inverse;
 	t_vec3	shift;
@@ -53,7 +54,7 @@ void	set_disk_of_cylinder(t_hittable_disk *disk,
 		vec3_mult_num(&axis_inverse, &cylinder_info->axis, -1);
 		vec3_mult_num(&shift, &axis_inverse, cylinder_info->height / 2);
 	}
-	disk->plane.point = cylinder_info->center;
+	disk->plane.point = cylinder_info->center_of_cylinder;
 	vec3_add_vec3_inplace(&disk->plane.point, &shift);
 	disk->plane.norm = cylinder_info->axis;
 	disk->radius = cylinder_info->radius;
