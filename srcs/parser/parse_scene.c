@@ -13,7 +13,7 @@ static t_bool	read_file_to_strarr_init(
 	*arr = ptrarr_create();
 	if (!(*arr))
 	{
-		ft_dprintf(2, "%s: "MSG_MALLOC"\n", EXEC_NAME);
+		printf("%s: "MSG_MALLOC"\n", EXEC_NAME);
 		return (FALSE);
 	}
 	*fd = open(path, O_RDONLY);
