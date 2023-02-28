@@ -19,10 +19,11 @@ char	*tokenname_manager(int i)
 
 t_wordtester	wordtester_manager(int i)
 {
-	static const t_wordtester	testers[3] = {
+	static const t_wordtester	testers[4] = {
 		is_identifier,
 		is_number,
-		is_comma
+		is_comma,
+		is_word
 	};
 
 	if (i < 0 || i >= N_TOKENTYPE)

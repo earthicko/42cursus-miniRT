@@ -32,13 +32,14 @@
 # define IDENTIFIER_NAME_SPHERE				"Sphere"
 # define IDENTIFIER_NAME_PLANE				"Plane"
 # define IDENTIFIER_NAME_CYLINDER			"Cylinder"
-# define N_TOKENTYPE 3
+# define N_TOKENTYPE 4
 
 typedef enum e_tokentype
 {
 	TOKENTYPE_IDENTIFIER = 0,
 	TOKENTYPE_NUMBER,
-	TOKENTYPE_COMMA
+	TOKENTYPE_COMMA,
+	TOKENTYPE_WORD
 }	t_tokentype;
 
 typedef t_bool		(*t_wordtester)(const char *word);
@@ -57,6 +58,7 @@ void				print_tokens(const t_ptrarr *tokens);
 t_bool				is_identifier(const char *word);
 t_bool				is_number(const char *word);
 t_bool				is_comma(const char *word);
+t_bool				is_word(const char *word);
 t_bool				is_in_pattern(
 						const char *identifier,
 						const int *pattern,
