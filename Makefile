@@ -114,6 +114,7 @@ FILENAME		= \
 				parser/builder/build_plane \
 				parser/builder/build_cylinder \
 				parser/builder/build_texture_solid \
+				parser/builder/build_texture_checker \
 				scene/create \
 				scene/search \
 				renderer/render \

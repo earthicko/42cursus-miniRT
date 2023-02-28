@@ -32,7 +32,8 @@ t_patternmatcher	common_patternmatcher_manager(int i)
 		is_sphere,
 		is_plane,
 		is_cylinder,
-		is_texture_solid
+		is_texture_solid,
+		is_texture_checker
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)
@@ -47,7 +48,8 @@ t_builder	common_builder_manager(int i)
 		build_sphere,
 		build_plane,
 		build_cylinder,
-		build_texture_solid
+		build_texture_solid,
+		build_texture_checker
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)
