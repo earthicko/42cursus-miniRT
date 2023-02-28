@@ -39,6 +39,7 @@ TESTER_FILENAME	= \
 				texture \
 				material \
 				parser \
+				tube \
 
 TESTER_SRC		= $(addprefix tests/, $(addsuffix .c, $(TESTER_FILENAME)))
 TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
