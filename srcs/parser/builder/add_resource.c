@@ -21,7 +21,7 @@ int	add_material_lambertian(t_scene *scene, t_texture *texture)
 {
 	t_material	*lambertian;
 
-	lambertian = material_lambertian_create(texture);
+	lambertian = material_lambertian_create("", texture);
 	if (!lambertian)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.materials, lambertian))

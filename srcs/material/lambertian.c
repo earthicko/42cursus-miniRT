@@ -3,13 +3,20 @@
 #include "geometry.h"
 #include "material_internal.h"
 
-t_material	*material_lambertian_create(t_texture *albedo)
+t_material	*material_lambertian_create(const char *name, t_texture *albedo)
 {
 	t_material_lambertian	*out;
 
 	out = malloc(sizeof(t_material_lambertian));
 	if (!out)
 		return (NULL);
+	out->name = ft_strdup(name);
+	if (!out->name)
+	{
+		free(out);
+		return (NULL);
+	}
+	out->destroy = material_destroy;
 	out->emit = material_emit;
 	out->scatter = material_lambertian_scatter;
 	out->albedo = albedo;

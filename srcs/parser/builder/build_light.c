@@ -41,7 +41,8 @@ static int	add_material_diffuse_light(t_scene *scene, t_color color)
 	vec3_mult_num_inplace(&color, LIGHT_DEFAULT_INTENSITY);
 	if (add_texture_solid(scene, color))
 		return (CODE_ERROR_MALLOC);
-	light = material_diffuse_light_create(ptrarr_getlast(scene->res.textures));
+	light = material_diffuse_light_create("",
+			ptrarr_getlast(scene->res.textures));
 	if (!light)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.materials, light))

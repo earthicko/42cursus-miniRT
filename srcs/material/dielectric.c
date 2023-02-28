@@ -5,13 +5,20 @@
 #include "number.h"
 #include "material_internal.h"
 
-t_material	*material_dielectric_create(double ior)
+t_material	*material_dielectric_create(const char *name, double ior)
 {
 	t_material_dielectric	*out;
 
 	out = malloc(sizeof(t_material_dielectric));
 	if (!out)
 		return (NULL);
+	out->name = ft_strdup(name);
+	if (!out->name)
+	{
+		free(out);
+		return (NULL);
+	}
+	out->destroy = material_destroy;
 	out->emit = material_emit;
 	out->scatter = material_dielectric_scatter;
 	out->ior = ior;
