@@ -57,7 +57,7 @@ int	build_cylinder(const t_ptrarr *tokens, t_scene *scene)
 	t_cylinder_info	info;
 	t_color			color;
 
-	build_vector(&info.center, &tokens->data[1]);
+	build_vector(&info.center_of_cylinder, &tokens->data[1]);
 	build_vector(&info.axis, &tokens->data[6]);
 	info.radius = ft_atof(tokens->data[11]) / 2;
 	info.height = ft_atof(tokens->data[12]);

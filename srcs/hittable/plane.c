@@ -1,10 +1,23 @@
 #include <stdlib.h>
+#include <math.h>
 #include "libft.h"
 #include "material.h"
 #include "geometry.h"
+#include "number.h"
 #include "hittable_internal.h"
 
-// TODO: outward_norm 필요성, 필요하긴 할듯. one weekend ray_color 함수읽고 판단할 것
+static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
+													t_vec3 *norm)
+{
+	if (fabs(vec3_dot_vec3(&ray->dir, norm)) < DOUBLE_E)
+		return (TRUE);
+	return (FALSE);
+}
+
+/*
+	This function needs to solve equation system of plane and straight line. 
+	See the comment of the solver_equation_system_plane_and_line for details.
+*/
 t_bool	hit_plane(t_hittable *hittable,
 					const t_ray *ray,
 					t_minmax t,
@@ -15,7 +28,9 @@ t_bool	hit_plane(t_hittable *hittable,
 	double				root;
 
 	this = (t_hittable_plane *)hittable;
-	if (solve_equation_system_plane_and_line(t, this, ray, &root) == FALSE)
+	if (ray_and_outward_norm_perpendicular(ray, &this->norm))
+		return (FALSE);
+	if (solver_equation_system_plane_and_line(t, this, ray, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);

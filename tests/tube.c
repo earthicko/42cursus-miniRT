@@ -14,7 +14,7 @@ static void	init_cylinder_info(t_cylinder_info *info,
 								double h,
 								double r)
 {
-	info->center = center;
+	info->center_of_cylinder = center;
 	info->axis = axis;
 	info->height = h;
 	info->radius = r;

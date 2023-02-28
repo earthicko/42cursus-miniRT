@@ -10,6 +10,8 @@
 
 typedef struct s_material	t_material;
 
+/******* hit_record *******/
+
 typedef struct s_hit_record
 {
 	t_point		p;
@@ -24,12 +26,15 @@ void				hit_record_set_normal_and_face(t_hit_record *rec, \
 													const t_ray *ray, \
 													const t_vec3 *normal);
 
+
+/******* hittable abstract struct *******/
+
 typedef struct s_hittable	t_hittable;
 
 typedef t_bool				(*t_hittable_hit)(t_hittable *hittable,
-											const t_ray *r,
-											t_minmax t,
-											t_hit_record *rec);
+												const t_ray *r,
+												t_minmax t,
+												t_hit_record *rec);
 
 typedef struct s_hittable
 {
@@ -45,6 +50,9 @@ typedef struct s_hittable_transform
 	t_mtx44			w_to_o;
 	t_mtx44			o_to_w;
 }	t_hittable_transform;
+
+
+/******* hittable real objects struct *******/
 
 typedef struct s_hittable_sphere
 {
@@ -96,7 +104,7 @@ typedef struct s_hittable_cylinder
 
 typedef struct s_cylinder_info
 {
-	t_point	center;
+	t_point	center_of_cylinder;
 	t_vec3	axis;
 	double	height;
 	double	radius;
@@ -109,6 +117,7 @@ typedef struct s_hittable_conical_hat
 	t_material		*material;
 	t_point			center_of_disk;
 	t_vec3			axis;
+	t_point			apex;
 	double			height;
 	double			radius;
 }	t_hittable_conical_hat;
@@ -122,6 +131,14 @@ typedef struct s_hittable_cone
 	t_hittable_conical_hat	conical_hat;
 }	t_hittable_cone;
 
+typedef struct s_cone_info
+{
+	t_point	center_of_disk;
+	t_vec3	axis;
+	double	height;
+	double	radius;
+}	t_cone_info;
+
 enum	e_disk_of_cylinder
 {
 	TOP = 0,
@@ -134,6 +151,9 @@ typedef struct s_hittable_list
 	t_bbox			bbox;
 	t_ptrarr		*elements;
 }	t_hittable_list;
+
+
+/******* hittable objects constructor, destructor *******/
 
 t_hittable			*hittable_sphere_create(t_point center, \
 											double radius, \
