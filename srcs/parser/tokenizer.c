@@ -78,7 +78,7 @@ t_ptrarr	*tokenize(const char *line)
 	}
 	if (fill_tokens(line, arr))
 	{
-		ptrarr_destroy(arr, TRUE);
+		ptrarr_destroy(arr, destroy_pchar);
 		printf("%s: "MSG_MALLOC"\n", EXEC_NAME);
 		return (NULL);
 	}

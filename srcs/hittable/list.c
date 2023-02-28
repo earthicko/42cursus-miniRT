@@ -82,6 +82,6 @@ t_hittable	*hittable_list_create(void)
 
 void	hittable_list_destroy(t_hittable_list *list)
 {
-	ptrarr_destroy(list->elements, FALSE);
+	ptrarr_destroy(list->elements, NULL);
 	free(list);
 }

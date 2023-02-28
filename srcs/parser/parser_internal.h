@@ -65,6 +65,7 @@ t_bool				is_in_pattern(
 						const int patternlen,
 						const t_ptrarr *tokens);
 
+void				destroy_pchar(void *pchar);
 int					parse_line(
 						const char *line,
 						t_scene *scene,
