@@ -74,14 +74,14 @@ static t_bool	root_is_out_of_range(t_hittable_tube *tube, t_hit_record *rec)
 	  where the pq_vec and the axis_vec are perpendicular. 
 
 	Line by axis: C_point + t * axis_vec (different from ray)
-				  The given point C is the center of the disk.
-	
+	   The given point C is the center of the disk.
+
 	We'll calculate the value of 't' to find point q. 
 	Equation system:
-	(Q - P) * axis_vec = 0
+	  (Q - P) * axis_vec = 0
 	  (C + t * axis_vec - P) * axis_vec = 0
 	Solution:
-	t= (P - C) * axis_vec / axis_vec * axis_vec 
+	  t= (P - C) * axis_vec / axis_vec * axis_vec 
 	So, the vector qp is the outward_norm. (That's what we want!)
 */
 static void	tube_hit_record_set_normal_and_face(t_hittable_tube *tube,
@@ -110,16 +110,12 @@ static void	tube_hit_record_set_normal_and_face(t_hittable_tube *tube,
 	We can get quadratic equation for 't' by aligning this equation system.
 	See the comment of the set_coefficient for details.
 */
-
-// TODO: ray_and_norm_are_perpendicular 함수 따로 뺄 것
-// TODO: 다른 객체들은 충돌시키기 전에 수직인지 미리 아는 방법이 없기에 교점 구한 후 확인
 t_bool	hit_tube(t_hittable *hittable,
 					const t_ray *ray,
 					t_minmax t,
 					t_hit_record *rec)
 {
 	t_hittable_tube	*this;
-	t_vec3			dir_cross_axis;
 	double			coef[3];
 	double			root;
 
@@ -136,22 +132,4 @@ t_bool	hit_tube(t_hittable *hittable,
 	rec->material = this->material;
 	tube_hit_record_set_normal_and_face(this, rec, ray);
 	return (TRUE);
-}
-
-// shift: add shift to center_of_cylinder to get center_of_disk
-void	set_tube_of_cylinder(t_hittable_tube *tube,
-								t_cylinder_info *cylinder_info,
-								t_material *material)
-{
-	t_vec3	shift;
-
-	tube->hit = hit_tube;
-	tube->material = material;
-	tube->center_of_disk = cylinder_info->center_of_cylinder;
-	vec3_mult_num(&shift, &cylinder_info->axis, cylinder_info->height / 2);
-	vec3_add_vec3_inplace(&tube->center_of_disk, &shift);
-	tube->center_of_cylinder = cylinder_info->center_of_cylinder;
-	tube->axis = cylinder_info->axis;
-	tube->height = cylinder_info->height;
-	tube->radius = cylinder_info->radius;
 }

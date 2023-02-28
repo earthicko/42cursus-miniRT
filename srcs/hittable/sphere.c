@@ -5,6 +5,19 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
+
+static void	set_coefficient(double coef[3],
+							t_hittable_sphere *sphere,
+							const t_ray *ray)
+{
+	t_vec3				oa;
+
+	vec3_sub_vec3(&oa, &ray->orig, &sphere->center);
+	coef[A] = vec3_dot_vec3(&ray->dir, &ray->dir);
+	coef[B] = 2 * vec3_dot_vec3(&oa, &ray->dir);
+	coef[C] = vec3_dot_vec3(&oa, &oa) - pow(sphere->radius, 2);
+}
+
 // TODO: radius 0, 혹은 거의 0인 경우에 대한 예외처리, 파싱단에서 처리하는게 나을듯
 // TODO: 필요시 uv 좌표 계산식 추가, the next weekend
 // TODO: 직선의 방향벡터가 정규화(길이 1로 설정)되지 않았을 때도 성립하는지 체크
@@ -32,7 +45,6 @@ t_bool	hit_sphere(t_hittable *hittable,
 					t_hit_record *rec)
 {
 	t_hittable_sphere	*this;
-	t_vec3				oa;
 	t_vec3				outward_norm;
 	double				coef[3];
 	double				root;
@@ -40,6 +52,7 @@ t_bool	hit_sphere(t_hittable *hittable,
 	if (!hittable->bbox.hit(&hittable->bbox, ray, &t))
 		return (FALSE);
 	this = (t_hittable_sphere *)hittable;
+	set_coefficient(coef, this, ray);
 	if (solver_quadratic_equation(t, coef, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
