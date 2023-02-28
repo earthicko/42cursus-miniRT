@@ -42,8 +42,8 @@ typedef struct s_hittable_transform
 	t_hittable_hit	hit;
 	t_bbox			bbox;
 	t_hittable		*base;
-	t_mtx44			w_to_h;
-	t_mtx44			h_to_w;
+	t_mtx44			w_to_o;
+	t_mtx44			o_to_w;
 }	t_hittable_transform;
 
 typedef struct s_hittable_sphere

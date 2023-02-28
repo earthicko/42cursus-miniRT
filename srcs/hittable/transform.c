@@ -11,11 +11,11 @@ t_bool	hittable_transform_hit(t_hittable *self,
 	t_ray					r_trans;
 
 	this = (t_hittable_transform *)self;
-	ray_multiply_m44(&r_trans, r, &this->w_to_h);
+	ray_multiply_m44(&r_trans, r, &this->w_to_o);
 	if (!this->base->hit(this->base, &r_trans, t, rec))
 		return (FALSE);
-	vec3_multiply_m44_inplace(&rec->p, &this->h_to_w);
-	vec3_multiply_m44_inplace(&rec->normal, &this->h_to_w);
+	vec3_multiply_m44_inplace(&rec->p, &this->o_to_w);
+	vec3_multiply_m44_inplace(&rec->normal, &this->o_to_w);
 	hit_record_set_normal_and_face(rec, &r_trans, &rec->normal);
 	return (TRUE);
 }
@@ -29,7 +29,7 @@ static t_point	get_corner(t_hittable_transform *this,
 		targets[(i & 1) == 0]->i[0],
 		targets[(i & 2) == 0]->i[1],
 		targets[(i & 4) == 0]->i[2]);
-	vec3_multiply_m44_inplace(&corner, &this->h_to_w);
+	vec3_multiply_m44_inplace(&corner, &this->o_to_w);
 	return (corner);
 }
 
@@ -58,13 +58,13 @@ static void	hittable_transform_init_bbox(t_hittable_transform *this)
 	bbox_init(&this->bbox, min, max);
 }
 
-static void	hittable_transform_init_h_to_w(t_mtx44 *h_to_w,
+static void	hittable_transform_init_o_to_w(t_mtx44 *o_to_w,
 				t_point orig, double ele, double azi)
 {
-	m44_init_identity(h_to_w);
-	m44_rotate_inplace(h_to_w, AXIS_X, ele);
-	m44_rotate_inplace(h_to_w, AXIS_Y, azi);
-	m44_translate_inplace(h_to_w, &orig);
+	m44_init_identity(o_to_w);
+	m44_rotate_inplace(o_to_w, AXIS_X, ele);
+	m44_rotate_inplace(o_to_w, AXIS_Y, azi);
+	m44_translate_inplace(o_to_w, &orig);
 }
 
 t_hittable	*hittable_transform_create(t_hittable *base,
@@ -80,8 +80,8 @@ t_hittable	*hittable_transform_create(t_hittable *base,
 	transform->base = base;
 	ele = deg_to_rad(ele);
 	azi = deg_to_rad(azi);
-	hittable_transform_init_h_to_w(&transform->h_to_w, orig, ele, azi);
-	m44_get_inverse(&transform->w_to_h, &transform->h_to_w);
+	hittable_transform_init_o_to_w(&transform->o_to_w, orig, ele, azi);
+	m44_get_inverse(&transform->w_to_o, &transform->o_to_w);
 	hittable_transform_init_bbox(transform);
 	return ((t_hittable *)transform);
 }
