@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "print.h"
-#include "parser_entities_internal.h"
+#include "builder_internal.h"
 
 /*
 		pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
@@ -54,9 +54,9 @@ int	build_plane(const t_ptrarr *tokens, t_scene *scene)
 	t_vec3	norm;
 	t_color	color;
 
-	parse_vector(&p, &tokens->data[1]);
-	parse_vector(&norm, &tokens->data[6]);
-	parse_vector(&color, &tokens->data[11]);
+	build_vector(&p, &tokens->data[1]);
+	build_vector(&norm, &tokens->data[6]);
+	build_vector(&color, &tokens->data[11]);
 	if (is_invalid_normalized_vec3(&norm), is_invalid_color(&color))
 		return (CODE_ERROR_DATA);
 	map_color(&color);

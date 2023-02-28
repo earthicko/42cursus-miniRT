@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "libft.h"
 #include "print.h"
-#include "parser_entities_internal.h"
+#include "builder_internal.h"
 
 /*
 		A 0.2 255,255,255
@@ -35,7 +35,7 @@ int	build_ambient_lighting(const t_ptrarr *tokens, t_scene *scene)
 	ratio = ft_atof(tokens->data[1]);
 	if (is_invalid_ratio(ratio))
 		return (CODE_ERROR_DATA);
-	parse_vector(&color, &tokens->data[2]);
+	build_vector(&color, &tokens->data[2]);
 	if (is_invalid_color(&color))
 		return (CODE_ERROR_DATA);
 	map_color(&color);

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "libft.h"
 #include "print.h"
-#include "parser_entities_internal.h"
+#include "builder_internal.h"
 
 /*
 		cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
@@ -58,11 +58,11 @@ int	build_cylinder(const t_ptrarr *tokens, t_scene *scene)
 	t_cylinder_info	info;
 	t_color			color;
 
-	parse_vector(&info.center, &tokens->data[1]);
-	parse_vector(&info.axis, &tokens->data[6]);
+	build_vector(&info.center, &tokens->data[1]);
+	build_vector(&info.axis, &tokens->data[6]);
 	info.radius = ft_atof(tokens->data[11]) / 2;
 	info.height = ft_atof(tokens->data[12]);
-	parse_vector(&color, &tokens->data[13]);
+	build_vector(&color, &tokens->data[13]);
 	if (is_invalid_normalized_vec3(&info.axis) || is_invalid_color(&color))
 		return (CODE_ERROR_DATA);
 	map_color(&color);

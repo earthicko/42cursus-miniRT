@@ -55,30 +55,6 @@ t_ptrarr	*read_file_to_strarr(const char *path)
 	}
 }
 
-/*
-	returns TRUE if line matches pattern, FALSE if doesn't,
-	negative if error occurs.
-*/
-int	parse_line(const char *line, t_scene *scene,
-	t_patternmatcher tester, t_builder builder)
-{
-	t_ptrarr	*tokens;
-	int			stat;
-
-	tokens = tokenize(line);
-	if (!tokens)
-		return (CODE_ERROR_MALLOC);
-	stat = FALSE;
-	if (tester(tokens))
-	{
-		stat = builder(tokens, scene);
-		if (!stat)
-			stat = TRUE;
-	}
-	ptrarr_destroy(tokens, TRUE);
-	return (stat);
-}
-
 int	parse_scene(const char *path, t_scene *scene)
 {
 	int			stat;
@@ -87,7 +63,7 @@ int	parse_scene(const char *path, t_scene *scene)
 	lines = read_file_to_strarr(path);
 	if (!lines)
 		return (CODE_ERROR_IO);
-	stat = parse_entities(lines, scene);
+	stat = parse_lines(lines, scene);
 	ptrarr_destroy(lines, TRUE);
 	printf("%s: parsing complete. results:\n", __func__);
 	printf("\t%d primitives, %d materials, %d textures\n",

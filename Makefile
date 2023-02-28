@@ -59,58 +59,59 @@ FILENAME		= \
 				geometry/vec3_reflect_refract \
 				geometry/vec3_utils1 \
 				geometry/vec3_utils2 \
-				ray \
+				ray/utils \
 				number/random \
 				number/degree \
-				number/number_utils \
-				ptrarr/ptrarr \
-				ptrarr/ptrarr_get \
+				number/utils \
+				ptrarr/create \
+				ptrarr/getter \
 				print/print0 \
 				print/print1 \
-				mlx_interface/mlx_interface \
-				mlx_interface/mlx_interface_key \
-				mlx_interface/mlx_interface_putpixel \
-				mlx_interface/mlx_interface_saveimg \
-				camera/camera_init \
-				camera/camera_get_ray_at \
-				bounding_box/bounding_box_init \
-				hittable/hittable_methods \
+				mlx_interface/create \
+				mlx_interface/key_interface \
+				mlx_interface/putpixel \
+				mlx_interface/saveimg \
+				camera/init \
+				camera/get_ray_at \
+				bounding_box/init \
+				hittable/methods \
 				hittable/math_utils \
 				hittable/hit_record_set_normal_and_face \
 				hittable/sphere \
 				hittable/plane \
-				hittable/cylinder_disk \
-				hittable/cylinder_tube \
+				hittable/disk \
+				hittable/tube \
 				hittable/cylinder \
-				hittable/hittable_list \
-				hittable/hittable_transform \
-				material/material_diffuse_light \
-				material/material_metal \
-				material/material_dielectric \
-				material/material_lambertian \
-				material/material \
-				texture/texture_solid \
-				texture/texture_checker \
-				parser/parser \
-				parser/parser_managers1 \
-				parser/parser_managers2 \
-				parser/parser_tokenizer \
-				parser/parser_get_tokentype \
-				parser/parser_entities/parser_entities \
-				parser/parser_entities/parser_add_resource \
-				parser/parser_entities/parser_utils \
-				parser/parser_entities/parser_checkrange \
-				parser/parser_entities/parser_ambient_lighting \
-				parser/parser_entities/parser_camera \
-				parser/parser_entities/parser_light \
-				parser/parser_entities/parser_sphere \
-				parser/parser_entities/parser_plane \
-				parser/parser_entities/parser_cylinder \
-				scene/scene \
-				renderer/renderer \
-				renderer/renderer_init \
-				renderer/renderer_pixel \
-				renderer/renderer_write_color \
+				hittable/list \
+				hittable/transform \
+				material/diffuse_light \
+				material/metal \
+				material/dielectric \
+				material/lambertian \
+				material/methods \
+				texture/solid \
+				texture/checker \
+				parser/parse_scene \
+				parser/managers1 \
+				parser/managers2 \
+				parser/tokenizer \
+				parser/get_tokentype \
+				parser/parse_lines \
+				parser/parse_line \
+				parser/builder/add_resource \
+				parser/builder/utils \
+				parser/builder/checkrange \
+				parser/builder/build_ambient_lighting \
+				parser/builder/build_camera \
+				parser/builder/build_light \
+				parser/builder/build_sphere \
+				parser/builder/build_plane \
+				parser/builder/build_cylinder \
+				scene/create \
+				renderer/render \
+				renderer/init \
+				renderer/render_pixel \
+				renderer/write_color \
 
 SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix srcs/, $(addsuffix .o, $(FILENAME)))

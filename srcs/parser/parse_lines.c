@@ -1,7 +1,7 @@
 #include "libft.h"
 #include "ptrarr.h"
 #include "msgdef.h"
-#include "parser_entities_internal.h"
+#include "parser_internal.h"
 
 /*
 	returns TRUE if line matches one of unique entities,
@@ -92,7 +92,7 @@ static t_bool	all_unique_entities_found(t_bool *map)
 	return (TRUE);
 }
 
-int	parse_entities(const t_ptrarr *lines, t_scene *scene)
+int	parse_lines(const t_ptrarr *lines, t_scene *scene)
 {
 	int			i;
 	int			stat;

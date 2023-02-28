@@ -2,7 +2,7 @@
 #include "libft.h"
 #include "mlx_interface.h"
 #include "print.h"
-#include "parser_entities_internal.h"
+#include "builder_internal.h"
 
 /*
 		C -50.0,0,20 0,0,1 70
@@ -54,8 +54,8 @@ int	build_camera(const t_ptrarr *tokens, t_scene *scene)
 	double			fov;
 	t_camerainfo	info;
 
-	parse_vector(&viewpoint, &tokens->data[1]);
-	parse_vector(&viewdir, &tokens->data[6]);
+	build_vector(&viewpoint, &tokens->data[1]);
+	build_vector(&viewdir, &tokens->data[6]);
 	if (is_invalid_normalized_vec3(&viewdir))
 		return (CODE_ERROR_DATA);
 	fov = ft_atof(tokens->data[11]);
