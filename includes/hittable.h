@@ -10,6 +10,8 @@
 
 typedef struct s_material	t_material;
 
+/******* hit_record *******/
+
 typedef struct s_hit_record
 {
 	t_point		p;
@@ -23,6 +25,9 @@ typedef struct s_hit_record
 void				hit_record_set_normal_and_face(t_hit_record *rec, \
 													const t_ray *ray, \
 													const t_vec3 *normal);
+
+
+/******* hittable abstract struct *******/
 
 typedef struct s_hittable	t_hittable;
 
@@ -45,6 +50,9 @@ typedef struct s_hittable_transform
 	t_mtx44			w_to_h;
 	t_mtx44			h_to_w;
 }	t_hittable_transform;
+
+
+/******* hittable real objects struct *******/
 
 typedef struct s_hittable_sphere
 {
@@ -134,6 +142,9 @@ typedef struct s_hittable_list
 	t_bbox			bbox;
 	t_ptrarr		*elements;
 }	t_hittable_list;
+
+
+/******* hittable objects constructor, destructor *******/
 
 t_hittable			*hittable_sphere_create(t_point center, \
 											double radius, \
