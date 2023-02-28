@@ -116,6 +116,8 @@ t_bool	hit_conical_hat(t_hittable *hittable,
 	ray_at(&rec->p, ray, rec->t);
 	rec->material = this->material;
 	conical_hat_record_set_normal_and_face(this, rec, ray);
+	if (fabs(vec3_dot_vec3(&rec->normal, &ray->dir)) < DOUBLE_E)
+		return (FALSE);
 	return (TRUE);
 }
 

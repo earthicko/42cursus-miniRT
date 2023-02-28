@@ -46,6 +46,8 @@ t_bool	hit_sphere(t_hittable *hittable,
 	ray_at(&rec->p, ray, rec->t);
 	vec3_sub_vec3(&outward_norm, &rec->p, &this->center);
 	vec3_mult_num_inplace(&outward_norm, 1 / this->radius);
+	if (fabs(vec3_dot_vec3(&outward_norm, &ray->dir)) < DOUBLE_E)
+		return (FALSE);
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 	rec->material = this->material;
 	return (TRUE);

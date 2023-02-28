@@ -4,6 +4,14 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
+static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
+													t_vec3 *norm)
+{
+	if (fabs(vec3_dot_vec3(&ray->dir, norm)) < DOUBLE_E)
+		return (TRUE);
+	return (FALSE);
+}
+
 static t_bool	root_is_out_of_range(t_hittable_disk *disk, t_hit_record *rec)
 {
 	if (dist_sq(&rec->p, &disk->plane.point) > pow(disk->radius, 2))
@@ -28,6 +36,8 @@ t_bool	hit_disk(t_hittable *hittable,
 	double			root;
 
 	this = (t_hittable_disk *)hittable;
+	if (ray_and_outward_norm_perpendicular(ray, &this->plane.norm))
+		return (FALSE);
 	if (solver_equation_system_plane_and_line(t, &this->plane, ray, &root)
 		== FALSE)
 		return (FALSE);

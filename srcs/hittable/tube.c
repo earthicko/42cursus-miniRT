@@ -4,6 +4,18 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
+
+static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
+													t_vec3 *axis)
+{
+	t_vec3	dir_cross_axis;
+
+	vec3_cross_vec3(&dir_cross_axis, &ray->dir, axis);
+	if (vec3_is_near_zero(&dir_cross_axis))
+		return (TRUE);
+	return (FALSE);
+}
+
 /*
 	Reference: http://www.illusioncatalyst.com/notes_files/mathematics
 				/line_cylinder_intersection.php
@@ -93,8 +105,7 @@ t_bool	hit_tube(t_hittable *hittable,
 	double			root;
 
 	this = (t_hittable_tube *)hittable;
-	vec3_cross_vec3(&dir_cross_axis, &ray->dir, &this->axis);
-	if (vec3_is_near_zero(&dir_cross_axis))
+	if (ray_and_outward_norm_perpendicular(ray, &this->axis))
 		return (FALSE);
 	set_coefficient(coef, this, ray);
 	if (solver_quadratic_equation(t, coef, &root) == FALSE)

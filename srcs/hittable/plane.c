@@ -4,7 +4,13 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
-// TODO: outward_norm 필요성, 필요하긴 할듯. one weekend ray_color 함수읽고 판단할 것
+static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
+													t_vec3 *norm)
+{
+	if (fabs(vec3_dot_vec3(&ray->dir, norm)) < DOUBLE_E)
+		return (TRUE);
+	return (FALSE);
+}
 t_bool	hit_plane(t_hittable *hittable,
 					const t_ray *ray,
 					t_minmax t,
@@ -15,7 +21,8 @@ t_bool	hit_plane(t_hittable *hittable,
 	double				root;
 
 	this = (t_hittable_plane *)hittable;
-	if (solve_equation_system_plane_and_line(t, this, ray, &root) == FALSE)
+	if (ray_and_outward_norm_perpendicular(ray, &this->norm))
+		return (FALSE);
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);
