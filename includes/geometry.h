@@ -72,5 +72,7 @@ void	vec3_unitize(t_vec3 *target);
 void	vec3_rand(t_vec3 *out, double min, double max);
 void	vec3_get_random_in_unit_sphere(t_vec3 *out);
 void	vec3_get_random_unit(t_vec3 *out);
+void	vec3_min(t_vec3 *out, const t_vec3 *a, const t_vec3 *b);
+void	vec3_max(t_vec3 *out, const t_vec3 *a, const t_vec3 *b);
 
 #endif

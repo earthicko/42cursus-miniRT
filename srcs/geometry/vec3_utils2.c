@@ -1,3 +1,4 @@
+#include <math.h>
 #include "geometry.h"
 #include "number.h"
 
@@ -27,4 +28,20 @@ void	vec3_get_random_unit(t_vec3 *out)
 {
 	vec3_get_random_in_unit_sphere(out);
 	vec3_unitize(out);
+}
+
+void	vec3_min(t_vec3 *out, const t_vec3 *a, const t_vec3 *b)
+{
+	vec3_setval(out,
+		fmin(a->i[0], b->i[0]),
+		fmin(a->i[1], b->i[1]),
+		fmin(a->i[2], b->i[2]));
+}
+
+void	vec3_max(t_vec3 *out, const t_vec3 *a, const t_vec3 *b)
+{
+	vec3_setval(out,
+		fmax(a->i[0], b->i[0]),
+		fmax(a->i[1], b->i[1]),
+		fmax(a->i[2], b->i[2]));
 }
