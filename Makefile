@@ -39,6 +39,7 @@ TESTER_FILENAME	= \
 				texture \
 				material \
 				parser \
+				mtx_inverse \
 
 TESTER_SRC		= $(addprefix tests/, $(addsuffix .c, $(TESTER_FILENAME)))
 TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
@@ -157,6 +158,9 @@ test_tube: tests/tube.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 test_pointer_speed: tests/pointer_speed_compare.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/pointer_speed_compare.o -o $@ $(LDFLAGS)
 
+test_mtx_inverse: tests/mtx_inverse.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/mtx_inverse.o -o $@ $(LDFLAGS)
+
 -include $(DEP)
 
 clean:
@@ -168,7 +172,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
-	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable test_pointer_speed
+	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable test_pointer_speed test_mtx_inverse
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBMLX_DIR)
 
