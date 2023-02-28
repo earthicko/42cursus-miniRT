@@ -12,6 +12,10 @@ static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
 	return (FALSE);
 }
 
+/*
+	The point C is center of the disk. (Yes, it's plane.point)
+	If PC > r, then root we got is out of. 
+*/
 static t_bool	root_is_out_of_range(t_hittable_disk *disk, t_hit_record *rec)
 {
 	if (dist_sq(&rec->p, &disk->plane.point) > pow(disk->radius, 2))

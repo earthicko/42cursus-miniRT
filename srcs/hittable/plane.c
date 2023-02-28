@@ -1,7 +1,9 @@
 #include <stdlib.h>
+#include <math.h>
 #include "libft.h"
 #include "material.h"
 #include "geometry.h"
+#include "number.h"
 #include "hittable_internal.h"
 
 static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
@@ -11,6 +13,11 @@ static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
 		return (TRUE);
 	return (FALSE);
 }
+
+/*
+	This function needs to solve equation system of plane and straight line. 
+	See the comment of the solver_equation_system_plane_and_line for details.
+*/
 t_bool	hit_plane(t_hittable *hittable,
 					const t_ray *ray,
 					t_minmax t,
@@ -23,6 +30,7 @@ t_bool	hit_plane(t_hittable *hittable,
 	this = (t_hittable_plane *)hittable;
 	if (ray_and_outward_norm_perpendicular(ray, &this->norm))
 		return (FALSE);
+	if (solver_equation_system_plane_and_line(t, this, ray, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);

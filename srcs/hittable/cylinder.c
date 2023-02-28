@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <math.h>
 #include "libft.h"
 #include "geometry.h"
 #include "number.h"

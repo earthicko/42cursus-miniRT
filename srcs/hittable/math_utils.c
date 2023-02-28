@@ -25,7 +25,7 @@ double	dist_sq(t_point *a, t_point *b)
  	If this function finds a solution that fits the range of t_minmax, 
  	it stores the result in root parameter and returns true. 
 */
-t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root)
+t_bool	solver_quadratic_equation(t_minmax t, double coef[3], double *root)
 {
 	double	dscrm;
 	double	sqrt_dscrm;
@@ -65,7 +65,7 @@ t_bool	solve_quadratic_equation(t_minmax t, double coef[3], double *root)
 			to the the ray dir vector and the normal vector of the plane.
 			Still, you should be careful of the floating exception.
 */
-t_bool	solve_equation_system_plane_and_line(const t_minmax t,
+t_bool	solver_equation_system_plane_and_line(const t_minmax t,
 											const t_hittable_plane *plane,
 											const t_ray *ray,
 											double *root)
