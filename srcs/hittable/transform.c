@@ -59,16 +59,24 @@ static void	hittable_transform_init_bbox(t_hittable_transform *this)
 }
 
 static void	hittable_transform_init_o_to_w(t_mtx44 *o_to_w,
-				t_point orig, double ele, double azi)
+				t_point orig, t_vec3 x_axis, double angle)
 {
+	double	elevation;
+	double	azimuth;
+	double	len_projected_yz;
+
+	len_projected_yz = sqrt(pow(x_axis.i[1], 2) + pow(x_axis.i[2], 2));
+	elevation = atan2(x_axis.i[0], len_projected_yz);
+	azimuth = atan2(x_axis.i[1], x_axis.i[2]);
 	m44_init_identity(o_to_w);
-	m44_rotate_inplace(o_to_w, AXIS_X, ele);
-	m44_rotate_inplace(o_to_w, AXIS_Y, azi);
+	m44_rotate_inplace(o_to_w, AXIS_Y, angle);
+	m44_rotate_inplace(o_to_w, AXIS_Z, elevation);
+	m44_rotate_inplace(o_to_w, AXIS_X, azimuth);
 	m44_translate_inplace(o_to_w, &orig);
 }
 
 t_hittable	*hittable_transform_create(t_hittable *base,
-				t_point orig, double ele, double azi)
+				t_point orig, t_vec3 x_axis, double angle)
 {
 	t_hittable_transform	*transform;
 
@@ -78,9 +86,7 @@ t_hittable	*hittable_transform_create(t_hittable *base,
 	ft_bzero(transform, sizeof(t_hittable_transform));
 	transform->hit = hittable_transform_hit;
 	transform->base = base;
-	ele = deg_to_rad(ele);
-	azi = deg_to_rad(azi);
-	hittable_transform_init_o_to_w(&transform->o_to_w, orig, ele, azi);
+	hittable_transform_init_o_to_w(&transform->o_to_w, orig, x_axis, angle);
 	m44_get_inverse(&transform->w_to_o, &transform->o_to_w);
 	hittable_transform_init_bbox(transform);
 	return ((t_hittable *)transform);

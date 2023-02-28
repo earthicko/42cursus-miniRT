@@ -146,8 +146,8 @@ t_hittable			*hittable_cylinder_create(t_cylinder_info *cylinder_info, \
 t_hittable			*hittable_list_create(void);
 t_hittable			*hittable_transform_create(t_hittable *base, \
 												t_point orig, \
-												double ele, \
-												double azi);
+												t_vec3 x_axis, \
+												double angle);
 
 void				hittable_list_destroy(t_hittable_list *list);
 
