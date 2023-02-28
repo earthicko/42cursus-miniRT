@@ -13,17 +13,22 @@ static t_bool	read_file_to_strarr_init(
 	*arr = ptrarr_create();
 	if (!(*arr))
 	{
-		ft_dprintf(2, "%s: "MSG_MALLOC"\n", EXEC_NAME);
+		printf("%s: "MSG_MALLOC"\n", EXEC_NAME);
 		return (FALSE);
 	}
 	*fd = open(path, O_RDONLY);
 	if (*fd < 0)
 	{
-		ptrarr_destroy(*arr, TRUE);
+		ptrarr_destroy(*arr, NULL);
 		perror(EXEC_NAME);
 		return (FALSE);
 	}
 	return (TRUE);
+}
+
+void	destroy_pchar(void *pchar)
+{
+	free((char *)pchar);
 }
 
 t_ptrarr	*read_file_to_strarr(const char *path)
@@ -49,7 +54,7 @@ t_ptrarr	*read_file_to_strarr(const char *path)
 			newline[ft_strlen(newline) - 1] = '\0';
 		if (ptrarr_append(arr, newline))
 		{
-			ptrarr_destroy(arr, TRUE);
+			ptrarr_destroy(arr, destroy_pchar);
 			return (NULL);
 		}
 	}
@@ -64,7 +69,7 @@ int	parse_scene(const char *path, t_scene *scene)
 	if (!lines)
 		return (CODE_ERROR_IO);
 	stat = parse_lines(lines, scene);
-	ptrarr_destroy(lines, TRUE);
+	ptrarr_destroy(lines, destroy_pchar);
 	printf("%s: parsing complete. results:\n", __func__);
 	printf("\t%d primitives, %d materials, %d textures\n",
 		scene->res.primitives->len,

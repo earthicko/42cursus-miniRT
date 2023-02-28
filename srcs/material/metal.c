@@ -3,13 +3,21 @@
 #include "geometry.h"
 #include "material_internal.h"
 
-t_material	*material_metal_create(t_texture *albedo, double fuzz)
+t_material	*material_metal_create(const char *name,
+				t_texture *albedo, double fuzz)
 {
 	t_material_metal	*out;
 
 	out = malloc(sizeof(t_material_metal));
 	if (!out)
 		return (NULL);
+	out->name = ft_strdup(name);
+	if (!out->name)
+	{
+		free(out);
+		return (NULL);
+	}
+	out->destroy = material_destroy;
 	out->emit = material_emit;
 	out->scatter = material_metal_scatter;
 	out->albedo = albedo;

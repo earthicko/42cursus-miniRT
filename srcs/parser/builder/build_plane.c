@@ -56,10 +56,10 @@ int	build_plane(const t_ptrarr *tokens, t_scene *scene)
 	build_vector(&p, &tokens->data[1]);
 	build_vector(&norm, &tokens->data[6]);
 	build_vector(&color, &tokens->data[11]);
-	if (is_invalid_normalized_vec3(&norm), is_invalid_color(&color))
+	if (is_invalid_normalized_vec3(&norm) || is_invalid_color(&color))
 		return (CODE_ERROR_DATA);
 	map_color(&color);
-	if (add_texture_solid(scene, color))
+	if (add_texture_solid(scene, "", color))
 		return (CODE_ERROR_MALLOC);
 	if (add_material_lambertian(scene, ptrarr_getlast(scene->res.textures)))
 		return (CODE_ERROR_MALLOC);

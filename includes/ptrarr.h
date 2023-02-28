@@ -13,10 +13,10 @@ typedef struct s_ptrarr
 }	t_ptrarr;
 
 t_ptrarr	*ptrarr_create(void);
-t_ptrarr	*ptrarr_destroy(t_ptrarr *ptrarr, t_bool free_all);
+t_ptrarr	*ptrarr_destroy(t_ptrarr *ptrarr, void (*destroyer)(void *));
 int			ptrarr_expand(t_ptrarr *ptrarr);
 int			ptrarr_append(t_ptrarr *ptrarr, const void *data);
-void		ptrarr_free_all_ptr(t_ptrarr *ptrarr);
+void		ptrarr_destroy_all(t_ptrarr *ptrarr, void (*destroyer)(void *));
 void		*ptrarr_get(const t_ptrarr *arr, int i);
 void		*ptrarr_getfirst(const t_ptrarr *arr);
 void		*ptrarr_getlast(const t_ptrarr *arr);

@@ -20,6 +20,6 @@ int	parse_line(const char *line, t_scene *scene,
 		if (!stat)
 			stat = TRUE;
 	}
-	ptrarr_destroy(tokens, TRUE);
+	ptrarr_destroy(tokens, destroy_pchar);
 	return (stat);
 }

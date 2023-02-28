@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "libft.h"
 #include "number.h"
 #include "msgdef.h"
@@ -7,7 +8,7 @@ t_bool	is_invalid_length(double len)
 {
 	if (len <= DOUBLE_E)
 	{
-		ft_dprintf(2, "%s: ratio "MSG_OUTOFRANGE"\n", EXEC_NAME,
+		printf("%s: ratio "MSG_OUTOFRANGE"\n", EXEC_NAME,
 			len, DOUBLE_E, DOUBLE_INF);
 		return (TRUE);
 	}
@@ -18,7 +19,7 @@ t_bool	is_invalid_ratio(double ratio)
 {
 	if (!(RANGE_MIN_RATIO <= ratio && ratio <= RANGE_MAX_RATIO))
 	{
-		ft_dprintf(2, "%s: ratio "MSG_OUTOFRANGE"\n", EXEC_NAME,
+		printf("%s: ratio "MSG_OUTOFRANGE"\n", EXEC_NAME,
 			ratio, RANGE_MIN_RATIO, RANGE_MAX_RATIO);
 		return (TRUE);
 	}
@@ -34,7 +35,7 @@ t_bool	is_invalid_color(const t_color *color)
 	{
 		if (!(RANGE_MIN_COLOR <= color->i[i] && color->i[i] < RANGE_MAX_COLOR))
 		{
-			ft_dprintf(2, "%s: color "MSG_OUTOFRANGE"\n", EXEC_NAME,
+			printf("%s: color "MSG_OUTOFRANGE"\n", EXEC_NAME,
 				color->i[i], RANGE_MIN_COLOR, RANGE_MAX_COLOR);
 			return (TRUE);
 		}
@@ -45,29 +46,21 @@ t_bool	is_invalid_color(const t_color *color)
 
 t_bool	is_invalid_normalized_vec3(const t_vec3 *vec)
 {
-	int	i;
+	double	len;
 
-	i = 0;
-	while (i < 3)
-	{
-		if (!(RANGE_MIN_NORMALIZEDVEC3 <= vec->i[i]
-				&& vec->i[i] <= RANGE_MAX_NORMALIZEDVEC3))
-		{
-			ft_dprintf(2, "%s: normalized vector component "MSG_OUTOFRANGE"\n",
-				EXEC_NAME,
-				vec->i[i], RANGE_MIN_NORMALIZEDVEC3, RANGE_MAX_NORMALIZEDVEC3);
-			return (TRUE);
-		}
-		i++;
-	}
-	return (FALSE);
+	len = vec3_get_len(vec);
+	if (1.f - E_NORMALIZEDVEC3 < len && len < 1.f + E_NORMALIZEDVEC3)
+		return (FALSE);
+	printf("%s: vector length "MSG_OUTOFRANGE"\n", EXEC_NAME,
+		len, 1.f - E_NORMALIZEDVEC3, 1.f + E_NORMALIZEDVEC3);
+	return (TRUE);
 }
 
 t_bool	is_invalid_fov(double fov)
 {
 	if (!(0.0 <= fov && fov <= 180.0))
 	{
-		ft_dprintf(2, "%s: fov "MSG_OUTOFRANGE"\n", EXEC_NAME,
+		printf("%s: fov "MSG_OUTOFRANGE"\n", EXEC_NAME,
 			fov, RANGE_MIN_FOV, RANGE_MAX_FOV);
 		return (TRUE);
 	}

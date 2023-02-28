@@ -36,15 +36,11 @@ void	bbox_init(t_bbox *target, t_point min, t_point max)
 
 void	bbox_init_surrounding(t_bbox *target, const t_bbox *a, const t_bbox *b)
 {
-	const t_point	min = {
-		fmin(a->min.i[0], b->min.i[0]),
-		fmin(a->min.i[1], b->min.i[1]),
-		fmin(a->min.i[2], b->min.i[2])};
-	const t_point	max = {
-		fmax(a->max.i[0], b->max.i[0]),
-		fmax(a->max.i[1], b->max.i[1]),
-		fmax(a->max.i[2], b->max.i[2])};
+	t_point	min;
+	t_point	max;
 
+	vec3_min(&min, &a->min, &b->min);
+	vec3_max(&max, &a->max, &b->max);
 	if (a->hit == 0 || b->hit == 0)
 	{
 		ft_bzero(target, sizeof(t_bbox));

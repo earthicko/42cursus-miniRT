@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "libft.h"
 #include "ptrarr.h"
 #include "msgdef.h"
@@ -26,7 +27,7 @@ static int	parse_unique_entity_loop(
 			found_once = TRUE;
 			if (already_found[i])
 			{
-				ft_dprintf(2, "%s: "MSG_DUPLICATE"\n", EXEC_NAME);
+				printf("%s: "MSG_DUPLICATE"\n", EXEC_NAME);
 				return (CODE_ERROR_DATA);
 			}
 			already_found[i] = TRUE;
@@ -69,7 +70,7 @@ static int	parse_common_entity(const char *line, t_scene *scene)
 		return (stat);
 	if (stat == FALSE)
 	{
-		ft_dprintf(2, "%s: "MSG_PARSEFAIL"\n", EXEC_NAME, line);
+		printf("%s: "MSG_PARSEFAIL"\n", EXEC_NAME, line);
 		return (CODE_ERROR_DATA);
 	}
 	return (CODE_OK);
@@ -84,7 +85,7 @@ static t_bool	all_unique_entities_found(t_bool *map)
 	{
 		if (map[i] == FALSE)
 		{
-			ft_dprintf(2, "%s: "MSG_ENTITY_NOTFOUND"\n", EXEC_NAME);
+			printf("%s: "MSG_ENTITY_NOTFOUND"\n", EXEC_NAME);
 			return (FALSE);
 		}
 		i++;

@@ -67,7 +67,7 @@ static void	renderer_render_flush(t_renderer *renderer, int n_samples)
 	filename = get_filename(n_samples);
 	if (!filename)
 	{
-		ft_dprintf(2, "%s: "MSG_MALLOC, EXEC_NAME);
+		printf("%s: "MSG_MALLOC, EXEC_NAME);
 		return ;
 	}
 	if (n_samples >= renderer->n_samples

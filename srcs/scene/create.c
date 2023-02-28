@@ -19,14 +19,25 @@ static t_bool	is_all_allocated(t_scene *scene)
 	return (TRUE);
 }
 
+static void	destroy_material(void *material)
+{
+	material_destroy((t_material *)material);
+}
+
+static void	destroy_texture(void *texture)
+{
+	texture_destroy((t_texture *)texture);
+}
+
+// TODO: assign respective destroyers when they're ready
 void	scene_destroy(t_scene *scene)
 {
 	if (scene->res.primitives)
-		ptrarr_destroy(scene->res.primitives, TRUE);
+		ptrarr_destroy(scene->res.primitives, free);
 	if (scene->res.materials)
-		ptrarr_destroy(scene->res.materials, TRUE);
+		ptrarr_destroy(scene->res.materials, destroy_material);
 	if (scene->res.textures)
-		ptrarr_destroy(scene->res.textures, TRUE);
+		ptrarr_destroy(scene->res.textures, destroy_texture);
 	if (scene->world)
 		hittable_list_destroy((t_hittable_list *)scene->world);
 	if (scene->objects)

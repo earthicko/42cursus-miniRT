@@ -22,19 +22,6 @@ void	print_ray(const t_ray *ray)
 	print_vec3(&ray->dir);
 }
 
-/*
-typedef struct s_camera
-{
-	t_point	view_origin;
-	t_point	pixel_origin;
-	t_vec3	xaxis;
-	t_vec3	yaxis;
-	t_vec3	u;
-	t_vec3	v;
-	t_vec3	w;
-	t_vec3	uv;
-}	t_camera;
-*/
 void	print_camera(const t_camera *cam)
 {
 	printf("Camera orig: ");
@@ -53,4 +40,20 @@ void	print_camera(const t_camera *cam)
 	print_vec3(&cam->w);
 	printf(" uv: ");
 	print_vec3(&cam->uv);
+}
+
+void	print_mtx44(const t_mtx44 *mtx44)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		printf("| %.2f %.2f %.2f %.2f |\n",
+			mtx44->i[i][0],
+			mtx44->i[i][1],
+			mtx44->i[i][2],
+			mtx44->i[i][3]);
+		i++;
+	}
 }

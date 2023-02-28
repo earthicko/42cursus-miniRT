@@ -20,10 +20,10 @@ t_ptrarr	*ptrarr_create(void)
 	return (ptrarr);
 }
 
-t_ptrarr	*ptrarr_destroy(t_ptrarr *ptrarr, t_bool free_all)
+t_ptrarr	*ptrarr_destroy(t_ptrarr *ptrarr, void (*destroyer)(void *))
 {
-	if (free_all)
-		ptrarr_free_all_ptr(ptrarr);
+	if (destroyer)
+		ptrarr_destroy_all(ptrarr, destroyer);
 	free(ptrarr->data);
 	free(ptrarr);
 	return (NULL);
@@ -55,14 +55,14 @@ int	ptrarr_append(t_ptrarr *ptrarr, const void *data)
 	return (CODE_OK);
 }
 
-void	ptrarr_free_all_ptr(t_ptrarr *ptrarr)
+void	ptrarr_destroy_all(t_ptrarr *ptrarr, void (*destroyer)(void *))
 {
 	int	i;
 
 	i = 0;
 	while (i < ptrarr->len)
 	{
-		free((void *)(ptrarr->data[i]));
+		destroyer((void *)ptrarr->data[i]);
 		i++;
 	}
 }

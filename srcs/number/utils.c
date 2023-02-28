@@ -19,3 +19,12 @@ int	clamp_int(int x, int min, int max)
 		return (max);
 	return (x);
 }
+
+void	swap_double(double *a, double *b)
+{
+	double	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}

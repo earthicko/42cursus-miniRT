@@ -36,6 +36,12 @@ t_bool	is_comma(const char *word)
 	return (FALSE);
 }
 
+t_bool	is_word(const char *word)
+{
+	(void)word;
+	return (TRUE);
+}
+
 t_bool	is_in_pattern(const char *identifier,
 	const int *pattern, const int patternlen, const t_ptrarr *tokens)
 {
