@@ -45,10 +45,10 @@ static void	conical_hat_record_set_normal_and_face(t_hittable_conical_hat *hat,
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 }
 
-/*
+/* 
 	Reference: http://www.illusioncatalyst.com/notes_files/mathematics
 			  /line_cone_intersection.php
-	
+
 	Cone: |P - H|^2 - [(P - H) * axis_vec]^2 = m *[(P - H) * axis_vec]^2
 	   The trace of P represents a cone. (the sides of a cone, to be precise)
 	   The point H is the apex of the cone.
@@ -81,7 +81,7 @@ static void	set_coefficient(double coef[3],
 											\
 				- (m * vec3_dot_vec3(&ray->dir, &hat->axis) \
 											* vec3_dot_vec3(&ha, &hat->axis)) \
-											\
+																			\
 				- (vec3_dot_vec3(&ray->dir, &hat->axis) \
 											* vec3_dot_vec3(&ha, &hat->axis));
 	coef[B] *= 2;
@@ -119,23 +119,4 @@ t_bool	hit_conical_hat(t_hittable *hittable,
 	if (fabs(vec3_dot_vec3(&rec->normal, &ray->dir)) < DOUBLE_E)
 		return (FALSE);
 	return (TRUE);
-}
-
-// shift: add shift to center_of_disk to get apex
-void	set_conical_hat_of_cylinder(t_hittable_conical_hat *conical_hat,
-									t_cone_info *cone_info,
-									t_material *material)
-{
-	t_vec3	shift;
-
-
-	conical_hat->hit = hit_conical_hat;
-	conical_hat->material = material;
-	conical_hat->apex = cone_info->center_of_disk;
-	vec3_mult_num(&shift, &cone_info->axis, cone_info->height);
-	vec3_add_vec3_inplace(&conical_hat->apex, &shift);
-	conical_hat->center_of_disk = cone_info->center_of_disk;
-	conical_hat->axis = cone_info->axis;
-	conical_hat->height = cone_info->height;
-	conical_hat->radius = cone_info->radius;
 }
