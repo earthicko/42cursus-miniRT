@@ -12,6 +12,12 @@ static t_bool	root_is_out_of_range(t_hittable_disk *disk, t_hit_record *rec)
 }
 
 // TODO: hit 함수들 static으로 수정해볼 것
+/*
+	This function needs to solve equation system of plane and straight line. 
+	The additional thing to do is to make sure,
+	that the solution fits the given range. (Because it's circle!)
+	See the comment of the solver_equation_system_plane_and_line for details.
+*/
 t_bool	hit_disk(t_hittable *hittable,
 					const t_ray *ray,
 					t_minmax t,

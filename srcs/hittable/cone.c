@@ -5,6 +5,9 @@
 #include "material.h"
 #include "hittable_internal.h"
 
+/*
+	For details, see hit functions for each elements.
+*/
 t_bool	hit_cone(t_hittable *hittable,
 					const t_ray *ray,
 					t_minmax t,

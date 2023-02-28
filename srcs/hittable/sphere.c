@@ -9,8 +9,10 @@
 // TODO: 필요시 uv 좌표 계산식 추가, the next weekend
 // TODO: 직선의 방향벡터가 정규화(길이 1로 설정)되지 않았을 때도 성립하는지 체크
 // TODO: outward_norm 길이 1로 정규화를 해주긴 했는데 왜 해야되지? 일단 해두긴 함
+// TODO: DOUBLE_E number.h헤더 인클루드 안해도 왜 컴파일 되는거지? 확인할 것
+/*
+	This function needs to solve equation system of sphere and straight line. 
 
-/* This function needs to solve equation system of sphere and straight line 
 	Sphere: (x_vec - O_point) * (x_vec - O_point) = radius^2
 	   The trace of the vector x represents a sphere.
 	   The given point O is the center of the sphere.
@@ -18,7 +20,7 @@
 	   The given point A is origin of the line,
 	   The vector dir is direction vector of line 
 	By aligning the sphere and the straight line, 
-	the following quadratic equation can be obtained. 
+	the following quadratic equation for 't' can be obtained. 
 	at^2 + 2bt + c = 0, where
 	a = dir * dir,
 	2b = 2 * (dir * (A - O)),

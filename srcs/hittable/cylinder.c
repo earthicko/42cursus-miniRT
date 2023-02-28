@@ -5,6 +5,9 @@
 #include "material.h"
 #include "hittable_internal.h"
 
+/*
+	For details, see hit functions for each elements.
+*/
 t_bool	hit_cylinder(t_hittable *hittable,
 						const t_ray *ray,
 						t_minmax t,
@@ -24,6 +27,9 @@ t_bool	hit_cylinder(t_hittable *hittable,
 	return (TRUE);
 }
 
+/*
+	shift: Add shift to center_of_cylinder to get center_of_disk
+*/
 t_hittable	*hittable_cylinder_create(t_cylinder_info *cylinder_info,
 										t_material *material)
 {

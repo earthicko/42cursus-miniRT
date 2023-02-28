@@ -6,9 +6,25 @@
 #include "material.h"
 #include "hittable_internal.h"
 
-// outward_norm
-// norm: 1. Pass through point p and perpendicular to vector ph (h is apex) 
-//		 2. norm should pass through one point on aixs
+/* 
+	The ultimate goal is to find the normal vector of the surface.(outward_norm)
+	An outward_norm can be obtained in the following way.
+	  The point h is the apex.
+	  The point p is the intersection point.
+	  We'll find a point q on the axis,
+	  where vector pq and vector ph are perpendicular. 
+
+	Line by axis: C_point + t * axis_vec (different from ray)
+	   The given point C is the center of the disk.
+
+	We need to calculate the value of 't' to find point q. 
+	Equation system: 
+	  (Q - P) * PH_vec = 0
+	  (C + t * dir_vec - P) * PH_vec = 0
+	Solution:
+	   t = cp_vec * ph_vec / axis_vec *  ph_vec
+	So, the vector qp is the outward_norm. (That's what we want!)
+*/
 static void	conical_hat_record_set_normal_and_face(t_hittable_conical_hat *hat,
 													t_hit_record *rec,
 													const t_ray *ray)
@@ -16,18 +32,26 @@ static void	conical_hat_record_set_normal_and_face(t_hittable_conical_hat *hat,
 	t_vec3	outward_norm;
 }
 
-// Reference: http://www.illusioncatalyst.com/notes_files/mathematics
-// 			/line_cone_intersection.php
 /*
-	Point H is apex of cone
+	Reference: http://www.illusioncatalyst.com/notes_files/mathematics
+			  /line_cone_intersection.php
 	
+	Cone: |P - H|^2 - [(P - H) * axis_vec]^2 = m *[(P - H) * axis_vec]^2
+	   The trace of P represents a cone. (the sides of a cone, to be precise)
+	   The point H is the apex of the cone.
+	   The constant m: m = radius^2 / height^2
 	Line: A_point + t * dir_vec
 	   The given point A is origin of the line,
 	   The vector dir is direction vector of line 
 
-	m = radius^2 / height^2
+	By aligning a cone and a line,
+	the following quadratic equation for 't' can be obtained. 
+	at^2 + 2bt + c = 0, where
+	a = dir * dir - m(dir * axis)^2 - (dir * axis)^2,
+	b = 2 * [(dir * w) - m(dir * axis)(w * axis) - (dir * axis)(w * axis)],
+	c = w * w - m(w * axis)^2 - (w * axis)^2
 
-	w vector is ha
+	w vector is A - H (i.e vector ha).
 */
 static void	set_coefficient(double coef[3],
 							t_hittable_conical_hat *hat,
@@ -57,6 +81,11 @@ static void	set_coefficient(double coef[3],
 
 // TODO: 법선에 수직인 경우(중근), 예외처리 추가
 // TODO: root_is_out_of_range 필요시 추가
+/*
+	This function needs to solve equation system of cone and straight line.
+	We can get quadratic equation for 't' by aligning this equation system.
+	See the comment of the set_coefficient for details.
+*/
 t_bool	hit_conical_hat(t_hittable *hittable,
 						const t_ray *ray,
 						t_minmax t,

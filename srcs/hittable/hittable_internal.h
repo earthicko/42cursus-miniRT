@@ -21,7 +21,7 @@ t_bool	solve_equation_system_plane_and_line(const t_minmax t, \
 												double *root);
 
 
-/******* Set cylinder's elements *******/
+/******* hit function for each object *******/
 
 void	set_tube_of_cylinder(t_hittable_tube *tube, \
 								t_cylinder_info *cylinder_info, \
