@@ -102,6 +102,26 @@ typedef struct s_cylinder_info
 	double	radius;
 }	t_cylinder_info;
 
+typedef struct s_hittable_conical_hat
+{
+	t_hittable_hit	hit;
+	t_bbox			bbox;
+	t_material		*material;
+	t_point			center_of_disk;
+	t_vec3			axis;
+	double			height;
+	double			radius;
+}	t_hittable_conical_hat;
+
+typedef struct s_hittable_cone
+{
+	t_hittable_hit			hit;
+	t_bbox					bbox;
+	t_material				*material;
+	t_hittable_disk			disk;
+	t_hittable_conical_hat	conical_hat;
+}	t_hittable_cone;
+
 enum	e_disk_of_cylinder
 {
 	TOP = 0,
