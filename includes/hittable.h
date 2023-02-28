@@ -32,9 +32,9 @@ void				hit_record_set_normal_and_face(t_hit_record *rec, \
 typedef struct s_hittable	t_hittable;
 
 typedef t_bool				(*t_hittable_hit)(t_hittable *hittable,
-											const t_ray *r,
-											t_minmax t,
-											t_hit_record *rec);
+												const t_ray *r,
+												t_minmax t,
+												t_hit_record *rec);
 
 typedef struct s_hittable
 {
@@ -104,7 +104,7 @@ typedef struct s_hittable_cylinder
 
 typedef struct s_cylinder_info
 {
-	t_point	center;
+	t_point	center_of_cylinder;
 	t_vec3	axis;
 	double	height;
 	double	radius;
@@ -117,6 +117,7 @@ typedef struct s_hittable_conical_hat
 	t_material		*material;
 	t_point			center_of_disk;
 	t_vec3			axis;
+	t_point			apex;
 	double			height;
 	double			radius;
 }	t_hittable_conical_hat;
@@ -129,6 +130,14 @@ typedef struct s_hittable_cone
 	t_hittable_disk			disk;
 	t_hittable_conical_hat	conical_hat;
 }	t_hittable_cone;
+
+typedef struct s_cone_info
+{
+	t_point	center_of_disk;
+	t_vec3	axis;
+	double	height;
+	double	radius;
+}	t_cone_info;
 
 enum	e_disk_of_cylinder
 {

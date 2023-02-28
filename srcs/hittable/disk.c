@@ -58,3 +58,16 @@ void	set_disk_of_cylinder(t_hittable_disk *disk,
 	disk->plane.norm = cylinder_info->axis;
 	disk->radius = cylinder_info->radius;
 }
+
+
+void	set_disk_of_cone(t_hittable_disk *disk,
+							t_cone_info *cone_info,
+							t_material *material)
+{
+	disk->hit = hit_disk;
+	disk->material = material;
+	ft_memset(&disk->plane, 0, sizeof(t_hittable_plane));
+	disk->plane.point = cone_info->center_of_disk;
+	disk->plane.norm = cone_info->axis;
+	disk->radius = cone_info->radius;
+}
