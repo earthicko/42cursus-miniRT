@@ -51,6 +51,7 @@ void	vec3_refract(t_vec3 *out, const t_vec3 *in, const t_vec3 *n, double r);
 
 void	m44_init_zero(t_mtx44 *target);
 void	m44_init_identity(t_mtx44 *target);
+void	m44_get_inverse(t_mtx44 *out, const t_mtx44 *in);
 
 void	vec3_multiply_m44(t_vec3 *out, const t_vec3 *a, const t_mtx44 *b);
 void	vec3_multiply_m44_inplace(t_vec3 *target, const t_mtx44 *a);

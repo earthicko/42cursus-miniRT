@@ -47,6 +47,8 @@ TESTER_DEP		= $(addprefix tests/, $(addsuffix .d, $(TESTER_FILENAME)))
 FILENAME		= \
 				timeman \
 				geometry/matrix_init \
+				geometry/matrix_inverse \
+				geometry/matrix_inverse_utils \
 				geometry/multiply \
 				geometry/rotate \
 				geometry/translate \
