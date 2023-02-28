@@ -97,7 +97,7 @@ t_bool	hit_tube(t_hittable *hittable,
 	if (vec3_is_near_zero(&dir_cross_axis))
 		return (FALSE);
 	set_coefficient(coef, this, ray);
-	if (solve_quadratic_equation(t, coef, &root) == FALSE)
+	if (solver_quadratic_equation(t, coef, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);

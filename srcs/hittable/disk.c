@@ -28,7 +28,7 @@ t_bool	hit_disk(t_hittable *hittable,
 	double			root;
 
 	this = (t_hittable_disk *)hittable;
-	if (solve_equation_system_plane_and_line(t, &this->plane, ray, &root)
+	if (solver_equation_system_plane_and_line(t, &this->plane, ray, &root)
 		== FALSE)
 		return (FALSE);
 	rec->t = root;

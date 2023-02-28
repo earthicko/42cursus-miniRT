@@ -40,11 +40,7 @@ t_bool	hit_sphere(t_hittable *hittable,
 	if (!hittable->bbox.hit(&hittable->bbox, ray, &t))
 		return (FALSE);
 	this = (t_hittable_sphere *)hittable;
-	vec3_sub_vec3(&oa, &ray->orig, &this->center);
-	coef[A] = vec3_dot_vec3(&ray->dir, &ray->dir);
-	coef[B] = 2 * vec3_dot_vec3(&oa, &ray->dir);
-	coef[C] = vec3_dot_vec3(&oa, &oa) - pow(this->radius, 2);
-	if (solve_quadratic_equation(t, coef, &root) == FALSE)
+	if (solver_quadratic_equation(t, coef, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);

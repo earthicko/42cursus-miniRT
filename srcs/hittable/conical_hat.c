@@ -97,7 +97,7 @@ t_bool	hit_conical_hat(t_hittable *hittable,
 
 	this = (t_hittable_conical_hat *)hittable;
 	set_coefficient(coef, this, ray);
-	if (solve_quadratic_equation(t, coef, &root) == FALSE)
+	if (solver_quadratic_equation(t, coef, &root) == FALSE)
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);
