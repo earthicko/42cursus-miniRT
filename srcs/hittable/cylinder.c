@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <math.h>
 #include "libft.h"
 #include "geometry.h"
 #include "number.h"
@@ -7,9 +6,9 @@
 #include "hittable_internal.h"
 
 t_bool	hit_cylinder(t_hittable *hittable,
-					const t_ray *ray,
-					t_minmax t,
-					t_hit_record *rec)
+						const t_ray *ray,
+						t_minmax t,
+						t_hit_record *rec)
 {
 	t_hittable_cylinder	*this;
 
@@ -26,7 +25,7 @@ t_bool	hit_cylinder(t_hittable *hittable,
 }
 
 t_hittable	*hittable_cylinder_create(t_cylinder_info *cylinder_info,
-								t_material *material)
+										t_material *material)
 {
 	t_hittable_cylinder	*cylinder;
 
