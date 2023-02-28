@@ -52,13 +52,11 @@ static int	add_material_diffuse_light(t_scene *scene, t_color color)
 	return (CODE_OK);
 }
 
-// TODO: remove casting to hittable* after return types get sorted out
 static int	add_light(t_scene *scene, t_point coord, t_material *m)
 {
 	t_hittable	*light;
 
-	light = (t_hittable *)hittable_sphere_create(
-			coord, LIGHT_DEFAULT_RADIUS, m);
+	light = hittable_sphere_create(coord, LIGHT_DEFAULT_RADIUS, m);
 	if (!light)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, light))

@@ -53,10 +53,10 @@ t_bool	hit_sphere(t_hittable *hittable,
 	return (TRUE);
 }
 
-t_hittable_sphere	*hittable_sphere_create(
-								t_point center,
-								double radius,
-								t_material *material)
+t_hittable	*hittable_sphere_create(
+							t_point center,
+							double radius,
+							t_material *material)
 {
 	t_hittable_sphere	*sphere;
 	t_point				min;
@@ -75,5 +75,5 @@ t_hittable_sphere	*hittable_sphere_create(
 	vec3_sub_vec3(&min, &center, &rad);
 	vec3_add_vec3(&max, &center, &rad);
 	bbox_init(&sphere->bbox, min, max);
-	return (sphere);
+	return ((t_hittable *)sphere);
 }	

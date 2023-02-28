@@ -29,12 +29,11 @@ t_bool	is_plane(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
-// TODO: remove casting to hittable* after return types get sorted out
 static int	add_plane(t_scene *scene, t_point p, t_vec3 norm, t_material *m)
 {
 	t_hittable	*plane;
 
-	plane = (t_hittable *)hittable_plane_create(p, norm, m);
+	plane = hittable_plane_create(p, norm, m);
 	if (!plane)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, plane))

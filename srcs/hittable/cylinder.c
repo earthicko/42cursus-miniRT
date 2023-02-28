@@ -25,8 +25,8 @@ t_bool	hit_cylinder(t_hittable *hittable,
 	return (TRUE);
 }
 
-t_hittable_cylinder	*hittable_cylinder_create(t_cylinder_info *cylinder_info,
-										t_material *material)
+t_hittable	*hittable_cylinder_create(t_cylinder_info *cylinder_info,
+								t_material *material)
 {
 	t_hittable_cylinder	*cylinder;
 
@@ -39,5 +39,5 @@ t_hittable_cylinder	*hittable_cylinder_create(t_cylinder_info *cylinder_info,
 	set_tube_of_cylinder(&cylinder->tube, cylinder_info, material);
 	set_disk_of_cylinder(&cylinder->disk[0], cylinder_info, material, BOTTOM);
 	set_disk_of_cylinder(&cylinder->disk[1], cylinder_info, material, TOP);
-	return (cylinder);
+	return ((t_hittable *)cylinder);
 }

@@ -34,12 +34,11 @@ t_bool	is_cylinder(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
-// TODO: remove casting to hittable* after return types get sorted out
 static int	add_cylinder(t_scene *scene, t_cylinder_info *info, t_material *m)
 {
 	t_hittable		*cylinder;
 
-	cylinder = (t_hittable *)hittable_cylinder_create(info, m);
+	cylinder = hittable_cylinder_create(info, m);
 	if (!cylinder)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, cylinder))

@@ -35,12 +35,11 @@ t_bool	is_sphere(const t_ptrarr *tokens)
 	return (FALSE);
 }
 
-// TODO: remove casting to hittable* after return types get sorted out
 static int	add_sphere(t_scene *scene, t_point cen, double d, t_material *m)
 {
 	t_hittable	*sphere;
 
-	sphere = (t_hittable *)hittable_sphere_create(cen, d / 2, m);
+	sphere = hittable_sphere_create(cen, d / 2, m);
 	if (!sphere)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, sphere))
