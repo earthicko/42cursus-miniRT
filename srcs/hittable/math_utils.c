@@ -70,14 +70,11 @@ t_bool	solver_equation_system_plane_and_line(const t_minmax t,
 											const t_ray *ray,
 											double *root)
 {
-	const double	norm_dot_dir = vec3_dot_vec3(&plane->norm, &ray->dir);
 	t_vec3			ap;
 
-	(void)t;
-	if (val_is_near_zero(norm_dot_dir))
-		return (FALSE);
 	vec3_sub_vec3(&ap, &plane->point, &ray->orig);
-	*root = vec3_dot_vec3(&ap, &plane->norm) / norm_dot_dir;
+	*root = vec3_dot_vec3(&ap, &plane->norm) \
+						/ vec3_dot_vec3(&plane->norm, &ray->dir);
 	if (*root < t.min || *root > t.max)
 		return (FALSE);
 	return (TRUE);
