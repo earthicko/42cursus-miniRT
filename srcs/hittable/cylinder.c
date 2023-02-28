@@ -22,7 +22,7 @@ t_bool	hit_cylinder(t_hittable *hittable,
 		t.max = rec->t;
 	if (this->disk[1].hit((t_hittable *)&this->disk[1], ray, t, rec))
 		t.max = rec->t;
-	if (val_is_near_zero(t.max - DOUBLE_INF))
+	if (fabs(t.max - DOUBLE_INF) < DOUBLE_E)
 		return (FALSE);
 	return (TRUE);
 }

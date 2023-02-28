@@ -3,6 +3,7 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
+// TODO: 이 함수 삭제 후  인라인으로 처리
 t_bool	val_is_near_zero(double val)
 {
 	if (fabs(val) < DOUBLE_E)

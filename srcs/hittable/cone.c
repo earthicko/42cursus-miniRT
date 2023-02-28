@@ -20,7 +20,7 @@ t_bool	hit_cone(t_hittable *hittable,
 		t.max = rec->t;
 	if (this->disk.hit((t_hittable *)&this->disk, ray, t, rec))
 		t.max = rec->t;
-	if (val_is_near_zero(t.max - DOUBLE_INF))
+	if (fabs(t.max - DOUBLE_INF) < DOUBLE_E)
 		return (FALSE);
 	return (TRUE);
 }
