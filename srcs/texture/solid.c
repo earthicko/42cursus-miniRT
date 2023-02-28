@@ -15,6 +15,7 @@ t_texture	*texture_solid_create(const char *name, t_color color)
 		free(out);
 		return (NULL);
 	}
+	out->destroy = texture_destroy;
 	out->get_color_at = texture_solid_get_color_at;
 	out->color = color;
 	return ((t_texture *)out);

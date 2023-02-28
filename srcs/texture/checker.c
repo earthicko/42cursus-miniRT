@@ -16,6 +16,7 @@ t_texture	*texture_checker_create(const char *name,
 		free(out);
 		return (NULL);
 	}
+	out->destroy = texture_destroy;
 	out->get_color_at = texture_checker_get_color_at;
 	out->a = a;
 	out->b = b;

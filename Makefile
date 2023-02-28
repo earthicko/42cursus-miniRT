@@ -94,6 +94,7 @@ FILENAME		= \
 				material/dielectric \
 				material/lambertian \
 				material/methods \
+				texture/destroy \
 				texture/solid \
 				texture/checker \
 				parser/parse_scene \
