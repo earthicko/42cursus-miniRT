@@ -37,6 +37,25 @@ static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
 
 	w vector is A - C (i.e vector ca)
 */
+static void	set_coefficient(double coef[3],
+								t_hittable_tube *tube,
+								const t_ray *ray)
+{
+	t_vec3	ca;
+
+	vec3_sub_vec3(&ca, &ray->orig, &tube->center_of_disk);
+	coef[A] = vec3_dot_vec3(&ray->dir, &ray->dir) \
+				- pow(vec3_dot_vec3(&ray->dir, &tube->axis), 2);
+	coef[B] = vec3_dot_vec3(&ray->dir, &ca) \
+											\
+				- (vec3_dot_vec3(&ray->dir, &tube->axis) \
+								* vec3_dot_vec3(&ca, &tube->axis));
+	coef[B] *= 2;
+	coef[C] = vec3_dot_vec3(&ca, &ca) \
+				- pow(vec3_dot_vec3(&ca, &tube->axis), 2) \
+				- pow(tube->radius, 2);
+}
+
 static t_bool	root_is_out_of_range(t_hittable_tube *tube, t_hit_record *rec)
 {
 	double	max_dist_sq;
