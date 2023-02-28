@@ -29,7 +29,20 @@ static void	conical_hat_record_set_normal_and_face(t_hittable_conical_hat *hat,
 													t_hit_record *rec,
 													const t_ray *ray)
 {
+	t_vec3	cp;
+	t_vec3	ph;
+	double	t;
+	t_point	q;
 	t_vec3	outward_norm;
+
+	vec3_sub_vec3(&cp, &rec->p, &hat->center_of_disk);
+	vec3_sub_vec3(&ph, &hat->apex, &rec->p);
+	t = vec3_dot_vec3(&cp, &ph) \
+					/ vec3_dot_vec3(&ray->dir, &ph);
+	vec3_mult_num(&q, &hat->axis, t);
+	vec3_add_vec3_inplace(&q, &hat->center_of_disk);
+	vec3_sub_vec3(&outward_norm, &rec->p, &q);
+	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 }
 
 /*
