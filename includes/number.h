@@ -2,7 +2,7 @@
 # define NUMBER_H
 
 # define DOUBLE_E	1e-8
-# define DOUBLE_INF	999999999
+# define DOUBLE_INF	999999999.9
 
 typedef struct s_minmax
 {
