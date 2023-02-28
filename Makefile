@@ -40,6 +40,7 @@ TESTER_FILENAME	= \
 				material \
 				parser \
 				mtx_inverse \
+				tube \
 
 TESTER_SRC		= $(addprefix tests/, $(addsuffix .c, $(TESTER_FILENAME)))
 TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
