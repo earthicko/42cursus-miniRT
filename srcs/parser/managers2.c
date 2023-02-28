@@ -28,10 +28,11 @@ t_builder	unique_builder_manager(int i)
 t_patternmatcher	common_patternmatcher_manager(int i)
 {
 	static const t_patternmatcher	common_matcher[N_IDENTIFIER_COMMON] = {
+		is_light,
 		is_sphere,
 		is_plane,
 		is_cylinder,
-		is_light
+		is_texture_solid
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)
@@ -42,10 +43,11 @@ t_patternmatcher	common_patternmatcher_manager(int i)
 t_builder	common_builder_manager(int i)
 {
 	static const t_builder			common_builder[N_IDENTIFIER_COMMON] = {
+		build_light,
 		build_sphere,
 		build_plane,
 		build_cylinder,
-		build_light
+		build_texture_solid
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)

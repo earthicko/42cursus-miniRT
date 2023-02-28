@@ -17,21 +17,23 @@
 # define RANGE_MIN_COLOR	0.0
 # define RANGE_MAX_COLOR	256.0
 # define E_NORMALIZEDVEC3	1e-3
-# define N_IDENTIFIER			6
+# define N_IDENTIFIER			7
 # define N_IDENTIFIER_UNIQUE	2
-# define N_IDENTIFIER_COMMON	4
+# define N_IDENTIFIER_COMMON	5
 # define IDENTIFIER_AMBIENTLIGHTING	"A"
 # define IDENTIFIER_CAMERA			"C"
+# define IDENTIFIER_LIGHT			"l"
 # define IDENTIFIER_SPHERE			"sp"
 # define IDENTIFIER_PLANE			"pl"
 # define IDENTIFIER_CYLINDER		"cy"
-# define IDENTIFIER_LIGHT			"l"
+# define IDENTIFIER_TEXTURE			"tx"
 # define IDENTIFIER_NAME_AMBIENTLIGHTING	"Ambient Lighting"
 # define IDENTIFIER_NAME_CAMERA				"Camera"
 # define IDENTIFIER_NAME_LIGHT				"Light"
 # define IDENTIFIER_NAME_SPHERE				"Sphere"
 # define IDENTIFIER_NAME_PLANE				"Plane"
 # define IDENTIFIER_NAME_CYLINDER			"Cylinder"
+# define IDENTIFIER_NAME_TEXTURE			"Texture"
 # define N_TOKENTYPE 4
 
 typedef enum e_tokentype

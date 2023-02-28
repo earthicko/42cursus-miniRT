@@ -113,6 +113,7 @@ FILENAME		= \
 				parser/builder/build_sphere \
 				parser/builder/build_plane \
 				parser/builder/build_cylinder \
+				parser/builder/build_texture_solid \
 				scene/create \
 				renderer/render \
 				renderer/init \
