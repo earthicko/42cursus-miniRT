@@ -20,5 +20,6 @@ double	deg_to_rad(double deg);
 int		is_near_zero(double num);
 double	map_minmax(double x, const t_minmax *in, const t_minmax *out);
 int		clamp_int(int x, int min, int max);
+void	swap_double(double *a, double *b);
 
 #endif
