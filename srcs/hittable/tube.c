@@ -14,7 +14,23 @@ static t_bool	root_is_out_of_range(t_hittable_tube *tube, t_hit_record *rec)
 	return (FALSE);
 }
 
-static void	tube_hit_record_set_normal_and_face(const t_hittable_tube *tube,
+/*
+	This function should find Point q, that is on axis 
+	and following following condition is met.
+
+	Point P is hit point
+	Point Q is on the axis. PQ_vec * axis_vec = 0 (Perpendicular)
+
+	Line by axis: C_point + t * axis_vec (different from ray)
+				  The given point C is the center of the disk.
+	
+	Equation system:
+	(Q - P) * axis_vec = 0
+	(C + t * axis_vec - P) * axis_vec = 0;
+	t= (P - C) * axis_vec / axis_vec * axis_vec 
+	
+*/
+static void	tube_hit_record_set_normal_and_face(t_hittable_tube *tube,
 											t_hit_record *rec,
 											const t_ray *ray)
 {
@@ -48,8 +64,21 @@ static void	set_coefficient(double coef[3],
 				- pow(tube->radius, 2);
 }
 
-// URL: http://www.illusioncatalyst.com/notes_files/mathematics
-//  	/line_cylinder_intersection.php
+// Reference: http://www.illusioncatalyst.com/notes_files/mathematics
+//  		/line_cylinder_intersection.php
+/*
+
+	Point C is the center of the disk
+
+	Line: A_point + t * dir_vec
+	   The given point A is origin of the line,
+	   The vector dir is direction vector of line 
+
+	reference's w_vec is ca vector
+*/
+
+// TODO: ray_and_norm_are_perpendicular 함수 따로 뺄 것
+// TODO: 다른 객체들은 충돌시키기 전에 수직인지 미리 아는 방법이 없기에 교점 구한 후 확인
 t_bool	hit_tube(t_hittable *hittable,
 					const t_ray *ray,
 					t_minmax t,
