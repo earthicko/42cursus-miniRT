@@ -23,23 +23,18 @@ t_bool	solve_equation_system_plane_and_line(const t_minmax t, \
 
 /******* hit function for each object *******/
 
-void	set_tube_of_cylinder(t_hittable_tube *tube, \
-								t_cylinder_info *cylinder_info, \
-								t_material *material);
+t_bool	hit_tube(t_hittable *hittable, \
+					const t_ray *ray, \
+					t_minmax t, \
+					t_hit_record *rec);
 
-void	set_disk_of_cylinder(t_hittable_disk *disk, \
-								t_cylinder_info *cylinder_info, \
-								t_material *material, \
-								int disk_type);
+t_bool	hit_disk(t_hittable *hittable, \
+					const t_ray *ray, \
+					t_minmax t, \
+					t_hit_record *rec);
 
-
-/******* Set cones's elements *******/
-
-void	set_disk_of_cone(t_hittable_disk *disk, \
-							t_cone_info *cone_info, \
-							t_material *material);
-
-void	set_conical_hat_of_cylinder(t_hittable_conical_hat *conical_hat, \
-									t_cone_info *cone_info, \
-									t_material *material);
+t_bool	hit_conical_hat(t_hittable *hittable, \
+						const t_ray *ray, \
+						t_minmax t, \
+						t_hit_record *rec);
 #endif
