@@ -3,8 +3,10 @@
 
 # include "../parser_internal.h"
 
-int		add_texture_solid(t_scene *scene, const char *solid, t_color color);
-int		add_material_lambertian(t_scene *scene, t_texture *texture);
+int		add_texture_solid(t_scene *scene,
+			const char *solid, t_color color);
+int		add_material_lambertian(t_scene *scene,
+			const char *name, t_texture *texture);
 void	map_color(t_color *color);
 
 t_bool	is_ambient_lighting(const t_ptrarr *tokens);
@@ -15,6 +17,7 @@ t_bool	is_plane(const t_ptrarr *tokens);
 t_bool	is_cylinder(const t_ptrarr *tokens);
 t_bool	is_texture_solid(const t_ptrarr *tokens);
 t_bool	is_texture_checker(const t_ptrarr *tokens);
+t_bool	is_material_lambertian(const t_ptrarr *tokens);
 
 t_bool	is_invalid_ratio(double ratio);
 t_bool	is_invalid_length(double len);
@@ -39,6 +42,8 @@ int		build_cylinder(
 int		build_texture_solid(
 			const t_ptrarr *tokens, t_scene *scene);
 int		build_texture_checker(
+			const t_ptrarr *tokens, t_scene *scene);
+int		build_material_lambertian(
 			const t_ptrarr *tokens, t_scene *scene);
 
 #endif

@@ -53,27 +53,31 @@ static char	*get_filename(int n)
 	return (filename);
 }
 
-static void	renderer_render_flush(t_renderer *renderer, int n_samples)
+static void	renderer_render_update(t_renderer *renderer, int n_samples)
 {
 	char	*filename;
 
 	if (n_samples >= renderer->n_samples
+		|| n_samples == 1
 		|| n_samples % RENDERER_UPDATE_FREQ_SHOW == 0
 		|| n_samples % RENDERER_UPDATE_FREQ_SAVE == 0)
 		renderer_write_color(renderer, n_samples);
 	if (n_samples >= renderer->n_samples
+		|| n_samples == 1
 		|| n_samples % RENDERER_UPDATE_FREQ_SHOW == 0)
 		display_putimage(renderer->disp);
-	filename = get_filename(n_samples);
-	if (!filename)
-	{
-		printf("%s: "MSG_MALLOC, EXEC_NAME);
-		return ;
-	}
 	if (n_samples >= renderer->n_samples
 		|| n_samples % RENDERER_UPDATE_FREQ_SAVE == 0)
+	{
+		filename = get_filename(n_samples);
+		if (!filename)
+		{
+			printf("%s: "MSG_MALLOC, EXEC_NAME);
+			return ;
+		}
 		display_save_bmp(renderer->disp, filename);
-	free(filename);
+		free(filename);
+	}
 }
 
 void	timeman(int mode);
@@ -86,22 +90,21 @@ int	renderer_render(void *param)
 	static int	render_finished;
 
 	renderer = (t_renderer *)param;
+	if (render_finished == 1)
+		return (0);
 	if (n_samples_so_far == 0)
 		timeman(0);
 	if (n_samples_so_far >= renderer->n_samples)
 	{
-		if (!render_finished)
-		{
-			printf("\nRender finished.\n");
-			render_finished = 1;
-			timeman(1);
-			renderer_render_flush(renderer, n_samples_so_far);
-		}
+		printf("\nRender finished.\n");
+		render_finished = 1;
+		timeman(1);
+		renderer_render_update(renderer, n_samples_so_far);
 		return (0);
 	}
 	renderer_render_loop(renderer);
 	n_samples_so_far++;
 	renderer_render_showstat(renderer, n_samples_so_far);
-	renderer_render_flush(renderer, n_samples_so_far);
+	renderer_render_update(renderer, n_samples_so_far);
 	return (0);
 }

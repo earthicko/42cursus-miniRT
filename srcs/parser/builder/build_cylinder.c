@@ -67,7 +67,7 @@ int	build_cylinder(const t_ptrarr *tokens, t_scene *scene)
 	map_color(&color);
 	if (add_texture_solid(scene, "", color))
 		return (CODE_ERROR_MALLOC);
-	if (add_material_lambertian(scene, ptrarr_getlast(scene->res.textures)))
+	if (add_material_lambertian(scene, "", ptrarr_getlast(scene->res.textures)))
 		return (CODE_ERROR_MALLOC);
 	if (add_cylinder(scene, &info, ptrarr_getlast(scene->res.materials)))
 		return (CODE_ERROR_MALLOC);

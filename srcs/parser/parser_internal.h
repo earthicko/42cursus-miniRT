@@ -17,24 +17,27 @@
 # define RANGE_MIN_COLOR	0.0
 # define RANGE_MAX_COLOR	256.0
 # define E_NORMALIZEDVEC3	1e-3
-# define N_IDENTIFIER			8
+# define N_IDENTIFIER			9
 # define N_IDENTIFIER_UNIQUE	2
-# define N_IDENTIFIER_COMMON	6
-# define IDENTIFIER_AMBIENTLIGHTING	"A"
-# define IDENTIFIER_CAMERA			"C"
-# define IDENTIFIER_LIGHT			"l"
-# define IDENTIFIER_SPHERE			"sp"
-# define IDENTIFIER_PLANE			"pl"
-# define IDENTIFIER_CYLINDER		"cy"
-# define IDENTIFIER_TEXTURE_SOLID	"tx_solid"
-# define IDENTIFIER_TEXTURE_CHECKER	"tx_checker"
-# define IDENTIFIER_NAME_AMBIENTLIGHTING	"Ambient Lighting"
-# define IDENTIFIER_NAME_CAMERA				"Camera"
-# define IDENTIFIER_NAME_LIGHT				"Light"
-# define IDENTIFIER_NAME_SPHERE				"Sphere"
-# define IDENTIFIER_NAME_PLANE				"Plane"
-# define IDENTIFIER_NAME_CYLINDER			"Cylinder"
-# define IDENTIFIER_NAME_TEXTURE			"Texture"
+# define N_IDENTIFIER_COMMON	7
+# define IDENTIFIER_AMBIENTLIGHTING		"A"
+# define IDENTIFIER_CAMERA				"C"
+# define IDENTIFIER_LIGHT				"l"
+# define IDENTIFIER_SPHERE				"sp"
+# define IDENTIFIER_PLANE				"pl"
+# define IDENTIFIER_CYLINDER			"cy"
+# define IDENTIFIER_TEXTURE_SOLID		"tx_solid"
+# define IDENTIFIER_TEXTURE_CHECKER		"tx_checker"
+# define IDENTIFIER_MATERIAL_LAMBERTIAN	"mt_lambertian"
+# define IDENTIFIER_NAME_AMBIENTLIGHTING		"Ambient Lighting"
+# define IDENTIFIER_NAME_CAMERA					"Camera"
+# define IDENTIFIER_NAME_LIGHT					"Light"
+# define IDENTIFIER_NAME_SPHERE					"Sphere"
+# define IDENTIFIER_NAME_PLANE					"Plane"
+# define IDENTIFIER_NAME_CYLINDER				"Cylinder"
+# define IDENTIFIER_NAME_TEXTURE_SOLID			"Texture (Solid)"
+# define IDENTIFIER_NAME_TEXTURE_CHECKER		"Texture (Checker)"
+# define IDENTIFIER_NAME_MATERIAL_LAMBERTIAN	"Material (Lambertian)"
 # define N_TOKENTYPE 4
 
 typedef enum e_tokentype
