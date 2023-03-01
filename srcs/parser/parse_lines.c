@@ -105,7 +105,10 @@ int	parse_lines(const t_ptrarr *lines, t_scene *scene)
 	{
 		stat = parse_unique_entity_loop(already_found, lines->data[i], scene);
 		if (stat < 0)
+		{
+			printf("%s: "MSG_PARSEFAIL"\n", EXEC_NAME, lines->data[i]);
 			return (stat);
+		}
 		if (stat == FALSE)
 		{
 			stat = parse_common_entity(lines->data[i], scene);
