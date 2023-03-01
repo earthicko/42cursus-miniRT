@@ -160,6 +160,8 @@ t_hittable			*hittable_plane_create(t_point point, \
 											t_material *material);
 t_hittable			*hittable_cylinder_create(t_cylinder_info *cylinder_info, \
 												t_material *material);
+t_hittable			*hittable_cone_create(t_cone_info *cone_info, \
+											t_material *material);
 t_hittable			*hittable_list_create(void);
 t_hittable			*hittable_transform_create(t_hittable *base, \
 												t_point orig, \
