@@ -1,0 +1,13 @@
+tx_solid   red     255,   0,   0
+tx_solid   green     0, 255,   0
+tx_solid   blue      0,   0, 255
+tx_solid   white   255, 255, 255
+tx_solid   black     0,   0,   0
+
+tx_checker bw     black white  1
+
+mt_lambertian     plain_white   white
+mt_lambertian     plain_black   black
+mt_lambertian     checker       bw
+mt_metal          silver        white   0.1
+mt_dielectric     glass         1.52
