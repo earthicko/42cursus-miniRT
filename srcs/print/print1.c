@@ -32,6 +32,16 @@ void	print_cylinder_info(const t_cylinder_info *info)
 	printf(")");
 }
 
+void	print_cone_info(const t_cone_info *info)
+{
+	printf("cone (center ");
+	print_vec3(&info->center_of_disk);
+	printf(", axis ");
+	print_vec3(&info->axis);
+	printf(", r %.2f h %.2f", info->radius, info->height);
+	printf(")");
+}
+
 void	print_bbox(const t_bbox *bbox)
 {
 	printf("bbox (");
