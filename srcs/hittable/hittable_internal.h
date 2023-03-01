@@ -36,4 +36,20 @@ t_bool	hit_conical_hat(t_hittable *hittable, \
 						const t_ray *ray, \
 						t_minmax t, \
 						t_hit_record *rec);
+
+t_bool	hit_xy_rectangle(t_hittable *hittable, \
+						const t_ray *ray, \
+						t_minmax t, \
+						t_hit_record *rec);
+
+t_bool	hit_yz_rectangle(t_hittable *hittable, \
+						const t_ray *ray, \
+						t_minmax t, \
+						t_hit_record *rec);
+
+t_bool	hit_zx_rectangle(t_hittable *hittable, \
+						const t_ray *ray, \
+						t_minmax t, \
+						t_hit_record *rec);
+
 #endif

@@ -92,6 +92,8 @@ FILENAME		= \
 				hittable/transform \
 				hittable/cone \
 				hittable/conical_hat \
+				hittable/aa_rectangle_create \
+				hittable/aa_rectangle_hit \
 				material/diffuse_light \
 				material/metal \
 				material/dielectric \
@@ -178,6 +180,9 @@ test_transform: tests/transform.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 test_cone_create: tests/cone_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/cone_create.o -o $@ $(LDFLAGS)
 
+test_aa_rect_create: tests/aa_rect_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/aa_rect_create.o -o $@ $(LDFLAGS)
+
 -include $(DEP)
 
 clean:
@@ -189,7 +194,8 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
-	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable test_pointer_speed test_mtx_inverse test_transform
+	$(RM) test_vectors test_camera test_texture test_material test_parser test_hittable test_pointer_speed test_mtx_inverse test_transform \
+	      test_cone_create test_aa_rect_create
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBMLX_DIR)
 
