@@ -35,7 +35,9 @@ t_patternmatcher	common_patternmatcher_manager(int i)
 		is_cone,
 		is_texture_solid,
 		is_texture_checker,
-		is_material_lambertian
+		is_material_lambertian,
+		is_material_metal,
+		is_material_dielectric
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)
@@ -53,7 +55,9 @@ t_builder	common_builder_manager(int i)
 		build_cone,
 		build_texture_solid,
 		build_texture_checker,
-		build_material_lambertian
+		build_material_lambertian,
+		build_material_metal,
+		build_material_dielectric
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)

@@ -17,9 +17,9 @@
 # define RANGE_MIN_COLOR	0.0
 # define RANGE_MAX_COLOR	256.0
 # define E_NORMALIZEDVEC3	1e-3
-# define N_IDENTIFIER			10
+# define N_IDENTIFIER			12
 # define N_IDENTIFIER_UNIQUE	2
-# define N_IDENTIFIER_COMMON	8
+# define N_IDENTIFIER_COMMON	10
 # define IDENTIFIER_AMBIENTLIGHTING		"A"
 # define IDENTIFIER_CAMERA				"C"
 # define IDENTIFIER_LIGHT				"l"
@@ -30,6 +30,8 @@
 # define IDENTIFIER_TEXTURE_SOLID		"tx_solid"
 # define IDENTIFIER_TEXTURE_CHECKER		"tx_checker"
 # define IDENTIFIER_MATERIAL_LAMBERTIAN	"mt_lambertian"
+# define IDENTIFIER_MATERIAL_METAL		"mt_metal"
+# define IDENTIFIER_MATERIAL_DIELECTRIC	"mt_dielectric"
 # define IDENTIFIER_NAME_AMBIENTLIGHTING		"Ambient Lighting"
 # define IDENTIFIER_NAME_CAMERA					"Camera"
 # define IDENTIFIER_NAME_LIGHT					"Light"
@@ -40,6 +42,8 @@
 # define IDENTIFIER_NAME_TEXTURE_SOLID			"Texture (Solid)"
 # define IDENTIFIER_NAME_TEXTURE_CHECKER		"Texture (Checker)"
 # define IDENTIFIER_NAME_MATERIAL_LAMBERTIAN	"Material (Lambertian)"
+# define IDENTIFIER_NAME_MATERIAL_METAL			"Material (Metal)"
+# define IDENTIFIER_NAME_MATERIAL_DIELECTRIC	"Material (Dielectric)"
 # define N_TOKENTYPE 4
 
 typedef enum e_tokentype

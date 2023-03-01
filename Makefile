@@ -120,6 +120,8 @@ FILENAME		= \
 				parser/builder/build_texture_solid \
 				parser/builder/build_texture_checker \
 				parser/builder/build_material_lambertian \
+				parser/builder/build_material_metal \
+				parser/builder/build_material_dielectric \
 				scene/create \
 				scene/search \
 				renderer/render \
