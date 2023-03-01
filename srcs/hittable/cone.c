@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <math.h>
 #include "libft.h"
 #include "geometry.h"
 #include "number.h"
@@ -40,7 +41,7 @@ static void	set_disk_of_cone(t_hittable_disk *disk,
 /*
 	t_vec 3 shift: Add shift to center_of_disk to get apex point.
 */
-static void	set_conical_hat_of_cylinder(t_hittable_conical_hat *conical_hat,
+static void	set_conical_hat_of_cone(t_hittable_conical_hat *conical_hat,
 										t_cone_info *cone_info,
 										t_material *material)
 {
