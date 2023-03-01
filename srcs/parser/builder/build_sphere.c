@@ -5,35 +5,8 @@
 #include "print.h"
 #include "builder_internal.h"
 
-/*
-		sp 0.0,0.0,20.6 12.6 10,0,255
-	∗ identifier: sp
-	∗ x,y,z coordinates of the sphere center: 0.0,0.0,20.6
-	∗ the sphere diameter: 12.6
-	∗ R,G,B colors in range [0-255]: 10, 0, 255
-*/
-t_bool	is_sphere(const t_ptrarr *tokens)
-{
-	static const int	patternlen = 12;
-	static const int	pattern[12] = {
-		TOKENTYPE_IDENTIFIER,
-		TOKENTYPE_NUMBER,
-		TOKENTYPE_COMMA,
-		TOKENTYPE_NUMBER,
-		TOKENTYPE_COMMA,
-		TOKENTYPE_NUMBER,
-		TOKENTYPE_NUMBER,
-		TOKENTYPE_NUMBER,
-		TOKENTYPE_COMMA,
-		TOKENTYPE_NUMBER,
-		TOKENTYPE_COMMA,
-		TOKENTYPE_NUMBER
-	};
-
-	if (is_in_pattern(IDENTIFIER_SPHERE, pattern, patternlen, tokens))
-		return (TRUE);
-	return (FALSE);
-}
+t_bool	is_sphere_with_color(const t_ptrarr *tokens);
+t_bool	is_sphere_with_material(const t_ptrarr *tokens);
 
 static int	add_sphere(t_scene *scene, t_point cen, double d, t_material *m)
 {
@@ -53,7 +26,7 @@ static int	add_sphere(t_scene *scene, t_point cen, double d, t_material *m)
 	return (CODE_OK);
 }
 
-int	build_sphere(const t_ptrarr *tokens, t_scene *scene)
+int	build_sphere_with_color(const t_ptrarr *tokens, t_scene *scene)
 {
 	t_point		cen;
 	double		d;
@@ -77,4 +50,32 @@ int	build_sphere(const t_ptrarr *tokens, t_scene *scene)
 	print_vec3(&color);
 	printf(")\n");
 	return (CODE_OK);
+}
+
+int	build_sphere_with_material(const t_ptrarr *tokens, t_scene *scene)
+{
+	t_point		cen;
+	double		d;
+	t_material	*mt;
+
+	build_vector(&cen, &tokens->data[1]);
+	d = ft_atof(tokens->data[6]);
+	mt = scene_search_material(scene, tokens->data[7]);
+	if (is_invalid_length(d / 2) || !mt)
+		return (CODE_ERROR_DATA);
+	if (add_sphere(scene, cen, d, mt))
+		return (CODE_ERROR_MALLOC);
+	printf("%s: sphere (center ", __func__);
+	print_vec3(&cen);
+	printf(", radius %.2f, material %s)\n", d / 2, mt->name);
+	return (CODE_OK);
+}
+
+int	build_sphere(const t_ptrarr *tokens, t_scene *scene)
+{
+	if (is_sphere_with_color(tokens))
+		return (build_sphere_with_color(tokens, scene));
+	if (is_sphere_with_material(tokens))
+		return (build_sphere_with_material(tokens, scene));
+	return (CODE_ERROR_DATA);
 }
