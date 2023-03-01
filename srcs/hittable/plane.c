@@ -37,6 +37,7 @@ t_bool	hit_plane(t_hittable *hittable,
 	outward_norm = this->norm;
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 	rec->material = this->material;
+	vec2_setval(&rec->uv, 0, 0);
 	return (TRUE);
 }
 

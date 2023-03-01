@@ -3,6 +3,7 @@
 #include "hittable_internal.h"
 
 // TODO: x0, x1 대소 반드시 모든 함수에 대해 체크할 것
+// TODO: implement u/v calculation
 t_bool	hit_xy_rectangle(t_hittable *hittable,
 						const t_ray *ray,
 						t_minmax t,
@@ -26,10 +27,12 @@ t_bool	hit_xy_rectangle(t_hittable *hittable,
 		return (FALSE);
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 	rec->material = this->material;
+	vec2_setval(&rec->uv, 0, 0);
 	return (TRUE);
 }
 
 // TODO: x0, x1 대소 반드시 모든 함수에 대해 체크할 것
+// TODO: implement u/v calculation
 t_bool	hit_yz_rectangle(t_hittable *hittable,
 						const t_ray *ray,
 						t_minmax t,
@@ -53,10 +56,12 @@ t_bool	hit_yz_rectangle(t_hittable *hittable,
 		return (FALSE);
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 	rec->material = this->material;
+	vec2_setval(&rec->uv, 0, 0);
 	return (TRUE);
 }
 
 // TODO: x0, x1 대소 반드시 모든 함수에 대해 체크할 것
+// TODO: implement u/v calculation
 t_bool	hit_zx_rectangle(t_hittable *hittable,
 						const t_ray *ray,
 						t_minmax t,
@@ -80,5 +85,6 @@ t_bool	hit_zx_rectangle(t_hittable *hittable,
 		return (FALSE);
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 	rec->material = this->material;
+	vec2_setval(&rec->uv, 0, 0);
 	return (TRUE);
 }

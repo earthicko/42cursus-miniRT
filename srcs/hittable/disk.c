@@ -24,6 +24,7 @@ static t_bool	root_is_out_of_range(t_hittable_disk *disk, t_hit_record *rec)
 }
 
 // TODO: hit 함수들 static으로 수정해볼 것
+// TODO: implement u/v calculation
 /*
 	This function needs to solve equation system of plane and straight line. 
 	The additional thing to do is to make sure,
@@ -52,5 +53,6 @@ t_bool	hit_disk(t_hittable *hittable,
 	rec->material = this->material;
 	outward_norm = this->plane.norm;
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
+	vec2_setval(&rec->uv, 0, 0);
 	return (TRUE);
 }

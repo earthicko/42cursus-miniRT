@@ -93,6 +93,7 @@ static void	set_coefficient(double coef[3],
 
 // TODO: 법선에 수직인 경우(중근), 예외처리 추가
 // TODO: root_is_out_of_range 필요시 추가
+// TODO: implement u/v calculation
 /*
 	This function needs to solve equation system of cone and straight line.
 	We can get quadratic equation for 't' by aligning this equation system.
@@ -117,5 +118,6 @@ t_bool	hit_conical_hat(t_hittable *hittable,
 	conical_hat_record_set_normal_and_face(this, rec, ray);
 	if (fabs(vec3_dot_vec3(&rec->normal, &ray->dir)) < DOUBLE_E)
 		return (FALSE);
+	vec2_setval(&rec->uv, 0, 0);
 	return (TRUE);
 }
