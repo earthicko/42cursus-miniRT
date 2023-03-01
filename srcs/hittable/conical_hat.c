@@ -89,7 +89,6 @@ static void	set_coefficient(double coef[3],
 				- m * pow(vec3_dot_vec3(&ha, &hat->axis), 2) \
 				- pow(vec3_dot_vec3(&ha, &hat->axis), 2) \
 				- pow(vec3_dot_vec3(&ha, &hat->axis), 2);
-
 }
 
 // TODO: 법선에 수직인 경우(중근), 예외처리 추가

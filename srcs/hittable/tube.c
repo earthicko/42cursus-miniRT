@@ -4,7 +4,6 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
-
 static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
 													t_vec3 *axis)
 {

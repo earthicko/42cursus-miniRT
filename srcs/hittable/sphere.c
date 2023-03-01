@@ -5,7 +5,6 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
-
 static void	set_coefficient(double coef[3],
 							t_hittable_sphere *sphere,
 							const t_ray *ray)

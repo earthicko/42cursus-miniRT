@@ -20,7 +20,6 @@ t_bool	solver_equation_system_plane_and_line(const t_minmax t, \
 												const t_ray *ray, \
 												double *root);
 
-
 /******* hit function for each object *******/
 
 t_bool	hit_tube(t_hittable *hittable, \

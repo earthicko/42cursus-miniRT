@@ -26,7 +26,6 @@ void				hit_record_set_normal_and_face(t_hit_record *rec, \
 													const t_ray *ray, \
 													const t_vec3 *normal);
 
-
 /******* hittable abstract struct *******/
 
 typedef struct s_hittable	t_hittable;
@@ -50,7 +49,6 @@ typedef struct s_hittable_transform
 	t_mtx44			w_to_o;
 	t_mtx44			o_to_w;
 }	t_hittable_transform;
-
 
 /******* hittable real objects struct *******/
 
@@ -151,7 +149,6 @@ typedef struct s_hittable_list
 	t_bbox			bbox;
 	t_ptrarr		*elements;
 }	t_hittable_list;
-
 
 /******* hittable objects constructor, destructor *******/
 

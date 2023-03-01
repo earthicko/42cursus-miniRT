@@ -46,7 +46,6 @@ static void	set_conical_hat_of_cylinder(t_hittable_conical_hat *conical_hat,
 {
 	t_vec3	shift;
 
-
 	conical_hat->hit = hit_conical_hat;
 	conical_hat->material = material;
 	conical_hat->apex = cone_info->center_of_disk;
