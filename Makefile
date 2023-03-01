@@ -42,6 +42,7 @@ TESTER_FILENAME	= \
 				mtx_inverse \
 				tube \
 				transform \
+				cone_create \
 
 TESTER_SRC		= $(addprefix tests/, $(addsuffix .c, $(TESTER_FILENAME)))
 TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
@@ -89,6 +90,8 @@ FILENAME		= \
 				hittable/cylinder \
 				hittable/list \
 				hittable/transform \
+				hittable/cone \
+				hittable/conical_hat \
 				material/diffuse_light \
 				material/metal \
 				material/dielectric \
@@ -169,6 +172,9 @@ test_mtx_inverse: tests/mtx_inverse.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 
 test_transform: tests/transform.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/transform.o -o $@ $(LDFLAGS)
+
+test_cone_create: tests/cone_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/cone_create.o -o $@ $(LDFLAGS)
 
 -include $(DEP)
 
