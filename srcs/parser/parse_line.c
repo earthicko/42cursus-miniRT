@@ -1,7 +1,7 @@
 #include "parser_internal.h"
 
 /*
-	returns TRUE if line matches pattern, FALSE if doesn't,
+	returns TRUE if parsing was successful, FALSE if wasn't,
 	negative if error occurs.
 */
 int	parse_line(const char *line, t_scene *scene,
