@@ -1,5 +1,6 @@
 #include "mlx.h"
 #include "mlx_interface.h"
+#include "settingman.h"
 
 static void	display_putpixel_forreal(t_display *disp, t_pixel p)
 {

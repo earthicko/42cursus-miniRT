@@ -4,7 +4,7 @@
 #include "libft.h"
 #include "mlx_interface_internal.h"
 #include "msgdef.h"
-#include "settings.h"
+#include "settingman.h"
 
 static void	display_save_bmp_init(const t_display *disp,
 								t_uchar *fileheader, t_uchar *infoheader)

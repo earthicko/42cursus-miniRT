@@ -3,6 +3,7 @@
 #include "libft.h"
 #include "msgdef.h"
 #include "renderer.h"
+#include "settingman.h"
 
 void	renderer_render_pixel(t_renderer *renderer, int x, int y);
 void	renderer_write_color(t_renderer *renderer, int n_samples);

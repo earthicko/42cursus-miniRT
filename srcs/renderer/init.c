@@ -2,6 +2,7 @@
 #include "libft.h"
 #include "renderer.h"
 #include "parser.h"
+#include "settingman.h"
 
 void	renderer_destroy(t_renderer *renderer)
 {

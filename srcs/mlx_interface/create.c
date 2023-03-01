@@ -2,6 +2,7 @@
 #include "mlx_interface.h"
 #include "mlx.h"
 #include "renderer.h"
+#include "settingman.h"
 #include <stdlib.h>
 
 int	exit_program(void *param)

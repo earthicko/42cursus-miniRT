@@ -5,6 +5,7 @@
 # include "ptrarr.h"
 # include "scene.h"
 # include "builder/builder_internal.h"
+# include "settingman.h"
 
 # define PARSER_DELIMETER	' '
 # define PARSER_COMMA		','
@@ -17,9 +18,13 @@
 # define RANGE_MIN_COLOR	0.0
 # define RANGE_MAX_COLOR	256.0
 # define E_NORMALIZEDVEC3	1e-3
-# define N_IDENTIFIER			12
+# define N_IDENTIFIER			15
+# define N_IDENTIFIER_SETTING	3
 # define N_IDENTIFIER_UNIQUE	2
 # define N_IDENTIFIER_COMMON	10
+# define IDENTIFIER_SETTING_DISPLAY		"display"
+# define IDENTIFIER_SETTING_CAMERA		"camera"
+# define IDENTIFIER_SETTING_RENDERER	"renderer"
 # define IDENTIFIER_AMBIENTLIGHTING		"A"
 # define IDENTIFIER_CAMERA				"C"
 # define IDENTIFIER_LIGHT				"l"
@@ -32,18 +37,6 @@
 # define IDENTIFIER_MATERIAL_LAMBERTIAN	"mt_lambertian"
 # define IDENTIFIER_MATERIAL_METAL		"mt_metal"
 # define IDENTIFIER_MATERIAL_DIELECTRIC	"mt_dielectric"
-# define IDENTIFIER_NAME_AMBIENTLIGHTING		"Ambient Lighting"
-# define IDENTIFIER_NAME_CAMERA					"Camera"
-# define IDENTIFIER_NAME_LIGHT					"Light"
-# define IDENTIFIER_NAME_SPHERE					"Sphere"
-# define IDENTIFIER_NAME_PLANE					"Plane"
-# define IDENTIFIER_NAME_CYLINDER				"Cylinder"
-# define IDENTIFIER_NAME_CONE					"Cone"
-# define IDENTIFIER_NAME_TEXTURE_SOLID			"Texture (Solid)"
-# define IDENTIFIER_NAME_TEXTURE_CHECKER		"Texture (Checker)"
-# define IDENTIFIER_NAME_MATERIAL_LAMBERTIAN	"Material (Lambertian)"
-# define IDENTIFIER_NAME_MATERIAL_METAL			"Material (Metal)"
-# define IDENTIFIER_NAME_MATERIAL_DIELECTRIC	"Material (Dielectric)"
 # define N_TOKENTYPE 4
 
 typedef enum e_tokentype
@@ -60,6 +53,8 @@ typedef int			(*t_builder)(const t_ptrarr *tokens, t_scene *scene);
 
 char				*tokenname_manager(int i);
 t_wordtester		wordtester_manager(int i);
+t_patternmatcher	setting_patternmatcher_manager(int i);
+t_builder			setting_builder_manager(int i);
 t_patternmatcher	unique_patternmatcher_manager(int i);
 t_builder			unique_builder_manager(int i);
 t_patternmatcher	common_patternmatcher_manager(int i);

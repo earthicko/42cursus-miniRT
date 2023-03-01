@@ -3,7 +3,6 @@
 
 # include "geometry.h"
 # include "ray.h"
-# include "settings.h"
 
 typedef struct s_camerainfo
 {

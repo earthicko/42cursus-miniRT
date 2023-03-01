@@ -3,7 +3,6 @@
 
 # include "libft_def.h"
 # include "geometry.h"
-# include "settings.h"
 
 enum	e_appkitkeycode
 {

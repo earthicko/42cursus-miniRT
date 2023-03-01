@@ -103,11 +103,14 @@ FILENAME		= \
 				texture/solid \
 				texture/checker \
 				parser/parse_scene \
+				parser/settingman \
 				parser/managers1 \
 				parser/managers2 \
+				parser/managers3 \
 				parser/tokenizer \
 				parser/get_tokentype \
 				parser/parse_lines \
+				parser/parse_lines_utils \
 				parser/parse_line \
 				parser/builder/add_resource \
 				parser/builder/utils \
