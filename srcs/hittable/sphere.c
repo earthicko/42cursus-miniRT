@@ -5,6 +5,17 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
+static void	set_uv(t_hit_record *rec, const t_vec3 *outward_norm)
+{
+	double	theta;
+	double	phi;
+
+	theta = acos(-(outward_norm->i[1]));
+	phi = atan2(-(outward_norm->i[2]), outward_norm->i[0]) + M_PI;
+	rec->uv.i[0] = phi / (M_PI * 2);
+	rec->uv.i[1] = theta / M_PI;
+}
+
 static void	set_coefficient(double coef[3],
 							t_hittable_sphere *sphere,
 							const t_ray *ray)
@@ -62,6 +73,7 @@ t_bool	hit_sphere(t_hittable *hittable,
 		return (FALSE);
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 	rec->material = this->material;
+	set_uv(rec, &outward_norm);
 	return (TRUE);
 }
 
