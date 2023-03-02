@@ -62,12 +62,16 @@ typedef struct s_display
 
 typedef struct s_imgwrapper
 {
-	void		*mlx_img;
+	void		*mlx;
+	void		*img;
+	char		*data_addr;
 	int			width;
 	int			height;
+	int			bpp;
+	int			nbytes;
+	int			endian;
 	t_minmax	x_range;
 	t_minmax	y_range;
-	t_display	*disp;
 }	t_imgwrapper;
 
 int				exit_program(void *param);
@@ -81,7 +85,7 @@ void			display_putimage(t_display *disp);
 
 int				display_save_bmp(const t_display *disp, const char *path);
 
-t_imgwrapper	*imgwrapper_create(t_display *disp, char *filename);
+t_imgwrapper	*imgwrapper_create(void *mlx, char *filename);
 void			imgwrapper_destroy(t_imgwrapper *img);
 void			imgwrapper_getcolor(t_imgwrapper *img,
 					t_color *out, const t_uv *uv);
