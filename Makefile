@@ -26,34 +26,6 @@ DIR_OBJ			= objs/
 DIR_TEST_SRC	= tests/
 DIR_TEST_OBJ	= test_objs/
 
-DRIVER_FILENAME	= main
-DRIVER_SRC		= $(addprefix $(DIR_SRC), $(addsuffix .c, $(DRIVER_FILENAME)))
-DRIVER_OBJ		= $(addprefix $(DIR_OBJ), $(addsuffix .o, $(DRIVER_FILENAME)))
-DRIVER_DEP		= $(addprefix $(DIR_OBJ), $(addsuffix .d, $(DRIVER_FILENAME)))
-
-TEST_FILENAME	= \
-				vectors_arithmetic \
-
-TEST_SRC		= $(addprefix $(DIR_TEST_SRC), $(addsuffix .c, $(TEST_FILENAME)))
-TEST_OBJ		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .o, $(TEST_FILENAME)))
-TEST_DEP		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .d, $(TEST_FILENAME)))
-
-TESTER_FILENAME	= \
-				vectors \
-				camera \
-				hittable \
-				texture \
-				material \
-				parser \
-				mtx_inverse \
-				tube \
-				transform \
-				cone_create \
-
-TESTER_SRC		= $(addprefix $(DIR_TEST_SRC), $(addsuffix .c, $(TESTER_FILENAME)))
-TESTER_OBJ		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .o, $(TESTER_FILENAME)))
-TESTER_DEP		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .d, $(TESTER_FILENAME)))
-
 FILENAME		= \
 				timeman \
 				geometry/matrix_init \
@@ -150,6 +122,35 @@ FILENAME		= \
 SRC				= $(addprefix $(DIR_SRC), $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILENAME)))
 DEP				= $(addprefix $(DIR_OBJ), $(addsuffix .d, $(FILENAME)))
+
+DRIVER_FILENAME	= main
+DRIVER_SRC		= $(addprefix $(DIR_SRC), $(addsuffix .c, $(DRIVER_FILENAME)))
+DRIVER_OBJ		= $(addprefix $(DIR_OBJ), $(addsuffix .o, $(DRIVER_FILENAME)))
+DRIVER_DEP		= $(addprefix $(DIR_OBJ), $(addsuffix .d, $(DRIVER_FILENAME)))
+
+TEST_FILENAME	= \
+				vectors_arithmetic \
+
+TEST_SRC		= $(addprefix $(DIR_TEST_SRC), $(addsuffix .c, $(TEST_FILENAME)))
+TEST_OBJ		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .o, $(TEST_FILENAME)))
+TEST_DEP		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .d, $(TEST_FILENAME)))
+
+TESTER_FILENAME	= \
+				vectors \
+				camera \
+				hittable \
+				texture \
+				material \
+				parser \
+				mtx_inverse \
+				tube \
+				transform \
+				cone_create \
+
+TESTER_SRC		= $(addprefix $(DIR_TEST_SRC), $(addsuffix .c, $(TESTER_FILENAME)))
+TESTER_OBJ		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .o, $(TESTER_FILENAME)))
+TESTER_DEP		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .d, $(TESTER_FILENAME)))
+
 ################################# TARGETS ######################################
 all: $(NAME)
 
