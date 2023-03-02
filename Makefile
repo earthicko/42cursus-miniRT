@@ -18,19 +18,25 @@ LDFLAGS			= $(LINK_LIBFT) $(LINK_LIBMLX) $(LINK_LIBM)
 
 INC_DIR			= -I. -Iincludes $(INC_DIR_LIBFT) $(INC_DIR_LIBMLX)
 ################################# COMMANDS #####################################
+RM				= rm -rf
 CFLAGS			= -Wall -Werror -Wextra -MMD -MP $(ACFLAGS) $(INC_DIR)
 ################################ FILENAMES #####################################
+DIR_SRC			= srcs/
+DIR_OBJ			= objs/
+DIR_TEST_SRC	= tests/
+DIR_TEST_OBJ	= test_objs/
+
 DRIVER_FILENAME	= main
-DRIVER_SRC		= $(addprefix srcs/, $(addsuffix .c, $(DRIVER_FILENAME)))
-DRIVER_OBJ		= $(addprefix srcs/, $(addsuffix .o, $(DRIVER_FILENAME)))
-DRIVER_DEP		= $(addprefix srcs/, $(addsuffix .d, $(DRIVER_FILENAME)))
+DRIVER_SRC		= $(addprefix $(DIR_SRC), $(addsuffix .c, $(DRIVER_FILENAME)))
+DRIVER_OBJ		= $(addprefix $(DIR_OBJ), $(addsuffix .o, $(DRIVER_FILENAME)))
+DRIVER_DEP		= $(addprefix $(DIR_OBJ), $(addsuffix .d, $(DRIVER_FILENAME)))
 
 TEST_FILENAME	= \
 				vectors_arithmetic \
 
-TEST_SRC		= $(addprefix tests/, $(addsuffix .c, $(TEST_FILENAME)))
-TEST_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TEST_FILENAME)))
-TEST_DEP		= $(addprefix tests/, $(addsuffix .d, $(TEST_FILENAME)))
+TEST_SRC		= $(addprefix $(DIR_TEST_SRC), $(addsuffix .c, $(TEST_FILENAME)))
+TEST_OBJ		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .o, $(TEST_FILENAME)))
+TEST_DEP		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .d, $(TEST_FILENAME)))
 
 TESTER_FILENAME	= \
 				vectors \
@@ -44,9 +50,9 @@ TESTER_FILENAME	= \
 				transform \
 				cone_create \
 
-TESTER_SRC		= $(addprefix tests/, $(addsuffix .c, $(TESTER_FILENAME)))
-TESTER_OBJ		= $(addprefix tests/, $(addsuffix .o, $(TESTER_FILENAME)))
-TESTER_DEP		= $(addprefix tests/, $(addsuffix .d, $(TESTER_FILENAME)))
+TESTER_SRC		= $(addprefix $(DIR_TEST_SRC), $(addsuffix .c, $(TESTER_FILENAME)))
+TESTER_OBJ		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .o, $(TESTER_FILENAME)))
+TESTER_DEP		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .d, $(TESTER_FILENAME)))
 
 FILENAME		= \
 				timeman \
@@ -141,11 +147,19 @@ FILENAME		= \
 				renderer/render_pixel \
 				renderer/write_color \
 
-SRC				= $(addprefix srcs/, $(addsuffix .c, $(FILENAME)))
-OBJ				= $(addprefix srcs/, $(addsuffix .o, $(FILENAME)))
-DEP				= $(addprefix srcs/, $(addsuffix .d, $(FILENAME)))
+SRC				= $(addprefix $(DIR_SRC), $(addsuffix .c, $(FILENAME)))
+OBJ				= $(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILENAME)))
+DEP				= $(addprefix $(DIR_OBJ), $(addsuffix .d, $(FILENAME)))
 ################################# TARGETS ######################################
 all: $(NAME)
+
+$(DIR_OBJ)%.o: $(DIR_SRC)%.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(INC_DIR) -c -o $@ $<
+
+$(DIR_TEST_OBJ)%.o: $(DIR_TEST_SRC)%.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(INC_DIR) -c -o $@ $<
 
 $(NAME): $(OBJ) $(LDLIBS) $(DRIVER_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(DRIVER_OBJ) -o $@ $(LDFLAGS)
@@ -159,47 +173,46 @@ $(LIBMLX_ORIG):
 $(LIBMLX): $(LIBMLX_ORIG)
 	cp $(LIBMLX_ORIG) .
 
-test_vectors: tests/vectors.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/vectors.o -o $@ $(LDFLAGS)
+test_vectors: test_objs/vectors.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/vectors.o -o $@ $(LDFLAGS)
 
-test_camera: tests/camera.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/camera.o -o $@ $(LDFLAGS)
+test_camera: test_objs/camera.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/camera.o -o $@ $(LDFLAGS)
 
-test_hittable: tests/hittable.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/hittable.o -o $@ $(LDFLAGS)
+test_hittable: test_objs/hittable.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/hittable.o -o $@ $(LDFLAGS)
 
-test_texture: tests/texture.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/texture.o -o $@ $(LDFLAGS)
+test_texture: test_objs/texture.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/texture.o -o $@ $(LDFLAGS)
 
-test_material: tests/material.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/material.o -o $@ $(LDFLAGS)
+test_material: test_objs/material.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/material.o -o $@ $(LDFLAGS)
 
-test_parser: tests/parser.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/parser.o -o $@ $(LDFLAGS)
+test_parser: test_objs/parser.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/parser.o -o $@ $(LDFLAGS)
 	
-test_tube: tests/tube.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/tube.o -o $@ $(LDFLAGS)
+test_tube: test_objs/tube.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/tube.o -o $@ $(LDFLAGS)
 
-test_pointer_speed: tests/pointer_speed_compare.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/pointer_speed_compare.o -o $@ $(LDFLAGS)
+test_pointer_speed: test_objs/pointer_speed_compare.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/pointer_speed_compare.o -o $@ $(LDFLAGS)
 
-test_mtx_inverse: tests/mtx_inverse.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/mtx_inverse.o -o $@ $(LDFLAGS)
+test_mtx_inverse: test_objs/mtx_inverse.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/mtx_inverse.o -o $@ $(LDFLAGS)
 
-test_transform: tests/transform.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/transform.o -o $@ $(LDFLAGS)
+test_transform: test_objs/transform.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/transform.o -o $@ $(LDFLAGS)
 
-test_cone_create: tests/cone_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/cone_create.o -o $@ $(LDFLAGS)
+test_cone_create: test_objs/cone_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/cone_create.o -o $@ $(LDFLAGS)
 
-test_aa_rect_create: tests/aa_rect_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) tests/aa_rect_create.o -o $@ $(LDFLAGS)
+test_aa_rect_create: test_objs/aa_rect_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/aa_rect_create.o -o $@ $(LDFLAGS)
 
 -include $(DEP)
 
 clean:
-	$(RM) $(OBJ) $(DEP) $(DRIVER_OBJ) $(DRIVER_DEP)
-	$(RM) $(TEST_OBJ) $(TEST_DEP) $(TESTER_OBJ) $(TESTER_DEP)
+	$(RM) $(DIR_OBJ) $(DIR_TEST_OBJ)
 	$(RM) $(LIBMLX)
 	@make clean -C $(LIBFT_DIR)
 	@make clean -C $(LIBMLX_DIR)
