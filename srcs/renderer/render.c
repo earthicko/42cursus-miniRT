@@ -14,7 +14,7 @@ static void	renderer_render_showstat(t_renderer *renderer, int n_samples)
 	const static char	*blinker[3] = {".     ", "..    ", "...   "};
 
 	if (n_samples == renderer->n_samples - 1
-		|| n_samples % renderer->freq_save == 0)
+		|| n_samples % renderer->freq_update == 0)
 	{
 		ft_printf("\rSample count %d ", n_samples);
 		ft_printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);
