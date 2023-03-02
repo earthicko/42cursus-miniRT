@@ -42,8 +42,9 @@ static void	camerainfo_init(t_camerainfo *info,
 	vec3_add_vec3(&info->cam_end, viewpoint, viewdir);
 	vec3_setval(&info->cam_up, 0, 1, 0);
 	info->fov = fov;
-	settingman_caminfo(GET, NULL, &info->focallen);
-	settingman_display_size(GET, &info->pixel_w, &info->pixel_h, NULL);
+	settingman_caminfo(SETTINGMAN_GET, NULL, &info->focallen);
+	settingman_display_size(SETTINGMAN_GET,
+		&info->pixel_w, &info->pixel_h, NULL);
 }
 
 int	build_camera(const t_ptrarr *tokens, t_scene *scene)

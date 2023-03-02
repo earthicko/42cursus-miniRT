@@ -14,7 +14,7 @@ static void	set_defaults_display(void)
 	const int	h = DISPLAY_DEFAULT_H;
 	const int	m = DISPLAY_MULTIPLIER;
 
-	settingman_display_size(SET, (int *)&w, (int *)&h, (int *)&m);
+	settingman_display_size(SETTINGMAN_SET, (int *)&w, (int *)&h, (int *)&m);
 }
 
 static void	set_defaults_camera(void)
@@ -26,7 +26,7 @@ static void	set_defaults_camera(void)
 	};
 	const double	focallen = CAM_DEFAULT_FOCALLEN;
 
-	settingman_caminfo(SET, (t_vec3 *)&updir, (double *)&focallen);
+	settingman_caminfo(SETTINGMAN_SET, (t_vec3 *)&updir, (double *)&focallen);
 }
 
 static void	set_defaults_renderer(void)
@@ -38,7 +38,7 @@ static void	set_defaults_renderer(void)
 		RENDERER_UPDATE_FREQ_SAVE
 	};
 
-	settingman_rendererinfo(SET, (int *)values);
+	settingman_rendererinfo(SETTINGMAN_SET, (int *)values);
 }
 
 int	parse_settings(const char *path)

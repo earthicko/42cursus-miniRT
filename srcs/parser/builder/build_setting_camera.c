@@ -37,7 +37,7 @@ int	build_setting_camera(const t_ptrarr *tokens, t_scene *scene)
 	focallen = ft_atof(tokens->data[6]);
 	if (is_invalid_normalized_vec3(&up_dir) || is_invalid_length(focallen))
 		return (CODE_ERROR_DATA);
-	settingman_caminfo(SET, &up_dir, &focallen);
+	settingman_caminfo(SETTINGMAN_SET, &up_dir, &focallen);
 	printf("%s: camera upward direction ", __func__);
 	print_vec3(&up_dir);
 	printf(" focal length %.2f\n", focallen);

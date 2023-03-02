@@ -73,7 +73,7 @@ int	build_setting_renderer(const t_ptrarr *tokens, t_scene *scene)
 	values[3] = ft_atoi(tokens->data[4]);
 	if (checkrange_renderer(values[0], values[1], values[2], values[3]))
 		return (CODE_ERROR_DATA);
-	settingman_rendererinfo(SET, values);
+	settingman_rendererinfo(SETTINGMAN_SET, values);
 	printf("%s: renderer setting ("
 		"max depth %d, "
 		"%d samples per pixel, "

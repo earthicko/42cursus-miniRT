@@ -23,9 +23,9 @@ static void	set_rendererinfo(t_renderer *renderer, int displayval[3])
 {
 	int	values[4];
 
-	settingman_display_size(GET,
+	settingman_display_size(SETTINGMAN_GET,
 		&displayval[0], &displayval[1], &displayval[2]);
-	settingman_rendererinfo(GET, values);
+	settingman_rendererinfo(SETTINGMAN_GET, values);
 	renderer->max_depth = values[0];
 	renderer->n_samples = values[1];
 	renderer->freq_update = values[2];

@@ -8,7 +8,7 @@ void	settingman_display_size(int mode,
 	static int	h;
 	static int	multiplier;
 
-	if (mode == GET)
+	if (mode == SETTINGMAN_GET)
 	{
 		if (w_buf)
 			*w_buf = w;
@@ -17,7 +17,7 @@ void	settingman_display_size(int mode,
 		if (multiplier_buf)
 			*multiplier_buf = multiplier;
 	}
-	if (mode == SET)
+	if (mode == SETTINGMAN_SET)
 	{
 		if (w_buf)
 			w = *w_buf;
@@ -34,14 +34,14 @@ void	settingman_caminfo(int mode,
 	static t_vec3	camdir;
 	static double	focallen;
 
-	if (mode == GET)
+	if (mode == SETTINGMAN_GET)
 	{
 		if (camdir_buf)
 			ft_memcpy(camdir_buf, &camdir, sizeof(t_vec3));
 		if (focallen_buf)
 			*focallen_buf = focallen;
 	}
-	if (mode == SET)
+	if (mode == SETTINGMAN_SET)
 	{
 		if (camdir_buf)
 			ft_memcpy(&camdir, camdir_buf, sizeof(t_vec3));
@@ -58,14 +58,14 @@ void	settingman_rendererinfo(int mode, int buf[4])
 	static int	update_freq_show;
 	static int	update_freq_save;
 
-	if (mode == GET)
+	if (mode == SETTINGMAN_GET)
 	{
 		buf[0] = max_depth;
 		buf[1] = n_samples;
 		buf[2] = update_freq_show;
 		buf[3] = update_freq_save;
 	}
-	if (mode == SET)
+	if (mode == SETTINGMAN_SET)
 	{
 		max_depth = buf[0];
 		n_samples = buf[1];

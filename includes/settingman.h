@@ -11,8 +11,8 @@
 
 enum e_settingmanmode
 {
-	GET = 0,
-	SET
+	SETTINGMAN_GET = 0,
+	SETTINGMAN_SET
 };
 
 void	settingman_display_size(int mode,

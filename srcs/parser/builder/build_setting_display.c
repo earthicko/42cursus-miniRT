@@ -62,7 +62,7 @@ int	build_setting_display(const t_ptrarr *tokens, t_scene *scene)
 	multiplier = ft_atoi(tokens->data[3]);
 	if (checkrange_display(width, height, multiplier))
 		return (CODE_ERROR_DATA);
-	settingman_display_size(SET, &width, &height, &multiplier);
+	settingman_display_size(SETTINGMAN_SET, &width, &height, &multiplier);
 	printf("%s: display resolution %d * %d (%dx)\n", __func__,
 		width, height, multiplier);
 	return (CODE_OK);
