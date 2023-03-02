@@ -41,6 +41,8 @@ t_bool	hit_aa_rectangle(t_hittable *hittable,
 	const t_minmax			uv_out = {0, 1};
 
 	this = (t_hittable_aa_rectangle *)hittable;
+	if (!this->bbox.hit(&this->bbox, ray, &t))
+		return (FALSE);
 	outward_norm.i[this->axis] = 1;
 	outward_norm.i[this->other_axis[0]] = 0;
 	outward_norm.i[this->other_axis[1]] = 0;
@@ -58,6 +60,20 @@ t_bool	hit_aa_rectangle(t_hittable *hittable,
 	return (TRUE);
 }
 
+static void	set_bbox(t_hittable_aa_rectangle *aa_rect)
+{
+	t_point	min;
+	t_point	max;
+
+	min.i[aa_rect->axis] = aa_rect->offset - DOUBLE_E;
+	max.i[aa_rect->axis] = aa_rect->offset + DOUBLE_E;
+	min.i[aa_rect->other_axis[0]] = aa_rect->range[0].min;
+	max.i[aa_rect->other_axis[0]] = aa_rect->range[0].max;
+	min.i[aa_rect->other_axis[1]] = aa_rect->range[1].min;
+	max.i[aa_rect->other_axis[1]] = aa_rect->range[1].max;
+	bbox_init(&aa_rect->bbox, min, max);
+}
+
 t_hittable	*hittable_aa_rectangle_create(t_aa_rectangle_info info,
 											t_material *material)
 {
@@ -72,7 +88,7 @@ t_hittable	*hittable_aa_rectangle_create(t_aa_rectangle_info info,
 	aa_rect = malloc(sizeof(t_hittable_aa_rectangle));
 	if (!aa_rect)
 		return (NULL);
-	ft_memset(aa_rect, 0, sizeof(t_hittable_aa_rectangle));
+	ft_bzero(aa_rect, sizeof(t_hittable_aa_rectangle));
 	aa_rect->hit = hit_aa_rectangle;
 	aa_rect->material = material;
 	aa_rect->axis = info.axis;
@@ -81,5 +97,6 @@ t_hittable	*hittable_aa_rectangle_create(t_aa_rectangle_info info,
 	aa_rect->other_axis[1] = other_axises[info.axis][1];
 	aa_rect->range[0] = info.range[0];
 	aa_rect->range[1] = info.range[1];
+	set_bbox(aa_rect);
 	return ((t_hittable *)aa_rect);
 }
