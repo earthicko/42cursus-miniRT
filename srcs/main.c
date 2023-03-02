@@ -18,6 +18,22 @@ static t_bool	match_extension(const char *path, const char *ext)
 	return (FALSE);
 }
 
+static void	init_textures(t_ptrarr *textures)
+{
+	int				i;
+	t_texture		*tx;
+	t_color			out;
+	t_hit_record	rec;
+
+	i = 0;
+	while (i < textures->len)
+	{
+		tx = (t_texture *)ptrarr_get(textures, i);
+		tx->get_color_at(tx, &out, &rec);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_renderer	renderer;
@@ -30,6 +46,7 @@ int	main(int argc, char **argv)
 	}
 	if (renderer_init(&renderer, argv[1]))
 		return (1);
+	init_textures(renderer.scene->res.textures);
 	mlx_hook(renderer.disp->win, ON_KEYDOWN, 0, mlx_key_interface, &renderer);
 	mlx_hook(renderer.disp->win, ON_DESTROY, 0, exit_program, &renderer);
 	mlx = mlx_interface_get_mlx_ptr();
