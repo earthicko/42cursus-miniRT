@@ -80,6 +80,7 @@ FILENAME		= \
 				texture/destroy \
 				texture/solid \
 				texture/checker \
+				texture/image \
 				parser/parse_scene \
 				parser/parse_settings \
 				parser/settingman \
