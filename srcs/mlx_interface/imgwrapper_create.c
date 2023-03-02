@@ -21,8 +21,7 @@ static t_color	map_color(int color)
 	return (mappedcolor);
 }
 
-static void	copy_colors(t_imgwrapper *imgwrapper,
-				char *data_addr, int bpp, int nbytes)
+static void	copy_colors(t_imgwrapper *img, char *data_addr, int bpp, int nbytes)
 {
 	int	o_height;
 	int	o_width;
@@ -30,14 +29,14 @@ static void	copy_colors(t_imgwrapper *imgwrapper,
 	int	y;
 
 	y = 0;
-	while (y < imgwrapper->height)
+	while (y < img->height)
 	{
 		x = 0;
-		while (x < imgwrapper->width)
+		while (x < img->width)
 		{
 			o_height = nbytes * y;
 			o_width = x * bpp / 8;
-			imgwrapper->colors[imgwrapper->width * y + x]
+			img->colors[img->width * (img->height - y - 1) + x]
 				= map_color(*(int *)(data_addr + o_height + o_width));
 			x++;
 		}
