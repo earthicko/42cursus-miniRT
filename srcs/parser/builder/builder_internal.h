@@ -21,6 +21,7 @@ t_bool	is_cylinder(const t_ptrarr *tokens);
 t_bool	is_cone(const t_ptrarr *tokens);
 t_bool	is_texture_solid(const t_ptrarr *tokens);
 t_bool	is_texture_checker(const t_ptrarr *tokens);
+t_bool	is_texture_image(const t_ptrarr *tokens);
 t_bool	is_material_lambertian(const t_ptrarr *tokens);
 t_bool	is_material_metal(const t_ptrarr *tokens);
 t_bool	is_material_dielectric(const t_ptrarr *tokens);
@@ -56,6 +57,8 @@ int		build_cone(
 int		build_texture_solid(
 			const t_ptrarr *tokens, t_scene *scene);
 int		build_texture_checker(
+			const t_ptrarr *tokens, t_scene *scene);
+int		build_texture_image(
 			const t_ptrarr *tokens, t_scene *scene);
 int		build_material_lambertian(
 			const t_ptrarr *tokens, t_scene *scene);

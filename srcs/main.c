@@ -8,7 +8,7 @@
 #include "scene.h"
 #include "renderer.h"
 
-t_bool	match_extension(const char *path, const char *ext)
+static t_bool	match_extension(const char *path, const char *ext)
 {
 	size_t	start;
 

@@ -42,6 +42,7 @@ typedef struct s_texture_image
 	t_texture_destroy		destroy;
 	char					*name;
 	t_texture_get_color_at	get_color_at;
+	char					*imgpath;
 	t_imgwrapper			*img;
 }	t_texture_image;
 
@@ -50,7 +51,6 @@ void		texture_destroy(t_texture *self);
 t_texture	*texture_solid_create(const char *name, t_color color);
 t_texture	*texture_checker_create(const char *name,
 				t_texture *a, t_texture *b, double freq);
-t_texture	*texture_image_create(const char *name,
-				t_imgwrapper *img);
+t_texture	*texture_image_create(const char *name, char *imgpath);
 
 #endif

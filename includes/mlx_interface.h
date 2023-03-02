@@ -61,6 +61,7 @@ typedef struct s_display
 
 typedef struct s_imgwrapper
 {
+	char		*filename;
 	int			width;
 	int			height;
 	t_minmax	x_range;

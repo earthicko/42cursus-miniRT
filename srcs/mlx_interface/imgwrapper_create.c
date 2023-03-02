@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
 #include "number.h"
@@ -44,7 +45,15 @@ static void	copy_colors(t_imgwrapper *imgwrapper,
 	}
 }
 
-static int	create_img(t_imgwrapper *imgwrapper, char *filename)
+static void	set_xy_range(t_imgwrapper *imgwrapper)
+{
+	imgwrapper->x_range.min = 0;
+	imgwrapper->x_range.max = imgwrapper->width - 1;
+	imgwrapper->y_range.min = 0;
+	imgwrapper->y_range.max = imgwrapper->height - 1;
+}
+
+int	imgwrapper_load(t_imgwrapper *imgwrapper)
 {
 	void	*mlx;
 	void	*img;
@@ -55,16 +64,20 @@ static int	create_img(t_imgwrapper *imgwrapper, char *filename)
 	if (!mlx)
 		return (CODE_ERROR_GENERIC);
 	img = mlx_xpm_file_to_image(mlx,
-			filename, &imgwrapper->width, &imgwrapper->height);
+			imgwrapper->filename, &imgwrapper->width, &imgwrapper->height);
 	if (!img)
 		return (CODE_ERROR_GENERIC);
+	set_xy_range(imgwrapper);
 	data_addr = mlx_get_data_addr(img, vals, vals + 1, vals + 2);
 	if (!data_addr)
 		return (CODE_ERROR_GENERIC);
 	imgwrapper->colors = malloc(
 			sizeof(t_color) * imgwrapper->width * imgwrapper->height);
+	if (!imgwrapper->colors)
+		return (CODE_ERROR_MALLOC);
 	copy_colors(imgwrapper, data_addr, vals[0], vals[1]);
 	mlx_destroy_image(mlx, img);
+	printf("%s: Image %s loaded.\n", __func__, imgwrapper->filename);
 	return (CODE_OK);
 }
 
@@ -76,14 +89,13 @@ t_imgwrapper	*imgwrapper_create(char *filename)
 	if (!imgwrapper)
 		return (NULL);
 	ft_bzero(imgwrapper, sizeof(t_imgwrapper));
-	imgwrapper->x_range.min = 0;
-	imgwrapper->x_range.max = imgwrapper->width - 1;
-	imgwrapper->y_range.min = 0;
-	imgwrapper->y_range.max = imgwrapper->height - 1;
-	if (create_img(imgwrapper, filename))
+	imgwrapper->filename = ft_strdup(filename);
+	if (!imgwrapper)
 	{
 		imgwrapper_destroy(imgwrapper);
 		return (NULL);
 	}
+	if (imgwrapper_load(imgwrapper))
+		imgwrapper->colors = NULL;
 	return (imgwrapper);
 }

@@ -5,8 +5,10 @@
 
 void	texture_image_destroy(t_texture *self)
 {
-	imgwrapper_destroy(((t_texture_image *)self)->img);
-	free(self->name);
+	if (((t_texture_image *)self)->img)
+		imgwrapper_destroy(((t_texture_image *)self)->img);
+	if (self->name)
+		free(self->name);
 	free(self);
 }
 
@@ -19,21 +21,28 @@ void	texture_image_get_color_at(
 	imgwrapper_getcolor(this->img, out, &hitrec->uv);
 }
 
-t_texture	*texture_image_create(const char *name, t_imgwrapper *img)
+t_texture	*texture_image_create(const char *name, char *imgpath)
 {
 	t_texture_image	*out;
 
 	out = malloc(sizeof(t_texture_image));
 	if (!out)
 		return (NULL);
+	ft_bzero(out, sizeof(t_texture_image));
 	out->name = ft_strdup(name);
 	if (!out->name)
 	{
-		free(out);
+		texture_image_destroy((t_texture *)out);
+		return (NULL);
+	}
+	out->img = imgwrapper_create(imgpath);
+	if (!out->img)
+	{
+		texture_image_destroy((t_texture *)out);
 		return (NULL);
 	}
 	out->destroy = texture_image_destroy;
 	out->get_color_at = texture_image_get_color_at;
-	out->img = img;
+	out->imgpath = imgpath;
 	return ((t_texture *)out);
 }

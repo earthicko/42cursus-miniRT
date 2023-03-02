@@ -113,6 +113,7 @@ FILENAME		= \
 				parser/builder/build_cone_patternmatcher \
 				parser/builder/build_texture_solid \
 				parser/builder/build_texture_checker \
+				parser/builder/build_texture_image \
 				parser/builder/build_material_lambertian \
 				parser/builder/build_material_metal \
 				parser/builder/build_material_dielectric \
