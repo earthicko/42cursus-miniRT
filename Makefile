@@ -119,10 +119,16 @@ FILENAME		= \
 				parser/builder/build_material_dielectric \
 				scene/create \
 				scene/search \
-				renderer/render \
 				renderer/init \
+				renderer/render \
+				renderer/render_multithread \
+				renderer/render_multithread_workers \
+				renderer/utils \
 				renderer/render_pixel \
+				renderer/render_loop \
 				renderer/write_color \
+				renderer/worker_getter \
+				renderer/worker_setter \
 
 SRC				= $(addprefix $(DIR_SRC), $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILENAME)))

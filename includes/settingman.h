@@ -4,6 +4,8 @@
 # include "geometry.h"
 
 # define DISPLAY_TITLE		"Photon Stalkers"
+# define RENDER_WORKER_N		4
+# define RENDER_SYNC_INTERVAL	1
 # define OUTPUT_FILENAME	"render"
 # define SETTING_FILENAME	"./settings.rt"
 # define LIGHT_DEFAULT_RADIUS		10

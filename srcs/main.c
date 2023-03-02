@@ -33,7 +33,10 @@ int	main(int argc, char **argv)
 	mlx_hook(renderer.disp->win, ON_KEYDOWN, 0, mlx_key_interface, &renderer);
 	mlx_hook(renderer.disp->win, ON_DESTROY, 0, exit_program, &renderer);
 	mlx = mlx_interface_get_mlx_ptr();
-	mlx_loop_hook(mlx, renderer_render, &renderer);
+	if (RENDER_WORKER_N == 1)
+		mlx_loop_hook(mlx, renderer_render, &renderer);
+	else
+		mlx_loop_hook(mlx, renderer_render_multithreaded, &renderer);
 	mlx_loop(mlx);
 	return (0);
 }

@@ -2,57 +2,8 @@
 #include <stdio.h>
 #include "libft.h"
 #include "msgdef.h"
-#include "renderer.h"
+#include "renderer_internal.h"
 #include "settingman.h"
-
-void	renderer_render_pixel(t_renderer *renderer, int x, int y);
-void	renderer_write_color(t_renderer *renderer, int n_samples);
-
-static void	renderer_render_showstat(t_renderer *renderer, int n_samples)
-{
-	static int			i;
-	const static char	*blinker[3] = {".     ", "..    ", "...   "};
-
-	if (n_samples == renderer->max_samples - 1
-		|| n_samples % renderer->freq_update == 0)
-	{
-		ft_printf("\rSample count %d ", n_samples);
-		ft_printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);
-	}
-}
-
-static void	renderer_render_loop(t_renderer *renderer)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < renderer->disp->h)
-	{
-		x = 0;
-		while (x < renderer->disp->w)
-		{
-			renderer_render_pixel(renderer, x, y);
-			x++;
-		}
-		y++;
-	}
-}
-
-static char	*get_filename(int n)
-{
-	char	*filename;
-	char	*postfix;
-
-	postfix = ft_itoa(n);
-	if (!postfix)
-		return (NULL);
-	filename = ft_strmerge(4, OUTPUT_FILENAME, "_", postfix, ".bmp");
-	free(postfix);
-	if (!filename)
-		return (NULL);
-	return (filename);
-}
 
 static void	renderer_render_update(t_renderer *renderer, int n_samples)
 {
