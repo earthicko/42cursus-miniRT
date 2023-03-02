@@ -61,15 +61,11 @@ typedef struct s_display
 
 typedef struct s_imgwrapper
 {
-	void		*img;
-	char		*data_addr;
 	int			width;
 	int			height;
-	int			bpp;
-	int			nbytes;
-	int			endian;
 	t_minmax	x_range;
 	t_minmax	y_range;
+	t_color		*colors;
 }	t_imgwrapper;
 
 int				exit_program(void *param);
