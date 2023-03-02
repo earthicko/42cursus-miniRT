@@ -19,22 +19,36 @@ static int	abort_renderer_init(t_renderer *renderer, int stat)
 	return (stat);
 }
 
-int	renderer_init(t_renderer *renderer, const char *scene_path)
+static void	set_rendererinfo(t_renderer *renderer, int displayval[3])
 {
+	int	values[4];
+
+	settingman_display_size(GET,
+		&displayval[0], &displayval[1], &displayval[2]);
+	settingman_rendererinfo(GET, values);
+	renderer->max_depth = values[0];
+	renderer->n_samples = values[1];
+	renderer->freq_update = values[2];
+	renderer->freq_save = values[3];
+}
+
+int	renderer_init(t_renderer *renderer, const char *path)
+{
+	int	displayval[3];
 	int	stat;
 
 	ft_bzero(renderer, sizeof(t_renderer));
 	renderer->scene = scene_create();
 	if (!renderer->scene)
 		return (abort_renderer_init(renderer, CODE_ERROR_GENERIC));
-	stat = parse_scene(scene_path, renderer->scene);
+	parse_settings(SETTING_FILENAME);
+	stat = parse_scene(path, renderer->scene);
 	if (stat)
 		return (abort_renderer_init(renderer, stat));
+	set_rendererinfo(renderer, displayval);
 	renderer->disp = display_create(
-			DISPLAY_DEFAULT_W, DISPLAY_DEFAULT_H, DISPLAY_TITLE);
+			displayval[0], displayval[1], displayval[2], DISPLAY_TITLE);
 	if (!renderer->disp)
 		return (abort_renderer_init(renderer, CODE_ERROR_GENERIC));
-	renderer->max_depth = RENDERER_MAX_DEPTH;
-	renderer->n_samples = RENDERER_N_SAMPLES;
 	return (CODE_OK);
 }

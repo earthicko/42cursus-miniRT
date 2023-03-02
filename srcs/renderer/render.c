@@ -14,7 +14,7 @@ static void	renderer_render_showstat(t_renderer *renderer, int n_samples)
 	const static char	*blinker[3] = {".     ", "..    ", "...   "};
 
 	if (n_samples == renderer->n_samples - 1
-		|| n_samples % RENDERER_UPDATE_FREQ_SHOW == 0)
+		|| n_samples % renderer->freq_save == 0)
 	{
 		ft_printf("\rSample count %d ", n_samples);
 		ft_printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);
@@ -60,15 +60,15 @@ static void	renderer_render_update(t_renderer *renderer, int n_samples)
 
 	if (n_samples >= renderer->n_samples
 		|| n_samples == 1
-		|| n_samples % RENDERER_UPDATE_FREQ_SHOW == 0
-		|| n_samples % RENDERER_UPDATE_FREQ_SAVE == 0)
+		|| n_samples % renderer->freq_update == 0
+		|| n_samples % renderer->freq_save == 0)
 		renderer_write_color(renderer, n_samples);
 	if (n_samples >= renderer->n_samples
 		|| n_samples == 1
-		|| n_samples % RENDERER_UPDATE_FREQ_SHOW == 0)
+		|| n_samples % renderer->freq_update == 0)
 		display_putimage(renderer->disp);
 	if (n_samples >= renderer->n_samples
-		|| n_samples % RENDERER_UPDATE_FREQ_SAVE == 0)
+		|| n_samples % renderer->freq_save == 0)
 	{
 		filename = get_filename(n_samples);
 		if (!filename)

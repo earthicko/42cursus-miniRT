@@ -1,0 +1,6 @@
+#         width  height  multiplier
+display   25    25     10
+#        (u, v, w)       focallen
+camera    0, 1, 0        10
+#         max depth   n_samples   update  save
+renderer  10          1000        100     999999999

@@ -9,6 +9,9 @@ int		add_material_lambertian(t_scene *scene,
 			const char *name, t_texture *texture);
 void	map_color(t_color *color);
 
+t_bool	is_setting_display(const t_ptrarr *tokens);
+t_bool	is_setting_camera(const t_ptrarr *tokens);
+t_bool	is_setting_renderer(const t_ptrarr *tokens);
 t_bool	is_ambient_lighting(const t_ptrarr *tokens);
 t_bool	is_camera(const t_ptrarr *tokens);
 t_bool	is_light(const t_ptrarr *tokens);
@@ -30,6 +33,12 @@ t_bool	is_invalid_fov(double fov);
 
 void	build_vector(t_vec3 *out, const void **token_start);
 
+int		build_setting_display(
+			const t_ptrarr *tokens, t_scene *scene);
+int		build_setting_camera(
+			const t_ptrarr *tokens, t_scene *scene);
+int		build_setting_renderer(
+			const t_ptrarr *tokens, t_scene *scene);
 int		build_ambient_lighting(
 			const t_ptrarr *tokens, t_scene *scene);
 int		build_camera(

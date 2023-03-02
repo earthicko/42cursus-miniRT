@@ -2,7 +2,6 @@
 #include "mlx_interface.h"
 #include "mlx.h"
 #include "renderer.h"
-#include "settingman.h"
 #include <stdlib.h>
 
 int	exit_program(void *param)
@@ -38,15 +37,16 @@ static int	get_display_info(t_display *disp)
 }
 
 static int	display_create_mlx(t_display *disp,
-	int width, int height, char *title)
+	int values[3], char *title)
 {
 	disp->mlx = mlx_init();
 	if (!disp->mlx)
 		return (CODE_ERROR_GENERIC);
-	disp->w = width;
-	disp->h = height;
-	disp->w_real = width * DISPLAY_MULTIPLIER;
-	disp->h_real = height * DISPLAY_MULTIPLIER;
+	disp->w = values[0];
+	disp->h = values[1];
+	disp->w_real = values[0] * values[2];
+	disp->h_real = values[1] * values[2];
+	disp->multiplier = values[2];
 	disp->win = mlx_new_window(disp->mlx, disp->w_real, disp->h_real, title);
 	if (!disp->win)
 		return (CODE_ERROR_GENERIC);
@@ -59,15 +59,19 @@ static int	display_create_mlx(t_display *disp,
 	return (CODE_OK);
 }
 
-t_display	*display_create(int width, int height, char *title)
+t_display	*display_create(int width, int height, int multiplier, char *title)
 {
 	t_display	*disp;
+	int			values[3];
 
 	disp = malloc(sizeof(t_display));
 	if (!disp)
 		return (NULL);
 	ft_bzero(disp, sizeof(t_display));
-	if (display_create_mlx(disp, width, height, title))
+	values[0] = width;
+	values[1] = height;
+	values[2] = multiplier;
+	if (display_create_mlx(disp, values, title))
 		return (display_destroy(disp));
 	disp->colors = malloc(sizeof(t_color) * width * height);
 	if (!disp->colors)

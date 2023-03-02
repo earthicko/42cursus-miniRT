@@ -9,43 +9,43 @@ int		parse_unique_entity_loop(
 int		parse_common_entity(const char *line, t_scene *scene);
 t_bool	all_unique_entities_found(t_bool *map);
 
-void	parse_setting_loop(const char *line, t_scene *scene)
+int	parse_setting_loop(const char *line, t_scene *scene)
 {
-	int		i;
+	int	i;
+	int	stat;
 
 	i = 0;
 	while (i < N_IDENTIFIER_SETTING)
 	{
-		parse_line(line, scene,
-			setting_patternmatcher_manager(i), setting_builder_manager(i));
+		stat = parse_line(line, scene,
+				setting_patternmatcher_manager(i), setting_builder_manager(i));
+		if (stat == TRUE)
+			return (TRUE);
 		i++;
 	}
+	return (FALSE);
 }
 
-// TODO: utilize parse_setting_loop()
 int	parse_lines(const t_ptrarr *lines, t_scene *scene)
 {
-	int			i;
-	int			stat;
-	t_bool		already_found[N_IDENTIFIER_UNIQUE];
+	int		i;
+	t_bool	already_found[N_IDENTIFIER_UNIQUE];
 
 	ft_memset(already_found, FALSE, sizeof(already_found));
-	i = 0;
-	while (i < lines->len)
+	i = -1;
+	while (++i < lines->len)
 	{
-		stat = parse_unique_entity_loop(already_found, lines->data[i], scene);
-		if (stat < 0)
-		{
-			printf("%s: "MSG_PARSEFAIL"\n", EXEC_NAME, lines->data[i]);
-			return (stat);
-		}
-		if (stat == FALSE)
-		{
-			stat = parse_common_entity(lines->data[i], scene);
-			if (stat < 0)
-				return (stat);
-		}
-		i++;
+		if (parse_setting_loop(lines->data[i], scene)
+			== TRUE)
+			continue ;
+		if (parse_unique_entity_loop(already_found, lines->data[i], scene)
+			== TRUE)
+			continue ;
+		if (parse_common_entity(lines->data[i], scene)
+			== TRUE)
+			continue ;
+		printf("%s: "MSG_PARSEFAIL"\n", EXEC_NAME, (char *)lines->data[i]);
+		return (CODE_ERROR_DATA);
 	}
 	if (!all_unique_entities_found(already_found))
 		return (CODE_ERROR_DATA);

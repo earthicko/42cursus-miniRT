@@ -53,6 +53,7 @@ typedef struct s_display
 	int		h;
 	int		w_real;
 	int		h_real;
+	int		multiplier;
 	double	ratio;
 	int		n_pixels;
 	t_color	*colors;
@@ -61,7 +62,7 @@ typedef struct s_display
 int			exit_program(void *param);
 int			mlx_key_interface(int k, void *param);
 
-t_display	*display_create(int width, int height, char *title);
+t_display	*display_create(int width, int height, int multiplier, char *title);
 t_display	*display_destroy(t_display *disp);
 
 void		display_putpixel(t_display *disp, t_pixel p);

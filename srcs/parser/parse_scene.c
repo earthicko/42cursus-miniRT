@@ -70,6 +70,8 @@ int	parse_scene(const char *path, t_scene *scene)
 		return (CODE_ERROR_IO);
 	stat = parse_lines(lines, scene);
 	ptrarr_destroy(lines, destroy_pchar);
+	if (stat)
+		return (stat);
 	printf("%s: parsing complete. results:\n", __func__);
 	printf("\t%d primitives, %d materials, %d textures\n",
 		scene->res.primitives->len,

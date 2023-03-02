@@ -71,9 +71,9 @@ int	parse_common_entity(const char *line, t_scene *scene)
 	if (stat == FALSE)
 	{
 		printf("%s: "MSG_PARSEFAIL"\n", EXEC_NAME, line);
-		return (CODE_ERROR_DATA);
+		return (FALSE);
 	}
-	return (CODE_OK);
+	return (TRUE);
 }
 
 t_bool	all_unique_entities_found(t_bool *map)

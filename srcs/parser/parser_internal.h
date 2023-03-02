@@ -72,6 +72,7 @@ t_bool				is_in_pattern(
 						const int patternlen,
 						const t_ptrarr *tokens);
 
+t_ptrarr			*read_file_to_strarr(const char *path);
 void				destroy_pchar(void *pchar);
 int					parse_line(
 						const char *line,
@@ -79,5 +80,6 @@ int					parse_line(
 						t_patternmatcher tester,
 						t_builder builder);
 int					parse_lines(const t_ptrarr *lines, t_scene *scene);
+int					parse_setting_loop(const char *line, t_scene *scene);
 
 #endif

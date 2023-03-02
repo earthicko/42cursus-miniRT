@@ -103,6 +103,7 @@ FILENAME		= \
 				texture/solid \
 				texture/checker \
 				parser/parse_scene \
+				parser/parse_settings \
 				parser/settingman \
 				parser/managers1 \
 				parser/managers2 \
@@ -115,6 +116,9 @@ FILENAME		= \
 				parser/builder/add_resource \
 				parser/builder/utils \
 				parser/builder/checkrange \
+				parser/builder/build_setting_display \
+				parser/builder/build_setting_camera \
+				parser/builder/build_setting_renderer \
 				parser/builder/build_ambient_lighting \
 				parser/builder/build_camera \
 				parser/builder/build_light \
