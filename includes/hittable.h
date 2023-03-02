@@ -144,63 +144,23 @@ enum	e_disk_of_cylinder
 	BOTTOM
 };
 
-/*
-	xy_rectangle is on z=k plane.
-*/
-typedef struct s_hittable_xy_rectangle
+typedef struct s_aa_rectangle_info
+{
+	int			axis;
+	double		offset;
+	t_minmax	range[2];
+}	t_aa_rectangle_info;
+
+typedef struct s_hittable_aa_rectangle
 {
 	t_hittable_hit	hit;
 	t_bbox			bbox;
 	t_material		*material;
-	double			x0;
-	double			x1;
-	double			y0;
-	double			y1;
-	double			k;
-}	t_hittable_xy_rectangle;
-
-/*
-	yz_rectangle is on x=k plane.
-*/
-typedef struct s_hittable_yz_rectangle
-{
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_material		*material;
-	double			y0;
-	double			y1;
-	double			z0;
-	double			z1;
-	double			k;
-}	t_hittable_yz_rectangle;
-
-/*
-	xz_rectangle is on y=k plane.
-*/
-typedef struct s_hittable_zx_rectangle
-{
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_material		*material;
-	double			z0;
-	double			z1;
-	double			x0;
-	double			x1;
-	double			k;
-}	t_hittable_zx_rectangle;
-
-enum	e_coord
-{
-	X = 0,
-	Y,
-	Z,
-};
-
-enum	e_len_rect
-{
-	WIDTH = 0,
-	HEIGHT,
-};
+	int				axis;
+	double			offset;
+	int				other_axis[2];
+	t_minmax		range[2];
+}	t_hittable_aa_rectangle;
 
 typedef struct s_hittable_list
 {
@@ -221,17 +181,7 @@ t_hittable			*hittable_cylinder_create(t_cylinder_info *cylinder_info, \
 												t_material *material);
 t_hittable			*hittable_cone_create(t_cone_info *cone_info, \
 											t_material *material);
-t_hittable			*hittable_xy_rectangle_create(t_point center, \
-													t_len_rect len, \
-													double k, \
-													t_material *material);
-t_hittable			*hittable_yz_rectangle_create(t_point center, \
-													t_len_rect len, \
-													double k, \
-													t_material *material);
-t_hittable			*hittable_zx_rectangle_create(t_point center, \
-													t_len_rect len, \
-													double k, \
+t_hittable			*hittable_aa_rectangle_create(t_aa_rectangle_info info, \
 													t_material *material);
 t_hittable			*hittable_list_create(void);
 t_hittable			*hittable_transform_create(t_hittable *base, \
