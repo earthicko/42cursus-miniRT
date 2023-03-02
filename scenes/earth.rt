@@ -1,0 +1,10 @@
+tx_image          earth  ./scenes/earth.xpm
+mt_lambertian     earth  earth
+
+A 0.02 255,255,255
+# x  y  z      u  v  w    fov
+C 0, 0, 100     0, 0, -1    70
+
+l   -40, 50, 30     1      255, 255, 255
+
+sp      0, 0, 0    50       earth

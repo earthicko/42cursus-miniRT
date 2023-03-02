@@ -5,3 +5,5 @@ tx_solid   white   255, 255, 255
 tx_solid   black     0,   0,   0
 
 tx_checker bw     black white  1
+
+tx_image   steve_face_front  ./scenes/steve/head_front.xpm
