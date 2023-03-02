@@ -3,6 +3,7 @@
 
 # include "libft_def.h"
 # include "geometry.h"
+# include "number.h"
 
 enum	e_appkitkeycode
 {
@@ -59,15 +60,30 @@ typedef struct s_display
 	t_color	*colors;
 }	t_display;
 
-int			exit_program(void *param);
-int			mlx_key_interface(int k, void *param);
+typedef struct s_imgwrapper
+{
+	void		*mlx_img;
+	int			width;
+	int			height;
+	t_minmax	x_range;
+	t_minmax	y_range;
+	t_display	*disp;
+}	t_imgwrapper;
 
-t_display	*display_create(int width, int height, int multiplier, char *title);
-t_display	*display_destroy(t_display *disp);
+int				exit_program(void *param);
+int				mlx_key_interface(int k, void *param);
 
-void		display_putpixel(t_display *disp, t_pixel p);
-void		display_putimage(t_display *disp);
+t_display		*display_create(int width, int height, int mult, char *title);
+t_display		*display_destroy(t_display *disp);
 
-int			display_save_bmp(const t_display *disp, const char *path);
+void			display_putpixel(t_display *disp, t_pixel p);
+void			display_putimage(t_display *disp);
+
+int				display_save_bmp(const t_display *disp, const char *path);
+
+t_imgwrapper	*imgwrapper_create(t_display *disp, char *filename);
+void			imgwrapper_destroy(t_imgwrapper *img);
+void			imgwrapper_getcolor(t_imgwrapper *img,
+					t_color *out, const t_uv *uv);
 
 #endif

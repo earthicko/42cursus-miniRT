@@ -55,6 +55,7 @@ FILENAME		= \
 				mlx_interface/key_interface \
 				mlx_interface/putpixel \
 				mlx_interface/saveimg \
+				mlx_interface/imgwrapper \
 				camera/init \
 				camera/get_ray_at \
 				bounding_box/init \
