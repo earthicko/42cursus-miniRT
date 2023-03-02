@@ -21,12 +21,12 @@ static t_bool	is_all_allocated(t_scene *scene)
 
 static void	destroy_material(void *material)
 {
-	material_destroy((t_material *)material);
+	((t_material *)material)->destroy((t_material *)material);
 }
 
 static void	destroy_texture(void *texture)
 {
-	texture_destroy((t_texture *)texture);
+	((t_texture *)texture)->destroy((t_texture *)texture);
 }
 
 // TODO: assign respective destroyers when they're ready
