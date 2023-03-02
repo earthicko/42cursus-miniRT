@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "texture_internal.h"
+#include "texture.h"
 
 void	texture_destroy(t_texture *self)
 {

@@ -1,6 +1,13 @@
 #include <stdlib.h>
 #include "libft.h"
-#include "texture_internal.h"
+#include "texture.h"
+
+void	texture_solid_get_color_at(
+			t_texture *self, t_color *out, const t_hit_record *hitrec)
+{
+	(void)hitrec;
+	*out = ((t_texture_solid *)self)->color;
+}
 
 t_texture	*texture_solid_create(const char *name, t_color color)
 {
@@ -19,11 +26,4 @@ t_texture	*texture_solid_create(const char *name, t_color color)
 	out->get_color_at = texture_solid_get_color_at;
 	out->color = color;
 	return ((t_texture *)out);
-}
-
-void	texture_solid_get_color_at(
-			t_texture *self, t_color *out, const t_hit_record *hitrec)
-{
-	(void)hitrec;
-	*out = ((t_texture_solid *)self)->color;
 }
