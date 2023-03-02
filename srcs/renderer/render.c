@@ -13,7 +13,7 @@ static void	renderer_render_showstat(t_renderer *renderer, int n_samples)
 	static int			i;
 	const static char	*blinker[3] = {".     ", "..    ", "...   "};
 
-	if (n_samples == renderer->n_samples - 1
+	if (n_samples == renderer->max_samples - 1
 		|| n_samples % renderer->freq_update == 0)
 	{
 		ft_printf("\rSample count %d ", n_samples);
@@ -58,16 +58,16 @@ static void	renderer_render_update(t_renderer *renderer, int n_samples)
 {
 	char	*filename;
 
-	if (n_samples >= renderer->n_samples
+	if (n_samples >= renderer->max_samples
 		|| n_samples == 1
 		|| n_samples % renderer->freq_update == 0
 		|| n_samples % renderer->freq_save == 0)
 		renderer_write_color(renderer, n_samples);
-	if (n_samples >= renderer->n_samples
+	if (n_samples >= renderer->max_samples
 		|| n_samples == 1
 		|| n_samples % renderer->freq_update == 0)
 		display_putimage(renderer->disp);
-	if (n_samples >= renderer->n_samples
+	if (n_samples >= renderer->max_samples
 		|| n_samples % renderer->freq_save == 0)
 	{
 		filename = get_filename(n_samples);
@@ -95,7 +95,7 @@ int	renderer_render(void *param)
 		return (0);
 	if (n_samples_so_far == 0)
 		timeman(0);
-	if (n_samples_so_far >= renderer->n_samples)
+	if (n_samples_so_far >= renderer->max_samples)
 	{
 		printf("\nRender finished.\n");
 		render_finished = 1;

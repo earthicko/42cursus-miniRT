@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "libft.h"
 #include "renderer.h"
+#include "msgdef.h"
 #include "parser.h"
 #include "settingman.h"
 
@@ -16,6 +17,7 @@ void	renderer_destroy(t_renderer *renderer)
 static int	abort_renderer_init(t_renderer *renderer, int stat)
 {
 	renderer_destroy(renderer);
+	ft_print_error(EXEC_NAME, stat);
 	return (stat);
 }
 
@@ -27,7 +29,7 @@ static void	set_rendererinfo(t_renderer *renderer, int displayval[3])
 		&displayval[0], &displayval[1], &displayval[2]);
 	settingman_rendererinfo(SETTINGMAN_GET, values);
 	renderer->max_depth = values[0];
-	renderer->n_samples = values[1];
+	renderer->max_samples = values[1];
 	renderer->freq_update = values[2];
 	renderer->freq_save = values[3];
 }

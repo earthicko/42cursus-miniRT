@@ -6,7 +6,7 @@
 
 typedef struct s_renderer
 {
-	int			n_samples;
+	int			max_samples;
 	int			max_depth;
 	int			freq_update;
 	int			freq_save;
