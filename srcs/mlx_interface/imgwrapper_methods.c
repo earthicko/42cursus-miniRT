@@ -6,9 +6,6 @@
 
 void	imgwrapper_destroy(t_imgwrapper *img)
 {
-	void	*mlx;
-
-	mlx = mlx_interface_get_mlx_ptr();
 	if (img->colors)
 		free(img->colors);
 	if (img->filename)

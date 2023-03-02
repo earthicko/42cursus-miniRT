@@ -57,6 +57,6 @@ int	build_texture_image(const t_ptrarr *tokens, t_scene *scene)
 		return (CODE_ERROR_MALLOC);
 	printf("%s: image texture (%s, using file %s)\n", __func__,
 		((t_texture *)ptrarr_getlast(scene->res.textures))->name,
-		tokens->data[2]);
+		(char *)tokens->data[2]);
 	return (CODE_OK);
 }
