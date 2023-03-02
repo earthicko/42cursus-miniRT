@@ -59,9 +59,9 @@ int	main(void)
 	t_display		*disp;
 	t_imgwrapper	*img;
 
-	disp = display_create(100, 100, 1, "");
-	img = imgwrapper_create(disp->mlx, "tests/steve_head_front.xpm");
+	disp = display_create(100, 100, 10, "");
+	img = imgwrapper_create("tests/steve_head_front.xpm");
 	putimage(disp, img);
-	mlx_loop(disp->mlx);
+	mlx_loop(mlx_interface_get_mlx_ptr());
 	return (0);
 }
