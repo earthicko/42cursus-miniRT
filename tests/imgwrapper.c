@@ -1,23 +1,67 @@
 #include <stdio.h>
+#include "mlx.h"
 #include "print.h"
 #include "mlx_interface.h"
+
+static void	getpixel(t_pixel *p, int x, int y, t_color color)
+{
+	const t_minmax	in = {0, 1};
+	const t_minmax	out = {0, 255};
+	int				i;
+	int				rgb[3];
+
+	p->x = x;
+	p->y = y;
+	i = 0;
+	while (i < 3)
+	{
+		rgb[i] = clamp_int(map_minmax(color.i[i], &in, &out), 0, 255);
+		i++;
+	}
+	p->color = rgb[0] << 16 | rgb[1] << 8 | rgb[2];
+}
+
+static void	putpixel(t_display *disp, t_imgwrapper *img, int x, int y)
+{
+	t_uv			uv;
+	const t_minmax	out = {0, 1};
+	t_color			color;
+	t_pixel			p;
+
+	uv.i[0] = map_minmax((double)x, &img->x_range, &out);
+	uv.i[1] = map_minmax((double)y, &img->y_range, &out);
+	imgwrapper_getcolor(img, &color, &uv);
+	getpixel(&p, x, y, color);
+	display_putpixel(disp, p);
+}
+
+static void	putimage(t_display *disp, t_imgwrapper *img)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < img->height)
+	{
+		x = 0;
+		while (x < img->width)
+		{
+			putpixel(disp, img, x, y);
+			x++;
+		}
+		y++;
+	}
+	display_putimage(disp);
+}
 
 int	main(void)
 {
 	t_display		*disp;
 	t_imgwrapper	*img;
-	t_color			color;
-	t_uv			uv;
 
-	disp = display_create(1, 1, 1, "");
-	img = imgwrapper_create(disp, "tests/steve_head_front.xpm");
-	printf("%p\n", img);
-	vec2_setval(&uv, 1, 1);
-	imgwrapper_getcolor(img, &color, &uv);
-	printf("color at ");
-	print_vec2(&uv);
-	printf(" = ");
-	print_vec3(&color);
-	printf("\n");
+	disp = display_create(100, 100, 1, "");
+	img = imgwrapper_create(disp->mlx, "tests/steve_head_front.xpm");
+	putimage(disp, img);
+	mlx_loop(disp->mlx);
 	return (0);
 }
