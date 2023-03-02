@@ -1,5 +1,5 @@
 #include "mlx.h"
-#include "mlx_interface.h"
+#include "mlx_interface_internal.h"
 #include "settingman.h"
 
 static void	display_putpixel_forreal(t_display *disp, t_pixel p)
@@ -40,5 +40,10 @@ void	display_putpixel(t_display *disp, t_pixel p)
 
 void	display_putimage(t_display *disp)
 {
-	mlx_put_image_to_window(disp->mlx, disp->win, disp->img, 0, 0);
+	void	*mlx;
+
+	mlx = mlx_interface_get_mlx_ptr();
+	if (!mlx)
+		return ;
+	mlx_put_image_to_window(mlx, disp->win, disp->img, 0, 0);
 }

@@ -2,18 +2,26 @@
 #include "libft.h"
 #include "number.h"
 #include "mlx.h"
-#include "mlx_interface.h"
+#include "mlx_interface_internal.h"
 
 void	imgwrapper_destroy(t_imgwrapper *img)
 {
-	if (img->img)
-		mlx_destroy_image(img->mlx, img->img);
+	void	*mlx;
+
+	mlx = mlx_interface_get_mlx_ptr();
+	if (mlx && img->img)
+		mlx_destroy_image(mlx, img->img);
 	free(img);
 }
 
 static int	create_img(t_imgwrapper *imgwrapper, char *filename)
 {
-	imgwrapper->img = mlx_xpm_file_to_image(imgwrapper->mlx,
+	void	*mlx;
+
+	mlx = mlx_interface_get_mlx_ptr();
+	if (!mlx)
+		return (CODE_ERROR_GENERIC);
+	imgwrapper->img = mlx_xpm_file_to_image(mlx,
 			filename, &imgwrapper->width, &imgwrapper->height);
 	if (!imgwrapper->img)
 		return (CODE_ERROR_GENERIC);
@@ -24,7 +32,7 @@ static int	create_img(t_imgwrapper *imgwrapper, char *filename)
 	return (CODE_OK);
 }
 
-t_imgwrapper	*imgwrapper_create(void *mlx, char *filename)
+t_imgwrapper	*imgwrapper_create(char *filename)
 {
 	t_imgwrapper	*imgwrapper;
 
@@ -32,7 +40,6 @@ t_imgwrapper	*imgwrapper_create(void *mlx, char *filename)
 	if (!imgwrapper)
 		return (NULL);
 	ft_bzero(imgwrapper, sizeof(t_imgwrapper));
-	imgwrapper->mlx = mlx;
 	if (create_img(imgwrapper, filename))
 	{
 		imgwrapper_destroy(imgwrapper);

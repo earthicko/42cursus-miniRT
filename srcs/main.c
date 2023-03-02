@@ -21,6 +21,7 @@ t_bool	match_extension(const char *path, const char *ext)
 int	main(int argc, char **argv)
 {
 	t_renderer	renderer;
+	void		*mlx;
 
 	if (argc != 2 || !match_extension(argv[1], ".rt"))
 	{
@@ -31,7 +32,8 @@ int	main(int argc, char **argv)
 		return (1);
 	mlx_hook(renderer.disp->win, ON_KEYDOWN, 0, mlx_key_interface, &renderer);
 	mlx_hook(renderer.disp->win, ON_DESTROY, 0, exit_program, &renderer);
-	mlx_loop_hook(renderer.disp->mlx, renderer_render, &renderer);
-	mlx_loop(renderer.disp->mlx);
+	mlx = mlx_interface_get_mlx_ptr();
+	mlx_loop_hook(mlx, renderer_render, &renderer);
+	mlx_loop(mlx);
 	return (0);
 }

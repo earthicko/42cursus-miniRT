@@ -1,8 +1,8 @@
+#include <stdlib.h>
 #include "libft.h"
-#include "mlx_interface.h"
+#include "mlx_interface_internal.h"
 #include "mlx.h"
 #include "renderer.h"
-#include <stdlib.h>
 
 int	exit_program(void *param)
 {
@@ -13,10 +13,13 @@ int	exit_program(void *param)
 
 t_display	*display_destroy(t_display *disp)
 {
-	if (disp->img)
-		mlx_destroy_image(disp->mlx, disp->img);
-	if (disp->win)
-		mlx_destroy_window(disp->mlx, disp->win);
+	void	*mlx;
+
+	mlx = mlx_interface_get_mlx_ptr();
+	if (mlx && disp->img)
+		mlx_destroy_image(mlx, disp->img);
+	if (mlx && disp->win)
+		mlx_destroy_window(mlx, disp->win);
 	if (disp->colors)
 		free(disp->colors);
 	free(disp);
@@ -39,19 +42,22 @@ static int	get_display_info(t_display *disp)
 static int	display_create_mlx(t_display *disp,
 	int values[3], char *title)
 {
-	disp->mlx = mlx_init();
-	if (!disp->mlx)
+	void	*mlx;
+
+	mlx = mlx_init();
+	if (!mlx)
 		return (CODE_ERROR_GENERIC);
+	mlxmanager(MLXMAN_SET, &mlx);
 	disp->w = values[0];
 	disp->h = values[1];
 	disp->w_real = values[0] * values[2];
 	disp->h_real = values[1] * values[2];
 	disp->multiplier = values[2];
-	disp->win = mlx_new_window(disp->mlx, disp->w_real, disp->h_real, title);
+	disp->win = mlx_new_window(mlx, disp->w_real, disp->h_real, title);
 	if (!disp->win)
 		return (CODE_ERROR_GENERIC);
 	disp->ratio = (double)disp->w / (double)disp->h;
-	disp->img = mlx_new_image(disp->mlx, disp->w_real, disp->h_real);
+	disp->img = mlx_new_image(mlx, disp->w_real, disp->h_real);
 	if (!disp->img)
 		return (CODE_ERROR_GENERIC);
 	if (get_display_info(disp))
