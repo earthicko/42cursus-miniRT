@@ -10,6 +10,8 @@ enum	e_coefficient
 	C,
 };
 
+void	hittable_destroy(t_hittable *self);
+
 /******* math_utils *******/
 
 t_bool	val_is_near_zero(double val);
@@ -33,21 +35,6 @@ t_bool	hit_disk(t_hittable *hittable, \
 					t_hit_record *rec);
 
 t_bool	hit_conical_hat(t_hittable *hittable, \
-						const t_ray *ray, \
-						t_minmax t, \
-						t_hit_record *rec);
-
-t_bool	hit_xy_rectangle(t_hittable *hittable, \
-						const t_ray *ray, \
-						t_minmax t, \
-						t_hit_record *rec);
-
-t_bool	hit_yz_rectangle(t_hittable *hittable, \
-						const t_ray *ray, \
-						t_minmax t, \
-						t_hit_record *rec);
-
-t_bool	hit_zx_rectangle(t_hittable *hittable, \
 						const t_ray *ray, \
 						t_minmax t, \
 						t_hit_record *rec);

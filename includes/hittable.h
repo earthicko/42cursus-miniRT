@@ -35,70 +35,78 @@ typedef t_bool				(*t_hittable_hit)(t_hittable *hittable,
 												const t_ray *r,
 												t_minmax t,
 												t_hit_record *rec);
+typedef void				(*t_hittable_destroy)(t_hittable *hittable);
 
 typedef struct s_hittable
 {
-	t_hittable_hit	hit;
-	t_bbox			bbox;
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
 }	t_hittable;
 
 typedef struct s_hittable_transform
 {
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_hittable		*base;
-	t_mtx44			w_to_o;
-	t_mtx44			o_to_w;
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_hittable			*base;
+	t_mtx44				w_to_o;
+	t_mtx44				o_to_w;
 }	t_hittable_transform;
 
 /******* hittable real objects struct *******/
 
 typedef struct s_hittable_sphere
 {
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_material		*material;
-	double			radius;
-	t_point			center;
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_material			*material;
+	double				radius;
+	t_point				center;
 }	t_hittable_sphere;
 
 typedef struct s_hittable_plane
 {
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_material		*material;
-	t_point			point;
-	t_vec3			norm;
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_material			*material;
+	t_point				point;
+	t_vec3				norm;
 }	t_hittable_plane;
 
 typedef struct s_hittable_tube
 {
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_material		*material;
-	t_point			center_of_cylinder;
-	t_point			center_of_disk;
-	t_vec3			axis;
-	double			height;
-	double			radius;
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_material			*material;
+	t_point				center_of_cylinder;
+	t_point				center_of_disk;
+	t_vec3				axis;
+	double				height;
+	double				radius;
 }	t_hittable_tube;
 
 typedef struct s_hittable_disk
 {
-	t_hittable_hit			hit;
-	t_bbox					bbox;
-	t_material				*material;
-	t_hittable_plane		plane;
-	double					radius;
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_material			*material;
+	t_hittable_plane	plane;
+	double				radius;
 }	t_hittable_disk;
 
 typedef struct s_hittable_cylinder
 {
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_material		*material;
-	t_hittable_tube	tube;
-	t_hittable_disk	disk[2];
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_material			*material;
+	t_hittable_tube		tube;
+	t_hittable_disk		disk[2];
 }	t_hittable_cylinder;
 
 typedef struct s_cylinder_info
@@ -111,18 +119,20 @@ typedef struct s_cylinder_info
 
 typedef struct s_hittable_conical_hat
 {
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_material		*material;
-	t_point			center_of_disk;
-	t_vec3			axis;
-	t_point			apex;
-	double			height;
-	double			radius;
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_material			*material;
+	t_point				center_of_disk;
+	t_vec3				axis;
+	t_point				apex;
+	double				height;
+	double				radius;
 }	t_hittable_conical_hat;
 
 typedef struct s_hittable_cone
 {
+	t_hittable_destroy		destroy;
 	t_hittable_hit			hit;
 	t_bbox					bbox;
 	t_material				*material;
@@ -153,13 +163,14 @@ typedef struct s_aa_rectangle_info
 
 typedef struct s_hittable_aa_rectangle
 {
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_material		*material;
-	int				axis;
-	double			offset;
-	int				other_axis[2];
-	t_minmax		range[2];
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_material			*material;
+	int					axis;
+	double				offset;
+	int					other_axis[2];
+	t_minmax			range[2];
 }	t_hittable_aa_rectangle;
 
 typedef struct s_box_info
@@ -175,6 +186,7 @@ typedef struct s_box_info
 
 typedef struct s_hittable_aa_box
 {
+	t_hittable_destroy		destroy;
 	t_hittable_hit			hit;
 	t_bbox					bbox;
 	t_hittable_aa_rectangle	*faces[6];
@@ -182,9 +194,10 @@ typedef struct s_hittable_aa_box
 
 typedef struct s_hittable_list
 {
-	t_hittable_hit	hit;
-	t_bbox			bbox;
-	t_ptrarr		*elements;
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_ptrarr			*elements;
 }	t_hittable_list;
 
 /******* hittable objects constructor, destructor *******/
@@ -207,8 +220,6 @@ t_hittable			*hittable_transform_create(t_hittable *base, \
 												t_point orig, \
 												t_vec3 x_axis, \
 												double angle);
-
-void				hittable_list_destroy(t_hittable_list *list);
 
 t_bool				hittable_has_bbox(t_hittable *self);
 int					hittable_list_append(t_hittable *self, t_hittable *item);

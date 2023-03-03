@@ -127,6 +127,7 @@ FILENAME		= \
 				parser/builder/build_material_metal \
 				parser/builder/build_material_dielectric \
 				scene/create \
+				scene/destroy \
 				scene/search \
 				renderer/init \
 				renderer/render \

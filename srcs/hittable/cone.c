@@ -67,6 +67,7 @@ t_hittable	*hittable_cone_create(t_cone_info *cone_info,
 	if (!cone)
 		return (NULL);
 	ft_memset(cone, 0, sizeof(t_hittable_cone));
+	cone->destroy = hittable_destroy;
 	cone->hit = hit_cone;
 	cone->material = material;
 	set_disk_of_cone(&cone->disk, cone_info, material);

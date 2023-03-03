@@ -62,6 +62,12 @@ int	hittable_list_append(t_hittable *self, t_hittable *item)
 	return (stat);
 }
 
+void	hittable_list_destroy(t_hittable *self)
+{
+	ptrarr_destroy(((t_hittable_list *)self)->elements, NULL);
+	free(self);
+}
+
 t_hittable	*hittable_list_create(void)
 {
 	t_hittable_list	*list;
@@ -70,6 +76,7 @@ t_hittable	*hittable_list_create(void)
 	if (!list)
 		return (NULL);
 	ft_bzero(list, sizeof(t_hittable_list));
+	list->destroy = hittable_list_destroy;
 	list->hit = hittable_list_hit;
 	list->elements = ptrarr_create();
 	if (!list->elements)
@@ -78,10 +85,4 @@ t_hittable	*hittable_list_create(void)
 		return (NULL);
 	}
 	return ((t_hittable *)list);
-}
-
-void	hittable_list_destroy(t_hittable_list *list)
-{
-	ptrarr_destroy(list->elements, NULL);
-	free(list);
 }

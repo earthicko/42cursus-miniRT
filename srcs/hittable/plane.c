@@ -51,6 +51,7 @@ t_hittable	*hittable_plane_create(t_point point,
 	if (!plane)
 		return (NULL);
 	ft_memset(plane, 0, sizeof(t_hittable_plane));
+	plane->destroy = hittable_destroy;
 	plane->hit = hit_plane;
 	plane->material = material;
 	plane->point = point;

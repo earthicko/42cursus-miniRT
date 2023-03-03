@@ -89,6 +89,7 @@ t_hittable	*hittable_aa_rectangle_create(t_aa_rectangle_info info,
 	if (!aa_rect)
 		return (NULL);
 	ft_bzero(aa_rect, sizeof(t_hittable_aa_rectangle));
+	aa_rect->destroy = hittable_destroy;
 	aa_rect->hit = hit_aa_rectangle;
 	aa_rect->material = material;
 	aa_rect->axis = info.axis;

@@ -2,7 +2,7 @@
 #include <math.h>
 #include "libft.h"
 #include "geometry.h"
-#include "hittable.h"
+#include "hittable_internal.h"
 
 t_bool	hittable_transform_hit(t_hittable *self,
 			const t_ray *r, t_minmax t, t_hit_record *rec)
@@ -84,6 +84,7 @@ t_hittable	*hittable_transform_create(t_hittable *base,
 	if (!transform)
 		return (NULL);
 	ft_bzero(transform, sizeof(t_hittable_transform));
+	transform->destroy = hittable_destroy;
 	transform->hit = hittable_transform_hit;
 	transform->base = base;
 	hittable_transform_init_o_to_w(&transform->o_to_w, orig, x_axis, angle);

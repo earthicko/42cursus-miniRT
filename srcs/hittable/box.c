@@ -26,6 +26,7 @@ t_hittable	*hittable_box_create(t_box_info *info)
 	if (!box)
 		return (NULL);
 	ft_memset(box, 0, sizeof(t_hittable_aa_box));
+	box->destroy = hittable_destroy;
 	box->hit = hit_box;
 	(void)info;
 	ft_printf("Unimplemented stub of %s\n", __func__);
