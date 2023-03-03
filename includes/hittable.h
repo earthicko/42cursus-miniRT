@@ -162,6 +162,24 @@ typedef struct s_hittable_aa_rectangle
 	t_minmax		range[2];
 }	t_hittable_aa_rectangle;
 
+typedef struct s_box_info
+{
+	t_point		cen;
+	t_vec3		x_axis;
+	double		x_angle;
+	double		width;
+	double		height;
+	double		depth;
+	t_material	*mt[6];
+}	t_box_info;
+
+typedef struct s_hittable_box
+{
+	t_hittable_hit			hit;
+	t_bbox					bbox;
+	t_hittable_aa_rectangle	*faces[6];
+}	t_hittable_box;
+
 typedef struct s_hittable_list
 {
 	t_hittable_hit	hit;
@@ -183,6 +201,7 @@ t_hittable			*hittable_cone_create(t_cone_info *cone_info, \
 											t_material *material);
 t_hittable			*hittable_aa_rectangle_create(t_aa_rectangle_info info, \
 													t_material *material);
+t_hittable			*hittable_box_create(t_box_info *info);
 t_hittable			*hittable_list_create(void);
 t_hittable			*hittable_transform_create(t_hittable *base, \
 												t_point orig, \

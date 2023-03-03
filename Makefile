@@ -54,6 +54,7 @@ FILENAME		= \
 				ptrarr/getter \
 				print/print0 \
 				print/print1 \
+				print/print2 \
 				mlx_interface/create \
 				mlx_interface/key_interface \
 				mlx_interface/putpixel \
@@ -77,6 +78,7 @@ FILENAME		= \
 				hittable/cone \
 				hittable/conical_hat \
 				hittable/aa_rectangle \
+				hittable/box \
 				material/diffuse_light \
 				material/metal \
 				material/dielectric \
@@ -114,6 +116,10 @@ FILENAME		= \
 				parser/builder/build_cylinder_patternmatcher \
 				parser/builder/build_cone \
 				parser/builder/build_cone_patternmatcher \
+				parser/builder/build_box \
+				parser/builder/build_box_with_color \
+				parser/builder/build_box_with_material \
+				parser/builder/build_box_patternmatcher \
 				parser/builder/build_texture_solid \
 				parser/builder/build_texture_checker \
 				parser/builder/build_texture_image \
