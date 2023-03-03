@@ -14,6 +14,11 @@ double	rand_double(void);
 double	rand_double_range(double min, double max);
 int		rand_range(int min, int max);
 
+int		ft_rand_ts(void);
+double	rand_double_ts(void);
+double	rand_double_range_ts(double min, double max);
+int		rand_range_ts(int min, int max);
+
 double	rad_to_deg(double rad);
 double	deg_to_rad(double deg);
 

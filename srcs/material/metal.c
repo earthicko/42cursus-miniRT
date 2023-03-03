@@ -46,7 +46,7 @@ t_bool	material_metal_scatter(
 	vec3_get_unit(&in_unit, &ray_in->dir);
 	vec3_reflect(&reflection, &in_unit, &hit->normal);
 	out->scattered.orig = hit->p;
-	vec3_get_random_in_unit_sphere(&fuzziness);
+	vec3_get_random_in_unit_sphere_ts(&fuzziness);
 	vec3_mult_num_inplace(&fuzziness, this->fuzz);
 	vec3_add_vec3(&out->scattered.dir, &reflection, &fuzziness);
 	if (vec3_dot_vec3(&out->scattered.dir, &hit->normal) > 0)

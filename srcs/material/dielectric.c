@@ -55,7 +55,7 @@ t_bool	material_dielectric_can_refract(
 	if (refract_ratio * sintheta > 1.0)
 		return (FALSE);
 	reflectance = material_dialectric_get_reflectance(costheta, refract_ratio);
-	if (reflectance > rand_double())
+	if (reflectance > rand_double_ts())
 		return (FALSE);
 	return (TRUE);
 }

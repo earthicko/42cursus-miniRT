@@ -35,7 +35,7 @@ t_bool	material_lambertian_scatter(
 
 	(void)ray_in;
 	this = (t_material_lambertian *)self;
-	vec3_get_random_unit(&random_unit);
+	vec3_get_random_unit_ts(&random_unit);
 	vec3_add_vec3(&scatter_dir, &(hit->normal), &random_unit);
 	out->scattered.orig = hit->p;
 	if (vec3_is_near_zero(&scatter_dir))

@@ -44,8 +44,10 @@ FILENAME		= \
 				geometry/vec3_reflect_refract \
 				geometry/vec3_utils1 \
 				geometry/vec3_utils2 \
+				geometry/vec3_utils3 \
 				ray/utils \
 				number/random \
+				number/random_multithread \
 				number/degree \
 				number/utils \
 				ptrarr/create \

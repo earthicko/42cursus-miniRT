@@ -31,8 +31,8 @@ void	test_get_ray(t_camera *cam, int x, int y)
 	double	v;
 	t_ray	ray;
 
-	u = (x + rand_double()) / (cam->pixel_w - 1);
-	v = (y + rand_double()) / (cam->pixel_h - 1);
+	u = (x + rand_double_ts()) / (cam->pixel_w - 1);
+	v = (y + rand_double_ts()) / (cam->pixel_h - 1);
 	printf("for pixel (%d, %d) uv=(%.2f, %.2f) ", x, y, u, v);
 	camera_get_ray_at(&ray, cam, u, v);
 	print_ray(&ray);

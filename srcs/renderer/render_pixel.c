@@ -51,8 +51,8 @@ void	renderer_render_pixel(t_renderer *renderer, int x, int y)
 	t_uv	uv;
 	t_ray	ray;
 
-	uv.i[0] = (x + rand_double()) / (renderer->disp->w);
-	uv.i[1] = (y + rand_double()) / (renderer->disp->h);
+	uv.i[0] = (x + rand_double_ts()) / (renderer->disp->w);
+	uv.i[1] = (y + rand_double_ts()) / (renderer->disp->h);
 	camera_get_ray_at(&ray, &renderer->scene->cam, &uv);
 	renderer_render_ray(renderer->disp->colors + (renderer->disp->w * y) + x,
 		renderer, &ray, renderer->max_depth);
