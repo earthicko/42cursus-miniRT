@@ -39,6 +39,7 @@ static void	set_next_milestone(t_renderer *renderer,
 	curr_milestone = milestone(stat);
 	next_milestone = get_next_milestone(renderer, curr_milestone);
 	renderer_render_update(renderer, curr_milestone);
+	set_n_samples_main(stat, curr_milestone);
 	set_milestone(stat, next_milestone);
 }
 
