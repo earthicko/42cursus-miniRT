@@ -20,12 +20,12 @@ t_bool	hit_box(t_hittable *hittable,
 
 t_hittable	*hittable_box_create(t_box_info *info)
 {
-	t_hittable_box	*box;
+	t_hittable_aa_box	*box;
 
-	box = malloc(sizeof(t_hittable_box));
+	box = malloc(sizeof(t_hittable_aa_box));
 	if (!box)
 		return (NULL);
-	ft_memset(box, 0, sizeof(t_hittable_box));
+	ft_memset(box, 0, sizeof(t_hittable_aa_box));
 	box->hit = hit_box;
 	(void)info;
 	ft_printf("Unimplemented stub of %s\n", __func__);

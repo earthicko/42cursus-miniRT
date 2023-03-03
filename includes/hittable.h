@@ -173,12 +173,12 @@ typedef struct s_box_info
 	t_material	*mt[6];
 }	t_box_info;
 
-typedef struct s_hittable_box
+typedef struct s_hittable_aa_box
 {
 	t_hittable_hit			hit;
 	t_bbox					bbox;
 	t_hittable_aa_rectangle	*faces[6];
-}	t_hittable_box;
+}	t_hittable_aa_box;
 
 typedef struct s_hittable_list
 {
