@@ -5,21 +5,28 @@
 #include "renderer_internal.h"
 #include "settingman.h"
 
+static t_bool	should_update(int max_samples, int n_samples, int freq)
+{
+	if (n_samples >= max_samples
+		|| n_samples == 1
+		|| n_samples % freq == 0)
+		return (TRUE);
+	return (FALSE);
+}
+
 static void	renderer_render_update(t_renderer *renderer, int n_samples)
 {
-	char	*filename;
+	char		*filename;
+	static int	update_count;
 
-	if (n_samples >= renderer->max_samples
-		|| n_samples == 1
-		|| n_samples % renderer->freq_update == 0
-		|| n_samples % renderer->freq_save == 0)
+	if (should_update(renderer->max_samples, n_samples, renderer->freq_update))
+	{
 		renderer_write_color(renderer, n_samples);
-	if (n_samples >= renderer->max_samples
-		|| n_samples == 1
-		|| n_samples % renderer->freq_update == 0)
 		display_putimage(renderer->disp);
-	if (n_samples >= renderer->max_samples
-		|| n_samples % renderer->freq_save == 0)
+		update_count++;
+	}
+	if (should_update(renderer->max_samples, n_samples, renderer->freq_update)
+		&& update_count % renderer->freq_save == 0)
 	{
 		filename = get_filename(n_samples);
 		if (!filename)
@@ -56,7 +63,7 @@ int	renderer_render(void *param)
 	}
 	renderer_render_loop(renderer);
 	n_samples_so_far++;
-	renderer_render_showstat(renderer, n_samples_so_far);
+	renderer_render_showstat(n_samples_so_far);
 	renderer_render_update(renderer, n_samples_so_far);
 	return (0);
 }

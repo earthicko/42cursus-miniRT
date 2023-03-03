@@ -18,15 +18,11 @@ char	*get_filename(int n)
 	return (filename);
 }
 
-void	renderer_render_showstat(t_renderer *renderer, int n_samples)
+void	renderer_render_showstat(int n_samples)
 {
 	static int			i;
 	const static char	*blinker[3] = {".     ", "..    ", "...   "};
 
-	if (n_samples == renderer->max_samples - 1
-		|| n_samples % renderer->freq_update == 0)
-	{
-		printf("\rSample count %d ", n_samples);
-		printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);
-	}
+	ft_printf("\rSample count %d ", n_samples);
+	ft_printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);
 }

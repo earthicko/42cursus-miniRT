@@ -54,6 +54,5 @@ t_bool	all_workers_reach_milestone(t_renderer_supervisor *stat)
 			return (FALSE);
 		i++;
 	}
-	printf("All workers has reached milestone %d\n", current_milestone);
 	return (TRUE);
 }

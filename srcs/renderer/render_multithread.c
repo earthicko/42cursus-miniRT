@@ -13,6 +13,7 @@ static void	renderer_render_update(t_renderer *renderer, int n_samples)
 
 	if (n_samples == 0)
 		return ;
+	renderer_render_showstat(n_samples);
 	renderer_write_color(renderer, n_samples);
 	display_putimage(renderer->disp);
 	update_count++;

@@ -66,6 +66,7 @@ int	init_workers(t_renderer *renderer, t_renderer_supervisor *stat)
 	int	h;
 
 	renderer->stat = stat;
+	stat->milestone = 1;
 	ret = 0;
 	ret |= pthread_mutex_init(&stat->m_finished, NULL);
 	ret |= pthread_mutex_init(&stat->m_n_samples, NULL);

@@ -10,7 +10,7 @@ void	renderer_render_loop_multithread(t_renderer_worker *worker);
 void	renderer_render_loop(t_renderer *renderer);
 
 char	*get_filename(int n);
-void	renderer_render_showstat(t_renderer *renderer, int n_samples);
+void	renderer_render_showstat(int n_samples);
 
 void	*worker_routine(void *arg);
 int		init_workers(t_renderer *renderer, t_renderer_supervisor *stat);
