@@ -14,13 +14,14 @@ static int	parse_box_with_color(
 	build_vector(&info->cen, &tokens->data[1]);
 	build_vector(&info->x_axis, &tokens->data[6]);
 	info->x_angle = ft_atof(tokens->data[11]);
-	info->width = ft_atof(tokens->data[12]);
-	info->height = ft_atof(tokens->data[13]);
-	info->depth = ft_atof(tokens->data[14]);
+	info->aa_info.widths[0] = ft_atof(tokens->data[12]);
+	info->aa_info.widths[1] = ft_atof(tokens->data[13]);
+	info->aa_info.widths[2] = ft_atof(tokens->data[14]);
 	build_vector(color, &tokens->data[15]);
 	if (is_invalid_normalized_vec3(&info->x_axis) || is_invalid_color(color)
-		|| is_invalid_length(info->width) || is_invalid_length(info->height)
-		|| is_invalid_length(info->depth))
+		|| is_invalid_length(info->aa_info.widths[0])
+		|| is_invalid_length(info->aa_info.widths[1])
+		|| is_invalid_length(info->aa_info.widths[2]))
 		return (CODE_ERROR_DATA);
 	map_color(color);
 	return (CODE_OK);
@@ -41,7 +42,7 @@ int	build_box_with_color(const t_ptrarr *tokens, t_scene *scene)
 	i = 0;
 	while (i < 6)
 	{
-		info.mt[i] = ptrarr_getlast(scene->res.materials);
+		info.aa_info.mt[i] = ptrarr_getlast(scene->res.materials);
 		i++;
 	}
 	if (add_box(scene, &info))

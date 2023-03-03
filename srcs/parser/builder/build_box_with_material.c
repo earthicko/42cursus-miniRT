@@ -15,18 +15,20 @@ static int	parse_box_with_material(t_box_info *info,
 	build_vector(&info->cen, &tokens->data[1]);
 	build_vector(&info->x_axis, &tokens->data[6]);
 	info->x_angle = ft_atof(tokens->data[11]);
-	info->width = ft_atof(tokens->data[12]);
-	info->height = ft_atof(tokens->data[13]);
-	info->depth = ft_atof(tokens->data[14]);
+	info->aa_info.widths[0] = ft_atof(tokens->data[12]);
+	info->aa_info.widths[1] = ft_atof(tokens->data[13]);
+	info->aa_info.widths[2] = ft_atof(tokens->data[14]);
 	if (is_invalid_normalized_vec3(&info->x_axis)
-		|| is_invalid_length(info->width) || is_invalid_length(info->height)
-		|| is_invalid_length(info->depth))
+		|| is_invalid_length(info->aa_info.widths[0])
+		|| is_invalid_length(info->aa_info.widths[1])
+		|| is_invalid_length(info->aa_info.widths[2]))
 		return (CODE_ERROR_DATA);
 	i = 0;
 	while (i < 6)
 	{
-		info->mt[i] = scene_search_material(scene, tokens->data[15 + i]);
-		if (!info->mt[i])
+		info->aa_info.mt[i]
+			= scene_search_material(scene, tokens->data[15 + i]);
+		if (!info->aa_info.mt[i])
 			return (CODE_ERROR_DATA);
 		i++;
 	}

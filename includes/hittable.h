@@ -54,6 +54,14 @@ typedef struct s_hittable_transform
 	t_mtx44				o_to_w;
 }	t_hittable_transform;
 
+typedef struct s_hittable_list
+{
+	t_hittable_destroy	destroy;
+	t_hittable_hit		hit;
+	t_bbox				bbox;
+	t_ptrarr			*elements;
+}	t_hittable_list;
+
 /******* hittable real objects struct *******/
 
 typedef struct s_hittable_sphere
@@ -159,6 +167,7 @@ typedef struct s_aa_rectangle_info
 	int			axis;
 	double		offset;
 	t_minmax	range[2];
+	t_bool		flip;
 }	t_aa_rectangle_info;
 
 typedef struct s_hittable_aa_rectangle
@@ -171,34 +180,30 @@ typedef struct s_hittable_aa_rectangle
 	double				offset;
 	int					other_axis[2];
 	t_minmax			range[2];
+	t_vec3				outward_norm;
 }	t_hittable_aa_rectangle;
+
+typedef struct s_aa_box_info
+{
+	double		widths[3];
+	t_material	*mt[6];
+}	t_aa_box_info;
 
 typedef struct s_box_info
 {
-	t_point		cen;
-	t_vec3		x_axis;
-	double		x_angle;
-	double		width;
-	double		height;
-	double		depth;
-	t_material	*mt[6];
+	t_aa_box_info	aa_info;
+	t_point			cen;
+	t_vec3			x_axis;
+	double			x_angle;
 }	t_box_info;
 
 typedef struct s_hittable_aa_box
 {
-	t_hittable_destroy		destroy;
-	t_hittable_hit			hit;
-	t_bbox					bbox;
-	t_hittable_aa_rectangle	*faces[6];
-}	t_hittable_aa_box;
-
-typedef struct s_hittable_list
-{
 	t_hittable_destroy	destroy;
 	t_hittable_hit		hit;
 	t_bbox				bbox;
-	t_ptrarr			*elements;
-}	t_hittable_list;
+	t_hittable_list		*faces;
+}	t_hittable_aa_box;
 
 /******* hittable objects constructor, destructor *******/
 

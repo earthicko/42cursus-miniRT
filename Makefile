@@ -77,8 +77,8 @@ FILENAME		= \
 				hittable/transform \
 				hittable/cone \
 				hittable/conical_hat \
-				hittable/aa_rectangle \
-				hittable/box \
+				hittable/aa_rectangle_create \
+				hittable/aa_rectangle_hit \
 				material/diffuse_light \
 				material/metal \
 				material/dielectric \
