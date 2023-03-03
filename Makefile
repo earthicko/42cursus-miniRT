@@ -28,6 +28,7 @@ DIR_TEST_OBJ	= test_objs/
 
 FILENAME		= \
 				timeman \
+				threadman \
 				geometry/matrix_init \
 				geometry/matrix_inverse \
 				geometry/matrix_inverse_utils \

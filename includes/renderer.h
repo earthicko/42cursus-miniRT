@@ -15,7 +15,6 @@ typedef struct s_renderer_worker
 {
 	t_renderer				*renderer;
 	t_renderer_supervisor	*super;
-	int						i;
 	int						n_samples;
 	t_mutex					m_n_samples;
 	int						y_begin;

@@ -5,12 +5,14 @@
 #include "msgdef.h"
 #include "renderer_internal.h"
 #include "settingman.h"
+#include "threadman.h"
 
 void	*worker_routine(void *arg)
 {
 	t_renderer_worker		*worker;
 	t_renderer_supervisor	*stat;
 	int						current_n_samples;
+	const int				idx_self = threadman(GETID, 0, 0, 0);
 
 	worker = (t_renderer_worker *)arg;
 	stat = worker->super;
@@ -18,14 +20,14 @@ void	*worker_routine(void *arg)
 	{
 		if (is_render_finished(stat))
 			break ;
-		current_n_samples = n_samples_worker(stat, worker->i);
+		current_n_samples = n_samples_worker(stat, idx_self);
 		if (current_n_samples == milestone(stat))
 		{
 			sleep(RENDER_SYNC_INTERVAL);
 			continue ;
 		}
 		renderer_render_loop_multithread(worker);
-		set_n_samples_worker(stat, worker->i, current_n_samples + 1);
+		set_n_samples_worker(stat, idx_self, current_n_samples + 1);
 	}
 	return (NULL);
 }
@@ -42,7 +44,6 @@ static int	set_worker_info(int h,
 	{
 		stat->workers[i].super = stat;
 		stat->workers[i].renderer = renderer;
-		stat->workers[i].i = i;
 		ret |= pthread_mutex_init(&stat->workers[i].m_n_samples, NULL);
 		if (i == 0)
 			stat->workers[i].y_begin = 0;
@@ -77,8 +78,7 @@ int	init_workers(t_renderer *renderer, t_renderer_supervisor *stat)
 	i = 0;
 	while (i < RENDER_WORKER_N)
 	{
-		ret |= pthread_create(&stat->ids[i], NULL,
-				worker_routine, &stat->workers[i]);
+		ret |= threadman(CREATE, i, worker_routine, &stat->workers[i]);
 		i++;
 	}
 	return (ret);
@@ -86,13 +86,6 @@ int	init_workers(t_renderer *renderer, t_renderer_supervisor *stat)
 
 void	terminate_workers(t_renderer_supervisor *stat)
 {
-	int	i;
-
 	set_render_finished(stat);
-	i = 0;
-	while (i < RENDER_WORKER_N)
-	{
-		pthread_join(stat->ids[i], NULL);
-		i++;
-	}
+	threadman(JOIN, 0, NULL, NULL);
 }
