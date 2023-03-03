@@ -29,18 +29,3 @@ void	set_n_samples_worker(t_renderer_supervisor *stat, int i, int n_samples)
 	stat->workers[i].n_samples = n_samples;
 	pthread_mutex_unlock(&stat->workers[i].m_n_samples);
 }
-
-void	update_milestone(t_renderer *renderer, t_renderer_supervisor *stat)
-{
-	int	current_milestone;
-
-	current_milestone = milestone(stat);
-	set_n_samples_main(stat, current_milestone);
-	if (current_milestone == 1)
-		current_milestone = renderer->freq_update;
-	else
-		current_milestone += renderer->freq_update;
-	if (current_milestone > renderer->max_samples)
-		current_milestone = renderer->max_samples;
-	set_milestone(stat, current_milestone);
-}

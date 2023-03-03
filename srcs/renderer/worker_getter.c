@@ -45,12 +45,15 @@ t_bool	all_workers_reach_milestone(t_renderer_supervisor *stat)
 {
 	int	i;
 	int	current_milestone;
+	int	n_samples;
 
 	current_milestone = milestone(stat);
 	i = 0;
 	while (i < RENDER_WORKER_N)
 	{
-		if (n_samples_worker(stat, i) < current_milestone)
+		n_samples = n_samples_worker(stat, i);
+		renderer_render_showstat_multithread(n_samples, i);
+		if (n_samples < current_milestone)
 			return (FALSE);
 		i++;
 	}

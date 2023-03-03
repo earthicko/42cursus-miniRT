@@ -13,7 +13,6 @@ static void	renderer_render_update(t_renderer *renderer, int n_samples)
 
 	if (n_samples == 0)
 		return ;
-	renderer_render_showstat(n_samples);
 	renderer_write_color(renderer, n_samples);
 	display_putimage(renderer->disp);
 	update_count++;
@@ -29,6 +28,18 @@ static void	renderer_render_update(t_renderer *renderer, int n_samples)
 		display_save_bmp(renderer->disp, filename);
 		free(filename);
 	}
+}
+
+static void	set_next_milestone(t_renderer *renderer,
+				t_renderer_supervisor *stat)
+{
+	int	curr_milestone;
+	int	next_milestone;
+
+	curr_milestone = milestone(stat);
+	next_milestone = get_next_milestone(renderer, curr_milestone);
+	renderer_render_update(renderer, curr_milestone);
+	set_milestone(stat, next_milestone);
 }
 
 void	timeman(int mode);
@@ -56,9 +67,7 @@ int	renderer_render_multithreaded(void *param)
 		return (0);
 	}
 	if (all_workers_reach_milestone(&stat))
-	{
-		renderer_render_update(renderer, n_samples_main(&stat));
-		update_milestone(renderer, &stat);
-	}
+		set_next_milestone(renderer, &stat);
+	sleep(RENDER_SYNC_INTERVAL);
 	return (0);
 }

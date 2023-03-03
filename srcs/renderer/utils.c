@@ -26,3 +26,23 @@ void	renderer_render_showstat(int n_samples)
 	ft_printf("\rSample count %d ", n_samples);
 	ft_printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);
 }
+
+void	renderer_render_showstat_multithread(int n_samples, int worker_idx)
+{
+	static int			i;
+	const static char	*blinker[3] = {".     ", "..    ", "...   "};
+
+	ft_printf("\rWorker %d Sample count %d ", worker_idx, n_samples);
+	ft_printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);
+}
+
+int	get_next_milestone(t_renderer *renderer, int current_milestone)
+{
+	if (current_milestone == 1)
+		current_milestone = renderer->freq_update;
+	else
+		current_milestone += renderer->freq_update;
+	if (current_milestone > renderer->max_samples)
+		current_milestone = renderer->max_samples;
+	return (current_milestone);
+}
