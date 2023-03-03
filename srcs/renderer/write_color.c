@@ -17,7 +17,7 @@ static void	map_pixel_color(int *rgb, t_renderer *renderer, t_pixel *p, int n)
 		val = renderer->disp->colors[pixel_i].i[i];
 		if (val != val)
 			val = 0.0;
-		val /= (n + 1);
+		val /= n;
 		val = sqrt(val);
 		val = map_minmax(val, &in, &out);
 		rgb[i] = clamp_int(val, 0, 255);
