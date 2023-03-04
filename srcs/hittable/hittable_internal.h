@@ -14,7 +14,6 @@ void	hittable_destroy(t_hittable *self);
 
 /******* math_utils *******/
 
-t_bool	val_is_near_zero(double val);
 double	dist_sq(t_point *a, t_point *b);
 t_bool	solver_quadratic_equation(t_minmax t, double coef[3], double *root);
 t_bool	solver_equation_system_plane_and_line(const t_minmax t, \

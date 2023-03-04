@@ -30,7 +30,6 @@ static void	set_coefficient(double coef[3],
 
 // TODO: radius 0, 혹은 거의 0인 경우에 대한 예외처리, 파싱단에서 처리하는게 나을듯
 // TODO: 필요시 uv 좌표 계산식 추가, the next weekend
-// TODO: 직선의 방향벡터가 정규화(길이 1로 설정)되지 않았을 때도 성립하는지 체크
 // TODO: outward_norm 길이 1로 정규화를 해주긴 했는데 왜 해야되지? 일단 해두긴 함
 // TODO: DOUBLE_E number.h헤더 인클루드 안해도 왜 컴파일 되는거지? 확인할 것
 /*

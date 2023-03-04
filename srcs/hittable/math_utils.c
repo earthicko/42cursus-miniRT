@@ -3,14 +3,6 @@
 #include "geometry.h"
 #include "hittable_internal.h"
 
-// TODO: 이 함수 삭제 후  인라인으로 처리
-t_bool	val_is_near_zero(double val)
-{
-	if (fabs(val) < DOUBLE_E)
-		return (TRUE);
-	return (FALSE);
-}
-
 double	dist_sq(t_point *a, t_point *b)
 {
 	t_vec3	b_to_a;
@@ -43,12 +35,6 @@ t_bool	solver_quadratic_equation(t_minmax t, double coef[3], double *root)
 	}
 	return (TRUE);
 }
-
-// TODO: ray가 평면이랑 평행하거나, 거의 평행할 때 예외처리 (0으로 나누게 됨)
-// TODO: 교점이 무수히 많을 때 (?)
-// 잠정적 결론:
-// 상식적으로 생각했을 때, 표면을 스치듯 지나가는 광선은 표면 밝기에 영향력이 거의 없다.
-// 따라서 위 두가지 경우 그냥 hit하지 않는다고 판단해도 무방할듯
 
 /*
 	This function solves equation system of plane and straight line.

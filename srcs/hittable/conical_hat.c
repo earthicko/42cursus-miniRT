@@ -108,8 +108,6 @@ static t_bool	root_is_out_of_range(t_hittable_conical_hat *hat,
 	return (FALSE);
 }
 
-// TODO: 법선에 수직인 경우(중근), 예외처리 추가
-// TODO: root_is_out_of_range 필요시 추가
 // TODO: implement u/v calculation
 /*
 	This function needs to solve equation system of cone and straight line.

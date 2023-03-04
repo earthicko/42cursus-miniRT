@@ -48,7 +48,6 @@ static void	set_tube_of_cylinder(t_hittable_tube *tube,
 	tube->radius = cylinder_info->radius;
 }
 
-// TODO: wgcc에서 shift 초기화 안해서 에러뱉을수도
 static void	set_disk_of_cylinder(t_hittable_disk *disk,
 									t_cylinder_info *cylinder_info,
 									t_material *material,

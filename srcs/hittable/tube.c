@@ -102,8 +102,6 @@ static void	tube_hit_record_set_normal_and_face(t_hittable_tube *tube,
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 }
 
-// TODO: ray_and_norm_are_perpendicular 함수 따로 뺄 것
-// TODO: 다른 객체들은 충돌시키기 전에 수직인지 미리 아는 방법이 없기에 교점 구한 후 확인
 // TODO: implement u/v calculation
 /*
 	This function needs to solve equation system of cylinder and straight line
