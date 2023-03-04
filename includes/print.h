@@ -16,6 +16,6 @@ void	print_scatter_record(const t_scatter_record *rec);
 void	print_cylinder_info(const t_cylinder_info *info);
 void	print_cone_info(const t_cone_info *info);
 void	print_bbox(const t_bbox *bbox);
-void	print_box_info(const t_box_info *info);
+void	print_box(const t_hittable *box);
 
 #endif
