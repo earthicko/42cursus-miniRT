@@ -27,11 +27,13 @@ int	main(void)
 	t_hit_record		rec;
 	t_ray				ray;
 
-	init_cylinder_info(&info, (t_point){0, 0, 0}, (t_vec3){0, 0, 1}, \
-						10, 5);
-	cy = hittable_cylinder_create(&info, 0);
-	ray.dir = (t_vec3){-10, 0, 5};
-	ray.orig = (t_point){10, 0, 0};
+	//init_cylinder_info(&info, (t_point){0, 0, 0}, (t_vec3){0, 0, 1}, \
+	//					10, 5);
+	init_cylinder_info(&info, (t_point){0, 0, 0}, (t_vec3){1, 0, 0}, \
+						20, 10);
+	cy = (t_hittable_cylinder *)hittable_cylinder_create(&info, 0);
+	ray.dir = (t_vec3){0, 0, -1};
+	ray.orig = (t_point){0, 0, 15};
 	/****************/
 	rec.p = (t_point){-100, -100, -100};
 	rec.normal = (t_vec3){-100, -100, -100};
@@ -40,6 +42,6 @@ int	main(void)
 	// printf("\n\n");
 	rec.is_front = -100;
 	/********************/
-	printf("is hit?: %d\n\n", hit_tube((t_hittable *)&(cy->tube), &ray, (t_minmax){0.00001, 10000000}, &rec));
+	printf("is hit?: %d\n\n", hit_tube((t_hittable *)&(cy->tube), &ray, (t_minmax){-1000000, 10000000}, &rec));
 	print_hit_record(&rec);
 }
