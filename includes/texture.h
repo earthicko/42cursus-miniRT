@@ -51,6 +51,7 @@ void		texture_destroy(t_texture *self);
 t_texture	*texture_solid_create(const char *name, t_color color);
 t_texture	*texture_checker_create(const char *name,
 				t_texture *a, t_texture *b, double freq);
-t_texture	*texture_image_create(const char *name, char *imgpath);
+t_texture	*texture_image_create(const char *name,
+				char *imgpath, int rotation, int flip);
 
 #endif

@@ -66,6 +66,8 @@ typedef struct s_imgwrapper
 	int			height;
 	t_minmax	x_range;
 	t_minmax	y_range;
+	int			rotation;
+	int			flip;
 	t_color		*colors;
 }	t_imgwrapper;
 
@@ -81,7 +83,7 @@ void			display_putimage(t_display *disp);
 
 int				display_save_bmp(const t_display *disp, const char *path);
 
-t_imgwrapper	*imgwrapper_create(char *filename);
+t_imgwrapper	*imgwrapper_create(char *filename, int rotation, int flip);
 void			imgwrapper_destroy(t_imgwrapper *img);
 void			imgwrapper_getcolor(t_imgwrapper *img,
 					t_color *out, const t_uv *uv);

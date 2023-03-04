@@ -21,7 +21,8 @@ void	texture_image_get_color_at(
 	imgwrapper_getcolor(this->img, out, &hitrec->uv);
 }
 
-t_texture	*texture_image_create(const char *name, char *imgpath)
+t_texture	*texture_image_create(const char *name,
+				char *imgpath, int rotation, int flip)
 {
 	t_texture_image	*out;
 
@@ -35,7 +36,7 @@ t_texture	*texture_image_create(const char *name, char *imgpath)
 		texture_image_destroy((t_texture *)out);
 		return (NULL);
 	}
-	out->img = imgwrapper_create(imgpath);
+	out->img = imgwrapper_create(imgpath, rotation, flip);
 	if (!out->img)
 	{
 		texture_image_destroy((t_texture *)out);
