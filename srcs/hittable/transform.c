@@ -16,7 +16,6 @@ t_bool	hittable_transform_hit(t_hittable *self,
 		return (FALSE);
 	vec3_multiply_m44_inplace(&rec->p, &this->o_to_w);
 	vec3_multiply_m44_inplace(&rec->normal, &this->o_to_w);
-	hit_record_set_normal_and_face(rec, &r_trans, &rec->normal);
 	return (TRUE);
 }
 
