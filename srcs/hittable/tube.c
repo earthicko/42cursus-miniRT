@@ -102,6 +102,15 @@ static void	tube_hit_record_set_normal_and_face(t_hittable_tube *tube,
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 }
 
+// TODO: (0, 0, 1) 방향인 원기둥만 일단 처리, 추후에 일반화 고려할 것
+static void	set_uv(t_hit_record *rec)
+{
+	const double	phi = atan2(rec->normal.i[1], rec->normal.i[0]);
+
+	rec->uv.i[0] = 1 - (phi + M_PI) / (2 * M_PI);
+	rec->uv.i[1] = (rec->p.i[2] + 1) / 2;
+}
+
 // TODO: implement u/v calculation
 /*
 	This function needs to solve equation system of cylinder and straight line
@@ -129,6 +138,6 @@ t_bool	hit_tube(t_hittable *hittable,
 		return (FALSE);
 	rec->material = this->material;
 	tube_hit_record_set_normal_and_face(this, rec, ray);
-	vec2_setval(&rec->uv, 0, 0);
+	set_uv(rec);
 	return (TRUE);
 }
