@@ -28,8 +28,8 @@ static int	tokenize_word(const char *line, t_ptrarr *arr)
 	char	*word;
 
 	wordlen = 0;
-	while (line[wordlen]
-		&& line[wordlen] != PARSER_DELIMETER && line[wordlen] != PARSER_COMMA)
+	while (line[wordlen] && !ft_strchr(PARSER_DELIMETER, line[wordlen])
+		&& line[wordlen] != PARSER_COMMA)
 		wordlen++;
 	word = malloc(sizeof(char) * (wordlen + 1));
 	if (!word)
@@ -47,7 +47,7 @@ static int	fill_tokens(const char *line, t_ptrarr *arr)
 {
 	while (*line)
 	{
-		while (*line && *line == PARSER_DELIMETER)
+		while (*line && ft_strchr(PARSER_DELIMETER, *line))
 			line++;
 		if (*line == PARSER_COMMA)
 		{
@@ -59,7 +59,8 @@ static int	fill_tokens(const char *line, t_ptrarr *arr)
 		{
 			if (tokenize_word(line, arr))
 				return (CODE_ERROR_MALLOC);
-			while (*line && *line != PARSER_DELIMETER && *line != PARSER_COMMA)
+			while (*line
+				&& !ft_strchr(PARSER_DELIMETER, *line) && *line != PARSER_COMMA)
 				line++;
 		}
 	}
@@ -83,16 +84,4 @@ t_ptrarr	*tokenize(const char *line)
 		return (NULL);
 	}
 	return (arr);
-}
-
-void	print_tokens(const t_ptrarr *tokens)
-{
-	int	i;
-
-	i = 0;
-	while (i < tokens->len)
-	{
-		printf("\"%s\" ", (char *)tokens->data[i]);
-		i++;
-	}
 }

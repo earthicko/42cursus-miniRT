@@ -7,7 +7,7 @@
 # include "builder/builder_internal.h"
 # include "settingman.h"
 
-# define PARSER_DELIMETER	' '
+# define PARSER_DELIMETER	" \t"
 # define PARSER_COMMA		','
 # define PARSER_COMMA_STR	","
 # define PARSER_COMMENT		'#'
@@ -63,7 +63,6 @@ t_patternmatcher	common_patternmatcher_manager(int i);
 t_builder			common_builder_manager(int i);
 
 t_ptrarr			*tokenize(const char *line);
-void				print_tokens(const t_ptrarr *tokens);
 t_bool				is_identifier(const char *word);
 t_bool				is_number(const char *word);
 t_bool				is_comma(const char *word);

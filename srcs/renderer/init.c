@@ -17,7 +17,7 @@ void	renderer_destroy(t_renderer *renderer)
 static int	abort_renderer_init(t_renderer *renderer, int stat)
 {
 	renderer_destroy(renderer);
-	ft_print_error(EXEC_NAME, stat);
+	ft_print_error(EXEC_NAME": ", stat);
 	return (stat);
 }
 
