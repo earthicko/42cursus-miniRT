@@ -23,7 +23,7 @@ int	add_box(t_scene *scene, t_box_info *info)
 		return (CODE_ERROR_MALLOC);
 	}
 	box = hittable_transform_create(aa_box,
-			info->cen, info->x_axis, info->x_angle);
+			info->cen, info->x_axis, deg_to_rad(info->x_angle));
 	if (!box)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, box))

@@ -53,5 +53,7 @@ t_bool	hit_aa_rectangle(t_hittable *hittable,
 	vec2_setval(&rec->uv,
 		map_minmax(rec->p.i[this->other_axis[0]], &this->range[0], &uv_out),
 		map_minmax(rec->p.i[this->other_axis[1]], &this->range[1], &uv_out));
+	if (this->outward_norm.i[this->axis] < 0)
+		rec->uv.i[0] = 1 - rec->uv.i[0];
 	return (TRUE);
 }
