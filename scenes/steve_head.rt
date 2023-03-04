@@ -1,0 +1,24 @@
+#         max depth   n_samples   update  save
+renderer  10          1           100     99999
+
+tx_image		steve_face_front	./scenes/steve/head_front.xpm
+tx_image		steve_face_back		./scenes/steve/head_back.xpm
+tx_image		steve_face_left		./scenes/steve/head_left.xpm
+tx_image		steve_face_right	./scenes/steve/head_right.xpm
+tx_image		steve_face_top		./scenes/steve/head_top.xpm
+tx_image		steve_face_bottom	./scenes/steve/head_bottom.xpm
+mt_lambertian	steve_face_front	steve_face_front
+mt_lambertian	steve_face_back		steve_face_back
+mt_lambertian	steve_face_left		steve_face_left
+mt_lambertian	steve_face_right	steve_face_right
+mt_lambertian	steve_face_top		steve_face_top
+mt_lambertian	steve_face_bottom	steve_face_bottom
+
+A	0.4	255,255,255
+#	x  y  z		u  v  w		fov
+C	0, 0, 100	0, 0, -1	70
+
+# l	-40, 50, 30		1	255, 255, 255
+
+#	x, y, z		u , v , w					theta	W	H	D	mt
+bo	0, 0, 0		0.57735, 0.57735, 0.57735	180		50	50	50	steve_face_front steve_face_back steve_face_right steve_face_left steve_face_top steve_face_bottom
