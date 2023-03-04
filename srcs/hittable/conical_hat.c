@@ -42,6 +42,7 @@ static void	conical_hat_record_set_normal_and_face(t_hittable_conical_hat *hat,
 	vec3_mult_num(&q, &hat->axis, t);
 	vec3_add_vec3_inplace(&q, &hat->center_of_disk);
 	vec3_sub_vec3(&outward_norm, &rec->p, &q);
+	vec3_unitize(&outward_norm);
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 }
 
@@ -87,8 +88,24 @@ static void	set_coefficient(double coef[3],
 	coef[B] *= 2;
 	coef[C] = vec3_dot_vec3(&ha, &ha) \
 				- m * pow(vec3_dot_vec3(&ha, &hat->axis), 2) \
-				- pow(vec3_dot_vec3(&ha, &hat->axis), 2) \
 				- pow(vec3_dot_vec3(&ha, &hat->axis), 2);
+}
+
+
+static t_bool	root_is_out_of_range(t_hittable_conical_hat *hat,
+										t_hit_record *rec)
+{
+	t_vec3	ch;
+	t_vec3	cp;
+	double	ch_dot_cp;
+
+	vec3_sub_vec3(&ch, &hat->apex, &hat->center_of_disk);
+	vec3_sub_vec3(&cp, &rec->p, &hat->center_of_disk);
+
+	ch_dot_cp = vec3_dot_vec3(&ch, &cp);
+	if (ch_dot_cp > pow(hat->height, 2) || ch_dot_cp < 0)
+		return (TRUE);
+	return (FALSE);
 }
 
 // TODO: 법선에 수직인 경우(중근), 예외처리 추가
@@ -114,6 +131,8 @@ t_bool	hit_conical_hat(t_hittable *hittable,
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);
+	if (root_is_out_of_range(this, rec))
+		return (FALSE);
 	rec->material = this->material;
 	conical_hat_record_set_normal_and_face(this, rec, ray);
 	if (fabs(vec3_dot_vec3(&rec->normal, &ray->dir)) < DOUBLE_E)
