@@ -48,12 +48,8 @@ void	vec3_multiply_m44(t_vec3 *out, const t_vec3 *a, const t_mtx44 *b)
 
 void	vec3_multiply_m44_inplace(t_vec3 *target, const t_mtx44 *a)
 {
-	const	double	(*m)[4];
-	const double	*v;
+	t_vec3	out;
 
-	m = a->i;
-	v = target->i;
-	target->i[0] = v[0] * m[0][0] + v[1] * m[1][0] + v[2] * m[2][0] + m[3][0];
-	target->i[1] = v[0] * m[0][1] + v[1] * m[1][1] + v[2] * m[2][1] + m[3][1];
-	target->i[2] = v[0] * m[0][2] + v[1] * m[1][2] + v[2] * m[2][2] + m[3][2];
+	vec3_multiply_m44(&out, target, a);
+	*target = out;
 }
