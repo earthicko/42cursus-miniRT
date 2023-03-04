@@ -5,13 +5,11 @@
 #include "builder_internal.h"
 
 /*
-		bo x , y , z   u , v , w   theta  W   H   D  r  ,  g  ,  b
-		0  1 2 3 4 5   6 7 8 9 10  11     12  13  14 15 16 17 18 19
+		bo x , y , z   u , v , w    W   H   D    r  ,  g  ,  b
+		0  1 2 3 4 5   6 7 8 9 10   11  12  13   14 15 16 17 18
 	∗ identifier: bo
 	∗ x,y,z coordinates of the center of the box
-	∗ 3d normalized vector of axis of box
-		In range [-1,1] for each x,y,z axis
-	∗ rotation angle in X axis
+	∗ x,y,z rotation angles of each axis
 	∗ the box width
 	∗ the box height
 	∗ the box depth
@@ -19,14 +17,14 @@
 */
 t_bool	is_box_with_color(const t_ptrarr *tokens)
 {
-	static const int	patternlen = 20;
-	static const int	pattern[20] = {
+	static const int	patternlen = 19;
+	static const int	pattern[19] = {
 		TOKENTYPE_IDENTIFIER,
 		TOKENTYPE_NUMBER, TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 		TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 		TOKENTYPE_NUMBER, TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 		TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
-		TOKENTYPE_NUMBER, TOKENTYPE_NUMBER, TOKENTYPE_NUMBER, TOKENTYPE_NUMBER,
+		TOKENTYPE_NUMBER, TOKENTYPE_NUMBER, TOKENTYPE_NUMBER,
 		TOKENTYPE_NUMBER, TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 		TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 	};
@@ -37,13 +35,11 @@ t_bool	is_box_with_color(const t_ptrarr *tokens)
 }
 
 /*
-		bo x , y , z   u , v , w   theta  W   H   D  mt1 mt2 mt3 mt4 mt5 mt6
-		0  1 2 3 4 5   6 7 8 9 10  11     12  13  14 15  16  17  18  19  20
+		bo x , y , z   u , v , w    W   H   D    mt1 mt2 mt3 mt4 mt5 mt6
+		0  1 2 3 4 5   6 7 8 9 10   11  12  13   14  15  16  17  18  19
 	∗ identifier: bo
 	∗ x,y,z coordinates of the center of the box
-	∗ 3d normalized vector of axis of box
-		In range [-1,1] for each x,y,z axis
-	∗ rotation angle in X axis
+	∗ x,y,z rotation angles of each axis
 	∗ the box width
 	∗ the box height
 	∗ the box depth
@@ -51,14 +47,14 @@ t_bool	is_box_with_color(const t_ptrarr *tokens)
 */
 t_bool	is_box_with_material(const t_ptrarr *tokens)
 {
-	static const int	patternlen = 21;
-	static const int	pattern[21] = {
+	static const int	patternlen = 20;
+	static const int	pattern[20] = {
 		TOKENTYPE_IDENTIFIER,
 		TOKENTYPE_NUMBER, TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 		TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 		TOKENTYPE_NUMBER, TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
 		TOKENTYPE_COMMA, TOKENTYPE_NUMBER,
-		TOKENTYPE_NUMBER, TOKENTYPE_NUMBER, TOKENTYPE_NUMBER, TOKENTYPE_NUMBER,
+		TOKENTYPE_NUMBER, TOKENTYPE_NUMBER, TOKENTYPE_NUMBER,
 		TOKENTYPE_WORD,
 		TOKENTYPE_WORD,
 		TOKENTYPE_WORD,

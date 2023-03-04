@@ -193,8 +193,7 @@ typedef struct s_box_info
 {
 	t_aa_box_info	aa_info;
 	t_point			cen;
-	t_vec3			x_axis;
-	double			x_angle;
+	t_vec3			rotate_angles;
 }	t_box_info;
 
 typedef struct s_hittable_aa_box
@@ -223,8 +222,7 @@ t_hittable			*hittable_aa_box_create(t_aa_box_info *info);
 t_hittable			*hittable_list_create(void);
 t_hittable			*hittable_transform_create(t_hittable *base, \
 												t_point orig, \
-												t_vec3 x_axis, \
-												double angle);
+												t_vec3 rotate_angles);
 
 t_bool				hittable_has_bbox(t_hittable *self);
 int					hittable_list_append(t_hittable *self, t_hittable *item);

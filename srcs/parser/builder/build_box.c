@@ -9,6 +9,18 @@ t_bool	is_box_with_material(const t_ptrarr *tokens);
 int		build_box_with_color(const t_ptrarr *tokens, t_scene *scene);
 int		build_box_with_material(const t_ptrarr *tokens, t_scene *scene);
 
+static void	deg_to_rad_vec3(t_vec3 *angles)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		angles->i[i] = deg_to_rad(angles->i[i]);
+		i++;
+	}
+}
+
 int	add_box(t_scene *scene, t_box_info *info)
 {
 	t_hittable	*aa_box;
@@ -22,8 +34,8 @@ int	add_box(t_scene *scene, t_box_info *info)
 		aa_box->destroy(aa_box);
 		return (CODE_ERROR_MALLOC);
 	}
-	box = hittable_transform_create(aa_box,
-			info->cen, info->x_axis, deg_to_rad(info->x_angle));
+	deg_to_rad_vec3(&info->rotate_angles);
+	box = hittable_transform_create(aa_box, info->cen, info->rotate_angles);
 	if (!box)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, box))
