@@ -47,7 +47,7 @@ static int	add_material_diffuse_light(t_scene *scene, t_color color)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.materials, light))
 	{
-		free(light);
+		light->destroy(light);
 		return (CODE_ERROR_MALLOC);
 	}
 	return (CODE_OK);
@@ -62,7 +62,7 @@ static int	add_light(t_scene *scene, t_point coord, t_material *m)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, light))
 	{
-		free(light);
+		light->destroy(light);
 		return (CODE_ERROR_MALLOC);
 	}
 	if (hittable_list_append(scene->world, light))

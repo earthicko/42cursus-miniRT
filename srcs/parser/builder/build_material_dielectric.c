@@ -37,7 +37,7 @@ static int	add_material_dielectric(t_scene *scene,
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.materials, dielectric))
 	{
-		free(dielectric);
+		dielectric->destroy(dielectric);
 		return (CODE_ERROR_MALLOC);
 	}
 	return (CODE_OK);

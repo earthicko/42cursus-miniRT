@@ -16,7 +16,7 @@ static int	add_cone(t_scene *scene, t_cone_info *info, t_material *m)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, cone))
 	{
-		free(cone);
+		cone->destroy(cone);
 		return (CODE_ERROR_MALLOC);
 	}
 	if (hittable_list_append(scene->world, cone)
