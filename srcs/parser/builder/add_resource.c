@@ -27,7 +27,7 @@ int	add_material_lambertian(t_scene *scene,
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.materials, lambertian))
 	{
-		free(lambertian);
+		lambertian->destroy(lambertian);
 		return (CODE_ERROR_MALLOC);
 	}
 	return (CODE_OK);

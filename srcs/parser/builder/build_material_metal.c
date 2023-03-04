@@ -38,7 +38,7 @@ static int	add_material_metal(t_scene *scene,
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.materials, metal))
 	{
-		free(metal);
+		metal->destroy(metal);
 		return (CODE_ERROR_MALLOC);
 	}
 	return (CODE_OK);

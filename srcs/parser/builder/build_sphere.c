@@ -17,7 +17,7 @@ static int	add_sphere(t_scene *scene, t_point cen, double d, t_material *m)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, sphere))
 	{
-		free(sphere);
+		sphere->destroy(sphere);
 		return (CODE_ERROR_MALLOC);
 	}
 	if (hittable_list_append(scene->world, sphere)
