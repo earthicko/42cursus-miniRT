@@ -235,6 +235,9 @@ test_aa_rect_create: test_objs/aa_rect_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 test_imgwrapper: test_objs/imgwrapper.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/imgwrapper.o -o $@ $(LDFLAGS)
 
+test_cone_ray_intersect: test_objs/cone_ray_intersect.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/cone_ray_intersect.o -o $@ $(LDFLAGS)
+
 -include $(DEP)
 
 clean:
