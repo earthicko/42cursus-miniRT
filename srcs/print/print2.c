@@ -14,7 +14,7 @@ void	print_aa_rect(const t_hittable *hittable)
 		aarect->range[0].min, aarect->range[0].max,
 		aarect->range[1].min, aarect->range[1].max);
 	print_vec3(&aarect->outward_norm);
-	printf(")\n");
+	printf(")");
 }
 
 void	print_box(const t_hittable *box)
