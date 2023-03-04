@@ -202,7 +202,7 @@ typedef struct s_hittable_aa_box
 	t_hittable_destroy	destroy;
 	t_hittable_hit		hit;
 	t_bbox				bbox;
-	t_hittable_list		*faces;
+	t_hittable			*faces;
 }	t_hittable_aa_box;
 
 /******* hittable objects constructor, destructor *******/
@@ -219,7 +219,7 @@ t_hittable			*hittable_cone_create(t_cone_info *cone_info, \
 											t_material *material);
 t_hittable			*hittable_aa_rectangle_create(t_aa_rectangle_info info, \
 													t_material *material);
-t_hittable			*hittable_box_create(t_box_info *info);
+t_hittable			*hittable_aa_box_create(t_aa_box_info *info);
 t_hittable			*hittable_list_create(void);
 t_hittable			*hittable_transform_create(t_hittable *base, \
 												t_point orig, \

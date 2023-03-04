@@ -79,6 +79,7 @@ FILENAME		= \
 				hittable/conical_hat \
 				hittable/aa_rectangle_create \
 				hittable/aa_rectangle_hit \
+				hittable/aa_box \
 				material/diffuse_light \
 				material/metal \
 				material/dielectric \

@@ -44,7 +44,7 @@ int	build_box_with_material(const t_ptrarr *tokens, t_scene *scene)
 	if (add_box(scene, &info))
 		return (CODE_ERROR_MALLOC);
 	printf("%s: ", __func__);
-	print_box_info(&info);
+	print_box(ptrarr_getlast(scene->res.primitives));
 	printf("\n");
 	return (CODE_OK);
 }

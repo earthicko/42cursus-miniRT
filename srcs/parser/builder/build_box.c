@@ -11,16 +11,24 @@ int		build_box_with_material(const t_ptrarr *tokens, t_scene *scene);
 
 int	add_box(t_scene *scene, t_box_info *info)
 {
-	t_hittable		*box;
+	t_hittable	*aa_box;
+	t_hittable	*box;
 
-	printf("Unimplement stub of %s\n", __func__);
-	return (CODE_OK);
-	box = hittable_box_create(info);
+	aa_box = hittable_aa_box_create(&info->aa_info);
+	if (!aa_box)
+		return (CODE_ERROR_MALLOC);
+	if (ptrarr_append(scene->res.primitives, aa_box))
+	{
+		aa_box->destroy(aa_box);
+		return (CODE_ERROR_MALLOC);
+	}
+	box = hittable_transform_create(aa_box,
+			info->cen, info->x_axis, info->x_angle);
 	if (!box)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, box))
 	{
-		free(box);
+		box->destroy(box);
 		return (CODE_ERROR_MALLOC);
 	}
 	if (hittable_list_append(scene->world, box)
