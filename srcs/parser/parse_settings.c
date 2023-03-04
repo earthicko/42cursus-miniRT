@@ -56,10 +56,7 @@ int	parse_settings(const char *path)
 	while (i < lines->len)
 	{
 		if (parse_setting_loop(lines->data[i], NULL) == FALSE)
-		{
 			printf("%s: "MSG_PARSEFAIL"\n", EXEC_NAME, (char *)lines->data[i]);
-			return (CODE_ERROR_DATA);
-		}
 		i++;
 	}
 	ptrarr_destroy(lines, destroy_pchar);

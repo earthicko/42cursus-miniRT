@@ -61,6 +61,7 @@ FILENAME		= \
 				mlx_interface/saveimg \
 				mlx_interface/imgwrapper_create \
 				mlx_interface/imgwrapper_methods \
+				mlx_interface/imgwrapper_transform \
 				mlx_interface/mlxman \
 				camera/init \
 				camera/get_ray_at \
