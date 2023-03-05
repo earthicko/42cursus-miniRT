@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include <stdlib.h>
 #include <math.h>
 #include "libft.h"
@@ -12,6 +14,57 @@ static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
 	if (fabs(vec3_dot_vec3(&ray->dir, norm)) < DOUBLE_E)
 		return (TRUE);
 	return (FALSE);
+}
+
+static void	set_u_axis_vec(t_vec3 *u_axis, t_vec3 *norm)
+{
+	const t_vec3	x_axis = {1, 0, 0};
+	const t_vec3	y_axis = {0, 1, 0};
+
+	if (fabs(norm->i[0]) > 0.9)
+		vec3_cross_vec3(u_axis, &y_axis, norm);
+	else
+		vec3_cross_vec3(u_axis, &x_axis, norm);
+	vec3_unitize(u_axis);
+	//vec3_mult_num_inplace(u_axis, 0.2);
+}
+
+/*
+	The point O is origin in new u-v coordinates system.
+*/
+static void	plane_set_uv(t_hittable_plane *plane, t_hit_record *rec)
+{
+	t_vec3	u_axis;
+	t_vec3	v_axis;
+	t_vec3	op;
+	double	tmp;
+	double	u_on;
+	double	v_on;
+
+	set_u_axis_vec(&u_axis, &rec->normal);
+	vec3_cross_vec3(&v_axis, &u_axis, &rec->normal);
+	vec3_unitize(&v_axis);
+	//vec3_mult_num_inplace(&v_axis, 0.2);
+	vec3_sub_vec3(&op, &rec->p, &plane->point);
+	vec3_mult_num_inplace(&op, 0.02);
+	u_on = vec3_dot_vec3(&op, &u_axis);
+	v_on = vec3_dot_vec3(&op, &v_axis);
+	if (u_on * v_on > 0)
+	{
+		rec->uv.i[0] = fabs(modf(u_on, &tmp));
+		rec->uv.i[1] = fabs(modf(v_on, &tmp));
+	}
+	else
+	{
+		if (u_on > 0)
+			rec->uv.i[0] = fabs(modf(u_on + 5, &tmp));
+		else
+			rec->uv.i[0] = fabs(modf(u_on - 5, &tmp));
+		rec->uv.i[1] = fabs(modf(v_on, &tmp));
+	}
+	dprintf(2, "u: %f\n", rec->uv.i[0]);
+	dprintf(2, "v: %f\n", rec->uv.i[1]);
+	dprintf(2, "\n");
 }
 
 /*
@@ -37,7 +90,8 @@ t_bool	hit_plane(t_hittable *hittable,
 	outward_norm = this->norm;
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 	rec->material = this->material;
-	vec2_setval(&rec->uv, 0, 0);
+	plane_set_uv(this, rec);
+	//vec2_setval(&rec->uv, 0, 0);
 	return (TRUE);
 }
 
