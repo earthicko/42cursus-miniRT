@@ -14,16 +14,27 @@ t_bool	hit_cone(t_hittable *hittable,
 					t_minmax t,
 					t_hit_record *rec)
 {
-	t_hittable_cone	*this;
+	t_hit_record		rec_buf;
+	t_bool				hit_anything;
+	int					i;
+	const t_hittable	*targets[2] = {
+		(t_hittable *)(&((t_hittable_cone *)hittable)->conical_hat),
+		(t_hittable *)(&((t_hittable_cone *)hittable)->disk),
+	};
 
-	this = (t_hittable_cone *)hittable;
-	if (this->conical_hat.hit((t_hittable *)&this->conical_hat, ray, t, rec))
-		t.max = rec->t;
-	if (this->disk.hit((t_hittable *)&this->disk, ray, t, rec))
-		t.max = rec->t;
-	if (fabs(t.max - DOUBLE_INF) < DOUBLE_E)
-		return (FALSE);
-	return (TRUE);
+	hit_anything = FALSE;
+	i = 0;
+	while (i < 2)
+	{
+		if (targets[i]->hit((t_hittable *)targets[i], ray, t, &rec_buf))
+		{
+			hit_anything = TRUE;
+			*rec = rec_buf;
+			t.max = rec_buf.t;
+		}
+		i++;
+	}
+	return (hit_anything);
 }
 
 static void	set_disk_of_cone(t_hittable_disk *disk,

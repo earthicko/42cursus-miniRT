@@ -14,18 +14,28 @@ t_bool	hit_cylinder(t_hittable *hittable,
 						t_minmax t,
 						t_hit_record *rec)
 {
-	t_hittable_cylinder	*this;
+	t_hit_record		rec_buf;
+	t_bool				hit_anything;
+	int					i;
+	const t_hittable	*targets[3] = {
+		(t_hittable *)(&((t_hittable_cylinder *)hittable)->tube),
+		(t_hittable *)(&((t_hittable_cylinder *)hittable)->disk[0]),
+		(t_hittable *)(&((t_hittable_cylinder *)hittable)->disk[1]),
+	};
 
-	this = (t_hittable_cylinder *)hittable;
-	if (this->tube.hit((t_hittable *)&this->tube, ray, t, rec))
-		t.max = rec->t;
-	if (this->disk[0].hit((t_hittable *)&this->disk[0], ray, t, rec))
-		t.max = rec->t;
-	if (this->disk[1].hit((t_hittable *)&this->disk[1], ray, t, rec))
-		t.max = rec->t;
-	if (fabs(t.max - DOUBLE_INF) < DOUBLE_E)
-		return (FALSE);
-	return (TRUE);
+	hit_anything = FALSE;
+	i = 0;
+	while (i < 3)
+	{
+		if (targets[i]->hit((t_hittable *)targets[i], ray, t, &rec_buf))
+		{
+			hit_anything = TRUE;
+			*rec = rec_buf;
+			t.max = rec_buf.t;
+		}
+		i++;
+	}
+	return (hit_anything);
 }
 
 /*
