@@ -128,6 +128,7 @@ FILENAME		= \
 				parser/builder/build_material_lambertian \
 				parser/builder/build_material_metal \
 				parser/builder/build_material_dielectric \
+				parser/builder/build_material_diffuse_light \
 				scene/create \
 				scene/destroy \
 				scene/search \

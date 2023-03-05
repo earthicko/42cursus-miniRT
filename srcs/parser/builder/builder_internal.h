@@ -26,6 +26,7 @@ t_bool	is_texture_image(const t_ptrarr *tokens);
 t_bool	is_material_lambertian(const t_ptrarr *tokens);
 t_bool	is_material_metal(const t_ptrarr *tokens);
 t_bool	is_material_dielectric(const t_ptrarr *tokens);
+t_bool	is_material_diffuse_light(const t_ptrarr *tokens);
 
 t_bool	is_invalid_ratio(double ratio);
 t_bool	is_invalid_length(double len);
@@ -68,6 +69,8 @@ int		build_material_lambertian(
 int		build_material_metal(
 			const t_ptrarr *tokens, t_scene *scene);
 int		build_material_dielectric(
+			const t_ptrarr *tokens, t_scene *scene);
+int		build_material_diffuse_light(
 			const t_ptrarr *tokens, t_scene *scene);
 
 #endif

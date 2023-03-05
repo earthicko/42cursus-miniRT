@@ -39,7 +39,8 @@ t_patternmatcher	common_patternmatcher_manager(int i)
 		is_texture_image,
 		is_material_lambertian,
 		is_material_metal,
-		is_material_dielectric
+		is_material_dielectric,
+		is_material_diffuse_light,
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)
@@ -61,7 +62,8 @@ t_builder	common_builder_manager(int i)
 		build_texture_image,
 		build_material_lambertian,
 		build_material_metal,
-		build_material_dielectric
+		build_material_dielectric,
+		build_material_diffuse_light,
 	};
 
 	if (i < 0 || i >= N_IDENTIFIER_COMMON)

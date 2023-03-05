@@ -103,5 +103,6 @@ t_hittable	*hittable_aa_box_create(t_aa_box_info *info)
 		hittable_aa_box_destroy((t_hittable *)aa_box);
 		return (NULL);
 	}
+	aa_box->bbox = ((t_hittable_list *)aa_box->faces)->bbox;
 	return ((t_hittable *)aa_box);
 }	

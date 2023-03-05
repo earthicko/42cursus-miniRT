@@ -1,0 +1,32 @@
+#			width	height	multiplier
+display		250		250		3
+#			u,	v,	w		focallen
+camera		0,	1,	0		10
+#			max depth	n_samples	update	save
+renderer	10			1000		100		999999999
+
+tx_solid		red		165,13,13
+tx_solid		green	30,115,38
+tx_solid		blue	0,0,255
+tx_solid		white	186,186,186
+mt_lambertian		red				red
+mt_lambertian		green			green
+mt_lambertian		blue			blue
+mt_lambertian		white			white
+mt_diffuse_light	white_light		255,255,255		10
+
+A	0.4	255,255,255
+#	x  y  z	    	u  v  w		fov
+C	0, 0, 800	0,0,-1 	40
+
+# light
+bo	0,100,0			0,0,0			100 10 100		white_light white_light white_light white_light white_light white_light
+# sides
+bo	-500,0,0		0,0,0			500 500 2000	green green green green green green
+bo	500,0,0			0,0,0			500 500 2000	red red red red red red
+# top
+bo	0,500,0			0,0,0			500 500 2000	white white white white white white
+# bottom
+bo	0,-500,0		0,0,0			500 500 2000	white white white white white white
+# front
+bo	0,0,-500		0,0,0			500 500 500		white white white white white white
