@@ -9,8 +9,9 @@ void	print_aa_rect(const t_hittable *hittable)
 	t_hittable_aa_rectangle	*aarect;
 
 	aarect = (t_hittable_aa_rectangle *)hittable;
-	printf("aa rect (axis %d, offset %.2f, range %.2f-%.2f, %.2f-%.2f, norm ",
-		aarect->axis, aarect->offset,
+	printf("aa rect (axis %d, offset %.2f, ",
+		aarect->axis, aarect->offset);
+	printf("range %.2f ... %.2f, %.2f ... %.2f, norm ",
 		aarect->range[0].min, aarect->range[0].max,
 		aarect->range[1].min, aarect->range[1].max);
 	print_vec3(&aarect->outward_norm);
@@ -36,4 +37,8 @@ void	print_box(const t_hittable *box)
 		printf("\n");
 		i++;
 	}
+	printf("aa box bounding box: ");
+	print_bbox(&aabox->bbox);
+	printf(" box bounding box: ");
+	print_bbox(&tbox->bbox);
 }
