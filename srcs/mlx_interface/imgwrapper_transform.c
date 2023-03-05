@@ -48,16 +48,20 @@ static void	rotate_loop(t_imgwrapper *img, t_color *buf)
 
 int	imgwrapper_rotate(t_imgwrapper *img)
 {
-	t_color	*buf;
-	int		temp;
+	t_color		*buf;
+	int			temp_i;
+	t_minmax	temp_m;
 
 	buf = malloc(sizeof(t_color) * img->width * img->height);
 	if (!buf)
 		return (CODE_ERROR_MALLOC);
 	rotate_loop(img, buf);
-	temp = img->width;
+	temp_i = img->width;
 	img->width = img->height;
-	img->height = temp;
+	img->height = temp_i;
+	temp_m = img->x_range;
+	img->x_range = img->y_range;
+	img->y_range = temp_m;
 	free(img->colors);
 	img->colors = buf;
 	return (CODE_OK);
