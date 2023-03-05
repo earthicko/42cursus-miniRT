@@ -58,6 +58,7 @@ int	build_camera(const t_ptrarr *tokens, t_scene *scene)
 	build_vector(&viewdir, &tokens->data[6]);
 	if (is_invalid_normalized_vec3(&viewdir))
 		return (CODE_ERROR_DATA);
+	vec3_unitize(&viewdir);
 	fov = ft_atof(tokens->data[11]);
 	if (is_invalid_fov(fov))
 		return (CODE_ERROR_DATA);

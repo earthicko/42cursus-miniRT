@@ -1,9 +1,9 @@
 #			width	height	multiplier
-display		250		250		3
+display		500		500		2
 #			u,	v,	w		focallen
 camera		0,	1,	0		10
 #			max depth	n_samples	update	save
-renderer	10			1000		100		999999999
+renderer	10			10000		100		10
 
 tx_solid		red		165,13,13
 tx_solid		green	30,115,38
@@ -16,12 +16,11 @@ mt_lambertian		white			white
 mt_diffuse_light	white_light		255,255,255		10
 mt_dielectric		glass			1.52
 
-A	0.04	255,255,255
-#	x  y  z	    	u  v  w		fov
-C	0, 0, 800	0,0,-1 	40
+A	0.04		255,255,255
+C	0,0,800		0,0,-1			40
 
 # light
-bo	0,230,0			0,0,0			100 10 100		white_light white_light white_light white_light white_light white_light
+bo	0,250,0			0,0,0			100 5 100	white_light white_light white_light white_light white_light white_light
 # sides
 bo	-500,0,0		0,0,0			500 500 500	green green green green green green
 bo	500,0,0			0,0,0			500 500 500	red red red red red red

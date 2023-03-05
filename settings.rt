@@ -1,5 +1,5 @@
 #			width	height	multiplier
-display		500		500	2
+display		500		500		2
 #			u,	v,	w		focallen
 camera		0,	1,	0		10
 #			max depth	n_samples	update	save
