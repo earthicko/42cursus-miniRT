@@ -8,8 +8,11 @@ static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
 													t_vec3 *axis)
 {
 	t_vec3	dir_cross_axis;
+	t_vec3	dir_normalized;
 
-	vec3_cross_vec3(&dir_cross_axis, &ray->dir, axis);
+	dir_normalized = ray->dir;
+	vec3_unitize(&dir_normalized);
+	vec3_cross_vec3(&dir_cross_axis, &dir_normalized, axis);
 	if (vec3_is_near_zero(&dir_cross_axis))
 		return (TRUE);
 	return (FALSE);
