@@ -16,7 +16,6 @@ static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
 	return (FALSE);
 }
 
-/*
 static void	set_u_axis_vec(t_vec3 *u_axis, t_vec3 *norm)
 {
 	const t_vec3	x_axis = {1, 0, 0};
@@ -30,13 +29,19 @@ static void	set_u_axis_vec(t_vec3 *u_axis, t_vec3 *norm)
 	//vec3_mult_num_inplace(u_axis, 0.2);
 }
 
+// 기본 박스 크기: 1 / freq
+// 벡터 t 실수배 후 박스 크기: 기본 박스 크기 / t ---> 1 / (freq * t)
 // The point O is origin in new u-v coordinates system.
+
+// freq값을 텍스쳐에서 꺼내오는 건 불가능
+// 식을 수정하는게 맞을듯
+// 혜유킴님이 도와준다고 했음 님만 믿겠습니다.
 static void	plane_set_uv(t_hittable_plane *plane, t_hit_record *rec)
 {
 	t_vec3	u_axis;
 	t_vec3	v_axis;
 	t_vec3	op;
-	double	tmp;
+	//double	tmp;
 	double	u_on;
 	double	v_on;
 
@@ -45,28 +50,36 @@ static void	plane_set_uv(t_hittable_plane *plane, t_hit_record *rec)
 	vec3_unitize(&v_axis);
 	//vec3_mult_num_inplace(&v_axis, 0.2);
 	vec3_sub_vec3(&op, &rec->p, &plane->point);
-	vec3_mult_num_inplace(&op, 0.02);
+	// 실수배에서 1 / freq 곱
+	vec3_mult_num_inplace(&op, 1 / freq);
 	u_on = vec3_dot_vec3(&op, &u_axis);
 	v_on = vec3_dot_vec3(&op, &v_axis);
+	// 분모에 박스크기, 박스 크기가 곧 freq가 됨
+	rec->uv.i[0] = fabs(floor(u_on)) / freq;
+	rec->uv.i[1] = fabs(floor(v_on)) / freq; 
+	/*
 	if (u_on * v_on > 0)
 	{
 		rec->uv.i[0] = fabs(modf(u_on, &tmp));
 		rec->uv.i[1] = fabs(modf(v_on, &tmp));
 	}
+	*/
+	/*
 	else
 	{
 		if (u_on > 0)
-			rec->uv.i[0] = fabs(modf(u_on + 5, &tmp));
+			rec->uv.i[0] = fabs(modf(u_on + 0.5, &tmp));
 		else
-			rec->uv.i[0] = fabs(modf(u_on - 5, &tmp));
+			rec->uv.i[0] = fabs(modf(u_on - 0.5, &tmp));
 		rec->uv.i[1] = fabs(modf(v_on, &tmp));
 	}
+	*/
 	dprintf(2, "u: %f\n", rec->uv.i[0]);
 	dprintf(2, "v: %f\n", rec->uv.i[1]);
-	dprintf(2, "\n");
+	dprintf(2, "\n\n");
 }
-*/
 
+/*
 static void	set_uv(t_uv *out,
 				const t_hit_record *rec, const t_hittable_plane *this)
 {
@@ -89,6 +102,7 @@ static void	set_uv(t_uv *out,
 	if (out->i[1] < 0)
 		out->i[1] += 1.0;
 }
+*/
 
 /*
 	This function needs to solve equation system of plane and straight line. 
@@ -133,5 +147,6 @@ t_hittable	*hittable_plane_create(t_point point,
 	plane->point = point;
 	plane->norm = norm;
 	plane->scale = scale;
+
 	return ((t_hittable *)plane);
 }
