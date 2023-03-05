@@ -9,6 +9,7 @@ t_bool	hittable_list_hit(t_hittable *self,
 	t_hittable_list	*this;
 	t_hittable		*element;
 	t_bool			hit_anything;
+	t_hit_record	rec_buf;
 	int				i;
 
 	this = (t_hittable_list *)self;
@@ -19,10 +20,11 @@ t_bool	hittable_list_hit(t_hittable *self,
 	while (i < this->elements->len)
 	{
 		element = (t_hittable *)this->elements->data[i];
-		if (element->hit(element, r, t, rec))
+		if (element->hit(element, r, t, &rec_buf))
 		{
 			hit_anything = TRUE;
-			t.max = rec->t;
+			*rec = rec_buf;
+			t.max = rec_buf.t;
 		}
 		i++;
 	}

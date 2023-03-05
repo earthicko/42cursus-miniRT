@@ -14,19 +14,23 @@ mt_lambertian		green			green
 mt_lambertian		blue			blue
 mt_lambertian		white			white
 mt_diffuse_light	white_light		255,255,255		10
+mt_dielectric		glass			1.52
 
-A	0.4	255,255,255
+A	0.04	255,255,255
 #	x  y  z	    	u  v  w		fov
 C	0, 0, 800	0,0,-1 	40
 
 # light
-bo	0,100,0			0,0,0			100 10 100		white_light white_light white_light white_light white_light white_light
+bo	0,230,0			0,0,0			100 10 100		white_light white_light white_light white_light white_light white_light
 # sides
-bo	-500,0,0		0,0,0			500 500 2000	green green green green green green
-bo	500,0,0			0,0,0			500 500 2000	red red red red red red
+bo	-500,0,0		0,0,0			500 500 500	green green green green green green
+bo	500,0,0			0,0,0			500 500 500	red red red red red red
 # top
-bo	0,500,0			0,0,0			500 500 2000	white white white white white white
+bo	0,500,0			0,0,0			500 500 500	white white white white white white
 # bottom
-bo	0,-500,0		0,0,0			500 500 2000	white white white white white white
+bo	0,-500,0		0,0,0			500 500 500	white white white white white white
 # front
-bo	0,0,-500		0,0,0			500 500 500		white white white white white white
+bo	0,0,-500		0,0,0			500 500 500	white white white white white white
+
+bo	-80,-85,0		0,15,0			120 280 120	white white white white white white
+sp	80,-170,0		150							glass
