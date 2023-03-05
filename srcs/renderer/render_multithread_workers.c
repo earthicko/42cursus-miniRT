@@ -22,10 +22,7 @@ void	*worker_routine(void *arg)
 			break ;
 		current_n_samples = n_samples_worker(stat, idx_self);
 		if (current_n_samples == milestone(stat))
-		{
-			sleep(RENDER_SYNC_INTERVAL);
 			continue ;
-		}
 		renderer_render_loop_multithread(worker);
 		set_n_samples_worker(stat, idx_self, current_n_samples + 1);
 	}
