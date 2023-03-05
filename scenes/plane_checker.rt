@@ -1,0 +1,21 @@
+tx_solid   red     255,   0,   0
+tx_solid   orange  255,165,0
+tx_solid   yellow  255,255,0
+tx_solid   green   0,255,0
+tx_solid   blue     0,   0,   255
+tx_solid   violet    255,0,255
+tx_solid   white   255, 255, 255
+tx_solid   black     0,   0,   0
+tx_checker bw     blue red  10
+mt_lambertian     plain_red     red
+mt_lambertian     plain_orange     orange
+mt_lambertian     plain_yellow     yellow
+mt_lambertian     plain_green     green
+mt_lambertian     plain_blue     blue
+mt_lambertian     plain_violet     violet
+mt_lambertian     checker     bw
+
+A      0.2   255, 255, 255
+C      0.0, 0.0, 20.0      0.0, 0.0, -1.0    70
+
+pl     0.0, 0.0, 0.0       0, 0, 1         checker
