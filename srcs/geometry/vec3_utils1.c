@@ -22,8 +22,8 @@ t_bool	vec3_is_near_zero(const t_vec3 *in)
 {
 	return (
 		- DOUBLE_E < in->i[0] && in->i[0] < DOUBLE_E
-		&& - DOUBLE_E < in->i[0] && in->i[1] < DOUBLE_E
-		&& - DOUBLE_E < in->i[0] && in->i[2] < DOUBLE_E);
+		&& - DOUBLE_E < in->i[1] && in->i[1] < DOUBLE_E
+		&& - DOUBLE_E < in->i[2] && in->i[2] < DOUBLE_E);
 }
 
 void	vec3_get_unit(t_vec3 *out, const t_vec3 *in)
