@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include <stdlib.h>
 #include <math.h>
 #include "libft.h"
@@ -26,57 +24,74 @@ static void	set_u_axis_vec(t_vec3 *u_axis, t_vec3 *norm)
 	else
 		vec3_cross_vec3(u_axis, &x_axis, norm);
 	vec3_unitize(u_axis);
-	//vec3_mult_num_inplace(u_axis, 0.2);
 }
 
-// 기본 박스 크기: 1 / freq
-// 벡터 t 실수배 후 박스 크기: 기본 박스 크기 / t ---> 1 / (freq * t)
-// The point O is origin in new u-v coordinates system.
+/* 
+	There is two way to do uv-mapping to make checker texture.
 
-// freq값을 텍스쳐에서 꺼내오는 건 불가능
-// 식을 수정하는게 맞을듯
-// 혜유킴님이 도와준다고 했음 님만 믿겠습니다.
+	1. Use decimal fraction. 
+	   (This case uv will be mapped between 0 and 1.)
+	2. Use the quotient of the coordinates divided by the length of the box.
+	   (This does not necessarily require u,v to be mapped between 0 and 1.)
+	   (In addition, proper multiplication of vectors must be performed 
+	   to adjust the checkerboard spacing.)
+	Why the way 2 can be appiled?: 
+	The oddness of the quotient of coordinate divided by box length
+	determines the texture of the coordinates.
+	
+	We'll chose the way 1.
+
+	Initial box size: 1 / freq
+	Box size after vector real multiplication operation: 
+	Initial box size / t ---> 1 / (freq * t)
+	
+	The point O is origin in new u-v coordinates system.
+*/
+
+/*
+	This is how the way 2 works.
+
+	rec->uv.i[0] = fabs(floor(u_on)) / 10;
+	rec->uv.i[1] = fabs(floor(v_on)) / 10; 
+
+	10 is might be the length of the box.
+*/
+
+/*
+	The scale of plane should be the same as freq of uv texture.
+*/
+
+// TODO: 밑에 조건문 else 안에서 if ~ else 안나누고 해결하는법
+// TODO: checker 간격 상수 define 해서 쓸 것
+// TODO: 함수 쪼개서 놈 맞출것
 static void	plane_set_uv(t_hittable_plane *plane, t_hit_record *rec)
 {
 	t_vec3	u_axis;
 	t_vec3	v_axis;
 	t_vec3	op;
-	//double	tmp;
 	double	u_on;
 	double	v_on;
 
 	set_u_axis_vec(&u_axis, &rec->normal);
 	vec3_cross_vec3(&v_axis, &u_axis, &rec->normal);
 	vec3_unitize(&v_axis);
-	//vec3_mult_num_inplace(&v_axis, 0.2);
 	vec3_sub_vec3(&op, &rec->p, &plane->point);
-	// 실수배에서 1 / freq 곱
-	vec3_mult_num_inplace(&op, 1 / freq);
+	vec3_mult_num_inplace(&op, 0.0002 * plane->scale);
 	u_on = vec3_dot_vec3(&op, &u_axis);
 	v_on = vec3_dot_vec3(&op, &v_axis);
-	// 분모에 박스크기, 박스 크기가 곧 freq가 됨
-	rec->uv.i[0] = fabs(floor(u_on)) / freq;
-	rec->uv.i[1] = fabs(floor(v_on)) / freq; 
-	/*
 	if (u_on * v_on > 0)
 	{
-		rec->uv.i[0] = fabs(modf(u_on, &tmp));
-		rec->uv.i[1] = fabs(modf(v_on, &tmp));
+		rec->uv.i[0] = fabs(fmod(u_on, 1));
+		rec->uv.i[1] = fabs(fmod(v_on, 1));
 	}
-	*/
-	/*
 	else
 	{
 		if (u_on > 0)
-			rec->uv.i[0] = fabs(modf(u_on + 0.5, &tmp));
+			rec->uv.i[0] = fabs(fmod(u_on + (double)1 / (double)plane->scale, 1));
 		else
-			rec->uv.i[0] = fabs(modf(u_on - 0.5, &tmp));
-		rec->uv.i[1] = fabs(modf(v_on, &tmp));
+			rec->uv.i[0] = fabs(fmod(u_on - (double)1 / (double)plane->scale, 1));
+		rec->uv.i[1] = fabs(fmod(v_on, 1));
 	}
-	*/
-	dprintf(2, "u: %f\n", rec->uv.i[0]);
-	dprintf(2, "v: %f\n", rec->uv.i[1]);
-	dprintf(2, "\n\n");
 }
 
 /*
@@ -95,8 +110,8 @@ static void	set_uv(t_uv *out,
 	vec3_setval(&z, 0, 0, 1);
 	vec2_setval(
 		out,
-		fmod(vec3_dot_vec3(&x, &projected_p) / this->scale, 1.0),
-		fmod(vec3_dot_vec3(&z, &projected_p) / this->scale, 1.0));
+		fmod(vec3_dot_vec3(&x, &projected_p) / (10 * this->scale), 1.0),
+		fmod(vec3_dot_vec3(&z, &projected_p) / (10 * this->scale), 1.0));
 	if (out->i[0] < 0)
 		out->i[0] += 1.0;
 	if (out->i[1] < 0)
