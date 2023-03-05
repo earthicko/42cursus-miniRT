@@ -91,7 +91,6 @@ static void	set_coefficient(double coef[3],
 				- pow(vec3_dot_vec3(&ha, &hat->axis), 2);
 }
 
-
 static t_bool	root_is_out_of_range(t_hittable_conical_hat *hat,
 										t_hit_record *rec)
 {
@@ -101,7 +100,6 @@ static t_bool	root_is_out_of_range(t_hittable_conical_hat *hat,
 
 	vec3_sub_vec3(&ch, &hat->apex, &hat->center_of_disk);
 	vec3_sub_vec3(&cp, &rec->p, &hat->center_of_disk);
-
 	ch_dot_cp = vec3_dot_vec3(&ch, &cp);
 	if (ch_dot_cp > pow(hat->height, 2) || ch_dot_cp < 0)
 		return (TRUE);

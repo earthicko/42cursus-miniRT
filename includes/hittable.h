@@ -214,7 +214,7 @@ t_hittable			*hittable_sphere_create(t_point center, \
 											t_material *material);
 t_hittable			*hittable_plane_create(t_point point, \
 											t_vec3 norm, \
-											t_material *material,
+											t_material *material, \
 											double scale);
 t_hittable			*hittable_cylinder_create(t_cylinder_info *cylinder_info, \
 												t_material *material);

@@ -105,7 +105,6 @@ static void	tube_hit_record_set_normal_and_face(t_hittable_tube *tube,
 	hit_record_set_normal_and_face(rec, ray, &outward_norm);
 }
 
-
 // TODO: implement u/v calculation
 /*
 	This function needs to solve equation system of cylinder and straight line
