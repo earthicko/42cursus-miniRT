@@ -226,7 +226,9 @@ t_hittable			*hittable_transform_create(t_hittable *base, \
 												t_point orig, \
 												t_vec3 rotate_angles);
 
+/******* others *******/
 t_bool				hittable_has_bbox(t_hittable *self);
 int					hittable_list_append(t_hittable *self, t_hittable *item);
+void				tube_set_uv(t_hittable_tube *tube, t_hit_record *rec);
 
 #endif
