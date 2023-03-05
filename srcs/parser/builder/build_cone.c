@@ -37,6 +37,7 @@ int	build_cone_with_color(const t_ptrarr *tokens, t_scene *scene)
 	build_vector(&color, &tokens->data[13]);
 	if (is_invalid_normalized_vec3(&info.axis) || is_invalid_color(&color))
 		return (CODE_ERROR_DATA);
+	vec3_unitize(&info.axis);
 	map_color(&color);
 	if (add_texture_solid(scene, "", color))
 		return (CODE_ERROR_MALLOC);
@@ -64,6 +65,7 @@ int	build_cone_with_material(const t_ptrarr *tokens, t_scene *scene)
 	mt = scene_search_material(scene, tokens->data[13]);
 	if (is_invalid_normalized_vec3(&info.axis) || !mt)
 		return (CODE_ERROR_DATA);
+	vec3_unitize(&info.axis);
 	if (add_cone(scene, &info, mt))
 		return (CODE_ERROR_MALLOC);
 	printf("%s: ", __func__);

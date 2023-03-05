@@ -50,6 +50,7 @@ int	build_plane_with_color(const t_ptrarr *tokens, t_scene *scene)
 	if (is_invalid_normalized_vec3(&dir.dir) || is_invalid_color(&color)
 		|| is_invalid_length(scale))
 		return (CODE_ERROR_DATA);
+	vec3_unitize(&dir.dir);
 	map_color(&color);
 	if (add_texture_solid(scene, "", color))
 		return (CODE_ERROR_MALLOC);
@@ -73,6 +74,7 @@ int	build_plane_with_material(const t_ptrarr *tokens, t_scene *scene)
 	mt = scene_search_material(scene, tokens->data[12]);
 	if (is_invalid_normalized_vec3(&dir.dir) || is_invalid_length(scale) || !mt)
 		return (CODE_ERROR_DATA);
+	vec3_unitize(&dir.dir);
 	if (add_plane(scene, dir, scale, mt))
 		return (CODE_ERROR_MALLOC);
 	printf("%s: plane (point ", __func__);
