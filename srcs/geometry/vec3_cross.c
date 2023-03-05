@@ -17,8 +17,6 @@ void	vec3_cross_vec3(t_vec3 *out, const t_vec3 *a, const t_vec3 *b)
 	{
 		out->i[i] = a->i[(i + 1) % 3] * b->i[(i + 2) % 3]
 			- a->i[(i + 2) % 3] * b->i[(i + 1) % 3];
-		if (i % 2 == 1)
-			out->i[i] *= -1;
 		i++;
 	}
 }
