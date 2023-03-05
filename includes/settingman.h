@@ -3,7 +3,7 @@
 
 # include "geometry.h"
 
-# define DISPLAY_TITLE		"Photon Stalkers"
+# define DISPLAY_TITLE		"Photon Chaser"
 # define RENDER_WORKER_N		6
 # define RENDER_SYNC_INTERVAL	1
 # define OUTPUT_FILENAME	"render"
