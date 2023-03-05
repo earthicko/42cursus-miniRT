@@ -50,8 +50,10 @@ typedef struct s_hittable_transform
 	t_hittable_hit		hit;
 	t_bbox				bbox;
 	t_hittable			*base;
-	t_mtx44				w_to_o;
-	t_mtx44				o_to_w;
+	t_mtx44				wtoo_trans;
+	t_mtx44				otow_trans;
+	t_mtx44				wtoo_rotate;
+	t_mtx44				otow_rotate;
 }	t_hittable_transform;
 
 typedef struct s_hittable_list

@@ -25,8 +25,10 @@ void	print_box(const t_hittable *box)
 
 	tbox = (t_hittable_transform *)box;
 	aabox = (t_hittable_aa_box *)tbox->base;
-	printf("box object to world: \n");
-	print_mtx44(&tbox->o_to_w);
+	printf("box object to world (transform): \n");
+	print_mtx44(&tbox->otow_trans);
+	printf("box object to world (rotation): \n");
+	print_mtx44(&tbox->otow_rotate);
 	i = 0;
 	while (i < 6)
 	{

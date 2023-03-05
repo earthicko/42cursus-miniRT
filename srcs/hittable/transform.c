@@ -11,11 +11,12 @@ t_bool	hittable_transform_hit(t_hittable *self,
 	t_ray					r_trans;
 
 	this = (t_hittable_transform *)self;
-	ray_multiply_m44(&r_trans, r, &this->w_to_o);
+	vec3_multiply_m44(&r_trans.orig, &r->orig, &this->wtoo_trans);
+	vec3_multiply_m44(&r_trans.dir, &r->dir, &this->wtoo_rotate);
 	if (!this->base->hit(this->base, &r_trans, t, rec))
 		return (FALSE);
-	vec3_multiply_m44_inplace(&rec->p, &this->o_to_w);
-	vec3_multiply_m44_inplace(&rec->normal, &this->o_to_w);
+	vec3_multiply_m44_inplace(&rec->p, &this->otow_trans);
+	vec3_multiply_m44_inplace(&rec->normal, &this->otow_rotate);
 	return (TRUE);
 }
 
@@ -28,7 +29,7 @@ static t_point	get_corner(t_hittable_transform *this,
 		targets[(i & 1) == 0]->i[0],
 		targets[(i & 2) == 0]->i[1],
 		targets[(i & 4) == 0]->i[2]);
-	vec3_multiply_m44_inplace(&corner, &this->o_to_w);
+	vec3_multiply_m44_inplace(&corner, &this->otow_trans);
 	return (corner);
 }
 
@@ -57,19 +58,23 @@ static void	hittable_transform_init_bbox(t_hittable_transform *this)
 	bbox_init(&this->bbox, min, max);
 }
 
-static void	hittable_transform_init_o_to_w(t_mtx44 *o_to_w,
+static void	hittable_transform_init_o_to_w(t_hittable_transform *transform,
 				t_point orig, t_vec3 rotate_angles)
 {
 	int	i;
 
-	m44_init_identity(o_to_w);
+	m44_init_identity(&transform->otow_trans);
+	m44_init_identity(&transform->otow_rotate);
 	i = 0;
 	while (i < 3)
 	{
-		m44_rotate_inplace(o_to_w, i, rotate_angles.i[i]);
+		m44_rotate_inplace(&transform->otow_trans, i, rotate_angles.i[i]);
+		m44_rotate_inplace(&transform->otow_rotate, i, rotate_angles.i[i]);
 		i++;
 	}
-	m44_translate_inplace(o_to_w, &orig);
+	m44_translate_inplace(&transform->otow_trans, &orig);
+	m44_get_inverse(&transform->wtoo_trans, &transform->otow_trans);
+	m44_get_inverse(&transform->wtoo_rotate, &transform->otow_rotate);
 }
 
 t_hittable	*hittable_transform_create(t_hittable *base,
@@ -84,8 +89,7 @@ t_hittable	*hittable_transform_create(t_hittable *base,
 	transform->destroy = hittable_destroy;
 	transform->hit = hittable_transform_hit;
 	transform->base = base;
-	hittable_transform_init_o_to_w(&transform->o_to_w, orig, rotate_angles);
-	m44_get_inverse(&transform->w_to_o, &transform->o_to_w);
+	hittable_transform_init_o_to_w(transform, orig, rotate_angles);
 	hittable_transform_init_bbox(transform);
 	return ((t_hittable *)transform);
 }
