@@ -14,6 +14,29 @@ static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
 	return (FALSE);
 }
 
+static void	set_uv(t_uv *out,
+				const t_hit_record *rec, const t_hittable_plane *this)
+{
+	double	distance;
+	t_vec3	projected_p;
+	t_vec3	x;
+	t_vec3	z;
+
+	distance = vec3_dot_vec3(&rec->p, &this->norm);
+	vec3_mult_num(&projected_p, &this->norm, -distance);
+	vec3_add_vec3_inplace(&projected_p, &rec->p);
+	vec3_setval(&x, 1, 0, 0);
+	vec3_setval(&z, 0, 0, 1);
+	vec2_setval(
+		out,
+		fmod(vec3_dot_vec3(&x, &projected_p) / this->scale, 1.0),
+		fmod(vec3_dot_vec3(&z, &projected_p) / this->scale, 1.0));
+	if (out->i[0] < 0)
+		out->i[0] += 1.0;
+	if (out->i[1] < 0)
+		out->i[1] += 1.0;
+}
+
 /*
 	This function needs to solve equation system of plane and straight line. 
 	See the comment of the solver_equation_system_plane_and_line for details.
@@ -24,7 +47,6 @@ t_bool	hit_plane(t_hittable *hittable,
 					t_hit_record *rec)
 {
 	t_hittable_plane	*this;
-	t_vec3				outward_norm;
 	double				root;
 
 	this = (t_hittable_plane *)hittable;
@@ -34,16 +56,16 @@ t_bool	hit_plane(t_hittable *hittable,
 		return (FALSE);
 	rec->t = root;
 	ray_at(&rec->p, ray, rec->t);
-	outward_norm = this->norm;
-	hit_record_set_normal_and_face(rec, ray, &outward_norm);
+	hit_record_set_normal_and_face(rec, ray, &this->norm);
 	rec->material = this->material;
-	vec2_setval(&rec->uv, 0, 0);
+	set_uv(&rec->uv, rec, this);
 	return (TRUE);
 }
 
 t_hittable	*hittable_plane_create(t_point point,
 							t_vec3 norm,
-							t_material *material)
+							t_material *material,
+							double scale)
 {
 	t_hittable_plane	*plane;
 
@@ -56,5 +78,6 @@ t_hittable	*hittable_plane_create(t_point point,
 	plane->material = material;
 	plane->point = point;
 	plane->norm = norm;
+	plane->scale = scale;
 	return ((t_hittable *)plane);
 }
