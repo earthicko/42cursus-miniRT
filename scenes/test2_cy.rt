@@ -6,7 +6,7 @@ tx_solid   blue     0,   0,   255
 tx_solid   violet    255,0,255
 tx_solid   white   255, 255, 255
 tx_solid   black     0,   0,   0
-tx_checker bw     blue red  10
+tx_checker bw     blue red  20
 mt_lambertian     plain_red     red
 mt_lambertian     plain_orange     orange
 mt_lambertian     plain_yellow     yellow
@@ -15,18 +15,19 @@ mt_lambertian     plain_blue     blue
 mt_lambertian     plain_violet     violet
 mt_lambertian     checker     bw
 
-
-A 0.02 255,255,255
-C 40,0.0, 20   -1, 0, 0   120
+A 0.2 255,255,255
+C 0.0,0.0,20   0, 0, -1   120
 l -40.0,50.0,0.0   0.6    10,0,255
-cy 0.0,0.0,0.0     0.0,0.0,1.0  20  20  0,0,255
+cy 0.0,0.0,0.0     1.0,0.0,0.0  20  20  checker
 #C 0,-10,0  -0.707107,-0.707107,0    120
 #C 30,30,30 0,-0.707106781, -0.707106781 120
 #C 30,30,30 -0.577350269, -0.577350269, -0.577350269  120
 #cy 0.0,0.0,0.0     0.70710678, 0.70710678,0.0  20  20   0, 0,255
-#sp 10,0.0,0    3    255,0,0
+#sp 0.0,0.0,0    20    checker
+#bo 0,0,0     0.57735, 0.57735, 0.57735     0      30  40  50 checker checker checker checker checker checker
 #sp -10,0.0,0    3    255,0,0
 #sp  0,0.0,0    3    255,0,255
+
 
 #cy 0.0,0.0,0.0     0.577350269,0.577350269,0.577350269   10  20   0, 0,255
 #cy 0.0,0.0,0.0     0.707106781, 0.707106781, 0   10  20   0, 0,255
