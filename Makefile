@@ -6,9 +6,10 @@ LINK_LIBFT		= -L$(LIBFT_DIR)
 INC_DIR_LIBFT	= -I$(LIBFT_DIR)/includes
 
 LINK_LIBM		= -lm
+LINK_PTHREAD	= -pthread
 
-LDLIBS			= $(LIBFT)
-LDFLAGS			= $(LINK_LIBFT) $(LINK_LIBM)
+LDLIBS			= $(LIBFT) $(LIBMLX)
+LDFLAGS			= $(LINK_LIBFT) $(LINK_LIBMLX) $(LINK_LIBM) $(LINK_PTHREAD)
 
 INC_DIR			= -I. -Iincludes $(INC_DIR_LIBFT)
 ################################# COMMANDS #####################################

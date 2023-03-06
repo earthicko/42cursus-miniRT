@@ -37,7 +37,7 @@ static void	display_save_bmp_init(const t_display *disp,
 
 static void	display_save_bmp_write(const t_display *disp, const int fd)
 {
-	const static t_uchar	bmppad[3];
+	static const t_uchar	bmppad[3];
 	int						x;
 	int						y;
 	char					*cursor;

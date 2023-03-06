@@ -16,8 +16,8 @@ static t_bool	ray_and_outward_norm_perpendicular(const t_ray *ray,
 
 static void	set_u_axis_vec(t_vec3 *u_axis, t_vec3 *norm)
 {
-	const t_vec3	x_axis = {1, 0, 0};
-	const t_vec3	y_axis = {0, 1, 0};
+	const t_vec3	x_axis = {{1, 0, 0}};
+	const t_vec3	y_axis = {{0, 1, 0}};
 
 	if (fabs(norm->i[0]) > 0.9)
 		vec3_cross_vec3(u_axis, &y_axis, norm);

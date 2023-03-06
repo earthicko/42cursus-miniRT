@@ -11,10 +11,10 @@ static double	get_root(t_hittable_aa_rectangle *this,
 	double	root;
 
 	if (fabs(vec3_dot_vec3(&ray->dir, outward_norm)) < DOUBLE_E)
-		return (nan(0));
+		return (nan(""));
 	root = (this->offset - ray->orig.i[this->axis]) / ray->dir.i[this->axis];
 	if (root < t->min || root > t->max)
-		return (nan(0));
+		return (nan(""));
 	return (root);
 }
 
