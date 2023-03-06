@@ -1,0 +1,81 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# ctags
+tags
+
+# User config
+miniRT
+minilibx_mms_20210621/mlx_image.swiftdoc
+minilibx_mms_20210621/mlx_image.swiftmodule
+minilibx_mms_20210621/mlx_image.swiftsourceinfo
+minilibx_mms_20210621/mlx_image.abi.json
+minilibx_mms_20210621/mlx_init.swiftdoc
+minilibx_mms_20210621/mlx_init.swiftmodule
+minilibx_mms_20210621/mlx_init.swiftsourceinfo
+minilibx_mms_20210621/mlx_init.abi.json
+minilibx_mms_20210621/mlx_window.swiftdoc
+minilibx_mms_20210621/mlx_window.swiftmodule
+minilibx_mms_20210621/mlx_window.swiftsourceinfo
+minilibx_mms_20210621/mlx_window.abi.json
+
+# swift temp files
+*.swiftdoc
+*.swiftmodule
+*.swiftsourceinfo
+
+# VSCode settings
+.vscode/launch.json
+.vscode/settings.json
+
+*.bmp
