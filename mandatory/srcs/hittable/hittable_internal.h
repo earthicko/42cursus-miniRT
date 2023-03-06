@@ -10,8 +10,6 @@ enum	e_coefficient
 	C,
 };
 
-void	hittable_destroy(t_hittable *self);
-
 /******* math_utils *******/
 
 double	dist_sq(t_point *a, t_point *b);

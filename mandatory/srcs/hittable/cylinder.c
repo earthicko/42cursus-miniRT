@@ -91,7 +91,6 @@ t_hittable	*hittable_cylinder_create(t_cylinder_info *cylinder_info,
 	if (!cylinder)
 		return (NULL);
 	ft_memset(cylinder, 0, sizeof(t_hittable_cylinder));
-	cylinder->destroy = hittable_destroy;
 	cylinder->hit = hit_cylinder;
 	cylinder->material = material;
 	set_tube_of_cylinder(&cylinder->tube, cylinder_info, material);

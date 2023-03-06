@@ -56,7 +56,6 @@ FILENAME		= \
 				mlx_interface/mlxman \
 				camera/init \
 				camera/get_ray_at \
-				hittable/methods \
 				hittable/math_utils \
 				hittable/hit_record_set_normal_and_face \
 				hittable/sphere \

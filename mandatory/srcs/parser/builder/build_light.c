@@ -62,7 +62,7 @@ static int	add_light(t_scene *scene, t_point coord, t_material *m)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, light))
 	{
-		light->destroy(light);
+		free(light);
 		return (CODE_ERROR_MALLOC);
 	}
 	if (hittable_list_append(scene->world, light))

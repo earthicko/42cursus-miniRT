@@ -13,7 +13,7 @@ static int	add_plane(t_scene *scene, t_ray dir, double scale, t_material *m)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, plane))
 	{
-		plane->destroy(plane);
+		free(plane);
 		return (CODE_ERROR_MALLOC);
 	}
 	if (hittable_list_append(scene->world, plane)

@@ -72,7 +72,6 @@ t_hittable	*hittable_sphere_create(
 	if (!sphere)
 		return (NULL);
 	ft_memset(sphere, 0, sizeof(t_hittable_sphere));
-	sphere->destroy = hittable_destroy;
 	sphere->hit = hit_sphere;
 	sphere->material = material;
 	sphere->radius = radius;

@@ -13,7 +13,7 @@ static int	add_cylinder(t_scene *scene, t_cylinder_info *info, t_material *m)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.primitives, cylinder))
 	{
-		cylinder->destroy(cylinder);
+		free(cylinder);
 		return (CODE_ERROR_MALLOC);
 	}
 	if (hittable_list_append(scene->world, cylinder)

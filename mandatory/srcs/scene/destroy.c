@@ -6,7 +6,7 @@
 
 static void	destroy_hittable(void *hittable)
 {
-	((t_hittable *)hittable)->destroy((t_hittable *)hittable);
+	free(hittable);
 }
 
 static void	destroy_material(void *material)
@@ -28,8 +28,8 @@ void	scene_destroy(t_scene *scene)
 	if (scene->res.textures)
 		ptrarr_destroy(scene->res.textures, destroy_texture);
 	if (scene->world)
-		scene->world->destroy(scene->world);
+		hittable_list_destroy(scene->world);
 	if (scene->objects)
-		scene->objects->destroy(scene->objects);
+		hittable_list_destroy(scene->objects);
 	free(scene);
 }

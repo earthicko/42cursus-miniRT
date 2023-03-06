@@ -8,7 +8,6 @@
 # include "material.h"
 
 typedef struct s_material	t_material;
-typedef struct s_vec2		t_len_rect;
 
 /******* hit_record *******/
 
@@ -33,17 +32,14 @@ typedef t_bool				(*t_hittable_hit)(t_hittable *hittable,
 												const t_ray *r,
 												t_minmax t,
 												t_hit_record *rec);
-typedef void				(*t_hittable_destroy)(t_hittable *hittable);
 
 typedef struct s_hittable
 {
-	t_hittable_destroy	destroy;
 	t_hittable_hit		hit;
 }	t_hittable;
 
 typedef struct s_hittable_list
 {
-	t_hittable_destroy	destroy;
 	t_hittable_hit		hit;
 	t_ptrarr			*elements;
 }	t_hittable_list;
@@ -52,7 +48,6 @@ typedef struct s_hittable_list
 
 typedef struct s_hittable_sphere
 {
-	t_hittable_destroy	destroy;
 	t_hittable_hit		hit;
 	t_material			*material;
 	double				radius;
@@ -61,7 +56,6 @@ typedef struct s_hittable_sphere
 
 typedef struct s_hittable_plane
 {
-	t_hittable_destroy	destroy;
 	t_hittable_hit		hit;
 	t_material			*material;
 	t_point				point;
@@ -71,7 +65,6 @@ typedef struct s_hittable_plane
 
 typedef struct s_hittable_tube
 {
-	t_hittable_destroy	destroy;
 	t_hittable_hit		hit;
 	t_material			*material;
 	t_point				center_of_cylinder;
@@ -83,7 +76,6 @@ typedef struct s_hittable_tube
 
 typedef struct s_hittable_disk
 {
-	t_hittable_destroy	destroy;
 	t_hittable_hit		hit;
 	t_material			*material;
 	t_hittable_plane	plane;
@@ -92,7 +84,6 @@ typedef struct s_hittable_disk
 
 typedef struct s_hittable_cylinder
 {
-	t_hittable_destroy	destroy;
 	t_hittable_hit		hit;
 	t_material			*material;
 	t_hittable_tube		tube;
@@ -128,5 +119,6 @@ t_hittable			*hittable_list_create(void);
 
 /******* others *******/
 int					hittable_list_append(t_hittable *self, t_hittable *item);
+void				hittable_list_destroy(t_hittable *self);
 
 #endif

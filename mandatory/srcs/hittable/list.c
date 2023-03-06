@@ -53,7 +53,6 @@ t_hittable	*hittable_list_create(void)
 	if (!list)
 		return (NULL);
 	ft_bzero(list, sizeof(t_hittable_list));
-	list->destroy = hittable_list_destroy;
 	list->hit = hittable_list_hit;
 	list->elements = ptrarr_create();
 	if (!list->elements)
