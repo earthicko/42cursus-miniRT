@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <time.h>
 
-// TODO: remove timeman before submission
 void	timeman(int mode)
 {
 	static clock_t	t;

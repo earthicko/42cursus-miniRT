@@ -6,6 +6,8 @@
 #include "renderer_internal.h"
 #include "settingman.h"
 
+void	timeman(int mode);
+
 static void	renderer_render_update(t_renderer *renderer, int n_samples)
 {
 	char		*filename;
@@ -43,9 +45,6 @@ static void	set_next_milestone(t_renderer *renderer,
 	set_milestone(stat, next_milestone);
 }
 
-void	timeman(int mode);
-
-// TODO: remove timeman before submission
 int	renderer_render_multithreaded(void *param)
 {
 	t_renderer						*renderer;

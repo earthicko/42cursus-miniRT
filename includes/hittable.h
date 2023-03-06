@@ -9,7 +9,6 @@
 # include "bounding_box.h"
 
 typedef struct s_material	t_material;
-typedef struct s_vec2		t_len_rect;
 
 /******* hit_record *******/
 
