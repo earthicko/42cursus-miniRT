@@ -12,9 +12,10 @@ LINK_LIBMLX		= -L$(LIBMLX_DIR) -lmlx -framework OpenGL -framework AppKit
 INC_DIR_LIBMLX	= -I$(LIBMLX_DIR)
 
 LINK_LIBM		= -lm
+LINK_PTHREAD	= -pthread
 
 LDLIBS			= $(LIBFT) $(LIBMLX)
-LDFLAGS			= $(LINK_LIBFT) $(LINK_LIBMLX) $(LINK_LIBM)
+LDFLAGS			= $(LINK_LIBFT) $(LINK_LIBMLX) $(LINK_LIBM) $(LINK_PTHREAD)
 
 INC_DIR			= -I. -Iincludes $(INC_DIR_LIBFT) $(INC_DIR_LIBMLX)
 ################################# COMMANDS #####################################
