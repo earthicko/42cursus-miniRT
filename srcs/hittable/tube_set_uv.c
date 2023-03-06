@@ -4,8 +4,8 @@
 
 static void	set_r_axis_vec(t_vec3 *r_axis, t_vec3 *axis)
 {
-	const t_vec3	x_axis = {1, 0, 0};
-	const t_vec3	y_axis = {0, 1, 0};
+	const t_vec3	x_axis = {{1, 0, 0}};
+	const t_vec3	y_axis = {{0, 1, 0}};
 
 	if (fabs(axis->i[0]) > 0.9)
 		vec3_cross_vec3(r_axis, &y_axis, axis);

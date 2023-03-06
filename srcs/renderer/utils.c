@@ -21,7 +21,7 @@ char	*get_filename(int n)
 void	renderer_render_showstat(int n_samples)
 {
 	static int			i;
-	const static char	*blinker[3] = {".     ", "..    ", "...   "};
+	static const char	*blinker[3] = {".     ", "..    ", "...   "};
 
 	ft_printf("\rSample count %d ", n_samples);
 	ft_printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);
@@ -30,7 +30,7 @@ void	renderer_render_showstat(int n_samples)
 void	renderer_render_showstat_multithread(int n_samples, int worker_idx)
 {
 	static int			i;
-	const static char	*blinker[3] = {".     ", "..    ", "...   "};
+	static const char	*blinker[3] = {".     ", "..    ", "...   "};
 
 	ft_printf("\rWorker %d Sample count %d ", worker_idx, n_samples);
 	ft_printf("%s", blinker[(i++) % (sizeof(blinker) / sizeof(char *))]);

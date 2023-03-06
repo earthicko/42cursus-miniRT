@@ -19,11 +19,11 @@ static void	set_defaults_display(void)
 
 static void	set_defaults_camera(void)
 {
-	const t_vec3	updir = {
+	const t_vec3	updir = {{
 		CAM_DEFAULT_CAMUP_X,
 		CAM_DEFAULT_CAMUP_Y,
 		CAM_DEFAULT_CAMUP_Z
-	};
+	}};
 	const double	focallen = CAM_DEFAULT_FOCALLEN;
 
 	settingman_caminfo(SETTINGMAN_SET, (t_vec3 *)&updir, (double *)&focallen);
