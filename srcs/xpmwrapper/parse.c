@@ -72,7 +72,6 @@ int	parse_xpm_header(t_xpmheader *header, t_ptrarr *lines)
 	if (((char *)(lines->data[0]))[ft_strlen((char *)(lines->data[0])) - 1]
 		!= '{')
 		return (CODE_ERROR_DATA);
-	ft_bzero(header, sizeof(t_xpmheader));
 	if (parse_xpm_info(header, lines->data[1]))
 		return (CODE_ERROR_DATA);
 	i = 2;
