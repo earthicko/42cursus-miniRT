@@ -47,6 +47,8 @@ t_bool	is_in_pattern(const char *identifier,
 {
 	int	i;
 
+	if (tokens->len != patternlen)
+		return (FALSE);
 	i = 0;
 	while (i < patternlen)
 	{
