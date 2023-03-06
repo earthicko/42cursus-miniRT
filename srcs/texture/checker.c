@@ -37,7 +37,7 @@ void	texture_checker_get_color_at(
 }
 
 t_texture	*texture_checker_create(const char *name,
-				t_texture *a, t_texture *b, double freq)
+				t_texture *a, t_texture *b, int freq)
 {
 	t_texture_checker	*out;
 

@@ -29,7 +29,7 @@ t_bool	is_texture_checker(const t_ptrarr *tokens)
 }
 
 static int	add_texture_checker(t_scene *scene, const char *name,
-				t_texture *(pattern[2]), double freq)
+				t_texture *(pattern[2]), int freq)
 {
 	t_texture	*checker;
 
@@ -48,22 +48,22 @@ int	build_texture_checker(const t_ptrarr *tokens, t_scene *scene)
 {
 	char		*name;
 	t_texture	*pattern[2];
-	double		freq;
+	int			freq;
 
 	name = (char *)(tokens->data[1]);
 	pattern[0] = scene_search_texture(scene, tokens->data[2]);
 	pattern[1] = scene_search_texture(scene, tokens->data[3]);
-	freq = ft_atof(tokens->data[4]);
-	if (freq < DOUBLE_E)
+	freq = (int)ft_atof(tokens->data[4]);
+	if (freq < 2 || freq % 2 == 1)
 	{
-		printf("%s: "MSG_OUTOFRANGE"\n", EXEC_NAME, freq, DOUBLE_E, DOUBLE_INF);
+		printf("%s: invalid frequency (%d).\n", EXEC_NAME, freq);
 		return (CODE_ERROR_DATA);
 	}
 	if (!pattern[0] || !pattern[1])
 		return (CODE_ERROR_DATA);
 	if (add_texture_checker(scene, name, pattern, freq))
 		return (CODE_ERROR_MALLOC);
-	printf("%s: checker texture (%s, %s <-> %s %.2f)\n", __func__, name,
+	printf("%s: checker texture (%s, %s <-> %s %d)\n", __func__, name,
 		pattern[0]->name, pattern[1]->name, freq);
 	return (CODE_OK);
 }
