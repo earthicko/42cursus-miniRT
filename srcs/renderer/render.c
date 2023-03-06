@@ -24,7 +24,6 @@ static void	renderer_render_update(t_renderer *renderer, int n_samples)
 	if (should_update(renderer->max_samples, n_samples, renderer->freq_update))
 	{
 		renderer_write_color(renderer, n_samples);
-		display_putimage(renderer->disp);
 		update_count++;
 	}
 	if (should_update(renderer->max_samples, n_samples, renderer->freq_update)
@@ -49,7 +48,7 @@ int	renderer_render(void *param)
 
 	renderer = (t_renderer *)param;
 	if (render_finished == 1)
-		return (0);
+		return (1);
 	if (n_samples_so_far == 0)
 		timeman(0);
 	if (n_samples_so_far >= renderer->max_samples)
@@ -58,7 +57,7 @@ int	renderer_render(void *param)
 		render_finished = 1;
 		timeman(1);
 		renderer_render_update(renderer, n_samples_so_far);
-		return (0);
+		return (1);
 	}
 	renderer_render_loop(renderer);
 	n_samples_so_far++;

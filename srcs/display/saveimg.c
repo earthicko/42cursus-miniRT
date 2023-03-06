@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "libft.h"
-#include "mlx_interface_internal.h"
+#include "display_internal.h"
 #include "msgdef.h"
 #include "settingman.h"
 
@@ -40,8 +40,7 @@ static void	display_save_bmp_write(const t_display *disp, const int fd)
 	const static t_uchar	bmppad[3];
 	int						x;
 	int						y;
-	int						o_height;
-	int						o_width;
+	char					*cursor;
 
 	y = disp->h_real - 1;
 	while (y >= 0)
@@ -49,9 +48,8 @@ static void	display_save_bmp_write(const t_display *disp, const int fd)
 		x = 0;
 		while (x < disp->w_real)
 		{
-			o_height = disp->nbytes * y;
-			o_width = x * disp->bpp / 8;
-			write(fd, disp->img_addr + o_height + o_width, 3);
+			cursor = (char *)(&disp->image[y * disp->w + x]);
+			write(fd, cursor, 3);
 			x++;
 		}
 		write(fd, bmppad, (4 - ((disp->w_real * 3) % 4)) % 4);

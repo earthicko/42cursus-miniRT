@@ -1,8 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft.h"
-#include "mlx.h"
-#include "mlx_interface.h"
+#include "display.h"
 #include "parser.h"
 #include "msgdef.h"
 #include "scene.h"
@@ -34,10 +33,18 @@ static void	init_textures(t_ptrarr *textures)
 	}
 }
 
+static void	render_until_done(int (*routine)(void *), void *arg)
+{
+	while (TRUE)
+	{
+		if (routine(arg))
+			break ;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_renderer	renderer;
-	void		*mlx;
 
 	if (argc != 2 || !match_extension(argv[1], ".rt"))
 	{
@@ -48,13 +55,9 @@ int	main(int argc, char **argv)
 	if (renderer_init(&renderer, argv[1]))
 		return (1);
 	init_textures(renderer.scene->res.textures);
-	mlx_hook(renderer.disp->win, ON_KEYDOWN, 0, mlx_key_interface, &renderer);
-	mlx_hook(renderer.disp->win, ON_DESTROY, 0, exit_program, &renderer);
-	mlx = mlx_interface_get_mlx_ptr();
 	if (RENDER_WORKER_N == 1)
-		mlx_loop_hook(mlx, renderer_render, &renderer);
+		render_until_done(renderer_render, &renderer);
 	else
-		mlx_loop_hook(mlx, renderer_render_multithreaded, &renderer);
-	mlx_loop(mlx);
+		render_until_done(renderer_render_multithreaded, &renderer);
 	return (0);
 }

@@ -16,7 +16,6 @@ static void	renderer_render_update(t_renderer *renderer, int n_samples)
 	if (n_samples == 0)
 		return ;
 	renderer_write_color(renderer, n_samples);
-	display_putimage(renderer->disp);
 	update_count++;
 	if (update_count % renderer->freq_save == 0
 		|| renderer->max_samples == n_samples)
@@ -60,13 +59,13 @@ int	renderer_render_multithreaded(void *param)
 		timeman(0);
 	}
 	if (is_render_finished(&stat))
-		return (0);
+		return (1);
 	if (n_samples_main(&stat) >= renderer->max_samples)
 	{
 		timeman(1);
 		terminate_workers(&stat);
 		renderer_render_update(renderer, n_samples_main(&stat));
-		return (0);
+		return (1);
 	}
 	if (all_workers_reach_milestone(&stat))
 		set_next_milestone(renderer, &stat);

@@ -3,7 +3,7 @@
 
 # include <pthread.h>
 # include "settingman.h"
-# include "mlx_interface.h"
+# include "display.h"
 # include "scene.h"
 
 typedef pthread_t						t_thread;

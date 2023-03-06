@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "libft.h"
-#include "mlx_interface.h"
+#include "display.h"
 #include "print.h"
 #include "builder_internal.h"
 

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "libft.h"
-#include "mlx.h"
 #include "number.h"
 #include "parser.h"
 #include "print.h"

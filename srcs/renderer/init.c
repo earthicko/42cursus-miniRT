@@ -52,7 +52,7 @@ int	renderer_init(t_renderer *renderer, const char *path)
 	if (displayval[1] < RENDER_WORKER_N)
 		return (abort_renderer_init(renderer, CODE_ERROR_DATA));
 	renderer->disp = display_create(
-			displayval[0], displayval[1], displayval[2], DISPLAY_TITLE);
+			displayval[0], displayval[1], displayval[2]);
 	if (!renderer->disp)
 		return (abort_renderer_init(renderer, CODE_ERROR_GENERIC));
 	return (CODE_OK);
