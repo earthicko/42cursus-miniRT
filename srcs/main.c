@@ -41,6 +41,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || !match_extension(argv[1], ".rt"))
 	{
+		printf("Error\n");
 		printf(MSG_USAGE"\n");
 		return (2);
 	}
