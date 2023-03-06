@@ -5,6 +5,8 @@
 #include "renderer_internal_bonus.h"
 #include "settingman_bonus.h"
 
+void	timeman(int mode);
+
 static t_bool	should_update(int max_samples, int n_samples, int freq)
 {
 	if (n_samples >= max_samples
@@ -39,9 +41,6 @@ static void	renderer_render_update(t_renderer *renderer, int n_samples)
 	}
 }
 
-void	timeman(int mode);
-
-// TODO: remove timeman before submission
 int	renderer_render(void *param)
 {
 	t_renderer	*renderer;
