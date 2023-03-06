@@ -11,7 +11,7 @@ void	print_hit_record(const t_hit_record *rec)
 	printf(" normal ");
 	print_vec3(&rec->normal);
 	printf(" %.2f ", rec->t);
-	printf(" is front: %d material %s", rec->is_front, rec->material->name);
+	printf(" is front: %d", rec->is_front);
 }
 
 void	print_scatter_record(const t_scatter_record *rec)

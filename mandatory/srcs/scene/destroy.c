@@ -11,7 +11,7 @@ static void	destroy_hittable(void *hittable)
 
 static void	destroy_material(void *material)
 {
-	((t_material *)material)->destroy((t_material *)material);
+	free(material);
 }
 
 static void	destroy_texture(void *texture)

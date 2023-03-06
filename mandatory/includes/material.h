@@ -16,45 +16,32 @@ typedef struct s_scatter_record
 	t_ray	scattered;
 }	t_scatter_record;
 
-typedef void				(*t_material_destroy)(t_material *self);
-
 typedef void				(*t_material_emit)(t_material *self,
 	t_color *out, const t_hit_record *hitrec);
-
 typedef t_bool				(*t_material_scatter)(t_material *self,
 	t_scatter_record *out, const t_ray *ray_in, const t_hit_record *hit);
 
 typedef struct s_material
 {
-	t_material_destroy	destroy;
 	t_material_emit		emit;
 	t_material_scatter	scatter;
-	char				*name;
 }	t_material;
 
 typedef struct s_material_lambertian
 {
-	t_material_destroy	destroy;
 	t_material_emit		emit;
 	t_material_scatter	scatter;
-	char				*name;
 	t_texture			*albedo;
 }	t_material_lambertian;
 
 typedef struct s_material_diffuse_light
 {
-	t_material_destroy	destroy;
 	t_material_emit		emit;
 	t_material_scatter	scatter;
-	char				*name;
 	t_texture			*emitter;
 }	t_material_diffuse_light;
 
-void		material_destroy(t_material *self);
-
-t_material	*material_lambertian_create(const char *name,
-				t_texture *albedo);
-t_material	*material_diffuse_light_create(const char *name,
-				t_texture *emitter);
+t_material	*material_lambertian_create(t_texture *albedo);
+t_material	*material_diffuse_light_create(t_texture *emitter);
 
 #endif
