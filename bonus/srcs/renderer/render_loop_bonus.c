@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_loop_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: donghyle  <donghyle@student.42seoul.>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/06 22:39:44 by donghyle          #+#    #+#             */
+/*   Updated: 2023/03/06 22:39:44 by donghyle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "renderer_internal_bonus.h"
 
 void	renderer_render_loop_multithread(t_renderer_worker *worker)
