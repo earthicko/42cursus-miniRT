@@ -14,7 +14,4 @@ enum e_mlxmanmode
 
 void	mlxmanager(int mode, void **buf);
 
-int		imgwrapper_load(t_imgwrapper *imgwrapper);
-int		imgwrapper_transform(t_imgwrapper *imgwrapper);
-
 #endif

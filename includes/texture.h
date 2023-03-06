@@ -3,7 +3,7 @@
 
 # include "hittable.h"
 # include "geometry.h"
-# include "mlx_interface.h"
+# include "xpmwrapper.h"
 
 typedef struct s_hit_record	t_hit_record;
 typedef struct s_texture	t_texture;
@@ -42,8 +42,7 @@ typedef struct s_texture_image
 	t_texture_destroy		destroy;
 	char					*name;
 	t_texture_get_color_at	get_color_at;
-	char					*imgpath;
-	t_imgwrapper			*img;
+	t_xpmwrapper			*xpm;
 }	t_texture_image;
 
 void		texture_destroy(t_texture *self);

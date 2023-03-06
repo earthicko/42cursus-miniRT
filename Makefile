@@ -59,9 +59,6 @@ FILENAME		= \
 				mlx_interface/key_interface \
 				mlx_interface/putpixel \
 				mlx_interface/saveimg \
-				mlx_interface/imgwrapper_create \
-				mlx_interface/imgwrapper_methods \
-				mlx_interface/imgwrapper_transform \
 				mlx_interface/mlxman \
 				camera/init \
 				camera/get_ray_at \
@@ -143,6 +140,12 @@ FILENAME		= \
 				renderer/write_color \
 				renderer/worker_getter \
 				renderer/worker_setter \
+				xpmwrapper/init \
+				xpmwrapper/utils \
+				xpmwrapper/load \
+				xpmwrapper/parse \
+				xpmwrapper/getcolor \
+				xpmwrapper/transform \
 
 SRC				= $(addprefix $(DIR_SRC), $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILENAME)))
@@ -235,11 +238,11 @@ test_cone_create: test_objs/cone_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 test_aa_rect_create: test_objs/aa_rect_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/aa_rect_create.o -o $@ $(LDFLAGS)
 
-test_imgwrapper: test_objs/imgwrapper.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/imgwrapper.o -o $@ $(LDFLAGS)
-
 test_cone_ray_intersect: test_objs/cone_ray_intersect.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
 	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/cone_ray_intersect.o -o $@ $(LDFLAGS)
+
+test_xpmwrapper: test_objs/xpmwrapper.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
+	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/xpmwrapper.o -o $@ $(LDFLAGS)
 
 -include $(DEP)
 
@@ -254,7 +257,7 @@ fclean: clean
 	$(RM) \
 		test_vectors test_camera test_texture test_material test_parser \
 		test_hittable test_pointer_speed test_mtx_inverse test_transform \
-		test_cone_create test_aa_rect_create test_imgwrapper
+		test_cone_create test_aa_rect_create test_xpmwrapper
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBMLX_DIR)
 
