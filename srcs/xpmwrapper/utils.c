@@ -5,6 +5,7 @@
 #include "libft.h"
 #include "msgdef.h"
 #include "texture.h"
+#include "xpmwrapper_internal.h"
 
 int	hex_to_int(const char *hex)
 {
