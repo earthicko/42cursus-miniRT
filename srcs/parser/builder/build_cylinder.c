@@ -25,6 +25,15 @@ static int	add_cylinder(t_scene *scene, t_cylinder_info *info, t_material *m)
 	return (CODE_OK);
 }
 
+static t_bool	is_invalid_cylinder_info(const t_cylinder_info *info)
+{
+	if (is_invalid_normalized_vec3(&info->axis)
+		|| is_invalid_length(info->height)
+		|| is_invalid_length(info->radius))
+		return (TRUE);
+	return (FALSE);
+}
+
 int	build_cylinder_with_color(const t_ptrarr *tokens, t_scene *scene)
 {
 	t_cylinder_info	info;
@@ -35,7 +44,7 @@ int	build_cylinder_with_color(const t_ptrarr *tokens, t_scene *scene)
 	info.radius = ft_atof(tokens->data[11]) / 2;
 	info.height = ft_atof(tokens->data[12]);
 	build_vector(&color, &tokens->data[13]);
-	if (is_invalid_normalized_vec3(&info.axis) || is_invalid_color(&color))
+	if (is_invalid_cylinder_info(&info) || is_invalid_color(&color))
 		return (CODE_ERROR_DATA);
 	vec3_unitize(&info.axis);
 	map_color(&color);
@@ -63,7 +72,7 @@ int	build_cylinder_with_material(const t_ptrarr *tokens, t_scene *scene)
 	info.radius = ft_atof(tokens->data[11]) / 2;
 	info.height = ft_atof(tokens->data[12]);
 	mt = scene_search_material(scene, tokens->data[13]);
-	if (is_invalid_normalized_vec3(&info.axis) || !mt)
+	if (is_invalid_cylinder_info(&info) || !mt)
 		return (CODE_ERROR_DATA);
 	vec3_unitize(&info.axis);
 	if (add_cylinder(scene, &info, mt))
