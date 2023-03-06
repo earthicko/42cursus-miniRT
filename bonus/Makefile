@@ -23,11 +23,10 @@ CFLAGS			= -Wall -Werror -Wextra -MMD -MP $(ACFLAGS) $(INC_DIR)
 ################################ FILENAMES #####################################
 DIR_SRC			= srcs/
 DIR_OBJ			= objs/
-DIR_TEST_SRC	= tests/
-DIR_TEST_OBJ	= test_objs/
 
 FILENAME		= \
 				threadman_bonus \
+				timeman_bonus \
 				geometry/matrix_init_bonus \
 				geometry/matrix_inverse_bonus \
 				geometry/matrix_inverse_utils_bonus \
@@ -147,42 +146,15 @@ SRC				= $(addprefix $(DIR_SRC), $(addsuffix .c, $(FILENAME)))
 OBJ				= $(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILENAME)))
 DEP				= $(addprefix $(DIR_OBJ), $(addsuffix .d, $(FILENAME)))
 
-DRIVER_FILENAME	= main
+DRIVER_FILENAME	= main_bonus
 DRIVER_SRC		= $(addprefix $(DIR_SRC), $(addsuffix .c, $(DRIVER_FILENAME)))
 DRIVER_OBJ		= $(addprefix $(DIR_OBJ), $(addsuffix .o, $(DRIVER_FILENAME)))
 DRIVER_DEP		= $(addprefix $(DIR_OBJ), $(addsuffix .d, $(DRIVER_FILENAME)))
-
-TEST_FILENAME	= \
-				vectors_arithmetic \
-
-TEST_SRC		= $(addprefix $(DIR_TEST_SRC), $(addsuffix .c, $(TEST_FILENAME)))
-TEST_OBJ		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .o, $(TEST_FILENAME)))
-TEST_DEP		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .d, $(TEST_FILENAME)))
-
-TESTER_FILENAME	= \
-				vectors \
-				camera \
-				hittable \
-				texture \
-				material \
-				parser \
-				mtx_inverse \
-				tube \
-				transform \
-				cone_create \
-
-TESTER_SRC		= $(addprefix $(DIR_TEST_SRC), $(addsuffix .c, $(TESTER_FILENAME)))
-TESTER_OBJ		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .o, $(TESTER_FILENAME)))
-TESTER_DEP		= $(addprefix $(DIR_TEST_OBJ), $(addsuffix .d, $(TESTER_FILENAME)))
 
 ################################# TARGETS ######################################
 all: $(NAME)
 
 $(DIR_OBJ)%.o: $(DIR_SRC)%.c
-	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(INC_DIR) -c -o $@ $<
-
-$(DIR_TEST_OBJ)%.o: $(DIR_TEST_SRC)%.c
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC_DIR) -c -o $@ $<
 
@@ -198,62 +170,16 @@ $(LIBMLX_ORIG):
 $(LIBMLX): $(LIBMLX_ORIG)
 	cp $(LIBMLX_ORIG) .
 
-test_vectors: test_objs/vectors.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/vectors.o -o $@ $(LDFLAGS)
-
-test_camera: test_objs/camera.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/camera.o -o $@ $(LDFLAGS)
-
-test_hittable: test_objs/hittable.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/hittable.o -o $@ $(LDFLAGS)
-
-test_texture: test_objs/texture.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/texture.o -o $@ $(LDFLAGS)
-
-test_material: test_objs/material.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/material.o -o $@ $(LDFLAGS)
-
-test_parser: test_objs/parser.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/parser.o -o $@ $(LDFLAGS)
-	
-test_tube: test_objs/tube.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/tube.o -o $@ $(LDFLAGS)
-
-test_pointer_speed: test_objs/pointer_speed_compare.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/pointer_speed_compare.o -o $@ $(LDFLAGS)
-
-test_mtx_inverse: test_objs/mtx_inverse.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/mtx_inverse.o -o $@ $(LDFLAGS)
-
-test_transform: test_objs/transform.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/transform.o -o $@ $(LDFLAGS)
-
-test_cone_create: test_objs/cone_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/cone_create.o -o $@ $(LDFLAGS)
-
-test_aa_rect_create: test_objs/aa_rect_create.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/aa_rect_create.o -o $@ $(LDFLAGS)
-
-test_imgwrapper: test_objs/imgwrapper.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/imgwrapper.o -o $@ $(LDFLAGS)
-
-test_cone_ray_intersect: test_objs/cone_ray_intersect.o $(OBJ) $(LDLIBS) $(TEST_OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(LDLIBS) $(TEST_OBJ) test_objs/cone_ray_intersect.o -o $@ $(LDFLAGS)
-
 -include $(DEP)
 
 clean:
-	$(RM) $(DIR_OBJ) $(DIR_TEST_OBJ)
+	$(RM) $(DIR_OBJ)
 	$(RM) $(LIBMLX)
 	@make clean -C $(LIBFT_DIR)
 	@make clean -C $(LIBMLX_DIR)
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)
-	$(RM) \
-		test_vectors test_camera test_texture test_material test_parser \
-		test_hittable test_pointer_speed test_mtx_inverse test_transform \
-		test_cone_create test_aa_rect_create test_imgwrapper
 	@make fclean -C $(LIBFT_DIR)
 	@make fclean -C $(LIBMLX_DIR)
 
