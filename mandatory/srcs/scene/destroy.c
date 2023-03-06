@@ -16,7 +16,7 @@ static void	destroy_material(void *material)
 
 static void	destroy_texture(void *texture)
 {
-	((t_texture *)texture)->destroy((t_texture *)texture);
+	free(texture);
 }
 
 void	scene_destroy(t_scene *scene)

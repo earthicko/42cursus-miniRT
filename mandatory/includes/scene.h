@@ -24,6 +24,4 @@ typedef struct s_scene
 t_scene		*scene_create(void);
 void		scene_destroy(t_scene *scene);
 
-t_texture	*scene_search_texture(t_scene *scene, const char *name);
-
 #endif

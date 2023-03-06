@@ -67,7 +67,6 @@ FILENAME		= \
 				material/diffuse_light \
 				material/lambertian \
 				material/methods \
-				texture/destroy \
 				texture/solid \
 				parser/parse_scene \
 				parser/managers1 \
@@ -91,7 +90,6 @@ FILENAME		= \
 				parser/builder/build_cylinder_patternmatcher \
 				scene/create \
 				scene/destroy \
-				scene/search \
 				renderer/init \
 				renderer/render \
 				renderer/utils \

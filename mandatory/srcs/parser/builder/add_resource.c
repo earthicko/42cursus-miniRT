@@ -2,16 +2,16 @@
 #include "geometry.h"
 #include "scene.h"
 
-int	add_texture_solid(t_scene *scene, const char *name, t_color color)
+int	add_texture_solid(t_scene *scene, t_color color)
 {
 	t_texture	*solid;
 
-	solid = texture_solid_create(name, color);
+	solid = texture_solid_create(color);
 	if (!solid)
 		return (CODE_ERROR_MALLOC);
 	if (ptrarr_append(scene->res.textures, solid))
 	{
-		texture_destroy(solid);
+		free(solid);
 		return (CODE_ERROR_MALLOC);
 	}
 	return (CODE_OK);
