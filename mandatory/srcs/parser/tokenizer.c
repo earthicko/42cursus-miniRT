@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include "libft.h"
 #include "ptrarr.h"
-#include "msgdef.h"
 #include "parser_internal.h"
 
 static int	tokenize_comma(t_ptrarr *arr)
@@ -73,14 +72,10 @@ t_ptrarr	*tokenize(const char *line)
 
 	arr = ptrarr_create();
 	if (!arr)
-	{
-		printf("%s: "MSG_MALLOC"\n", EXEC_NAME);
 		return (NULL);
-	}
 	if (fill_tokens(line, arr))
 	{
 		ptrarr_destroy(arr, destroy_pchar);
-		printf("%s: "MSG_MALLOC"\n", EXEC_NAME);
 		return (NULL);
 	}
 	return (arr);

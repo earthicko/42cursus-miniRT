@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft.h"
-#include "print.h"
 #include "builder_internal.h"
 
 /*
@@ -82,10 +81,5 @@ int	build_cylinder(const t_ptrarr *tokens, t_scene *scene)
 		return (CODE_ERROR_MALLOC);
 	if (add_cylinder(scene, &info, ptrarr_getlast(scene->res.materials)))
 		return (CODE_ERROR_MALLOC);
-	printf("%s: ", __func__);
-	print_cylinder_info(&info);
-	printf(", color ");
-	print_vec3(&color);
-	printf(")\n");
 	return (CODE_OK);
 }

@@ -2,7 +2,6 @@
 #include "mlx.h"
 #include "number.h"
 #include "parser.h"
-#include "print.h"
 #include "renderer.h"
 
 static void	init_renderer_render_ray(

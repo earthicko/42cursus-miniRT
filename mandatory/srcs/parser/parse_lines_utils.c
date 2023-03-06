@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "libft.h"
 #include "ptrarr.h"
-#include "msgdef.h"
 #include "parser_internal.h"
 
 /*
@@ -26,10 +25,7 @@ int	parse_unique_entity_loop(
 		{
 			found_once = TRUE;
 			if (already_found[i])
-			{
-				printf("%s: "MSG_DUPLICATE"\n", EXEC_NAME);
 				return (CODE_ERROR_DATA);
-			}
 			already_found[i] = TRUE;
 		}
 		else if (stat < 0)
@@ -69,10 +65,7 @@ int	parse_common_entity(const char *line, t_scene *scene)
 	if (stat < 0)
 		return (stat);
 	if (stat == FALSE)
-	{
-		printf("%s: "MSG_PARSEFAIL"\n", EXEC_NAME, line);
 		return (FALSE);
-	}
 	return (TRUE);
 }
 
@@ -84,10 +77,7 @@ t_bool	all_unique_entities_found(t_bool *map)
 	while (i < N_IDENTIFIER_UNIQUE)
 	{
 		if (map[i] == FALSE)
-		{
-			printf("%s: "MSG_ENTITY_NOTFOUND"\n", EXEC_NAME);
 			return (FALSE);
-		}
 		i++;
 	}
 	return (TRUE);

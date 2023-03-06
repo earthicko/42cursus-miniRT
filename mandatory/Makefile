@@ -44,12 +44,9 @@ FILENAME		= \
 				geometry/vec3_utils2 \
 				ray/utils \
 				number/random \
-				number/degree \
 				number/utils \
 				ptrarr/create \
 				ptrarr/getter \
-				print/print0 \
-				print/print1 \
 				mlx_interface/create \
 				mlx_interface/key_interface \
 				mlx_interface/putpixel \
@@ -88,9 +85,7 @@ FILENAME		= \
 				scene/destroy \
 				renderer/init \
 				renderer/render \
-				renderer/utils \
 				renderer/render_pixel \
-				renderer/render_loop \
 				renderer/write_color \
 
 SRC				= $(addprefix $(DIR_SRC), $(addsuffix .c, $(FILENAME)))

@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft.h"
-#include "print.h"
 #include "builder_internal.h"
 
 /*
@@ -51,18 +50,6 @@ static int	add_plane(t_scene *scene, t_ray dir, double scale, t_material *m)
 	return (CODE_OK);
 }
 
-static void	print_plane_with_color(
-				const char *func, t_ray dir, t_color color, double scale)
-{
-	printf("%s: plane (point ", func);
-	print_vec3(&dir.orig);
-	printf(", normal ");
-	print_vec3(&dir.dir);
-	printf(", scale %.2f, color ", scale);
-	print_vec3(&color);
-	printf(")\n");
-}
-
 int	build_plane(const t_ptrarr *tokens, t_scene *scene)
 {
 	t_ray	dir;
@@ -84,6 +71,5 @@ int	build_plane(const t_ptrarr *tokens, t_scene *scene)
 		return (CODE_ERROR_MALLOC);
 	if (add_plane(scene, dir, scale, ptrarr_getlast(scene->res.materials)))
 		return (CODE_ERROR_MALLOC);
-	print_plane_with_color(__func__, dir, color, scale);
 	return (CODE_OK);
 }

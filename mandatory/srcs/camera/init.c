@@ -8,7 +8,7 @@ void	camera_init_get_h_and_w(const t_camerainfo *info, double *h, double *w)
 	double	ratio;
 
 	ratio = DISPLAY_DEFAULT_W / DISPLAY_DEFAULT_H;
-	*h = 2.0 * tan(deg_to_rad(info->fov / 2));
+	*h = 2.0 * tan((info->fov / 2) / (180.0 / M_PI));
 	*w = ratio * *h;
 }
 

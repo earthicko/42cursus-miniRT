@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include "libft.h"
 #include "ptrarr.h"
-#include "msgdef.h"
-#include "print.h"
 #include "parser_internal.h"
 
 static t_bool	read_file_to_strarr_init(
@@ -12,15 +10,11 @@ static t_bool	read_file_to_strarr_init(
 {
 	*arr = ptrarr_create();
 	if (!(*arr))
-	{
-		printf("%s: "MSG_MALLOC"\n", EXEC_NAME);
 		return (FALSE);
-	}
 	*fd = open(path, O_RDONLY);
 	if (*fd < 0)
 	{
 		ptrarr_destroy(*arr, NULL);
-		perror(EXEC_NAME);
 		return (FALSE);
 	}
 	return (TRUE);
@@ -72,15 +66,5 @@ int	parse_scene(const char *path, t_scene *scene)
 	ptrarr_destroy(lines, destroy_pchar);
 	if (stat)
 		return (stat);
-	printf("%s: parsing complete. results:\n", __func__);
-	printf("\t%d primitives, %d materials, %d textures\n",
-		scene->res.primitives->len,
-		scene->res.materials->len,
-		scene->res.textures->len);
-	printf("\t%d objects, %d lights\n",
-		((t_hittable_list *)scene->objects)->elements->len,
-		((t_hittable_list *)scene->world)->elements->len
-		- ((t_hittable_list *)scene->objects)->elements->len);
-	printf("\n");
 	return (stat);
 }

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "libft.h"
 #include "ptrarr.h"
-#include "msgdef.h"
 #include "parser_internal.h"
 
 int		parse_unique_entity_loop(
@@ -48,7 +47,6 @@ int	parse_lines(const t_ptrarr *lines, t_scene *scene)
 		if (parse_common_entity(lines->data[i], scene)
 			== TRUE)
 			continue ;
-		printf("%s: "MSG_PARSEFAIL"\n", EXEC_NAME, (char *)lines->data[i]);
 		return (CODE_ERROR_DATA);
 	}
 	if (!all_unique_entities_found(already_found))

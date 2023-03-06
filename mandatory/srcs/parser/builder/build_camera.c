@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "libft.h"
 #include "mlx_interface.h"
-#include "print.h"
 #include "builder_internal.h"
 
 /*
@@ -62,12 +61,5 @@ int	build_camera(const t_ptrarr *tokens, t_scene *scene)
 		return (CODE_ERROR_DATA);
 	camerainfo_init(&info, &viewpoint, &viewdir, fov);
 	camera_init(&scene->cam, &info);
-	printf("%s: camera viewpoint ", __func__);
-	print_vec3(&viewpoint);
-	printf(", view direction ");
-	print_vec3(&viewdir);
-	printf(", fov %.2f\n%s: built ", fov, __func__);
-	print_camera(&scene->cam);
-	printf("\n");
 	return (CODE_OK);
 }

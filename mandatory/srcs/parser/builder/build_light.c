@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft.h"
-#include "print.h"
 #include "builder_internal.h"
 
 /*
@@ -86,10 +85,5 @@ int	build_light(const t_ptrarr *tokens, t_scene *scene)
 		return (CODE_ERROR_MALLOC);
 	if (add_light(scene, coord, ptrarr_getlast(scene->res.materials)))
 		return (CODE_ERROR_MALLOC);
-	printf("%s: light (coord ", __func__);
-	print_vec3(&coord);
-	printf(", ratio %.2f, color ", ratio);
-	print_vec3(&color);
-	printf(")\n");
 	return (CODE_OK);
 }

@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "libft.h"
-#include "print.h"
 #include "builder_internal.h"
 
 /*
@@ -40,8 +39,5 @@ int	build_ambient_lighting(const t_ptrarr *tokens, t_scene *scene)
 		return (CODE_ERROR_DATA);
 	map_color(&color);
 	vec3_mult_num(&scene->bg, &color, ratio);
-	printf("%s: background color ", __func__);
-	print_vec3(&scene->bg);
-	printf("\n");
 	return (CODE_OK);
 }

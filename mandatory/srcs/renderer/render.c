@@ -1,9 +1,26 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft.h"
-#include "msgdef.h"
 #include "renderer_internal.h"
 #include "settingman.h"
+
+void	renderer_render_loop(t_renderer *renderer)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < renderer->disp->h)
+	{
+		x = 0;
+		while (x < renderer->disp->w)
+		{
+			renderer_render_pixel(renderer, x, y);
+			x++;
+		}
+		y++;
+	}
+}
 
 static t_bool	should_update(int max_samples, int n_samples, int freq)
 {
@@ -37,14 +54,12 @@ int	renderer_render(void *param)
 		return (0);
 	if (n_samples_so_far >= RENDERER_N_SAMPLES)
 	{
-		printf("\nRender finished.\n");
 		render_finished = 1;
 		renderer_render_update(renderer, n_samples_so_far);
 		return (0);
 	}
 	renderer_render_loop(renderer);
 	n_samples_so_far++;
-	renderer_render_showstat(n_samples_so_far);
 	renderer_render_update(renderer, n_samples_so_far);
 	return (0);
 }
