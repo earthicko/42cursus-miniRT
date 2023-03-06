@@ -75,7 +75,6 @@ FILENAME		= \
 				parser/get_tokentype \
 				parser/parse_lines \
 				parser/parse_lines_utils \
-				parser/parse_line \
 				parser/builder/add_resource \
 				parser/builder/utils \
 				parser/builder/checkrange \
@@ -83,11 +82,8 @@ FILENAME		= \
 				parser/builder/build_camera \
 				parser/builder/build_light \
 				parser/builder/build_sphere \
-				parser/builder/build_sphere_patternmatcher \
 				parser/builder/build_plane \
-				parser/builder/build_plane_patternmatcher \
 				parser/builder/build_cylinder \
-				parser/builder/build_cylinder_patternmatcher \
 				scene/create \
 				scene/destroy \
 				renderer/init \
