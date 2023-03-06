@@ -2,8 +2,6 @@
 #include "hittable.h"
 #include "geometry.h"
 
-/******* set uv *********/
-
 static void	set_r_axis_vec(t_vec3 *r_axis, t_vec3 *axis)
 {
 	const t_vec3	x_axis = {1, 0, 0};

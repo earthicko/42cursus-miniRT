@@ -23,7 +23,6 @@ static t_bool	root_is_out_of_range(t_hittable_disk *disk, t_hit_record *rec)
 	return (FALSE);
 }
 
-// TODO: hit 함수들 static으로 수정해볼 것
 // TODO: implement u/v calculation
 /*
 	This function needs to solve equation system of plane and straight line. 
