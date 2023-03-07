@@ -40,8 +40,7 @@ t_bool	hit_plane(t_hittable *hittable,
 
 t_hittable	*hittable_plane_create(t_point point,
 							t_vec3 norm,
-							t_material *material,
-							double scale)
+							t_material *material)
 {
 	t_hittable_plane	*plane;
 
@@ -53,6 +52,5 @@ t_hittable	*hittable_plane_create(t_point point,
 	plane->material = material;
 	plane->point = point;
 	plane->norm = norm;
-	plane->scale = scale;
 	return ((t_hittable *)plane);
 }
