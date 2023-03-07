@@ -21,7 +21,6 @@ int	exit_program(void *param)
 	if (RENDER_WORKER_N > 1)
 		terminate_workers(((t_renderer *)param)->stat);
 	renderer_destroy((t_renderer *)param);
-	system("leaks miniRT");
 	exit(0);
 }
 
