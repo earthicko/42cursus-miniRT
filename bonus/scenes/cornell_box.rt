@@ -5,14 +5,6 @@ camera		0,	1,	0		10
 #			max depth	n_samples	update	save
 renderer	10			10000		100		10
 
-tx_solid		red		165,13,13
-tx_solid		green	30,115,38
-tx_solid		blue	0,0,255
-tx_solid		white	186,186,186
-mt_lambertian		red				red
-mt_lambertian		green			green
-mt_lambertian		blue			blue
-mt_lambertian		white			white
 mt_diffuse_light	white_light		255,255,255		10
 mt_dielectric		glass			1.52
 
@@ -22,14 +14,14 @@ C	0,0,800		0,0,-1			40
 # light
 bo	0,250,0			0,0,0			100 5 100	white_light white_light white_light white_light white_light white_light
 # sides
-bo	-500,0,0		0,0,0			500 500 500	green green green green green green
-bo	500,0,0			0,0,0			500 500 500	red red red red red red
+bo	-500,0,0		0,0,0			500 500 500		30,115,38
+bo	500,0,0			0,0,0			500 500 500		165,13,13
 # top
-bo	0,500,0			0,0,0			500 500 500	white white white white white white
+bo	0,500,0			0,0,0			500 500 500		186,186,186
 # bottom
-bo	0,-500,0		0,0,0			500 500 500	white white white white white white
+bo	0,-500,0		0,0,0			500 500 500		186,186,186
 # front
-bo	0,0,-500		0,0,0			500 500 500	white white white white white white
+bo	0,0,-500		0,0,0			500 500 500		186,186,186
 
-bo	-80,-85,0		0,15,0			120 280 120	white white white white white white
-sp	80,-170,0		150							glass
+bo	-80,-85,0		0,15,0			120 280 120		186,186,186
+sp	80,-170,0		150								glass
