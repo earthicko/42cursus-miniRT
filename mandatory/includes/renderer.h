@@ -39,6 +39,5 @@ typedef struct s_renderinfo
 int		renderer_init(t_renderer *renderer, const char *path);
 void	renderer_destroy(t_renderer *renderer);
 int		renderer_render(void *param);
-int		renderer_render_multithreaded(void *param);
 
 #endif
