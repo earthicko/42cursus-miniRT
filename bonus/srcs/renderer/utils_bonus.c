@@ -50,7 +50,7 @@ void	renderer_render_showstat_multithread(int n_samples, int worker_idx)
 
 int	get_next_milestone(t_renderer *renderer, int current_milestone)
 {
-	if (current_milestone == 1)
+	if (current_milestone == 1 && renderer->freq_update != 1)
 		current_milestone = renderer->freq_update;
 	else
 		current_milestone += renderer->freq_update;

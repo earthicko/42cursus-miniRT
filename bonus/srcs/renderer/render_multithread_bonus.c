@@ -80,5 +80,6 @@ int	renderer_render_multithreaded(void *param)
 	}
 	if (all_workers_reach_milestone(&stat))
 		set_next_milestone(renderer, &stat);
+	sleep(RENDER_SYNC_INTERVAL);
 	return (0);
 }
