@@ -68,10 +68,12 @@ int	renderer_render(void *param)
 	{
 		render_finished = 1;
 		renderer_render_update(renderer, n_samples_so_far);
+		ft_printf("\nRender finished.\n");
 		return (0);
 	}
 	renderer_render_loop(renderer);
 	n_samples_so_far++;
 	renderer_render_update(renderer, n_samples_so_far);
+	ft_printf("\rSample %d ...", n_samples_so_far);
 	return (0);
 }
