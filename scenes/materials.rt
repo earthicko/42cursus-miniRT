@@ -1,13 +1,44 @@
-tx_solid   red     255,   0,   0
-tx_solid   green     0, 255,   0
-tx_solid   blue      0,   0, 255
-tx_solid   white   255, 255, 255
-tx_solid   black     0,   0,   0
+tx_solid		red			255,0,0
+tx_solid		green		0,255,0
+tx_solid		yellow		255,255,0
+tx_solid		blue		0,0,255
+tx_solid		white		255,255,255
+tx_solid		black		0,0,0
+tx_checker		bw	black	white		6
+tx_image		steve_head_front		./scenes/steve/head_front.xpm	0	0
+mt_lambertian	red					red
+mt_lambertian	green				green
+mt_lambertian	yellow				yellow
+mt_lambertian	blue				blue
+mt_lambertian	white				white
+mt_lambertian	black				black
+mt_lambertian	checker				bw
+mt_metal		silver	white		0.1
+mt_metal		gold	yellow		0.02
+mt_dielectric	glass				1.52
+mt_lambertian	steve_head_front	steve_head_front
 
-tx_checker bw     black white  1
+#			width	height	multiplier
+display		500		250		4
+#			u,	v,	w		focallen
+camera		0,	1,	0		10
+#			max depth	n_samples	update	save
+renderer	10			1000		100		999999999
 
-mt_lambertian     plain_white   white
-mt_lambertian     plain_black   black
-mt_lambertian     checker       bw
-mt_metal          silver        white   0.1
-mt_dielectric     glass         1.52
+A	0.02		255,255,255
+C	0,7.5,35		0,0,-1			70
+
+l	0,0,20		1				255,255,255
+
+pl	0,0,-50		0,0,1	1		255,255,255
+
+sp	-30,0,0		10		red
+sp	-15,0,0		10		green
+sp	0,0,0		10		yellow
+sp	15,0,0		10		blue
+sp	30,0,0		10		white
+sp	-30,15,0	10		black
+sp	-15,15,0	10		checker
+sp	0,15,0		10		silver
+sp	15,15,0		10		steve_head_front
+sp	30,15,0		10		glass

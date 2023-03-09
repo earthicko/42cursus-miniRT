@@ -29,21 +29,18 @@ tx_image		steve_head_left		./scenes/steve/head_left.xpm	3	0
 tx_image		steve_head_right	./scenes/steve/head_right.xpm	1	0
 tx_image		steve_head_top		./scenes/steve/head_top.xpm		0	0
 tx_image		steve_head_bottom	./scenes/steve/head_bottom.xpm	0	0
-
 tx_image		steve_torso_front	./scenes/steve/torso_front.xpm	0	0
 tx_image		steve_torso_back	./scenes/steve/torso_back.xpm	0	0
 tx_image		steve_torso_left	./scenes/steve/torso_left.xpm	3	0
 tx_image		steve_torso_right	./scenes/steve/torso_right.xpm	1	0
 tx_image		steve_torso_top		./scenes/steve/torso_top.xpm	0	0
 tx_image		steve_torso_bottom	./scenes/steve/torso_bottom.xpm	0	0
-
 tx_image		steve_arm_front		./scenes/steve/arm_front.xpm	0	0
 tx_image		steve_arm_back		./scenes/steve/arm_back.xpm		0	0
 tx_image		steve_arm_left		./scenes/steve/arm_left.xpm		3	0
 tx_image		steve_arm_right		./scenes/steve/arm_right.xpm	1	0
 tx_image		steve_arm_top		./scenes/steve/arm_top.xpm		0	0
 tx_image		steve_arm_bottom	./scenes/steve/arm_bottom.xpm	0	0
-
 tx_image		steve_leg_front		./scenes/steve/leg_front.xpm	0	0
 tx_image		steve_leg_back		./scenes/steve/leg_back.xpm		0	0
 tx_image		steve_leg_left		./scenes/steve/leg_left.xpm		3	0
@@ -76,9 +73,9 @@ mt_lambertian	steve_leg_right		steve_leg_right
 mt_lambertian	steve_leg_top		steve_leg_top
 mt_lambertian	steve_leg_bottom	steve_leg_bottom
 
-A	0.2	135,206,235
-#	x  y  z		u v w		fov
-C	0, 0, 800	0,0,-1		40
+A	0.2				135,206,235
+#	x	y	z		u v w		fov
+C	0,	0,	800		0,0,-1		40
 
 bo	0,250,0			0,0,0			100 5 100	white_light white_light white_light white_light white_light white_light
 bo	-500,0,0		0,0,0			500 500 500	green green green green green green
