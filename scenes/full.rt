@@ -3,7 +3,7 @@ display		1920	1080	1
 #			u,	v,	w		focallen
 camera		0,	1,	0		10
 #			max depth	n_samples	update	save
-renderer	10			10000		1000	1
+renderer	10			10000		500		1
 
 tx_solid			red				165,13,13
 tx_solid			green			30,115,38
@@ -93,19 +93,23 @@ C	0,	0,	800		0,0,-1		40
 
 bo	220,250,0		0,0,0			100 5 100		white_light white_light white_light white_light white_light white_light
 bo	-220,250,0		0,0,0			100 5 100		white_light white_light white_light white_light white_light white_light
+sp	330,150,-50		50								blue_light
+sp	-330,150,-50	50								red_light
+
 bo	-1000,0,0		0,0,0			1000 500 500	green green green green green green
 bo	1000,0,0		0,0,0			1000 500 500	red red red red red red
 bo	0,500,0			0,0,0			1000 500 500	white white white white white white
 bo	0,-500,0		0,0,0			1000 500 500	white white white white white white
 bo	0,0,-500		0,0,0			1000 500 500	white white white white white white
 
-bo	-190,100,0		0,60,35			1 100 80		white_metal white_metal white_metal white_metal white_metal white_metal
+bo	-190,100,0		0,55,35			1 120 100		white_metal white_metal white_metal white_metal white_metal white_metal
 bo	-110,-70,-200	-20,-10,0		200 170 1		white_metal white_metal white_metal white_metal white_metal white_metal
 
-sp	-120,-170,0		150								glass
-sp	-110,-20,-50	100								earth
-cy	-0,130,100		0.7,0.7,0		60	90			blue_metal
-co	120,80,80		0.7,-0.7,0		110	80			yellow_metal
+sp	-120,-160,0		170								glass
+sp	120,0,100		120								glass
+sp	-100,-10,-50	120								earth
+cy	-0,130,-40		-0.58,0.58,0.58	90	120			blue_metal
+co	120,100,-100	0.7,-0.7,0		140	110			yellow_metal
 
 bo	-320,40,0		0,35,0			80	80	80		steve_head_left steve_head_right steve_head_top steve_head_bottom steve_head_front steve_head_back
 bo	-320,-60,0		0,0,0			80	120	40		steve_torso_left steve_torso_right steve_torso_top steve_torso_bottom steve_torso_front steve_torso_back
@@ -116,8 +120,6 @@ bo	-300,-180,16	-15,0,0			40	120	40		steve_leg_left steve_leg_right steve_leg_to
 
 bo	100,-125,0		-30,20,0		100 250 80		aubergine aubergine aubergine aubergine plum_aubergine aubergine
 
+bo	190,100,0		0,-45,-55		1 90 100		white_metal white_metal white_metal white_metal white_metal white_metal
 cy	300,-100,0		0,0.71,0.71		200	200			glass
-bo	300,-100,0		45,45,45		1000 10 10		bw bw bw bw bw bw
-
-sp	330,150,-50		50								blue_light
-sp	-330,150,-50	50								red_light
+bo	300,-100,0		45,45,45		1000 30 30		bw bw bw bw bw bw
