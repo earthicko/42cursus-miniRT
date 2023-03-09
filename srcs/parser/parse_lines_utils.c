@@ -69,10 +69,7 @@ int	parse_common_entity(const char *line, t_scene *scene)
 	if (stat < 0)
 		return (stat);
 	if (stat == FALSE)
-	{
-		printf("%s: "MSG_PARSEFAIL"\n", EXEC_NAME, line);
 		return (FALSE);
-	}
 	return (TRUE);
 }
 
