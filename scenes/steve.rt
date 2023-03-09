@@ -1,34 +1,28 @@
-#			max depth	n_samples	update	save
-renderer	10			1000		100		99999
-
 tx_image		steve_head_front	./scenes/steve/head_front.xpm	0	0
 tx_image		steve_head_back		./scenes/steve/head_back.xpm	0	0
 tx_image		steve_head_left		./scenes/steve/head_left.xpm	3	0
 tx_image		steve_head_right	./scenes/steve/head_right.xpm	1	0
 tx_image		steve_head_top		./scenes/steve/head_top.xpm		0	0
 tx_image		steve_head_bottom	./scenes/steve/head_bottom.xpm	0	0
-
 tx_image		steve_torso_front	./scenes/steve/torso_front.xpm	0	0
 tx_image		steve_torso_back	./scenes/steve/torso_back.xpm	0	0
 tx_image		steve_torso_left	./scenes/steve/torso_left.xpm	3	0
 tx_image		steve_torso_right	./scenes/steve/torso_right.xpm	1	0
 tx_image		steve_torso_top		./scenes/steve/torso_top.xpm	0	0
 tx_image		steve_torso_bottom	./scenes/steve/torso_bottom.xpm	0	0
-
 tx_image		steve_arm_front		./scenes/steve/arm_front.xpm	0	0
 tx_image		steve_arm_back		./scenes/steve/arm_back.xpm		0	0
 tx_image		steve_arm_left		./scenes/steve/arm_left.xpm		3	0
 tx_image		steve_arm_right		./scenes/steve/arm_right.xpm	1	0
 tx_image		steve_arm_top		./scenes/steve/arm_top.xpm		0	0
 tx_image		steve_arm_bottom	./scenes/steve/arm_bottom.xpm	0	0
-
 tx_image		steve_leg_front		./scenes/steve/leg_front.xpm	0	0
 tx_image		steve_leg_back		./scenes/steve/leg_back.xpm		0	0
 tx_image		steve_leg_left		./scenes/steve/leg_left.xpm		3	0
 tx_image		steve_leg_right		./scenes/steve/leg_right.xpm	1	0
 tx_image		steve_leg_top		./scenes/steve/leg_top.xpm		0	0
 tx_image		steve_leg_bottom	./scenes/steve/leg_bottom.xpm	0	0
-
+tx_image		grass				./scenes/grass.xpm				0	0
 mt_lambertian	steve_head_front	steve_head_front
 mt_lambertian	steve_head_back		steve_head_back
 mt_lambertian	steve_head_left		steve_head_left
@@ -53,7 +47,7 @@ mt_lambertian	steve_leg_left		steve_leg_left
 mt_lambertian	steve_leg_right		steve_leg_right
 mt_lambertian	steve_leg_top		steve_leg_top
 mt_lambertian	steve_leg_bottom	steve_leg_bottom
-
+mt_lambertian	grass				grass
 tx_solid		red		255,0,0
 tx_solid		green	0,255,0
 tx_solid		blue	0,0,255
@@ -61,14 +55,13 @@ mt_lambertian	red		red
 mt_lambertian	green	green
 mt_lambertian	blue	blue
 
-A	0.4	255,255,255
-#	x  y  z		u  v  w			fov
-C	100,50,200	-0.5,-0.28,-0.9	70
+#			max depth	n_samples	update	save
+renderer	10			1000		100		99999
 
-# l	-40,50,30		1		255,255,255
-# bo	50,0,0		0,0,0			100	1	1	red		red		red		red		red		red
-# bo	0,50,0		0,0,0			1	100	1	green	green	green	green	green	green
-# bo	0,0,50		0,0,0			1	1	100	blue	blue	blue	blue	blue	blue
+A	0.4	255,255,255
+#	x  y  z		u  v  w				fov
+C	100,50,200	-0.5,-0.28,-0.9		70
+l	-40,50,30	1					255,255,255
 
 bo	0,62.5,0		0,20,0		50	50	50	steve_head_left steve_head_right steve_head_top steve_head_bottom steve_head_front steve_head_back
 bo	0,0,0			0,0,0		50	75	25	steve_torso_left steve_torso_right steve_torso_top steve_torso_bottom steve_torso_front steve_torso_back
@@ -77,6 +70,4 @@ bo	50,5,0			-15,0,20	25	75	25	steve_arm_left steve_arm_right steve_arm_top steve
 bo	-12.5,-75,-10	15,0,0		25	75	25	steve_leg_left steve_leg_right steve_leg_top steve_leg_bottom steve_leg_front steve_leg_back
 bo	12.5,-75,10		-15,0,0		25	75	25	steve_leg_left steve_leg_right steve_leg_top steve_leg_bottom steve_leg_front steve_leg_back
 
-#	x , y , z   u , v , w  scale  r  ,  g  ,  b
-# pl	0,-115,0	0,1,0		1	50,150,50
-pl	0,-115,0	0,1,0		50	steve_head_front
+pl	0,-115,0		0,1,0		50			grass
