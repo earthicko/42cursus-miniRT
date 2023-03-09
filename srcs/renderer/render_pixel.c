@@ -36,6 +36,8 @@ void	renderer_render_ray(t_color	*out,
 		return ;
 	}
 	hitrec.material->emit(hitrec.material, &info.emitted, &hitrec);
+	if (depth == renderer->max_depth)
+		vec3_mult_num_inplace(&info.emitted, 1.0 / LIGHT_DEFAULT_INTENSITY);
 	vec3_add_vec3_inplace(out, &info.emitted);
 	if (!hitrec.material->scatter(hitrec.material, &scatrec, ray, &hitrec))
 		return ;
