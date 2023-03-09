@@ -1,9 +1,9 @@
 #			width	height	multiplier
-display		500		250		3
+display		1920	1080	1
 #			u,	v,	w		focallen
 camera		0,	1,	0		10
 #			max depth	n_samples	update	save
-renderer	10			10000		100		10
+renderer	10			10000		1000	1
 
 tx_solid			red				165,13,13
 tx_solid			green			30,115,38
@@ -11,22 +11,27 @@ tx_solid			blue			38,50,187
 tx_solid			black			30,30,30
 tx_solid			white			186,186,186
 tx_solid			yellow			186,186,0
+tx_solid			aubergine		77,28,86
+tx_solid			plum			184,173,199
 tx_checker			bw				black white		4
-tx_checker			white_yellow	white yellow	8
+tx_checker			plum_aubergine	aubergine plum	8
 tx_image			grass			./scenes/grass.xpm				0	0
 mt_lambertian		red				red
 mt_lambertian		green			green
 mt_lambertian		blue			blue
 mt_lambertian		white			white
+mt_lambertian		yellow			yellow
+mt_lambertian		aubergine		aubergine
+mt_lambertian		plum			plum
 mt_lambertian		bw				bw
 mt_lambertian		grass			grass
 mt_metal			white_metal		white			0.0
 mt_metal			blue_metal		blue			0.5
 mt_metal			yellow_metal	yellow			1.0
-mt_metal			white_yellow	white_yellow	0.8
-mt_diffuse_light	white_light		255,255,255		10
-mt_diffuse_light	red_light		165,13,13		5
-mt_diffuse_light	blue_light		50,30,165		8
+mt_metal			plum_aubergine	plum_aubergine	0.8
+mt_diffuse_light	white_light		255,255,255		8
+mt_diffuse_light	red_light		125,50,25		20
+mt_diffuse_light	blue_light		135,206,235		16
 mt_dielectric		glass			1.52
 
 tx_image			earth			./scenes/earth.xpm				0	0
@@ -82,25 +87,25 @@ mt_lambertian	steve_leg_right		steve_leg_right
 mt_lambertian	steve_leg_top		steve_leg_top
 mt_lambertian	steve_leg_bottom	steve_leg_bottom
 
-A	0.2				135,206,235
+A	0.4				135,206,235
 #	x	y	z		u v w		fov
 C	0,	0,	800		0,0,-1		40
 
-bo	250,250,0		0,0,0			100 5 100		white_light white_light white_light white_light white_light white_light
-bo	-250,250,0		0,0,0			100 5 100		white_light white_light white_light white_light white_light white_light
+bo	220,250,0		0,0,0			100 5 100		white_light white_light white_light white_light white_light white_light
+bo	-220,250,0		0,0,0			100 5 100		white_light white_light white_light white_light white_light white_light
 bo	-1000,0,0		0,0,0			1000 500 500	green green green green green green
 bo	1000,0,0		0,0,0			1000 500 500	red red red red red red
 bo	0,500,0			0,0,0			1000 500 500	white white white white white white
 bo	0,-500,0		0,0,0			1000 500 500	white white white white white white
 bo	0,0,-500		0,0,0			1000 500 500	white white white white white white
 
-bo	-210,100,0		0,60,35			1 100 80		white_metal white_metal white_metal white_metal white_metal white_metal
+bo	-190,100,0		0,60,35			1 100 80		white_metal white_metal white_metal white_metal white_metal white_metal
 bo	-110,-70,-200	-20,-10,0		200 170 1		white_metal white_metal white_metal white_metal white_metal white_metal
 
 sp	-120,-170,0		150								glass
-sp	-140,-20,-50	100								earth
-cy	-30,150,100		0.7,0.7,0		60	90			blue_metal
-co	-0,80,80		0.7,-0.7,0		110	80			yellow_metal
+sp	-110,-20,-50	100								earth
+cy	-0,130,100		0.7,0.7,0		60	90			blue_metal
+co	120,80,80		0.7,-0.7,0		110	80			yellow_metal
 
 bo	-320,40,0		0,35,0			80	80	80		steve_head_left steve_head_right steve_head_top steve_head_bottom steve_head_front steve_head_back
 bo	-320,-60,0		0,0,0			80	120	40		steve_torso_left steve_torso_right steve_torso_top steve_torso_bottom steve_torso_front steve_torso_back
@@ -109,10 +114,10 @@ bo	-240,-52,10		-15,0,20		40	120	40		steve_arm_left steve_arm_right steve_arm_to
 bo	-340,-180,		-16	15,0,0		40	120	40		steve_leg_left steve_leg_right steve_leg_top steve_leg_bottom steve_leg_front steve_leg_back
 bo	-300,-180,16	-15,0,0			40	120	40		steve_leg_left steve_leg_right steve_leg_top steve_leg_bottom steve_leg_front steve_leg_back
 
-bo	100,-125,0		-30,20,0		100 250 80		white white white white white_yellow white
+bo	100,-125,0		-30,20,0		100 250 80		aubergine aubergine aubergine aubergine plum_aubergine aubergine
 
 cy	300,-100,0		0,0.71,0.71		200	200			glass
 bo	300,-100,0		45,45,45		1000 10 10		bw bw bw bw bw bw
 
-sp	200,100,-50		50								red_light
-sp	350,100,50		50								blue_light
+sp	330,150,-50		50								blue_light
+sp	-330,150,-50	50								red_light
